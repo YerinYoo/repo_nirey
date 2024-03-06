@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko"  xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>codeXdmList</title>
+</head>
+<body>
+
+<p th:text="${item.seq}"></p>
+<p th:text="${item.name}"></p>
+
+<a th:href="@{/CodeXdmList}" th:text="이동"></a>
+<a th:href="@{/CodeForm(seq=${item.seq})}"  th:text="수정"></a>
+
+<form method="post" action="codeDelete"> 
+
+<input type="hidden" name="seq" th:value="${item.seq}">
+<input type="hidden" name="name" th:value="${item.name}">
+<button type="submit" th:href="@{/CodeXdmList}">Delete</button>
+
+</form>
+
+<form method="post" action="codeUelete"> 
+
+<input type="hidden" name="seq" th:value="${item.seq}">
+<input type="hidden" name="name" th:value="${item.name}">
+<input type="hidden" name="delNY" th:value="${item.delNY}">
+
+	<button type="submit" th:href="@{/CodeXdmList}" >Uelete</button>
+
+</form>
+
+</body>

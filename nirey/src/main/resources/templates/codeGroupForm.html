@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html lang="ko"  xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>codeGroupForm</title>
+</head>
+<body>
+
+	<!-- action="어쩌구" : 컨트롤러 주소 -->
+	<form method="post" action="codeGroupUpdt"> <!--   form 태그는 액션, 메서드가 필요함 / 메서드는  get, post 두 가지만 들어올 수 있음 / 액션에는 리퀘스트 매핑에 들어간 것들 입력해야 함-->
+		<!--  <input type="text"  name="seq" th:value="${item.seq}"> -->
+		<input type="text" name="seq" th:value="${item.seq}"> <!-- form 안에 데이터 등록 태그에는 name=""으로 이름 부여되어야 들어오는 값을 컨트롤러에 저장할 수 있음 -->
+		<input type="text" name="name" th:value="${item.name}" >
+		<!-- 
+		<input type="text" name="modDatetime">
+		<input type="text" name="regDatetime">
+		 -->
+		<button type="submit">저장</button>
+		<!--  name과 DTO 이름이 같을 경우 자동으로 스프링 상에서 매칭되어 데이터가 컨트롤러에 입력됨 -->
+	</form>
+
+
+</body>
+</html>

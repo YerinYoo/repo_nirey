@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="ko"  xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>codeGroupXdmList</title>
+</head>
+<body>
+
+
+    <a th:href="@{/codeGroupAdd}" th:text="등록"></a>
+    <br>
+    
+    <table>
+    	<tr>
+    		<td>ch</td>
+    		<td>#</td> <!-- # : thymeleaf를 사용하겠다는 뜻 / html에 데이터베이스에서 불러온 내용을 집어넣겠다는 내용 -->
+    		<td>delNY</td>
+    		<td>seq</td>
+    		<td>name</td>
+    		<td>count</td>
+    		<td>modDate</td>
+    	</tr>
+    	
+    	<tr th:if="${!#lists.isEmpty(list)}" >
+    		<td colspan="6">데이터 없음</td>
+    	</tr>
+	
+    	<tr th:if="${!#lists.isEmpty(list)}" th:each="list:${list}"> <!-- list : ${list} >> for문처럼 list를 사용하겠다는 뜻
+    																														${list} >> 앞에서 받아온 list, controller에 있는 이름과 동일하게 사용해야함 
+    																														다른 사람의 코드를 수정 없이 사용하기 위해 관례적으로  list를 이름으로 사용함 -->
+    	    <td></td>
+    		<td></td>
+     		<td th:if="${list.delNY eq 0}">N</td>
+     		<td th:unless="${list.delNY eq 0}">Y</td>
+    		<td th:text="${list.seq}"></td>
+    		<!-- 
+       		<td th:text="${list.name}"></td>
+       		 -->
+       		 <td><a th:href="@{/codeGroupView(seq=${list.seq}, name=${list.name}, delNY=${list.delNY})}"  th:text="${list.name}"></a><td>
+<!--        		 <td><a href="/codeGroupView?CodeGroup_seq=1"></a><td> -->
+       		<td th:text="${list.cdSeqCount}"></td>
+     		<td th:text="${#dates.format(list.modDatetime,  'yyyy-MM-dd HH:mm:ss')}"></td>
+     		
+    	</tr>
+    </table>
+
+</body>
+</html>

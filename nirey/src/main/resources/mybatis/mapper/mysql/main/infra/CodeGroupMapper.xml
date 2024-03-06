@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.recorded.infra.codegroup.CodeGroupDao">
+
+	<resultMap id="resultMapObj" type="com.recorded.infra.codegroup.CodeGroupDto"></resultMap>
+
+    <select id="selectList" resultMap="resultMapObj">
+    
+        select
+        
+        a.delNY
+     	,a.seq
+		, a.name
+		,a.modDateTime
+		, (select count(*) from Code aa where aa.CodeGroup_seq=a.seq) as cdSeqCount 
+		
+		from CodeGroup a
+
+    </select>
+    
+    <select id="selectOne" resultMap="resultMapObj">
+    <!--  result에서 받아올 값이 여러 개 =  selectList, 하나 = selectOne -->
+    
+    		select
+    		
+    		a.delNY
+    		, a.seq
+    		, a.name
+    		, a.modDateTime
+    		
+    		from CodeGroup a
+    		
+    		where 1=1
+    			and a.seq=#{seq} 
+    			
+<!--  #{_______} = html에서 받아올 값 / 불러올 값 -->
+    </select>
+    
+    <insert id="insert">
+    
+            insert into CodeGroup (name, memo)
+    		values (#{name}, #{memo}) 
+
+    </insert>
+    
+    <update id="update">
+   	update codeGroup
+   	set
+   		name = #{name}
+   	WHERE 1=1
+   		and seq = #{seq}
+  	
+  	</update>
+  	
+  	<update id="updtDel">
+  			update CodeGroup
+  			set
+  			delNY=1
+  			where 1=1
+  			and seq = #{seq}
+  	</update>
+  	
+  	
+  	<delete id="delete">
+  	
+  	delete from CodeGroup
+  	where seq=#{seq}
+  	</delete>
+    
+</mapper>
