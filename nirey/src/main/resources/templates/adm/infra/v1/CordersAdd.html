@@ -476,206 +476,20 @@
 							<div class="col-sm-12 col-12">
 								<div class="card" style="background-color : snow">
 									<div class="card-header">
-										<div class="card-title">코드 그룹 관리</div>
+										<div class="card-title">코드  관리</div>
 									</div>
-									
-									<div class="row mb-3 ms-2 me-2">
-										<div class="col-4">
-											<label class="form-label d-flex">주문 상태를 설정하세요</label>
-											<select class="select-single js-states form-control" title="Select Product Category"
-												data-live-search="true">
-												<option>주문 취소</option>
-												<option>결제 완료</option>
-												<option>배송 준비 중</option>
-												<option>배송 중</option>
-												<option>배송 완료</option>
-												<option>구매 확정</option>
-												<option>주문 상태</option>
-											</select>
-										</div>
-
-										<div class="col-4">
-											<label class="form-label d-flex">결제 상태를 설정하세요</label>
-											<select class="select-single js-states form-control" title="Select Product Category"
-												data-live-search="true">
-												<option>결제 완료</option>
-												<option>결제 대기 중</option>
-												<option>결제 취소</option>
-											</select>
-										</div>
-
-										<div class="col-4">
-											<label class="form-label d-flex">검색 카테고리를 설정하세요</label>
-											<select class="select-single js-states form-control" title="Select Product Category"
-												data-live-search="true">
-												<option>고객</option>
-												<option>제품</option>
-												<option>고객 아이디</option>
-												<option>주문일자</option>
-												<option>결제 금액</option>
-												<option>결제 상태</option>
-												<option>주문 상태</option>
-											</select>
-										</div>
-									</div>
-
-									<div class="row mb-3 ms-2 me-2">
-										<div class="col-4">
-											<label class="form-label d-flex">주문일을 설정하세요</label>
-											<input type="text" id="shDateStart" name="shDateStart" placeholder="----.--.--" class="form-control form-control-sm" autocomplete="off" readonly>
-										</div>
-
-										<div class="col-4">
-											<label class="form-label d-flex">검색어를 입력하세요</label>
-											<input type="text" id="shDateEnd" class="form-control form-control-sm" aria-label="Dollar amount (with dot and two decimal places)" placeholder="검색어1">
-										</div>
-
-										<div class="col-4 gy-4">
-											<input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" placeholder="검색어2">
-										</div>
-
-									</div>
-									</div>
-								
-								
-								<div class="row">
-									<div class="col-11">
-											<p>Total</p>
-											<!-- 해당 구문 들어가면 왜 먹지 않는지 물어보기 / mySQL 및 콘솔에서는 해당 mapper 쿼리 잘 작동되어 출력됨 -->
-											<!-- <p>Total : <span th:text="${list.cgSeqCount" ></span></p>  -->
-											
-
-									</div>
-
-								
-								
-									<div class="col-1">
-										<select class="select-single js-states form-control" title="Select Product Category"
-													data-live-search="true">
-													<option>-</option>
-													<option>5</option>
-													<option>10</option>
-													<option>25</option>
-													<option>50</option>
-													<option>100</option>
-												</select>
-									</div>
-									</div>
-									                          
-									 <a th:href="@{/ordersAdd}" th:text="등록"></a>
+											<form method="post" action="codeInsert">
 	
-												    
-				<!-- Content wrapper scroll start -->
-				<div class="content-wrapper-scroll">
+												<input type="text" name="name" placeholder="CodeName" > 
+												<input type="text" name="memo"  placeholder="memo">
+												<input type="text" name="CodeGroupSeq" placeholder="CodeGroupSeq">
+												<button type="submit" th:href="@{/Corders}">add</button>
+												
+											</form>
 
-					<!-- Content wrapper start -->
-					<div class="content-wrapper" >
-																
-						<!-- Row start -->
-						<div class="row">
-							<div class="col-sm-12 col-12">
-								
-										<div class="table-responsive">
-											<table class="table v-middle" style="table-layout:fixed;" >
-												 	<tr>
-											    		<td>
-												    		<div class="form-check form-check-inline">
-																	<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-															</div>
-											    		</td>
-											    		<td>#</td>
-											    		<td>delNY</td>
-											    		<td>seq</td>
-											    		<td>name</td>
-											    		<td>count</td>
-											    		<td>regDate</td>
-											    		<td>modDate</td>
-										    		</tr>
-										    	<tr th:if="${!#lists.isEmpty(list)}" th:each="list:${list}"> 
-										    		<td>															
-										    				<div class="form-check form-check-inline">
-																<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-															</div>
-													</td>
-										    		<td></td>
-										     		<td th:if="${list.delNY eq 0}">N</td>
-										     		<td th:unless="${list.delNY eq 0}">Y</td>
-										    		<td th:text="${list.seq}"></td>
-										       		 <td><a th:href="@{/ordersView(seq=${list.seq}, name=${list.name}, delNY=${list.delNY})}"  th:text="${list.name}"></a></td>
-			       									<td th:text="${list.cdSeqCount}"></td>
-			       									<td th:text="${#dates.format(list.modDatetime,  'yyyy-MM-dd HH:mm:ss')}"></td>
-										     		<td th:text="${#dates.format(list.regDatetime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-										    	</tr>
-											</table>
-										</div>
+											</div>
 									</div>
 								</div>
-											
-											<nav aria-label="Page Navigation">
-											<div class="row">
-                                                <ul class="pagination justify-content-center mt-5">
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#" aria-label="Previous">
-                                                            <span aria-hidden="true">
-                                                                <i class="bi bi-arrow-left"></i>
-                                                            </span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="page-item active">
-                                                        <a class="page-link" href="#">1</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#">2</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#">3</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#">4</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#">5</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#">6</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#">7</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#" aria-label="Next">
-                                                            <span aria-hidden="true">
-                                                                <i class="bi bi-arrow-right"></i>
-                                                            </span>
-                                                        </a>
-                                                    </li>
-												</ul>
-											</div>
-
-												<div class="row">
-
-													<div class="col-1" style="float : left;">
-                                                            <span class="me-2">
-                                                                <a class="btn btn-primary btn-m" href="#" th:href="@{/ordersAdd}">
-                                                                    <i class="bi bi-pencil"></i>
-                                                                </a>
-                                                            </span>
-                                                           </div>
-                                                           
-                                                           <div class="col-1" style="float : right; padding-left : 1270px;">
-                                                           
-                                                            <span>
-                                                            
-                                                                <a class="btn btn-danger btn-icon btn-m mb-1" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                                    <i class="bi bi-trash"></i>
-                                                                </a>
-                                                            </span>
-                                                            </div>
-                                                    </div>
-												</div>
-											</nav>
-											
-
 								<!-- Card end -->
 
 							</div>
@@ -693,33 +507,6 @@
 
 				</div>
 				<!-- Content wrapper scroll end -->
-				
-				
-				<!-- Add Modals Here -->
-				<div class="modals-placeholder">
-				
-								<!-- Modal 1 -->
-					<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-						aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLabel">삭제</h5>
-									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-								</div>
-								<div class="modal-body">
-									삭제하시겠습니까?
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-dark" data-bs-dismiss="modal">닫기</button>
-									<button type="submit" class="btn btn-warning"th:href="@{/orders}" th:text="Uelete"></button>
-									<button type="submit" class="btn btn-danger" th:href="@{/orders}" th:text="Delete"></button>
-
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
 
 			</div>
 			<!-- *************

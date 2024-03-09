@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.recorded.infra.code.CodeDao">
+
+	<resultMap id="resultMapObj" type="com.recorded.infra.code.CodeDto"></resultMap>
+
+    <select id="selectList" resultMap="resultMapObj">
+
+			select
+				a.seq as CodeGroupSeq
+			    ,a.name as CodeGroupName
+			    ,b.delNY
+			    ,b.seq
+			    ,b.name
+			    ,b.regDatetime
+			    ,b.modDatetime
+			  	, (select count(*) from code b) as SeqCount
+			
+			from 
+			    CodeGroup a
+			    
+			left join  code b
+			
+			on  a.seq=b.CodeGroup_seq
+
+    </select>
+	  
+	      <select id="selectOne" resultMap="resultMapObj">
+    
+    		select
+    		
+    		a.delNY
+    		, a.seq
+    		, a.name
+    		, a.modDateTime
+    		
+    		from code a
+    		
+    		where 1=1
+    			and a.seq=#{seq} 
+    			
+    </select>
+    
+	  <insert id="insert">
+			insert into code (
+			name
+			, memo
+			, CodeGroup_seq
+			) values (
+			#{name}
+			, #{memo}
+			, #{CodeGroupSeq}) 
+	  </insert>
+	  
+	   
+    <update id="update">
+   	update code
+   	set
+   		name = #{name}
+   	WHERE 1=1
+   		and seq = #{seq}
+  	
+  	</update>
+  	
+  	<update id="uelete">
+  			update code
+  			set
+  			delNY=1
+  			where 1=1
+  			and seq = #{seq}
+  	</update>
+  	
+  	
+  	<delete id="delete">
+  	
+  	delete from code
+  	where seq=#{seq}
+  	</delete>
+	  
+</mapper>

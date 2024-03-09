@@ -476,51 +476,54 @@
 							<div class="col-sm-12 col-12">
 								<div class="card" style="background-color : snow">
 									<div class="card-header">
-										<div class="card-title">코드 그룹 관리</div>
+										<div class="card-title mb-4">코드 그룹 관리</div>
 									</div>
-
-	
-									<table style="width : 40%">
+									</div>
+									<div class="card-body">
+									
+									<table style="width : 30%">
 									<tr>
-									<td>seq</td>
+									<td>seq :</td>
 									<td  th:text=" ${item.seq}"></td>
 									</tr>
 									<tr>
-									<td>name</td>
+									<td>name :</td>
 									<td  th:text="${item.name}"></td>
 									</tr>
 									</table>
 									
-									<div class="row">
-										<div class="col-3">
-											<a  th:href="@{/orders}" th:text="이동"></a>
+									<div class="row mt-5">
+										<div class="col-9">
+										<button type="submit" class="btn btn-dark" th:href="@{/orders}" th:text="Back"></button>
 										</div>
-										<div class="col-3">
-											<a th:href="@{/ordersForm(seq=${item.seq})}"  th:text="수정"></a>
+										<div class="col-1 ">
+										<button type="button" class="btn btn-success" th:href="@{/ordersForm(seq=${item.seq})}" th:text="Edit"></button>
 										</div>
-										<div class="col-3">
 										
-											<form method="post" action="CodeGroupDelete"> 
-											<input type="hidden" name="seq" th:value="${item.seq}">
-											<input type="hidden" name="name" th:value="${item.name}">
-											
-											
-											<a type="submit" th:href="@{/orders}">Delete</a>
-											
-											</form>
-										</div>
-										<div class="col-3">
-											<form method="post" action="CodeGroupUpdtDel"> 
+											<div class="col-1">
+											<form method="post" action="codeGroupUpdtDel"> 
 												<input type="hidden" name="seq" th:value="${item.seq}">
 												<input type="hidden" name="name" th:value="${item.name}">
 												<input type="hidden" name="delNY" th:value="${item.delNY}">
 												
-												
-												<a type="submit" th:href="@{/orders}">Uelete</a>
+												<button type="submit" class="btn btn-warning"th:href="@{/orders}" th:text="Uelete"></button>
 											
 											</form>
 											</div>
 									
+										<div class="col-1 ">
+										
+											<form method="post" action="codeGroupDelete"> 
+											<input type="hidden" name="seq" th:value="${item.seq}">
+											<input type="hidden" name="name" th:value="${item.name}">
+											
+											<button type="submit" class="btn btn-danger" th:href="@{/orders}" th:text="Delete"></button>
+											
+											</form>
+										</div>
+									
+									</div>
+	
 									</div>
 
 

@@ -80,7 +80,7 @@ public class CodeGroupController {
 	public String codeGroupInsert(CodeGroupDto dto) throws Exception {
 		System.out.println(dto.getName());
 		service.insert(dto);
-		return "redirect:/codeGroupXdmList";
+		return "redirect:/orders";
 	}
 	
 	@RequestMapping(value="/codeGroupUpdt")
@@ -90,7 +90,7 @@ public String codeGroupUpdt(CodeGroupDto dto) throws Exception{
 		System.out.println(dto.toString());
 //		return "codeGroupXdmListAdd";
 //		return 1;
-		return "redirect:/codeGroupXdmList"; //리스트로 돌아가는 기능은 실무에서 거의 사용 X
+		return "redirect:/orders"; //리스트로 돌아가는 기능은 실무에서 거의 사용 X
 	}
 	
 	@RequestMapping(value="/codeGroupUpdtDel")
@@ -98,7 +98,7 @@ public String codeGroupUpdt(CodeGroupDto dto) throws Exception{
 		
 		service.updtDel(dto);
 		
-		return "redirect:/codeGroupXdmList";
+		return "redirect:/orders";
 	}
 	
 	@RequestMapping(value="/codeGroupDelete")
@@ -106,89 +106,9 @@ public String codeGroupUpdt(CodeGroupDto dto) throws Exception{
 		
 		service.delete(dto);
 		
-		return "redirect:/codeGroupXdmList";
+		return "redirect:/orders";
 	}
-	
-	@RequestMapping(value="account-details")
-	public String accountDetails() throws Exception {
-		return "usr/infra/v1/account-details";
-	}
-	
-	@RequestMapping(value="address")
-	public String address() throws Exception {
-		return "usr/infra/v1/address";
-	}
-	
-	@RequestMapping(value="cart")
-	public String cart() throws Exception {
-		return "usr/infra/v1/cart";
-	}
-	
-	@RequestMapping(value="checkoutShop")
-	public String checkoutShop() throws Exception {
-		return "usr/infra/v1/checkout";
-	}
-	
-	@RequestMapping(value="dashboard")
-	public String dashboard() throws Exception {
-		return "usr/infra/v1/dashboard";
-	}
-	
-	@RequestMapping(value="recorded")
-	public String demo3() throws Exception {
-		return "usr/infra/v1/demo3";
-	}
-	
-	@RequestMapping(value="product")
-	public String demo3Product() throws Exception {
-		return "usr/infra/v1/demo3-product";
-	}
-	
-	@RequestMapping(value="shop")
-	public String demo3Shop() throws Exception {
-		return "usr/infra/v1/demo3-shop";
-	}
-	
-	@RequestMapping(value="forgot-password")
-	public String forgotPassword() throws Exception {
-		return "usr/infra/v1/forgot-password";
-	}
-	
-	@RequestMapping(value="login")
-	public String login() throws Exception {
-		return "usr/infra/v1/login";
-	}
-	
-	@RequestMapping(value="order")
-	public String orded() throws Exception {
-		return "usr/infra/v1/order";
-	}
-	
-	@RequestMapping(value="order-complete")
-	public String orderComplete() throws Exception {
-		return "usr/infra/v1/order-complete";
-	}
-	
-	@RequestMapping(value="order-details")
-	public String orderDetails() throws Exception {
-		return "usr/infra/v1/order-details";
-	}
-	
-	@RequestMapping(value="register")
-	public String register() throws Exception {
-		return "usr/infra/v1/register";
-	}
-	
-	@RequestMapping(value="welcome")
-	public String welcome() throws Exception {
-		return "usr/infra/v1/welcome";
-	}
-	
-	@RequestMapping(value="wishlist")
-	public String wishlist() throws Exception {
-		return "usr/infra/v1/wishlist";
-	}
-	
+
 	//adm page
 	
 	@RequestMapping(value="account-settings")
@@ -242,6 +162,21 @@ public String codeGroupUpdt(CodeGroupDto dto) throws Exception{
 		return "adm/infra/v1/ordersView"; 
 	}
 	
+	@RequestMapping(value = "/ordersForm")
+	public String ordersForm(CodeGroupDto dto, Model model) throws Exception {
+		
+		model.addAttribute("item", service.selectOne(dto)); 
+		
+		return "adm/infra/v1/ordersForm"; 
+	}
+	
+	@RequestMapping(value="/ordersAdd")
+	public String ordersAdd() throws Exception {
+		
+		return "adm/infra/v1/ordersAdd";
+		
+	}
+	
 	@RequestMapping(value="products")
 	public String products() throws Exception {
 		return "adm/infra/v1/products";
@@ -266,14 +201,5 @@ public String codeGroupUpdt(CodeGroupDto dto) throws Exception{
 	public String viewCart() throws Exception {
 		return "adm/infra/v1/view-cart";
 	}
-	
-	@RequestMapping (value="ordersForm")
-	public String ordersForm(CodeGroupDto dto, Model model) throws Exception {
-		
-		model.addAttribute("item", service.selectOne(dto));
-		
-		return "adm/infra/v1/ordersForm";
-	}
-	
 	
 }

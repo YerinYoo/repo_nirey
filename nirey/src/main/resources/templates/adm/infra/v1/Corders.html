@@ -476,7 +476,7 @@
 							<div class="col-sm-12 col-12">
 								<div class="card" style="background-color : snow">
 									<div class="card-header">
-										<div class="card-title">코드 그룹 관리</div>
+										<div class="card-title">코드  관리</div>
 									</div>
 									
 									<div class="row mb-3 ms-2 me-2">
@@ -562,7 +562,7 @@
 									</div>
 									</div>
 									                          
-									 <a th:href="@{/ordersAdd}" th:text="등록"></a>
+									 <a th:href="@{/CordersAdd}" th:text="등록"></a>
 	
 												    
 				<!-- Content wrapper scroll start -->
@@ -576,37 +576,46 @@
 							<div class="col-sm-12 col-12">
 								
 										<div class="table-responsive">
-											<table class="table v-middle" style="table-layout:fixed;" >
-												 	<tr>
-											    		<td>
-												    		<div class="form-check form-check-inline">
-																	<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-															</div>
-											    		</td>
-											    		<td>#</td>
-											    		<td>delNY</td>
-											    		<td>seq</td>
-											    		<td>name</td>
-											    		<td>count</td>
-											    		<td>regDate</td>
-											    		<td>modDate</td>
-										    		</tr>
-										    	<tr th:if="${!#lists.isEmpty(list)}" th:each="list:${list}"> 
-										    		<td>															
-										    				<div class="form-check form-check-inline">
-																<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-															</div>
-													</td>
-										    		<td></td>
-										     		<td th:if="${list.delNY eq 0}">N</td>
-										     		<td th:unless="${list.delNY eq 0}">Y</td>
-										    		<td th:text="${list.seq}"></td>
-										       		 <td><a th:href="@{/ordersView(seq=${list.seq}, name=${list.name}, delNY=${list.delNY})}"  th:text="${list.name}"></a></td>
-			       									<td th:text="${list.cdSeqCount}"></td>
-			       									<td th:text="${#dates.format(list.modDatetime,  'yyyy-MM-dd HH:mm:ss')}"></td>
-										     		<td th:text="${#dates.format(list.regDatetime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-										    	</tr>
-											</table>
+										<table class="table v-middle" style="table-layout:fixed;" >
+									    	<tr>
+									    		<td>
+									    			<div class="form-check form-check-inline">
+														<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+													</div>
+									    		</td>
+									    		<td>#</td>
+									    		<td>CodeGroupSeq</td>
+									    		<td>CodeGroup Name</td>
+									    		<td>DelNY</td>
+									    		<td>CodeSeq</td>
+									    		<td>Code Name</td>
+									    		<td>regDatetime</td>
+									    		<td>modDatetime</td>
+									    		
+									    	</tr>
+									    	
+									    	<tr th:if="${!#lists.isEmpty(list)}" >
+									    		<td colspan="9"></td>
+									    	</tr>
+										
+									    	<tr th:if="${!#lists.isEmpty(list)}" th:each="list:${list}"> 
+									    	    <td>
+									    	    	<div class="form-check form-check-inline">
+														<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+													</div>
+									    	    </td>
+									    		<td></td>
+									    		<td th:text="${list.CodeGroupSeq}"></td>
+									    		<td th:text="${list.CodeGroupName}"></td>
+									     		<td th:if="${list.delNY eq 0}">N</td>
+									     		<td th:unless="${list.delNY eq 0}">Y</td>
+									    		<td th:text="${list.seq}"></td>
+									    		<td><a th:href="@{/CordersView(seq=${list.seq}, name=${list.name}, delNY=${list.delNY})}"  th:text="${list.name}"></a></td>
+									       		<!-- <td th:text="${list.name}"></td>-->
+									       		<td th:text="${#dates.format(list.regDatetime,  'yyyy-MM-dd HH:mm:ss')}"></td>
+									     		<td th:text="${#dates.format(list.modDatetime,  'yyyy-MM-dd HH:mm:ss')}"></td>
+									    	</tr>
+									    </table>
 										</div>
 									</div>
 								</div>
@@ -656,7 +665,7 @@
 
 													<div class="col-1" style="float : left;">
                                                             <span class="me-2">
-                                                                <a class="btn btn-primary btn-m" href="#" th:href="@{/ordersAdd}">
+                                                                <a class="btn btn-primary btn-m" href="#" th:href="@{/CordersAdd}">
                                                                     <i class="bi bi-pencil"></i>
                                                                 </a>
                                                             </span>
