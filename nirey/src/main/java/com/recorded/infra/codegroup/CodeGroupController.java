@@ -227,7 +227,7 @@ public String codeGroupUpdt(CodeGroupDto dto) throws Exception{
 		return "adm/infra/v1/loginAdm";
 	}
 	
-	@RequestMapping(value="orders")
+	@RequestMapping(value="/orders")
 	public String orders(Model model) throws Exception {
 		
 		model.addAttribute("list", service.selectList());
