@@ -15,12 +15,12 @@
 <a th:href="@{/codeGroupForm(seq=${item.seq})}"  th:text="수정"></a>
 <a th:href="@{/codeGroupXdmList}" th:text="삭제"></a>
 
-<form method="post" action="codeGroupDelete"> 
+<form method="post" action="CodeGroupDelete"> 
 <input type="hidden" name="seq" th:value="${item.seq}">
 <input type="hidden" name="name" th:value="${item.name}">
 
 
-	<button type="submit" th:href="@{/codeGroupXdmList}">Delete</button>
+	<button type="submit" th:href="@{/CodeGroupXdmList}">Delete</button>
 	
 	
 
@@ -33,7 +33,7 @@
 <input type="hidden" name="delNY" th:value="${item.delNY}">
 
 
-	<button type="submit" th:href="@{/codeGroupXdmList}">Uelete</button>
+	<button type="submit" th:href="@{/CodeGroupXdmList}">Uelete</button>
 
 </form>
 </body>

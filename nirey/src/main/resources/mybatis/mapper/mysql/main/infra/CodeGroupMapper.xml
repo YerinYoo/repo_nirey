@@ -13,12 +13,26 @@
      	,a.seq
 		, a.name
 		,a.modDateTime
-		, (select count(*) from Code aa where aa.CodeGroup_seq=a.seq) as cdSeqCount 
+		, a.regDateTime
+		, (select count(*) from Code aa where aa.CodeGroup_seq=a.seq) as cdSeqCount
+		, (select count(*) from CodeGroup) as cgSeqCount
 		
 		from CodeGroup a
 
     </select>
     
+    <!--  total count -->
+    <!-- 
+           <select id="selectOne" resultMap="resultMapObj">
+       
+         select
+        count(*) as cgSeqCount
+        from CodeGroup
+        
+       </select>
+     -->
+
+       
     <select id="selectOne" resultMap="resultMapObj">
     <!--  result에서 받아올 값이 여러 개 =  selectList, 하나 = selectOne -->
     

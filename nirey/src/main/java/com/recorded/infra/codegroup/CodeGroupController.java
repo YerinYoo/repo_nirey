@@ -109,5 +109,171 @@ public String codeGroupUpdt(CodeGroupDto dto) throws Exception{
 		return "redirect:/codeGroupXdmList";
 	}
 	
-
+	@RequestMapping(value="account-details")
+	public String accountDetails() throws Exception {
+		return "usr/infra/v1/account-details";
+	}
+	
+	@RequestMapping(value="address")
+	public String address() throws Exception {
+		return "usr/infra/v1/address";
+	}
+	
+	@RequestMapping(value="cart")
+	public String cart() throws Exception {
+		return "usr/infra/v1/cart";
+	}
+	
+	@RequestMapping(value="checkoutShop")
+	public String checkoutShop() throws Exception {
+		return "usr/infra/v1/checkout";
+	}
+	
+	@RequestMapping(value="dashboard")
+	public String dashboard() throws Exception {
+		return "usr/infra/v1/dashboard";
+	}
+	
+	@RequestMapping(value="recorded")
+	public String demo3() throws Exception {
+		return "usr/infra/v1/demo3";
+	}
+	
+	@RequestMapping(value="product")
+	public String demo3Product() throws Exception {
+		return "usr/infra/v1/demo3-product";
+	}
+	
+	@RequestMapping(value="shop")
+	public String demo3Shop() throws Exception {
+		return "usr/infra/v1/demo3-shop";
+	}
+	
+	@RequestMapping(value="forgot-password")
+	public String forgotPassword() throws Exception {
+		return "usr/infra/v1/forgot-password";
+	}
+	
+	@RequestMapping(value="login")
+	public String login() throws Exception {
+		return "usr/infra/v1/login";
+	}
+	
+	@RequestMapping(value="order")
+	public String orded() throws Exception {
+		return "usr/infra/v1/order";
+	}
+	
+	@RequestMapping(value="order-complete")
+	public String orderComplete() throws Exception {
+		return "usr/infra/v1/order-complete";
+	}
+	
+	@RequestMapping(value="order-details")
+	public String orderDetails() throws Exception {
+		return "usr/infra/v1/order-details";
+	}
+	
+	@RequestMapping(value="register")
+	public String register() throws Exception {
+		return "usr/infra/v1/register";
+	}
+	
+	@RequestMapping(value="welcome")
+	public String welcome() throws Exception {
+		return "usr/infra/v1/welcome";
+	}
+	
+	@RequestMapping(value="wishlist")
+	public String wishlist() throws Exception {
+		return "usr/infra/v1/wishlist";
+	}
+	
+	//adm page
+	
+	@RequestMapping(value="account-settings")
+	public String accountSettings() throws Exception {
+		return "adm/infra/v1/account-settings";
+	}
+	
+	@RequestMapping(value="calendar")
+	public String calendar() throws Exception {
+		return "adm/infra/v1/calendar";
+	}
+	
+	@RequestMapping(value="checkout")
+	public String checkout() throws Exception {
+		return "adm/infra/v1/checkout";
+	}
+	
+	@RequestMapping(value="customers")
+	public String customers(Model model) throws Exception {
+		
+		model.addAttribute("list", service.selectList());
+		return "adm/infra/v1/customers";
+	}
+	
+	@RequestMapping(value="forgot_password")
+	public String forgotPwd() throws Exception {
+		return "adm/infra/v1/forgot_password";
+	}
+	
+	@RequestMapping(value="/")
+	public String index() throws Exception {
+		return "adm/infra/v1/index";
+	}
+	@RequestMapping(value="loginAdm")
+	public String loginAdm() throws Exception {
+		return "adm/infra/v1/loginAdm";
+	}
+	
+	@RequestMapping(value="orders")
+	public String orders(Model model) throws Exception {
+		
+		model.addAttribute("list", service.selectList());
+		return "adm/infra/v1/orders";
+	}
+	
+	@RequestMapping(value = "/ordersView")
+	public String ordersView(CodeGroupDto dto, Model model) throws Exception {
+		
+		model.addAttribute("item", service.selectOne(dto)); 
+		
+		return "adm/infra/v1/ordersView"; 
+	}
+	
+	@RequestMapping(value="products")
+	public String products() throws Exception {
+		return "adm/infra/v1/products";
+	}
+	
+	@RequestMapping(value="reviews")
+	public String reviews() throws Exception {
+		return "adm/infra/v1/reviews";
+	}
+	
+	@RequestMapping(value="signup")
+	public String signup() throws Exception {
+		return "adm/infra/v1/signup";
+	}
+	
+	@RequestMapping(value="tables")
+	public String tables() throws Exception {
+		return "adm/infra/v1/tables";
+	}
+	
+	@RequestMapping(value="view-cart")
+	public String viewCart() throws Exception {
+		return "adm/infra/v1/view-cart";
+	}
+	
+	@RequestMapping (value="ordersForm")
+	public String ordersForm(CodeGroupDto dto, Model model) throws Exception {
+		
+		model.addAttribute("item", service.selectOne(dto));
+		
+		return "adm/infra/v1/ordersForm";
+	}
+	
+	
 }

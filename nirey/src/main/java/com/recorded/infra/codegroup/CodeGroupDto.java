@@ -11,7 +11,8 @@ public class CodeGroupDto {
 	private Date  regDatetime;
 	private Date modDatetime;
 	private  Integer cdSeqCount;
-	
+	private Integer cgSeqCount;
+		
 	//getter, setter
 	public String getSeq() {
 		return seq;
@@ -55,11 +56,25 @@ public class CodeGroupDto {
 	public void setCdSeqCount(Integer cdSeqCount) {
 		this.cdSeqCount = cdSeqCount;
 	}
+	public Integer getCgSeqCount() {
+		return cgSeqCount;
+	}
+	public void setCgSeqCount(Integer cgSeqCount) {
+		this.cgSeqCount = cgSeqCount;
+	}
 	@Override
 	public String toString() {
 		return "CodeGroupDto [seq=" + seq + ", name=" + name + ", memo=" + memo + ", delNY=" + delNY + ", regDatetime="
-				+ regDatetime + ", modDatetime=" + modDatetime + ", cdSeqCount=" + cdSeqCount + "]";
+				+ regDatetime + ", modDatetime=" + modDatetime + ", cdSeqCount=" + cdSeqCount + ", cgSeqCount="
+				+ cgSeqCount + "]";
 	}
+	
+	
+	
+
+	
+
+	
 	
 	
 	
