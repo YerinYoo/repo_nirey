@@ -23,6 +23,18 @@
 			left join  code b
 			
 			on  a.seq=b.CodeGroup_seq
+	<!-- 		
+			<if test="shDelNy != null and shDelNy.equals('')">AND b.delNY = #{shDelNy}</if>
+	      
+			<choose>
+				<when test="shOptionDate == 1">AND a.regDatetime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				<when test="shOptionDate == 2">AND a.modDatetime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			</choose>
+	
+	    	 <choose>
+	         	 <when test="shOption == 1">AND b.seq = #{shValue}</when>
+	            <when test="shOption == 2">AND b.name LIKE CONCAT('%',#{shValue},'%')</when>
+	       	 </choose> -->
 
     </select>
 	  

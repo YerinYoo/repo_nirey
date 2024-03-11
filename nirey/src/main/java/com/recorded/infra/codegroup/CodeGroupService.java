@@ -57,6 +57,8 @@ public class CodeGroupService {
 		return dao.delete(dto);
 	}
 	
-	
+    public List<CodeGroupDto> selectList(CodeGroupVo vo) { 
+    	return dao.selectList(vo); 
+    }
 
 }

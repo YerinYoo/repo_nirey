@@ -1,13 +1,12 @@
 package com.recorded.infra.codegroup;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import com.recorded.infra.code.CodeDto;
 
 
 @Controller
@@ -34,6 +33,26 @@ public class CodeGroupController {
 		
 		return "codeGroupXdmList"; //
 	}
+	
+	@RequestMapping(value = "/orders")
+	public String orders(CodeGroupVo vo, Model model) throws Exception{
+
+		System.out.println("===========================================");
+		System.out.println(vo.toString());
+			model.addAttribute("list", service.selectList(vo));
+			model.addAttribute("vo", vo);
+			
+        return "adm/infra/v1/orders";
+  	}
+	
+//	@RequestMapping(value="orders")
+//	public String orders(Model model) throws Exception {
+//		
+//		model.addAttribute("list", service.selectList());
+//		
+//		return "adm/infra/v1/orders";
+//	}
+
 	
 	@RequestMapping(value = "/codeGroupView")
 	public String codeGroupView(CodeGroupDto dto, Model model) throws Exception {
@@ -147,11 +166,11 @@ public String codeGroupUpdt(CodeGroupDto dto) throws Exception{
 		return "adm/infra/v1/loginAdm";
 	}
 	
-	@RequestMapping(value="/orders")
-	public String orders(Model model) throws Exception {
+	@RequestMapping(value="/ordersOrg")
+	public String ordersOrg(Model model) throws Exception {
 		
 		model.addAttribute("list", service.selectList());
-		return "adm/infra/v1/orders";
+		return "adm/infra/v1/ordersOrg";
 	}
 	
 	@RequestMapping(value = "/ordersView")

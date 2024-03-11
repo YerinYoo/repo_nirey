@@ -5,8 +5,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>codeGroupXdmList</title>
+    
 </head>
 <body>
+
+<!-- search s -->
+<div id="divSearch" class="container-fluid px-0 pb-3">
+	<div class="row row-cols-2 row-cols-sm-6 g-2 px-2">
+		<div class="col">
+			<select id="shDelNy" name="shDelNy" class="form-select form-select-sm">
+				<option value="" th:selected="${vo.shDelNy == null}">삭제여부</option>
+				<option value="1" th:selected="${vo.shDelNy == 1}">Y</option>
+				<option value="0" th:selected="${vo.shDelNy == 0}">N</option>            
+			</select>
+		</div>
+		
+		<div class="col">
+			<select id="shOptionDate" name="shOptionDate" class="form-select form-select-sm">
+				<option value="" th:selected="${vo.shOptionDate == null}">날짜</option>
+				<option value="1" th:selected="${vo.shOptionDate == 1}">등록일</option>
+				<option value="2" th:selected="${vo.shOptionDate == 2}">수정일</option>
+			</select>
+		</div>  
+		<div class="col">
+			<input type="text" id="shDateStart" name="shDateStart" th:value="${#strings.substring(vo.shDateStart, 0, 10)}" placeholder="시작일" class="form-control form-control-sm" autocomplete="off">
+		</div>              
+		<div class="col">
+			<input type="text" id="shDateEnd" name="shDateEnd" th:value="${#strings.substring(vo.shDateEnd, 0, 10)}" placeholder="종료일" class="form-control form-control-sm" autocomplete="off">
+		</div> 
+	</div>
+	<div class="row row-cols-2 row-cols-sm-6 g-2 mt-1 px-2">
+		<div class="col">
+			<select id="shOption" name="shOption" class="form-select form-select-sm">
+				<option value="" th:selected="${vo.shOption == null}">검색구분</option>
+				<option value="1" th:selected="${vo.shOption == 1}">코드그룹 코드</option>
+				<option value="2" th:selected="${vo.shOption == 2}">코드그룹 이름</option>
+				<option value="3" th:selected="${vo.shOption == 3}">코드그룹 이름 (영문)</option>
+			</select>
+		</div>                    
+		<div class="col">
+			<input type="text" id="shValue" name="shValue" th:value="${vo.shValue}" onkeyup="enterkey()" placeholder="검색어" class="form-control form-control-sm">
+			<div class="invalid-feedback" id="shValueFeedback"></div>
+		</div> 
+		<div class="col">
+			<button type="button" id="btnSearch" class="btn btn-outline-secondary btn-sm btn_custom"><i class="fa-solid fa-magnifying-glass fa-lg"></i></button>
+			<button type="button" id="btnReset" class="btn btn-outline-secondary btn-sm btn_custom"><i class="fa-solid fa-rotate-right fa-lg"></i></button>
+		</div>    
+	</div>
+</div>
+<!-- search e -->
 
 
     <a th:href="@{/codeGroupAdd}" th:text="등록"></a>
@@ -45,6 +92,8 @@
      		
     	</tr>
     </table>
+    
+    
 
 </body>
 </html>

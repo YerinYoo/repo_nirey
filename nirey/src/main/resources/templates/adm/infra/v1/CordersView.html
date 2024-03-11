@@ -502,15 +502,20 @@
 									
 									<div class="row mt-5">
 										<div class="col-9">
-										<button type="button" class="btn btn-dark"  th:href="@{/Corders}" th:text="이동"></button>
+										<a  th:href="@{/Corders}" >
+										<button type="button" class="btn btn-dark" th:text="이동"></button>
+										</a>
 										</div>
 										<div class="col-1 ">
-										<button type="button" class="btn btn-success" th:href="@{/CordersForm(seq=${item.seq})}" >Edit</button>
+										<a  th:href="@{/CordersForm(seq=${item.seq})}">
+										<button type="button" class="btn btn-success">Edit</button>
+										</a>
 										</div>
 										
+										<!-- 
 										<a th:href="@{/Corders}" th:text="이동"></a>
-<a th:href="@{/CordersForm(seq=${item.seq})}"  th:text="수정"></a>
-										
+										<a th:href="@{/CordersForm(seq=${item.seq})}"  th:text="수정"></a>
+										 -->
 											<div class="col-1">
 											<form method="post" action="codeUelete"> 
 												<input type="hidden" name="seq" th:value="${item.seq}">

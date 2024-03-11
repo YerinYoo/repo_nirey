@@ -16,4 +16,7 @@ public interface CodeGroupDao { //쿼리 실행 역할 (selectList, selectOne, d
 	public int updtDel(CodeGroupDto dto);
 	public int delete(CodeGroupDto dto);
 	
+	
+    public List<CodeGroupDto> selectList(CodeGroupVo vo);
+	
 }

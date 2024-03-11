@@ -44,6 +44,11 @@
 		<!-- Data Tables -->
 		<link rel="stylesheet" href="/adm/vendor/datatables/dataTables.bs5.css" />
 		<link rel="stylesheet" href="/adm/vendor/datatables/dataTables.bs5-custom.css" />
+		
+		
+		<!-- Date Range CSS -->
+		<link rel="stylesheet" href="assets/vendor/daterange/daterange.css">
+		
 
 	</head>
 
@@ -494,10 +499,14 @@
 									
 									<div class="row mt-5">
 										<div class="col-9">
-										<button type="submit" class="btn btn-dark" th:href="@{/orders}" th:text="Back"></button>
+										<a th:href="@{/orders}" >
+										<button type="button" class="btn btn-dark" th:text="Back"></button>
+										</a>
 										</div>
 										<div class="col-1 ">
-										<button type="button" class="btn btn-success" th:href="@{/ordersForm(seq=${item.seq})}" th:text="Edit"></button>
+										<a th:href="@{/ordersForm(seq=${item.seq})}" >
+										<button type="button" class="btn btn-success" th:text="Edit"></button>
+										</a>
 										</div>
 										
 											<div class="col-1">
@@ -585,6 +594,11 @@
 
 		<!-- Main Js Required -->
 		<script src="/adm/js/main.js"></script>
+		
+		
+		<!-- Date Range JS -->
+		<script src="assets/vendor/daterange/daterange.js"></script>
+		<script src="assets/vendor/daterange/custom-daterange.js"></script>
 
 	</body>
 
