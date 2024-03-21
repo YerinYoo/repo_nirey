@@ -15,26 +15,26 @@
 			    ,b.name
 			    ,b.regDatetime
 			    ,b.modDatetime
-			  	, (select count(*) from code b) as SeqCount
+			  	<!-- , (select count(*) from code b) as SeqCount -->
 			
 			from 
 			    CodeGroup a
 			    
 			left join  code b
 			
-			on  a.seq=b.CodeGroup_seq
-	<!-- 		
-			<if test="shDelNy != null and shDelNy.equals('')">AND b.delNY = #{shDelNy}</if>
-	      
+			on  a.seq=b.CodeGroupSeq
+			
+	        <if test="shDelNy != null and shDelNy.equals('')">AND b.delNY = #{shDelNy}</if>
+	      <!-- 
 			<choose>
 				<when test="shOptionDate == 1">AND a.regDatetime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
 				<when test="shOptionDate == 2">AND a.modDatetime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
 			</choose>
-	
+	 -->
 	    	 <choose>
 	         	 <when test="shOption == 1">AND b.seq = #{shValue}</when>
-	            <when test="shOption == 2">AND b.name LIKE CONCAT('%',#{shValue},'%')</when>
-	       	 </choose> -->
+	            <when test="shOption == 2">AND a.name LIKE CONCAT('%',#{shValue},'%')</when>
+	       	 </choose>
 
     </select>
 	  
@@ -46,6 +46,8 @@
     		, a.seq
     		, a.name
     		, a.modDateTime
+    		, a.CodeGroupSeq
+    		
     		
     		from code a
     		
@@ -53,6 +55,19 @@
     			and a.seq=#{seq} 
     			
     </select>
+    
+    	<select id="selectListCachedCodeArrayList" resultMap="resultMapObj">
+    	
+		SELECT 
+			seq
+			, name
+			, CodeGroupSeq
+		FROM
+			code
+		WHERE 1=1
+			AND DelNY = 0
+
+   </select>
     
 	  <insert id="insert">
 			insert into code (

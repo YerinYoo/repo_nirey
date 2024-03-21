@@ -1,9 +1,12 @@
 package com.recorded.infra.code;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import jakarta.annotation.PostConstruct;
 
 @Service
 //Service = 로직, DAO를 호출하여 조합시키는 곳
@@ -60,6 +63,16 @@ public class CodeService {
     public List<CodeDto> selectList(CodeVo vo) { 
     	return dao.selectList(vo); 
     }
+    
+    @PostConstruct
+	public void selectListCachedCodeArrayList() throws Exception {
+		List<CodeDto> codeListFromDb = (ArrayList<CodeDto>) dao.selectListCachedCodeArrayList();
+//		codeListFromDb = (ArrayList<Code>) dao.selectListCachedCodeArrayList();
+		CodeDto.cachedCodeArrayList.clear(); 
+		CodeDto.cachedCodeArrayList.addAll(codeListFromDb);
+		System.out.println("cachedCodeArrayList: " + CodeDto.cachedCodeArrayList.size() + " chached !");
+	}
+    
 	
 
 }

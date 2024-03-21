@@ -45,6 +45,17 @@
 		<link rel="stylesheet" href="/adm/vendor/datatables/dataTables.bs5.css" />
 		<link rel="stylesheet" href="/adm/vendor/datatables/dataTables.bs5-custom.css" />
 
+		<!-- Date Range CSS -->
+		<!-- 
+		<link rel="stylesheet" href="adm/vendor/daterange/daterange.css">
+		 -->
+		 
+		 <!--  강사님 데이트 피커 -->
+		 <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" media="screen"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+
 	</head>
 
 	<body>
@@ -498,12 +509,38 @@
 							<option value="2" th:selected="${vo.shOptionDate == 2}">수정일</option>
 						</select>
 					</div>  
-				<!-- 	<div class="col">
-						<input type="text" id="shDateStart" name="shDateStart" th:value="${#strings.substring(vo.shDateStart, 0, 10)}" placeholder="시작일" class="form-control form-control-sm" autocomplete="off">
+					<!-- 
+					<div class="col">
+						<div class="input-group">
+							<span class="input-group-text">
+								<i class="bi bi-calendar4"></i>
+							</span>
+							<input type="text" id="shDateStart" name="shDateStart" th:value="${#strings.substring(vo.shDateStart, 0, 10)}" placeholder="시작일" class="form-control datepicker" autocomplete="off">
+						</div>
+					</div>
+					
+					<div class="col">
+						<div class="input-group">
+							<span class="input-group-text">
+								<i class="bi bi-calendar4"></i>
+							</span>
+							<input type="text" id="shDateEnd" name="shDateEnd" th:value="${#strings.substring(vo.shDateEnd, 0, 10)}" placeholder="종료일" class="form-control datepicker" autocomplete="off">
+						</div>
+					</div>
+					 -->
+
+
+						<div class="col">
+                                    <input type="text" id="shDateStart" name="shDateStart"
+                                        th:value="${#strings.substring(vo.shDateStart, 0, 10)}" placeholder="시작일"
+                                        class="form-control form-control datetimepicker" class="form-control form-control-sm"  autocomplete="off">
+
 					</div>              
 					<div class="col">
-						<input type="text" id="shDateEnd" name="shDateEnd" th:value="${#strings.substring(vo.shDateEnd, 0, 10)}" placeholder="종료일" class="form-control form-control-sm" autocomplete="off">
-					</div>  -->
+						<input type="text" id="shDateEnd" name="shDateEnd"
+						th:value="${#strings.substring(vo.shDateEnd, 0, 10)}" placeholder="종료일" class="form-control form-control-sm" autocomplete="off">
+					</div>  
+					
 				</div>
 				<div class="row row-cols-2 row-cols-sm-6 g-2 mt-1 px-2">
 					<div class="col">
@@ -551,7 +588,9 @@
 									</div>
 									</div>
 									                          
-									 <a th:href="@{/ordersAdd}" th:text="등록"></a>
+									 <a th:href="@{/ordersAdd}" th:text="등록">
+									 
+									 </a>
 	
 												    
 				<!-- Content wrapper scroll start -->
@@ -748,9 +787,9 @@
 		
 		<script type="text/javascript">
 
-/* 	window.addEventListener('load', function() {
+	window.addEventListener('load', function() {
 			$("#shDateStart, #shDateEnd").datepicker();
-	}); */
+	}); 
 	
 	let goUrlXdmList = "/orders";								/* ### */
 	let goUrlXdmForm = "/v1/infra/codegroup/codeGroupXdmForm";								/* ### */
@@ -764,8 +803,7 @@
 	    location.href = goUrlXdmList;
 	}
 
-/* 
-	document.getElementById("btnForm").onclick = function () {
+/* 	document.getElementById("btnForm").onclick = function () {
 	    goForm(0);
 	}
  */
@@ -782,8 +820,26 @@
 	};
 	
 	let form = document.querySelector("form[name=formList]");
+	</script>
 	
-</script>
+	<!-- 강사님 데이터 피커 -->
+<!--데이터피커 자바스크립트 구문-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $("#shDateStart, #shDateEnd").datetimepicker({
+                    format: "Y-m-d",
+                    timepicker:false,
+                });
+            });
+        </script>
+
+
+	<!-- Date Range JS -->
+	<!-- 
+	<script src="/adm/vendor/daterange/daterange.js"></script>
+	<script src="adm/vendor/daterange/custom-daterange.js"></script>
+ -->
 
 	</body>
 

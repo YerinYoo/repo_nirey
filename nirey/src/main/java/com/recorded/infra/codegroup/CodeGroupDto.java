@@ -6,12 +6,11 @@ public class CodeGroupDto {
 
 	private String seq;
 	private String name;
-	private String memo;
 	private Integer delNY;
 	private Date  regDatetime;
 	private Date modDatetime;
 	private  Integer cdSeqCount;
-	private Integer cgSeqCount;
+	//private Integer cgSeqCount;
 		
 	//getter, setter
 	public String getSeq() {
@@ -25,12 +24,6 @@ public class CodeGroupDto {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public String getMemo() {
-		return memo;
-	}
-	public void setMemo(String memo) {
-		this.memo = memo;
 	}
 	public Integer getDelNY() {
 		return delNY;
@@ -56,18 +49,19 @@ public class CodeGroupDto {
 	public void setCdSeqCount(Integer cdSeqCount) {
 		this.cdSeqCount = cdSeqCount;
 	}
-	public Integer getCgSeqCount() {
-		return cgSeqCount;
-	}
-	public void setCgSeqCount(Integer cgSeqCount) {
-		this.cgSeqCount = cgSeqCount;
-	}
+	//public Integer getCgSeqCount() {
+	//	return cgSeqCount;
+	//}
+	//public void setCgSeqCount(Integer cgSeqCount) {
+	//	this.cgSeqCount = cgSeqCount;
+	//}
 	@Override
 	public String toString() {
-		return "CodeGroupDto [seq=" + seq + ", name=" + name + ", memo=" + memo + ", delNY=" + delNY + ", regDatetime="
+		return "CodeGroupDto [seq=" + seq + ", name=" + name + ", memo=" + ", delNY=" + delNY + ", regDatetime="
 				+ regDatetime + ", modDatetime=" + modDatetime + ", cdSeqCount=" + cdSeqCount + ", cgSeqCount="
-				+ cgSeqCount + "]";
+				+ "]";
 	}
+	
 	
 	
 	

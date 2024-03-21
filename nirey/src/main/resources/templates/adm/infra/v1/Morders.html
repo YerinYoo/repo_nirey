@@ -44,6 +44,14 @@
 		<!-- Data Tables -->
 		<link rel="stylesheet" href="/adm/vendor/datatables/dataTables.bs5.css" />
 		<link rel="stylesheet" href="/adm/vendor/datatables/dataTables.bs5-custom.css" />
+		
+				 
+		 <!--  강사님 데이트 피커 -->
+		 <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" media="screen"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+		
 
 	</head>
 
@@ -459,6 +467,8 @@
 				<!-- Page header ends -->
 
 				<!-- Content wrapper scroll start -->
+				
+				
 				<div class="content-wrapper-scroll">
 
 					<!-- Content wrapper start -->
@@ -476,25 +486,230 @@
 							<div class="col-sm-12 col-12">
 								<div class="card" style="background-color : snow">
 									<div class="card-header">
-										<div class="card-title">코드 그룹 수정</div>
+										<div class="card-title">멤버  관리</div>
 									</div>
-									<div class="card-body mt-5">
-										<form method="post" action="codeGroupInsert"> <!--   form 태그는 액션, 메서드가 필요함 / 메서드는  get, post 두 가지만 들어올 수 있음 / 액션에는 리퀘스트 매핑에 들어간 것들 입력해야 함-->
-											<!--  <input type="text"  name="seq" th:value="${item.seq}"> -->
+									
+									
+									<div class="row mb-3 ms-2 me-2">
+										<form name="formList" id="formList" method="post" autocomplete="off">
 										
+											<!-- search s -->
+											<div id="divSearch" class="container-fluid px-0 pb-3">
+												<div class="row row-cols-2 row-cols-sm-6 g-2 px-2">
+													<div class="col">
+														<select id="shDelNy" name="shDelNy" class="form-select form-select-sm">
+															<option value="" th:selected="${vo.shDelNy == null}">삭제여부</option>
+															<option value="1" th:selected="${vo.shDelNy == 1}">Y</option>
+															<option value="0" th:selected="${vo.shDelNy == 0}">N</option>            
+														</select>
+													</div>
+													<div class="col">
+														<select class="form-select" name="shDelNy" id="shDelNy">
+															<option value="" th:selected="${vo.shDelNy == null}">사용여부</option>
+															<option value="1" th:selected="${vo.shDelNy == 1}">Y</option>
+															<option value="0" th:selected="${vo.shDelNy == 0}">N</option>
+												</select>
+											</div>			
+													<div class="col">
+														<select id="shOptionDate" name="shOptionDate" class="form-select form-select-sm">
+															<option value="" th:selected="${vo.shOptionDate == null}">날짜</option>
+															<option value="1" th:selected="${vo.shOptionDate == 1}">등록일</option>
+															<option value="2" th:selected="${vo.shOptionDate == 2}">수정일</option>
+														</select>
+													</div>  
+													<div class="col">
+														<input type="text" id="shDateStart" name="shDateStart" th:value="${#strings.substring(vo.shDateStart, 0, 10)}" placeholder="시작일" class="form-control form-control-sm" autocomplete="off">
+													</div>              
+													<div class="col">
+														<input type="text" id="shDateEnd" name="shDateEnd" th:value="${#strings.substring(vo.shDateEnd, 0, 10)}" placeholder="종료일" class="form-control form-control-sm" autocomplete="off">
+													</div> 
+												</div>
+												<div class="row row-cols-2 row-cols-sm-6 g-2 mt-1 px-2">
+													<div class="col">
+														<select id="shOption" name="shOption" class="form-select form-select-sm">
+															<option value=""   th:selected="${vo.shOption == null}">검색구분</option>
+															<option value="1" th:selected="${vo.shOption == 1}">회원 시퀀스</option>
+															<option value="2" th:selected="${vo.shOption == 2}">회원 이름</option>
+														</select>
+													</div>                    
+													<div class="col">
+														<input type="text" id="shValue" name="shValue" th:value="${vo.shValue}" onkeyup="enterkey()" placeholder="검색어" class="form-control form-control-sm">
+														<div class="invalid-feedback" id="shValueFeedback"></div>
+													</div> 
+													<div class="col">
+														<button type="button" id="btnSearch" class="btn btn-outline-secondary btn-sm btn_custom"><i class="fa-solid fa-magnifying-glass fa-lg"></i></button>
+														<button type="button" id="btnReset" class="btn btn-outline-secondary btn-sm btn_custom"><i class="fa-solid fa-rotate-right fa-lg"></i></button>
+													</div>    
+												</div>
+											</div>
+											<!-- search e -->	
 										
-											<label>name</label>
-											<input type="text" name="name"   >
-											<!-- 
-											<input type="text" name="modDatetime">
-											<input type="text" name="regDatetime">
-											 -->
-											<button type="submit"  id="btnSubmit">저장</button>
-											</form>
-											</div>
-											</div>
+										</form>
+
+								
+								
+									<div class="col-1">
+										<select class="select-single js-states form-control" title="Select Product Category"
+													data-live-search="true">
+													<option>-</option>
+													<option>5</option>
+													<option>10</option>
+													<option>25</option>
+													<option>50</option>
+													<option>100</option>
+												</select>
+									</div>
+									</div>
+									                          
+									 <a th:href="@{/CordersAdd}" th:text="등록"></a>
+	
+												    
+				<!-- Content wrapper scroll start -->
+				<div class="content-wrapper-scroll">
+
+					<!-- Content wrapper start -->
+					<div class="content-wrapper" >
+																
+						<!-- Row start -->
+						<div class="row">
+							<div class="col-sm-12 col-12">
+								
+										<div class="table-responsive">
+										<table class="table v-middle" style="table-layout:fixed;" >
+									    	<tr>
+									    		<td>
+									    			<div class="form-check form-check-inline">
+														<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+													</div>
+									    		</td>
+									    		<td>#</td>
+									    		<td>memberSeq</td>
+									    		<td>member Name</td>
+									    		<td>quitNY</td>
+									    		<td>dormantNY</td>
+									    		<td>ID</td>
+									    		<td>pwd</td>
+									    		<td>email</td>
+									    		<td>gender</td>
+									    		<td>birthday</td>
+									    		<td>MobileNum</td>
+									    		<td>joinDate</td>
+									    		<td>modDateTime</td>
+									    		
+									    	</tr>
+									    	
+									    	<tr th:if="${!#lists.isEmpty(list)}" >
+									    		<td colspan="14"></td>
+									    	</tr>
+										
+									    	<tr th:if="${!#lists.isEmpty(list)}" th:each="list:${list}"> 
+									    	    <td>
+									    	    	<div class="form-check form-check-inline">
+														<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+													</div>
+									    	    </td>
+									    		<td></td>
+									    		<td th:text="${list.MemberSeq}"></td>
+									    		<td>
+									    			<a th:href="@{/MordersView(memberSeq=${list.memberSeq}, name=${list.name}, quitNY=${list.quitNY})}"  th:text="${list.name}"></a>
+									    		</td>
+									     		
+									     		<td th:if="${list.quitNY eq 0}">N</td>
+									     		<td th:unless="${list.quitNY eq 0}">Y</td>
+									     		
+									     		<td th:if="${list.dormantNY eq 0}">N</td>
+									     		<td th:unless="${list.dormantNY eq 0}">Y</td>
+									    		
+									    		<td th:text="${list.ID} " ></td>
+									    		<td th:text="${list.pwd}"></td>
+									    		<td th:text="${list.email}" ></td>
+			    		
+									    		<td>
+									    		<th:block th:switch="${list.genderCD}">
+												    <span th:case="1">남성</span>
+												    <span th:case="2">여성</span>
+												    <span th:case="3">기타</span>
+												</th:block>
+												</td>
+												 
+<!-- 									    <td th:if="${list.genderCD eq 1}">남성</td>
+									    		<td th:unless="${list.genderCD eq 2}">여성</td>  -->
+									    		
+									    		<td th:text="${#dates.format(list.birthday, 'yyyy-MM-dd')}"></td>
+									    		<td th:text="${list.MobileNum}"></td>
+									       		<td th:text="${#dates.format(list.joinDate,  'yyyy-MM-dd HH:mm:ss')}"></td>
+									     		<td th:text="${#dates.format(list.modDateTime,  'yyyy-MM-dd HH:mm:ss')}"></td>
+									    	</tr>
+									    </table>
+										</div>
 									</div>
 								</div>
+											
+											<nav aria-label="Page Navigation">
+											<div class="row">
+                                                <ul class="pagination justify-content-center mt-5">
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="#" aria-label="Previous">
+                                                            <span aria-hidden="true">
+                                                                <i class="bi bi-arrow-left"></i>
+                                                            </span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="page-item active">
+                                                        <a class="page-link" href="#">1</a>
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="#">2</a>
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="#">3</a>
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="#">4</a>
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="#">5</a>
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="#">6</a>
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="#">7</a>
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="#" aria-label="Next">
+                                                            <span aria-hidden="true">
+                                                                <i class="bi bi-arrow-right"></i>
+                                                            </span>
+                                                        </a>
+                                                    </li>
+												</ul>
+											</div>
+
+												<div class="row">
+
+													<div class="col-1" style="float : left;">
+                                                            <span class="me-2">
+                                                                <a class="btn btn-primary btn-m" href="#" th:href="@{/CordersAdd}">
+                                                                    <i class="bi bi-pencil"></i>
+                                                                </a>
+                                                            </span>
+                                                           </div>
+                                                           
+                                                           <div class="col-1" style="float : right; padding-left : 1270px;">
+                                                           
+                                                            <span>
+                                                            
+                                                                <a class="btn btn-danger btn-icon btn-m mb-1" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                                    <i class="bi bi-trash"></i>
+                                                                </a>
+                                                            </span>
+                                                            </div>
+                                                    </div>
+												</div>
+											</nav>
+											
+
 								<!-- Card end -->
 
 							</div>
@@ -512,6 +727,33 @@
 
 				</div>
 				<!-- Content wrapper scroll end -->
+				
+				
+				<!-- Add Modals Here -->
+				<div class="modals-placeholder">
+				
+								<!-- Modal 1 -->
+					<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">삭제</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									삭제하시겠습니까?
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-dark" data-bs-dismiss="modal">닫기</button>
+									<button type="submit" class="btn btn-warning"th:href="@{/orders}" th:text="Uelete"></button>
+									<button type="submit" class="btn btn-danger" th:href="@{/orders}" th:text="Delete"></button>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
 			</div>
 			<!-- *************
@@ -548,24 +790,24 @@
 		<!-- Main Js Required -->
 		<script src="/adm/js/main.js"></script>
 		
-				
+		
 		<script type="text/javascript">
 
- 	window.addEventListener('load', function() {
-			$("#shDateStart, #shDateEnd").datepicker();
+	window.addEventListener('load', function() {
+			$("#shDateStart, #shDateEnd").datetimepicker();
 	}); 
 	
-	let goUrlXdmList = "/orders";								/* ### */
-	let goUrlXdmForm = "/ordersForm";								/* ### */
+	let goUrlXdmList = "/Morders";								/* ### */
+	let goUrlXdmForm = "/v1/infra/code/MordersForm";								/* ### */
 	let goUrlXdmMultiUele = "/v1/infra/codegroup/codeGroupXdmMultiUele";			/* ### */
 	let goUrlXdmMultiDele = "/v1/infra/codegroup/codeGroupXdmMultiDele";			/* ### */
 	let goUrlXdmView = "/v1/infra/codegroup/codeGroupXdmView";								/* ### */
 	
 	let seq = document.querySelector("input[name=ifcgSeq]");									/* ### */
 
-/* 	document.getElementById("btnReset").onclick = function () {
+	document.getElementById("btnReset").onclick = function () {
 	    location.href = goUrlXdmList;
-	} */
+	}
 
 /* 	document.getElementById("btnForm").onclick = function () {
 	    goForm(0);
@@ -578,49 +820,32 @@
 	    form.submit();
 	}
 	
-/* 	document.getElementById("btnSearch").onclick = function () {
+	document.getElementById("btnSearch").onclick = function () {
 	    form.action = goUrlXdmList;
 	    form.submit();
-	}; */
+	};
 	
 	let form = document.querySelector("form[name=formList]");
-		
-	document.getElementById("btnSubmit").onclick = function() {
-		
-		if(validationInst() == false)return false;
-		}
-		
-		function validationInst() {
-			if(validationUpdt() == false) {
-				return false;
-				} else {
-					form.action = goUrlXdmList;
-					form.submit();
-				}
-		}
-		
-		function validationInst() {
-			if(validationUpdt() == false) return false;
-		}					
-		
-		function validationUpdt(){
-			if(!nullToEmpty(document.getElementById("name").value)) {
-				alert("데이터 넣어라");
-				return false;
-				
-			}
-		}
-		nullToEmpty = function(value){
-			if(value == null || value == 'null' || value.length == 0){
-				return false;
-			} else{
-				return true;
-			}
-		}
-		
-		
-		
-		</script>
+	</script>
+	
+	<!-- 강사님 데이터 피커 -->
+<!--데이터피커 자바스크립트 구문-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $("#shDateStart, #shDateEnd").datetimepicker({
+                    format: "Y-m-d",
+                    timepicker:false,
+                });
+            });
+        </script>
+
+
+	<!-- Date Range JS -->
+	<!-- 
+	<script src="/adm/vendor/daterange/daterange.js"></script>
+	<script src="adm/vendor/daterange/custom-daterange.js"></script>
+ -->
 
 	</body>
 

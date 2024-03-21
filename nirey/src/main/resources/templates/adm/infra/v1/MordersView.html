@@ -476,23 +476,70 @@
 							<div class="col-sm-12 col-12">
 								<div class="card" style="background-color : snow">
 									<div class="card-header">
-										<div class="card-title">코드 그룹 수정</div>
+										<div class="card-title mb-4">코드 관리</div>
 									</div>
-									<div class="card-body mt-5">
-										<form method="post" action="codeGroupInsert"> <!--   form 태그는 액션, 메서드가 필요함 / 메서드는  get, post 두 가지만 들어올 수 있음 / 액션에는 리퀘스트 매핑에 들어간 것들 입력해야 함-->
-											<!--  <input type="text"  name="seq" th:value="${item.seq}"> -->
+									</div>
+									<div class="card-body">
+									
+									<table style="width : 30%">
+									<tr>
+									<td>seq :</td>
+									<td  th:text=" ${item.memberSeq}"></td>
+									</tr>
+									<tr>
+									<td>name :</td>
+									<td  th:text="${item.name}"></td>
+									</tr>
+
+									</table>
+									
+									<div class="row mt-5">
+										<div class="col-9">
+										<a  th:href="@{/Corders}" >
+										<button type="button" class="btn btn-dark" th:text="이동"></button>
+										</a>
+										</div>
+										<div class="col-1 ">
+										<a  th:href="@{/CordersForm(seq=${item.memberSeq})}">
+										<button type="button" class="btn btn-success">Edit</button>
+										</a>
+										</div>
 										
-										
-											<label>name</label>
-											<input type="text" name="name"   >
-											<!-- 
-											<input type="text" name="modDatetime">
-											<input type="text" name="regDatetime">
-											 -->
-											<button type="submit"  id="btnSubmit">저장</button>
+										<!-- 
+										<a th:href="@{/Corders}" th:text="이동"></a>
+										<a th:href="@{/CordersForm(seq=${item.memberSeq})}"  th:text="수정"></a>
+										 -->
+											<div class="col-1">
+											<form method="post" action="codeUelete"> 
+												<input type="hidden" name="memberSeq" th:value="${item.memberSeq}">
+												<input type="hidden" name="name" th:value="${item.name}">
+												<input type="hidden" name="quitNY" th:value="${item.quitNY}">
+												
+												<button type="submit" class="btn btn-warning"th:href="@{/Corders}" th:text="Uelete"></button>
+											
 											</form>
 											</div>
-											</div>
+									
+										<div class="col-1 ">
+										
+											<form method="post" action="codeDelete"> 
+											<input type="hidden" name="seq" th:value="${item.memberSeq}">
+											<input type="hidden" name="name" th:value="${item.name}">
+											
+											<button type="submit" class="btn btn-danger" th:href="@{/orders}" th:text="Delete"></button>
+											
+											</form>
+										</div>
+									
+									</div>
+	
+									</div>
+
+
+
+
+
+										</div>
 									</div>
 								</div>
 								<!-- Card end -->
@@ -547,80 +594,6 @@
 
 		<!-- Main Js Required -->
 		<script src="/adm/js/main.js"></script>
-		
-				
-		<script type="text/javascript">
-
- 	window.addEventListener('load', function() {
-			$("#shDateStart, #shDateEnd").datepicker();
-	}); 
-	
-	let goUrlXdmList = "/orders";								/* ### */
-	let goUrlXdmForm = "/ordersForm";								/* ### */
-	let goUrlXdmMultiUele = "/v1/infra/codegroup/codeGroupXdmMultiUele";			/* ### */
-	let goUrlXdmMultiDele = "/v1/infra/codegroup/codeGroupXdmMultiDele";			/* ### */
-	let goUrlXdmView = "/v1/infra/codegroup/codeGroupXdmView";								/* ### */
-	
-	let seq = document.querySelector("input[name=ifcgSeq]");									/* ### */
-
-/* 	document.getElementById("btnReset").onclick = function () {
-	    location.href = goUrlXdmList;
-	} */
-
-/* 	document.getElementById("btnForm").onclick = function () {
-	    goForm(0);
-	}
- */
-
-	goForm = function (keyValue) {
-	    seq.value = keyValue;
-	    form.action = goUrlXdmForm;
-	    form.submit();
-	}
-	
-/* 	document.getElementById("btnSearch").onclick = function () {
-	    form.action = goUrlXdmList;
-	    form.submit();
-	}; */
-	
-	let form = document.querySelector("form[name=formList]");
-		
-	document.getElementById("btnSubmit").onclick = function() {
-		
-		if(validationInst() == false)return false;
-		}
-		
-		function validationInst() {
-			if(validationUpdt() == false) {
-				return false;
-				} else {
-					form.action = goUrlXdmList;
-					form.submit();
-				}
-		}
-		
-		function validationInst() {
-			if(validationUpdt() == false) return false;
-		}					
-		
-		function validationUpdt(){
-			if(!nullToEmpty(document.getElementById("name").value)) {
-				alert("데이터 넣어라");
-				return false;
-				
-			}
-		}
-		nullToEmpty = function(value){
-			if(value == null || value == 'null' || value.length == 0){
-				return false;
-			} else{
-				return true;
-			}
-		}
-		
-		
-		
-		</script>
 
 	</body>
 

@@ -476,22 +476,26 @@
 							<div class="col-sm-12 col-12">
 								<div class="card" style="background-color : snow">
 									<div class="card-header">
-										<div class="card-title">코드 그룹 수정</div>
+										<div class="card-title mb-5">코드 수정</div>
 									</div>
-									<div class="card-body mt-5">
-										<form method="post" action="codeGroupInsert"> <!--   form 태그는 액션, 메서드가 필요함 / 메서드는  get, post 두 가지만 들어올 수 있음 / 액션에는 리퀘스트 매핑에 들어간 것들 입력해야 함-->
+										<form method="post" action="codeGroupUpdt"> <!--   form 태그는 액션, 메서드가 필요함 / 메서드는  get, post 두 가지만 들어올 수 있음 / 액션에는 리퀘스트 매핑에 들어간 것들 입력해야 함-->
 											<!--  <input type="text"  name="seq" th:value="${item.seq}"> -->
-										
-										
-											<label>name</label>
-											<input type="text" name="name"   >
+
+													<input type="text" name="seq" th:value="${item.memberSeq}"> <!-- form 안에 데이터 등록 태그에는 name=""으로 이름 부여되어야 들어오는 값을 컨트롤러에 저장할 수 있음 -->
+
+
+													<input type="text" name="name" th:value="${item.name}" >
+
+													<input type="text" name="CodeGroupSeq" th:value="${item.CodeGroupSeq}">
+
+											
+											
 											<!-- 
 											<input type="text" name="modDatetime">
 											<input type="text" name="regDatetime">
 											 -->
-											<button type="submit"  id="btnSubmit">저장</button>
+											<button type="submit" th:href="@{/orders}">저장</button>
 											</form>
-											</div>
 											</div>
 									</div>
 								</div>
@@ -547,80 +551,6 @@
 
 		<!-- Main Js Required -->
 		<script src="/adm/js/main.js"></script>
-		
-				
-		<script type="text/javascript">
-
- 	window.addEventListener('load', function() {
-			$("#shDateStart, #shDateEnd").datepicker();
-	}); 
-	
-	let goUrlXdmList = "/orders";								/* ### */
-	let goUrlXdmForm = "/ordersForm";								/* ### */
-	let goUrlXdmMultiUele = "/v1/infra/codegroup/codeGroupXdmMultiUele";			/* ### */
-	let goUrlXdmMultiDele = "/v1/infra/codegroup/codeGroupXdmMultiDele";			/* ### */
-	let goUrlXdmView = "/v1/infra/codegroup/codeGroupXdmView";								/* ### */
-	
-	let seq = document.querySelector("input[name=ifcgSeq]");									/* ### */
-
-/* 	document.getElementById("btnReset").onclick = function () {
-	    location.href = goUrlXdmList;
-	} */
-
-/* 	document.getElementById("btnForm").onclick = function () {
-	    goForm(0);
-	}
- */
-
-	goForm = function (keyValue) {
-	    seq.value = keyValue;
-	    form.action = goUrlXdmForm;
-	    form.submit();
-	}
-	
-/* 	document.getElementById("btnSearch").onclick = function () {
-	    form.action = goUrlXdmList;
-	    form.submit();
-	}; */
-	
-	let form = document.querySelector("form[name=formList]");
-		
-	document.getElementById("btnSubmit").onclick = function() {
-		
-		if(validationInst() == false)return false;
-		}
-		
-		function validationInst() {
-			if(validationUpdt() == false) {
-				return false;
-				} else {
-					form.action = goUrlXdmList;
-					form.submit();
-				}
-		}
-		
-		function validationInst() {
-			if(validationUpdt() == false) return false;
-		}					
-		
-		function validationUpdt(){
-			if(!nullToEmpty(document.getElementById("name").value)) {
-				alert("데이터 넣어라");
-				return false;
-				
-			}
-		}
-		nullToEmpty = function(value){
-			if(value == null || value == 'null' || value.length == 0){
-				return false;
-			} else{
-				return true;
-			}
-		}
-		
-		
-		
-		</script>
 
 	</body>
 

@@ -2,12 +2,8 @@ package com.recorded.infra.code;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.recorded.infra.code.CodeDto;
-import com.recorded.infra.codegroup.CodeGroupVo;
 
 @Controller
 public class CodeController {
@@ -27,6 +23,8 @@ public class CodeController {
 	public String codeView(CodeDto dto, Model model) throws Exception {
 		
 		model.addAttribute("item", service.selectOne(dto));
+		
+		
 		
 		return "codeView"; 
 		
@@ -84,10 +82,17 @@ public class CodeController {
 		return "redirect:/Corders";
 	}
 	
-	@RequestMapping(value="/Corders")
-	public String Corders(Model model) throws Exception {
-		
-		model.addAttribute("list", service.selectList());
+	@RequestMapping(value = "/Corders")
+	public String Corders(CodeVo vo, Model model) throws Exception {
+
+		System.out.println("===========================================");
+		System.out.println(vo.toString());
+		System.out.println("vo.getShDateStart() : " + vo.getShDateStart());
+		System.out.println("vo.getShDateEnd() : " + vo.getShDateEnd());
+
+		model.addAttribute("list", service.selectList(vo));
+		model.addAttribute("vo", vo);
+
 		return "adm/infra/v1/Corders";
 	}
 	

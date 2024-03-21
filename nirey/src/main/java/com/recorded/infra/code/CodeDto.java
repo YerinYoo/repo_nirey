@@ -1,7 +1,9 @@
 
 package com.recorded.infra.code;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class CodeDto {
 	
@@ -10,7 +12,6 @@ public class CodeDto {
 	private Integer delNY;
 	private String seq;
 	private String name;
-	private String memo;
 	private Date regDatetime;
 	private Date modDatetime;
 	
@@ -44,31 +45,37 @@ public class CodeDto {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Date getModDatetime() {
-		return modDatetime;
-	}
-	public void setModDatetime(Date modDatetime) {
-		this.modDatetime = modDatetime;
-	}
-	public String getMemo() {
-		return memo;
-	}
-	public void setMemo(String memo) {
-		this.memo = memo;
-	}
 	public Date getRegDatetime() {
 		return regDatetime;
 	}
 	public void setRegDatetime(Date regDatetime) {
 		this.regDatetime = regDatetime;
 	}
-	@Override //toString
+	public Date getModDatetime() {
+		return modDatetime;
+	}
+	public void setModDatetime(Date modDatetime) {
+		this.modDatetime = modDatetime;
+	}
+	@Override
 	public String toString() {
 		return "CodeDto [CodeGroupSeq=" + CodeGroupSeq + ", CodeGroupName=" + CodeGroupName + ", delNY=" + delNY
-				+ ", seq=" + seq + ", name=" + name + ", memo=" + memo + ", regDatetime=" + regDatetime
-				+ ", modDatetime=" + modDatetime + "]";
+				+ ", seq=" + seq + ", name=" + name + ", regDatetime=" + regDatetime + ", modDatetime=" + modDatetime
+				+ "]";
 	}
+	
+//	for cache
+	public static List<CodeDto> cachedCodeArrayList = new ArrayList<CodeDto>();
 
+	public static List<CodeDto> getCachedCodeArrayList() {
+		return cachedCodeArrayList;
+	}
+	public static void setCachedCodeArrayList(List<CodeDto> cachedCodeArrayList) {
+		CodeDto.cachedCodeArrayList = cachedCodeArrayList;
+	}
+	
+	
+	
 	
 	
 }

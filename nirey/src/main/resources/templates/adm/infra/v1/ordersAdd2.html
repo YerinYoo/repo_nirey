@@ -465,43 +465,51 @@
 					<div class="content-wrapper">
 
 						<!-- Row start -->
-						<div class="row">
-							<div class="col-sm-12 col-12">
 
-								<!-- Card start -->
-								<div class="card">
+														<div class="card">
 									<div class="card-body">
 									
-						<div class="row">
-							<div class="col-sm-12 col-12">
-								<div class="card" style="background-color : snow">
-									<div class="card-header">
-										<div class="card-title">코드 그룹 수정</div>
-									</div>
-									<div class="card-body mt-5">
-										<form method="post" action="codeGroupInsert"> <!--   form 태그는 액션, 메서드가 필요함 / 메서드는  get, post 두 가지만 들어올 수 있음 / 액션에는 리퀘스트 매핑에 들어간 것들 입력해야 함-->
-											<!--  <input type="text"  name="seq" th:value="${item.seq}"> -->
+													<div class="row">
+													<div class="col-sm-6 col-12">
+														<h4>코드 그룹 추가</h4>
+													</div>
+													</div>
+									
+
+										<!-- Row start -->
 										
+
 										
-											<label>name</label>
-											<input type="text" name="name"   >
-											<!-- 
-											<input type="text" name="modDatetime">
-											<input type="text" name="regDatetime">
-											 -->
-											<button type="submit"  id="btnSubmit">저장</button>
-											</form>
-											</div>
-											</div>
+														<form method="post"  action="codeGroupInsert"> <!--   form 태그는 액션, 메서드가 필요함 / 메서드는  get, post 두 가지만 들어올 수 있음 / 액션에는 리퀘스트 매핑에 들어간 것들 입력해야 함-->
+										<div class="row">
+											<div class="col-sm-12 col-12">
+												<div class="card" style="background-color : snow">
+													<div class="card-header">
+														<div class="card-title mb-5">코드 그룹 관리</div>
+													</div>
+														
+															<input type="text" name="name"  id="name"> <!-- form 안에 데이터 등록 태그에는 name=""으로 이름 부여되어야 들어오는 값을 컨트롤러에 저장할 수 있음 -->
+															<input type="text" name="memo" >
+															<button type="submit"   id="btnSubmit">add</button>
+															<!--  name과 DTO 이름이 같을 경우 자동으로 스프링 상에서 매칭되어 데이터가 컨트롤러에 입력됨 -->
+												</div>
+										</div>
 									</div>
+														</form>
+											
+										<!-- Row end -->
+										
+									
 								</div>
+								<!-- Card end -->
 								<!-- Card end -->
 
 							</div>
 						</div>
 						<!-- Row end -->
+						
+						</div>
 
-					</div>
 					<!-- Content wrapper end -->
 
 					<!-- App Footer start -->
@@ -509,8 +517,7 @@
 						<span>© Arise admin 2023</span>
 					</div>
 					<!-- App footer end -->
-
-				</div>
+					</div>
 				<!-- Content wrapper scroll end -->
 
 			</div>
@@ -534,6 +541,7 @@
 			************ Vendor Js Files *************
 		************* -->
 
+	
 		<!-- Overlay Scroll JS -->
 		<script src="/adm/vendor/overlay-scroll/jquery.overlayScrollbars.min.js"></script>
 		<script src="/adm/vendor/overlay-scroll/custom-scrollbar.js"></script>
@@ -548,24 +556,24 @@
 		<!-- Main Js Required -->
 		<script src="/adm/js/main.js"></script>
 		
-				
+		
 		<script type="text/javascript">
-
- 	window.addEventListener('load', function() {
-			$("#shDateStart, #shDateEnd").datepicker();
-	}); 
 	
-	let goUrlXdmList = "/orders";								/* ### */
-	let goUrlXdmForm = "/ordersForm";								/* ### */
-	let goUrlXdmMultiUele = "/v1/infra/codegroup/codeGroupXdmMultiUele";			/* ### */
-	let goUrlXdmMultiDele = "/v1/infra/codegroup/codeGroupXdmMultiDele";			/* ### */
-	let goUrlXdmView = "/v1/infra/codegroup/codeGroupXdmView";								/* ### */
+/* 		window.addEventListener('load', function() {
+				$("#shDateStart, #shDateEnd").datepicker();
+		}); */
+		
+		let goUrlXdmList = "/orders";								/* ### */
+		let goUrlXdmForm = "/ordersAdd";								/* ### */
+		let goUrlXdmMultiUele = "/v1/infra/codegroup/codeGroupXdmMultiUele";			/* ### */
+		let goUrlXdmMultiDele = "/v1/infra/codegroup/codeGroupXdmMultiDele";			/* ### */
+		let goUrlXdmView = "/ordersView";								/* ### */
+		
+		let seq = document.querySelector("input[name=seq]");									/* ### */
 	
-	let seq = document.querySelector("input[name=ifcgSeq]");									/* ### */
-
-/* 	document.getElementById("btnReset").onclick = function () {
-	    location.href = goUrlXdmList;
-	} */
+		document.getElementById("btnSubmit").onclick = function () {
+		    location.href = goUrlXdmList;
+		}
 
 /* 	document.getElementById("btnForm").onclick = function () {
 	    goForm(0);
@@ -578,36 +586,42 @@
 	    form.submit();
 	}
 	
-/* 	document.getElementById("btnSearch").onclick = function () {
+	document.getElementById("btnSearch").onclick = function () {
 	    form.action = goUrlXdmList;
 	    form.submit();
-	}; */
+	};
 	
 	let form = document.querySelector("form[name=formList]");
-		
+	
+	</script>
+	
+	<script>
+	
+
 	document.getElementById("btnSubmit").onclick = function() {
 		
-		if(validationInst() == false)return false;
-		}
-		
-		function validationInst() {
-			if(validationUpdt() == false) {
+		if(validationInst() == false) {
 				return false;
-				} else {
-					form.action = goUrlXdmList;
-					form.submit();
-				}
+			} else {
+				form.action = goUrlXdmList;
+				form.submit();
+			}
 		}
 		
-		function validationInst() {
-			if(validationUpdt() == false) return false;
-		}					
+	function validationInst() {
+		if(validationUpdt() == false) {
+			alert("ㅅㅄㅄㅄㅂ");
+			return false;
+			} 
+	}
+		
+			
 		
 		function validationUpdt(){
 			if(!nullToEmpty(document.getElementById("name").value)) {
-				alert("데이터 넣어라");
+				alert("님 데이터 없음요");
 				return false;
-				
+
 			}
 		}
 		nullToEmpty = function(value){
@@ -617,10 +631,8 @@
 				return true;
 			}
 		}
-		
-		
-		
-		</script>
+	</script>
+
 
 	</body>
 

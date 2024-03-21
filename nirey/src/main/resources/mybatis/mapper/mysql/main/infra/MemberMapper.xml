@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.recorded.infra.member.MemberDao">
+
+	<resultMap id="resultMapObj" type="com.recorded.infra.member.MemberDto"></resultMap>
+
+    <select id="selectList" resultMap="resultMapObj">
+
+			select
+				a.memberSeq
+				, a.name
+				, a.quitNY
+				, a.dormantNY
+				, a.ID
+				, a.pwd
+			    , a.genderCD
+			    , a.email
+			    , a.birthday
+			    , a. MobileNum
+			    , a. joinDate
+			    , a.modDateTime
+			
+			from 
+			    member a
+			
+			where 1=1
+	        <if test="shDelNy != null and shDelNy.equals('')">AND a.quitNY = #{shDelNy}</if>
+	      
+			<choose>
+				<when test="shOptionDate == 1">AND a.joinDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				<when test="shOptionDate == 2">AND a.modDatetime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			</choose> 
+
+	    	 <choose>
+	         	 <when test="shOption == 1">AND a.memberSeq = #{shValue}</when>
+	         	 <when test="shOption==2"> AND a.name LIKE CONCAT('%',#{shValue},'%')</when>
+	       	 </choose>
+
+    </select>
+	  
+	      <select id="selectOne" resultMap="resultMapObj">
+    
+    		select
+    		
+    		a.quitNY
+    		, a.memberSeq
+    		, a.name
+    		, a.modDateTime
+    		
+    		from member  a
+    		
+    		where 1=1
+    			and a.memberSeq=#{memberSeq} 
+    			
+    </select>
+    
+	  <insert id="insert">
+			insert into code (
+				 a.name
+				, a.quitNY
+				, a.dormantNY
+				, a.ID
+				, a.pwd
+			    , a.genderCD
+			    , a.email
+			    , a.birthday
+			    , a. MobileNum
+
+			) values (
+			#{name}
+			, #{quitNY}
+			,#{dormantNY}
+			,#{ID}
+			,#{pwd}
+			,#{genderCD}
+			,#{email}
+			,#{birthday}
+			,#{MobileNum}
+			
+	  </insert>
+	  
+	   
+    <update id="update">
+   	update code
+   	set
+   		name = #{name}
+   	WHERE 1=1
+   		and memberSeq = #{memberSeq}
+  	
+  	</update>
+  	
+  	<update id="uelete">
+  			update code
+  			set
+  			quitNY=1
+  			where 1=1
+  			and memberSeq = #{memberSeq}
+  	</update>
+  	
+  	
+  	<delete id="delete">
+  	
+  	delete from code
+  	where memberSeq=#{memberSeq}
+  	</delete>
+	  
+</mapper>

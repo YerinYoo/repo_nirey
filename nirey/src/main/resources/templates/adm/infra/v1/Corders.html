@@ -44,6 +44,14 @@
 		<!-- Data Tables -->
 		<link rel="stylesheet" href="/adm/vendor/datatables/dataTables.bs5.css" />
 		<link rel="stylesheet" href="/adm/vendor/datatables/dataTables.bs5-custom.css" />
+		
+				 
+		 <!--  강사님 데이트 피커 -->
+		 <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" media="screen"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+		
 
 	</head>
 
@@ -459,6 +467,8 @@
 				<!-- Page header ends -->
 
 				<!-- Content wrapper scroll start -->
+				
+				
 				<div class="content-wrapper-scroll">
 
 					<!-- Content wrapper start -->
@@ -479,73 +489,62 @@
 										<div class="card-title">코드  관리</div>
 									</div>
 									
+									
 									<div class="row mb-3 ms-2 me-2">
-										<div class="col-4">
-											<label class="form-label d-flex">주문 상태를 설정하세요</label>
-											<select class="select-single js-states form-control" title="Select Product Category"
-												data-live-search="true">
-												<option>주문 취소</option>
-												<option>결제 완료</option>
-												<option>배송 준비 중</option>
-												<option>배송 중</option>
-												<option>배송 완료</option>
-												<option>구매 확정</option>
-												<option>주문 상태</option>
-											</select>
-										</div>
-
-										<div class="col-4">
-											<label class="form-label d-flex">결제 상태를 설정하세요</label>
-											<select class="select-single js-states form-control" title="Select Product Category"
-												data-live-search="true">
-												<option>결제 완료</option>
-												<option>결제 대기 중</option>
-												<option>결제 취소</option>
-											</select>
-										</div>
-
-										<div class="col-4">
-											<label class="form-label d-flex">검색 카테고리를 설정하세요</label>
-											<select class="select-single js-states form-control" title="Select Product Category"
-												data-live-search="true">
-												<option>고객</option>
-												<option>제품</option>
-												<option>고객 아이디</option>
-												<option>주문일자</option>
-												<option>결제 금액</option>
-												<option>결제 상태</option>
-												<option>주문 상태</option>
-											</select>
-										</div>
-									</div>
-
-									<div class="row mb-3 ms-2 me-2">
-										<div class="col-4">
-											<label class="form-label d-flex">주문일을 설정하세요</label>
-											<input type="text" id="shDateStart" name="shDateStart" placeholder="----.--.--" class="form-control form-control-sm" autocomplete="off" readonly>
-										</div>
-
-										<div class="col-4">
-											<label class="form-label d-flex">검색어를 입력하세요</label>
-											<input type="text" id="shDateEnd" class="form-control form-control-sm" aria-label="Dollar amount (with dot and two decimal places)" placeholder="검색어1">
-										</div>
-
-										<div class="col-4 gy-4">
-											<input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" placeholder="검색어2">
-										</div>
-
-									</div>
-									</div>
-								
-								
-								<div class="row">
-									<div class="col-11">
-											<p>Total</p>
-											<!-- 해당 구문 들어가면 왜 먹지 않는지 물어보기 / mySQL 및 콘솔에서는 해당 mapper 쿼리 잘 작동되어 출력됨 -->
-											<!-- <p>Total : <span th:text="${list.cgSeqCount" ></span></p>  -->
-											
-
-									</div>
+										<form name="formList" id="formList" method="post" autocomplete="off">
+										
+											<!-- search s -->
+											<div id="divSearch" class="container-fluid px-0 pb-3">
+												<div class="row row-cols-2 row-cols-sm-6 g-2 px-2">
+													<div class="col">
+														<select id="shDelNy" name="shDelNy" class="form-select form-select-sm">
+															<option value="" th:selected="${vo.shDelNy == null}">삭제여부</option>
+															<option value="1" th:selected="${vo.shDelNy == 1}">Y</option>
+															<option value="0" th:selected="${vo.shDelNy == 0}">N</option>            
+														</select>
+													</div>
+													<div class="col">
+														<select class="form-select" name="shDelNy" id="shDelNy">
+															<option value="" th:selected="${vo.shDelNy == null}">사용여부</option>
+															<option value="1" th:selected="${vo.shDelNy == 1}">Y</option>
+															<option value="0" th:selected="${vo.shDelNy == 0}">N</option>
+												</select>
+											</div>			
+													<div class="col">
+														<select id="shOptionDate" name="shOptionDate" class="form-select form-select-sm">
+															<option value="" th:selected="${vo.shOptionDate == null}">날짜</option>
+															<option value="1" th:selected="${vo.shOptionDate == 1}">등록일</option>
+															<option value="2" th:selected="${vo.shOptionDate == 2}">수정일</option>
+														</select>
+													</div>  
+													<div class="col">
+														<input type="text" id="shDateStart" name="shDateStart" th:value="${#strings.substring(vo.shDateStart, 0, 10)}" placeholder="시작일" class="form-control form-control-sm" autocomplete="off">
+													</div>              
+													<div class="col">
+														<input type="text" id="shDateEnd" name="shDateEnd" th:value="${#strings.substring(vo.shDateEnd, 0, 10)}" placeholder="종료일" class="form-control form-control-sm" autocomplete="off">
+													</div> 
+												</div>
+												<div class="row row-cols-2 row-cols-sm-6 g-2 mt-1 px-2">
+													<div class="col">
+														<select id="shOption" name="shOption" class="form-select form-select-sm">
+															<option value="" th:selected="${vo.shOption == null}">검색구분</option>
+															<option value="1" th:selected="${vo.shOption == 1}">코드 시퀀스</option>
+															<option value="2" th:selected="${vo.shOption == 2}">코드 이름</option>
+														</select>
+													</div>                    
+													<div class="col">
+														<input type="text" id="shValue" name="shValue" th:value="${vo.shValue}" onkeyup="enterkey()" placeholder="검색어" class="form-control form-control-sm">
+														<div class="invalid-feedback" id="shValueFeedback"></div>
+													</div> 
+													<div class="col">
+														<button type="button" id="btnSearch" class="btn btn-outline-secondary btn-sm btn_custom"><i class="fa-solid fa-magnifying-glass fa-lg"></i></button>
+														<button type="button" id="btnReset" class="btn btn-outline-secondary btn-sm btn_custom"><i class="fa-solid fa-rotate-right fa-lg"></i></button>
+													</div>    
+												</div>
+											</div>
+											<!-- search e -->	
+										
+										</form>
 
 								
 								
@@ -609,7 +608,7 @@
 									    		<td th:text="${list.CodeGroupName}"></td>
 									     		<td th:if="${list.delNY eq 0}">N</td>
 									     		<td th:unless="${list.delNY eq 0}">Y</td>
-									    		<td th:text="${list.seq}"></td>
+									    		<td th:text="${list.seq} " ></td>
 									    		<td><a th:href="@{/CordersView(seq=${list.seq}, name=${list.name}, delNY=${list.delNY})}"  th:text="${list.name}"></a></td>
 									       		<!-- <td th:text="${list.name}"></td>-->
 									       		<td th:text="${#dates.format(list.regDatetime,  'yyyy-MM-dd HH:mm:ss')}"></td>
@@ -764,6 +763,63 @@
 
 		<!-- Main Js Required -->
 		<script src="/adm/js/main.js"></script>
+		
+		
+		<script type="text/javascript">
+
+	window.addEventListener('load', function() {
+			$("#shDateStart, #shDateEnd").datepicker();
+	}); 
+	
+	let goUrlXdmList = "/Corders";								/* ### */
+	let goUrlXdmForm = "/v1/infra/code/CordersForm";								/* ### */
+	let goUrlXdmMultiUele = "/v1/infra/codegroup/codeGroupXdmMultiUele";			/* ### */
+	let goUrlXdmMultiDele = "/v1/infra/codegroup/codeGroupXdmMultiDele";			/* ### */
+	let goUrlXdmView = "/v1/infra/codegroup/codeGroupXdmView";								/* ### */
+	
+	let seq = document.querySelector("input[name=ifcgSeq]");									/* ### */
+
+	document.getElementById("btnReset").onclick = function () {
+	    location.href = goUrlXdmList;
+	}
+
+/* 	document.getElementById("btnForm").onclick = function () {
+	    goForm(0);
+	}
+ */
+
+	goForm = function (keyValue) {
+	    seq.value = keyValue;
+	    form.action = goUrlXdmForm;
+	    form.submit();
+	}
+	
+	document.getElementById("btnSearch").onclick = function () {
+	    form.action = goUrlXdmList;
+	    form.submit();
+	};
+	
+	let form = document.querySelector("form[name=formList]");
+	</script>
+	
+	<!-- 강사님 데이터 피커 -->
+<!--데이터피커 자바스크립트 구문-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $("#shDateStart, #shDateEnd").datetimepicker({
+                    format: "Y-m-d",
+                    timepicker:false,
+                });
+            });
+        </script>
+
+
+	<!-- Date Range JS -->
+	<!-- 
+	<script src="/adm/vendor/daterange/daterange.js"></script>
+	<script src="adm/vendor/daterange/custom-daterange.js"></script>
+ -->
 
 	</body>
 
