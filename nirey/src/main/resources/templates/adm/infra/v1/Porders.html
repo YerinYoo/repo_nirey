@@ -18,7 +18,7 @@
 		<link rel="shortcut icon" href="/adm/images/favicon.svg">
 
 		<!-- Title -->
-		<title>Member List</title>
+		<title>Product List</title>
 
 
 		<!-- *************
@@ -486,7 +486,7 @@
 							<div class="col-sm-12 col-12">
 								<div class="card" style="background-color : snow">
 									<div class="card-header">
-										<div class="card-title">코드  관리</div>
+										<div class="card-title">제품 관리</div>
 									</div>
 									
 									
@@ -527,9 +527,9 @@
 												<div class="row row-cols-2 row-cols-sm-6 g-2 mt-1 px-2">
 													<div class="col">
 														<select id="shOption" name="shOption" class="form-select form-select-sm">
-															<option value="" th:selected="${vo.shOption == null}">검색구분</option>
-															<option value="1" th:selected="${vo.shOption == 1}">코드 시퀀스</option>
-															<option value="2" th:selected="${vo.shOption == 2}">코드 이름</option>
+															<option value=""   th:selected="${vo.shOption == null}">검색구분</option>
+															<option value="1" th:selected="${vo.shOption == 1}">제품 시퀀스</option>
+															<option value="2" th:selected="${vo.shOption == 2}">제품 이름</option>
 														</select>
 													</div>                    
 													<div class="col">
@@ -561,7 +561,7 @@
 									</div>
 									</div>
 									                          
-									 <a th:href="@{/CordersAdd}" th:text="등록"></a>
+									 <a th:href="@{/PordersAdd}" th:text="등록"></a>
 	
 												    
 				<!-- Content wrapper scroll start -->
@@ -583,18 +583,24 @@
 													</div>
 									    		</td>
 									    		<td>#</td>
-									    		<td>CodeGroupSeq</td>
-									    		<td>CodeGroup Name</td>
-									    		<td>DelNY</td>
-									    		<td>CodeSeq</td>
-									    		<td>Code Name</td>
-									    		<td>regDatetime</td>
-									    		<td>modDatetime</td>
+									    		<td>productSeq</td>
+									    		<td>delNY</td>
+									    		<td>ProductName</td>
+									    		<td>OrgPrice</td>
+									    		<td>DiscountedPrice</td>
+									    		<td>ProductDescription</td>
+									    		<td>prodStockCD</td>
+									    		<td>category1CD</td>
+									    		<td>category2CD</td>
+									    		<td>color</td>
+									    		<td>size</td>
+									    		<td>regDateTime</td>
+									    		<td>modDateTime</td>
 									    		
 									    	</tr>
 									    	
 									    	<tr th:if="${!#lists.isEmpty(list)}" >
-									    		<td colspan="9"></td>
+									    		<td colspan="15"></td>
 									    	</tr>
 										
 									    	<tr th:if="${!#lists.isEmpty(list)}" th:each="list:${list}"> 
@@ -604,15 +610,43 @@
 													</div>
 									    	    </td>
 									    		<td></td>
-									    		<td th:text="${list.CodeGroupSeq}"></td>
-									    		<td th:text="${list.CodeGroupName}"></td>
-									     		<td th:if="${list.delNY eq 0}">N</td>
+									    		<td th:text="${list.productSeq}"></td>
+									    		<td th:if="${list.delNY eq 0}">N</td>
 									     		<td th:unless="${list.delNY eq 0}">Y</td>
-									    		<td th:text="${list.seq} " ></td>
-									    		<td><a th:href="@{/CordersView(seq=${list.seq}, name=${list.name}, delNY=${list.delNY})}"  th:text="${list.name}"></a></td>
-									       		<!-- <td th:text="${list.name}"></td>-->
-									       		<td th:text="${#dates.format(list.regDatetime,  'yyyy-MM-dd HH:mm:ss')}"></td>
-									     		<td th:text="${#dates.format(list.modDatetime,  'yyyy-MM-dd HH:mm:ss')}"></td>
+									    		<td>
+									    			<a th:href="@{/PordersView(productSeq=${list.productSeq}, ProductName=${list.ProductName}, delNY=${list.delNY})}"  th:text="${list.ProductName}"></a>
+									    		</td>
+									     		
+									    		<td th:text="${list.OrgPrice} " ></td>
+									    		<td th:text="${list.DiscountedPrice}"></td>
+									    		<td th:text="${list.ProductDescription}" ></td>
+									    		
+									    		<td th:if="${list.prodStockCD!= null}" th:text="${@codeService.selectOneCachedCode(list.prodStockCD)}" class="prodStockCD align-middle"></td>
+												<td th:unless="${list.prodStockCD != null}" class="prodStockCD align-middle"></td>
+												
+												
+												<td th:if="${list.category1CD!= null}" th:text="${@codeService.selectOneCachedCode(list.category1CD)}" class="category1CD align-middle"></td>
+												<td th:unless="${list.category1CD != null}" class="category1CD align-middle"></td>
+																								
+												<td th:if="${list.category2CD!= null}" th:text="${@codeService.selectOneCachedCode(list.category2CD)}" class="category2CD align-middle"></td>
+												<td th:unless="${list.category2CD != null}" class="category2CD align-middle"></td>
+												
+												<td th:text="${list.color}"></td>
+												
+												<td th:text="${list.size}"></td>
+									    	<!-- 	<td>
+									    		<th:block th:switch="${list.genderCD}">
+												    <span th:case="1">남성</span>
+												    <span th:case="2">여성</span>
+												    <span th:case="3">기타</span>
+												</th:block>
+												</td> -->
+												 
+<!-- 									    <td th:if="${list.genderCD eq 1}">남성</td>
+									    		<td th:unless="${list.genderCD eq 2}">여성</td>  -->
+
+									       		<td th:text="${#dates.format(list.regDateTime,  'yyyy-MM-dd HH:mm:ss')}"></td>
+									     		<td th:text="${#dates.format(list.modDateTime,  'yyyy-MM-dd HH:mm:ss')}"></td>
 									    	</tr>
 									    </table>
 										</div>
@@ -771,8 +805,8 @@
 			$("#shDateStart, #shDateEnd").datetimepicker();
 	}); 
 	
-	let goUrlXdmList = "/Corders";								/* ### */
-	let goUrlXdmForm = "/v1/infra/code/CordersForm";								/* ### */
+	let goUrlXdmList = "/Porders";								/* ### */
+	let goUrlXdmForm = "/v1/infra/code/PordersForm";								/* ### */
 	let goUrlXdmMultiUele = "/v1/infra/codegroup/codeGroupXdmMultiUele";			/* ### */
 	let goUrlXdmMultiDele = "/v1/infra/codegroup/codeGroupXdmMultiDele";			/* ### */
 	let goUrlXdmView = "/v1/infra/codegroup/codeGroupXdmView";								/* ### */

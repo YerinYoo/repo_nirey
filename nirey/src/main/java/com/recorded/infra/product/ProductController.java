@@ -1,4 +1,4 @@
-package com.recorded.infra.member;
+package com.recorded.infra.product;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,52 +9,51 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.recorded.common.constants.Constants;
 import com.recorded.common.util.UtilDateTime;
 
-
 @Controller
-public class MemberController {
+public class ProductController {
 	
 	@Autowired
-	 MemberService service;
+	 ProductService service;
 	
-	@RequestMapping(value="/MemberInsert")
-	public String MemberInsert(MemberDto dto) throws Exception {
+	@RequestMapping(value="/ProductInsert")
+	public String ProductInsert(ProductDto dto) throws Exception {
 		
 		System.out.println(dto.toString());
 		
 		service.insert(dto);
 		
-		return "redirect:/Morders";
+		return "redirect:/Porders";
 	}
 	
-	@RequestMapping(value="/MemberUpdate")
-	public String MemberUpdate(MemberDto dto) throws Exception {
+	@RequestMapping(value="/ProductUpdate")
+	public String ProductUpdate(ProductDto dto) throws Exception {
 		
-		System.out.println(dto.getName());
+		System.out.println(dto.getProductName());
 		
 		service.update(dto);
 		
-		return "redirect:/Morders";
+		return "redirect:/Porders";
 	}
 	
 	
-	@RequestMapping(value="/MemberUelete")
-	public String MemberUelete(MemberDto dto) throws Exception {
+	@RequestMapping(value="/ProductUelete")
+	public String ProductUelete(ProductDto dto) throws Exception {
 		
 		service.uelete(dto);
 		
-		return "redirect:/Morders";
+		return "redirect:/Porders";
 	}
 	
-	@RequestMapping(value="/MemberDelete")
-	public String MemberDelete(MemberDto dto) throws Exception {
+	@RequestMapping(value="/ProductDelete")
+	public String ProductDelete(ProductDto dto) throws Exception {
 		
 		service.delete(dto);
 		
-		return "redirect:/Morders";
+		return "redirect:/Porders";
 	}
 	
-	@RequestMapping(value = "/Morders")
-	public String Morders(@ModelAttribute("vo") MemberVo vo, Model model ) throws Exception {
+	@RequestMapping(value = "/Porders")
+	public String Porders(@ModelAttribute("vo") ProductVo vo, Model model ) throws Exception {
 		setSearch(vo);
 
 		System.out.println("===========================================");
@@ -65,33 +64,33 @@ public class MemberController {
 		model.addAttribute("list", service.selectList(vo));
 		model.addAttribute("vo", vo);
 
-		return "adm/infra/v1/Morders";
+		return "adm/infra/v1/Porders";
 	}
 	
-	@RequestMapping(value = "/MordersView")
-	public String MordersView(MemberDto dto, Model model) throws Exception {
+	@RequestMapping(value = "/PordersView")
+	public String PordersView(ProductDto dto, Model model) throws Exception {
 		
 		model.addAttribute("item", service.selectOne(dto)); 
 		
-		return "adm/infra/v1/MordersView"; 
+		return "adm/infra/v1/PordersView"; 
 	}
 	
-	@RequestMapping(value = "/MordersForm")
-	public String MordersForm(MemberDto dto, Model model) throws Exception {
+	@RequestMapping(value = "/PordersForm")
+	public String PordersForm(ProductDto dto, Model model) throws Exception {
 		
 		model.addAttribute("item", service.selectOne(dto)); 
 		
-		return "adm/infra/v1/MordersForm"; 
+		return "adm/infra/v1/PordersForm"; 
 	}
 	
-	@RequestMapping(value="/MordersAdd")
-	public String MordersAdd() throws Exception {
+	@RequestMapping(value="/PordersAdd")
+	public String PordersAdd() throws Exception {
 		
-		return "adm/infra/v1/MordersAdd";
+		return "adm/infra/v1/PordersAdd";
 		
 	}
 	
-	public void setSearch(MemberVo vo) throws Exception {
+	public void setSearch(ProductVo vo) throws Exception {
 		/* 최초 화면 로딩시에 세팅은 문제가 없지만 */
 		/*이후 전체적으로 데이터를 조회를 하려면 null 값이 넘어 오는 관계로 문제가 전체 데이터 조회가 되지 못한다.*/
 		/*해서 BaseVo.java 에서 기본값을 주어서 처리*/

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.recorded.infra.product.ProductDao">
+
+	<resultMap id="resultMapObj" type="com.recorded.infra.product.ProductDto"></resultMap>
+
+    <select id="selectList" resultMap="resultMapObj">
+
+			select
+				a.productSeq
+				, a.delNY
+				, a.ProductName
+				, a.OrgPrice
+				, a.DiscountedPrice
+				, a.ProductDescription
+				, a.prodStockCD
+				, a.category1CD
+				, a.category2CD
+				, a.regDateTime
+				, a.modDateTime
+                , b.color
+                , c.size
+			
+			from 
+			    product a
+			inner join 
+				prodColor b
+			on
+				 a.productSeq=b.Product_productSeq
+			inner join 
+				prodSize c
+			on 
+				b.Product_productSeq=c.Product_productSeq
+			
+			where 1=1
+	        <if test="shDelNy != null and shDelNy.equals('')">AND a.delNY = #{shDelNy}</if>
+	      
+			<choose>
+				<when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				<when test="shOptionDate == 2">AND a.modDatetime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			</choose> 
+
+	    	 <choose>
+	         	 <when test="shOption == 1">AND a.productSeq = #{shValue}</when>
+	         	 <when test="shOption==2"> AND a.ProductName LIKE CONCAT('%',#{shValue},'%')</when>
+	       	 </choose>
+
+    </select>
+	  
+	      <select id="selectOne" resultMap="resultMapObj">
+    
+    		select
+    		
+    		a.delNY
+    		, a.productSeq
+    		, a.ProductName
+    		, a.modDateTime
+    		
+    		from product  a
+    		
+    		where 1=1
+    			and a.productSeq=#{productSeq} 
+    			
+    </select>
+    
+	  <insert id="insert">
+			insert into code (
+				a.delNY
+				, a.ProductName
+				, a.OrgPrice
+				, a.DiscountedPrice
+				, a.ProductDescription
+				, a.prodStockCD
+				, a.category1CD
+				, a.category2CD
+				, b.color
+                , c.size
+
+			) values (
+			#{delNY}
+			, #{ProductName}
+			,#{OrgPrice}
+			,#{DiscountedPrice}
+			,#{ProductDescription}
+			,#{prodStockCD}
+			,#{category1CD}
+			,#{category2CD}
+			,#{color}
+			,#{size}
+			
+	  </insert>
+	  
+	   
+    <update id="update">
+   	update code
+   	set
+   		ProductName = #{ProductName}
+   	WHERE 1=1
+   		and productSeq = #{productSeq}
+  	
+  	</update>
+  	
+  	<update id="uelete">
+  			update code
+  			set
+  			delNY=1
+  			where 1=1
+  			and productSeq = #{productSeq}
+  	</update>
+  	
+  	
+  	<delete id="delete">
+  	
+  	delete from code
+  	where productSeq=#{productSeq}
+  	</delete>
+	  
+</mapper>

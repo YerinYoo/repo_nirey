@@ -623,14 +623,17 @@
 									    		<td th:text="${list.ID} " ></td>
 									    		<td th:text="${list.pwd}"></td>
 									    		<td th:text="${list.email}" ></td>
+									    		
+									    		<td th:if="${list.genderCD != null}" th:text="${@codeService.selectOneCachedCode(list.genderCD)}" class="genderCD align-middle"></td>
+												<td th:unless="${list.genderCD != null}" class="genderCD align-middle"></td>
 			    		
-									    		<td>
+									    	<!-- 	<td>
 									    		<th:block th:switch="${list.genderCD}">
 												    <span th:case="1">남성</span>
 												    <span th:case="2">여성</span>
 												    <span th:case="3">기타</span>
 												</th:block>
-												</td>
+												</td> -->
 												 
 <!-- 									    <td th:if="${list.genderCD eq 1}">남성</td>
 									    		<td th:unless="${list.genderCD eq 2}">여성</td>  -->

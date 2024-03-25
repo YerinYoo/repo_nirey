@@ -73,6 +73,17 @@ public class CodeService {
 		System.out.println("cachedCodeArrayList: " + CodeDto.cachedCodeArrayList.size() + " chached !");
 	}
     
+	public static String selectOneCachedCode(int code) throws Exception {
+		String rt = "";
+		for(CodeDto codeRow : CodeDto.cachedCodeArrayList) {
+			if (codeRow.getSeq().equals(Integer.toString(code))) {
+				rt = codeRow.getName();
+			} else {
+				// by pass
+			}
+		}
+		return rt;
+	}
 	
 
 }
