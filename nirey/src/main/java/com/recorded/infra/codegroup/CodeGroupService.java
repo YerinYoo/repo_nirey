@@ -61,4 +61,7 @@ public class CodeGroupService {
     	return dao.selectList(vo); 
     }
 
+    public List<CodeGroupDto> selectListWithoutPaging() {
+    	return dao.selectListWithoutPaging();
+    }
 }

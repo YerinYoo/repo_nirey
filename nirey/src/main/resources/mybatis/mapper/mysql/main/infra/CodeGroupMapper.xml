@@ -96,5 +96,16 @@
   	delete from CodeGroup
   	where seq=#{seq}
   	</delete>
+  	
+  	<select id="selectListWithoutPaging" resultMap="resultMapObj">
+		SELECT
+			a.seq
+			, a.name
+		FROM codeGroup a
+		WHERE 1=1
+			AND delNy = 0
+
+		ORDER BY a.seq DESC
+	</select>
     
 </mapper>

@@ -72,11 +72,11 @@
 	  <insert id="insert">
 			insert into code (
 			name
-			, memo
-			, CodeGroup_seq
+			, delNY
+			, CodeGroupSeq
 			) values (
 			#{name}
-			, #{memo}
+			, #{delNY}
 			, #{CodeGroupSeq}) 
 	  </insert>
 	  

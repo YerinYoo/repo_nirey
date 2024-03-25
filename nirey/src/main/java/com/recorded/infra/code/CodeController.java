@@ -5,14 +5,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.recorded.infra.codegroup.CodeGroupService;
+
 @Controller
 public class CodeController {
 	
 	@Autowired
 	 CodeService service;
+	
+	@Autowired
+	CodeGroupService codeGroupService;
 
 	@RequestMapping(value = "/CodeXdmList")
-	public String codeXdmList(Model model) throws Exception {       
+	public String codeXdmList(Model model) throws Exception {      
 		model.addAttribute("list", service.selectList()); 
 		System.out.println(model.toString());
 
@@ -36,13 +41,6 @@ public class CodeController {
 		model.addAttribute("item", service.selectOne(dto));
 		
 		return "CodeForm";
-	}
-	
-	@RequestMapping(value="/codeAdd")
-	public String codeAdd() throws Exception {
-		
-		return "codeAdd";
-		
 	}
 	
 	@RequestMapping(value="/codeInsert")
@@ -113,14 +111,12 @@ public class CodeController {
 	}
 	
 	@RequestMapping(value="/CordersAdd")
-	public String CordersAdd() throws Exception {
+	public String CordersAdd(CodeDto dto, Model model) throws Exception {
+		
+		model.addAttribute("listCodeGroup", codeGroupService.selectListWithoutPaging());
 		
 		return "adm/infra/v1/CordersAdd";
 		
 	}
-	
-	
-	
-	
 
 }

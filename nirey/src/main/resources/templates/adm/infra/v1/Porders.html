@@ -588,7 +588,6 @@
 									    		<td>ProductName</td>
 									    		<td>OrgPrice</td>
 									    		<td>DiscountedPrice</td>
-									    		<td>ProductDescription</td>
 									    		<td>prodStockCD</td>
 									    		<td>category1CD</td>
 									    		<td>category2CD</td>
@@ -600,7 +599,7 @@
 									    	</tr>
 									    	
 									    	<tr th:if="${!#lists.isEmpty(list)}" >
-									    		<td colspan="15"></td>
+									    		<td colspan="14"></td>
 									    	</tr>
 										
 									    	<tr th:if="${!#lists.isEmpty(list)}" th:each="list:${list}"> 
@@ -619,7 +618,6 @@
 									     		
 									    		<td th:text="${list.OrgPrice} " ></td>
 									    		<td th:text="${list.DiscountedPrice}"></td>
-									    		<td th:text="${list.ProductDescription}" ></td>
 									    		
 									    		<td th:if="${list.prodStockCD!= null}" th:text="${@codeService.selectOneCachedCode(list.prodStockCD)}" class="prodStockCD align-middle"></td>
 												<td th:unless="${list.prodStockCD != null}" class="prodStockCD align-middle"></td>

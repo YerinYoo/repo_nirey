@@ -19,4 +19,5 @@ public interface CodeGroupDao { //쿼리 실행 역할 (selectList, selectOne, d
 	
     public List<CodeGroupDto> selectList(CodeGroupVo vo);
 	
+    public List<CodeGroupDto> selectListWithoutPaging();
 }

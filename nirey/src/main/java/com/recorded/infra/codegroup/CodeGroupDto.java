@@ -2,6 +2,8 @@ package com.recorded.infra.codegroup;
 
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class CodeGroupDto {
 
 	private String seq;
