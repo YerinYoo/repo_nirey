@@ -489,33 +489,33 @@
 									<table style="width : 30%">
 									<tr>
 									<td>seq :</td>
-									<td  th:text=" ${item.seq}"></td>
+									<td  th:text=" ${item.productSeq}"></td>
 									</tr>
 									<tr>
 									<td>name :</td>
-									<td  th:text="${item.name}"></td>
+									<td  th:text="${item.ProductName}"></td>
 									</tr>
 									</table>
 									
 									<div class="row mt-5">
 										<div class="col-9">
-										<a th:href="@{/orders}" >
+										<a th:href="@{/Porders}" >
 										<button type="button" class="btn btn-dark" th:text="Back"></button>
 										</a>
 										</div>
 										<div class="col-1 ">
-										<a th:href="@{/ordersForm(seq=${item.seq})}" >
+										<a th:href="@{/PordersForm(seq=${item.productSeq})}" >
 										<button type="button" class="btn btn-success" th:text="Edit"></button>
 										</a>
 										</div>
 										
 											<div class="col-1">
 											<form method="post" action="codeGroupUpdtDel"> 
-												<input type="hidden" name="seq" th:value="${item.seq}">
-												<input type="hidden" name="name" th:value="${item.name}">
+												<input type="hidden" name="seq" th:value="${item.productSeq}">
+												<input type="hidden" name="name" th:value="${item.ProductName}">
 												<input type="hidden" name="delNY" th:value="${item.delNY}">
 												
-												<button type="submit" class="btn btn-warning"th:href="@{/orders}" th:text="Uelete"></button>
+												<button type="submit" class="btn btn-warning"th:href="@{/Porders}" th:text="Uelete"></button>
 											
 											</form>
 											</div>

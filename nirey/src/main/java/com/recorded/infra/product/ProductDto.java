@@ -7,7 +7,8 @@ import java.util.List;
 import com.recorded.infra.code.CodeDto;
 
 public class ProductDto {
-	
+
+
 private String productSeq;
 private Integer delNY;
 private String ProductName;
@@ -30,6 +31,7 @@ public void setProductSeq(String productSeq) {
 public Integer getDelNY() {
 	return delNY;
 }
+
 public void setDelNY(Integer delNY) {
 	this.delNY = delNY;
 }

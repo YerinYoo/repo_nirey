@@ -18,14 +18,13 @@
 		<link rel="shortcut icon" href="/adm/images/favicon.svg">
 
 		<!-- Title -->
-		<title>Bootstrap Admin Dashboards</title>
+		<title>Member List</title>
 
 
 		<!-- *************
 			************ Common Css Files *************
 		************ -->
-
-		<!-- Animated css --> 
+		<!-- Animated css -->
 		<link rel="stylesheet" href="/adm/css/animate.css">
 
 		<!-- Bootstrap font icons css -->
@@ -41,6 +40,10 @@
 
 		<!-- Scrollbar CSS -->
 		<link rel="stylesheet" href="/adm/vendor/overlay-scroll/OverlayScrollbars.min.css">
+
+		<!-- Data Tables -->
+		<link rel="stylesheet" href="/adm/vendor/datatables/dataTables.bs5.css" />
+		<link rel="stylesheet" href="/adm/vendor/datatables/dataTables.bs5-custom.css" />
 
 	</head>
 
@@ -217,7 +220,7 @@
 									<span class="menu-text">Calendar</span>
 								</a>
 							</li>
-							<li class="sidebar-dropdown active">
+							<li class="sidebar-dropdown">
 								<a href="#">
 									<i class="bi bi-columns-gap"></i>
 									<span class="menu-text">Forms</span>
@@ -234,7 +237,7 @@
 											<a href="form-file-input.html">File Input</a>
 										</li>
 										<li>
-											<a href="form-validations.html" class="current-page">Validations</a>
+											<a href="form-validations.html">Validations</a>
 										</li>
 										<li>
 											<a href="bs-select.html">Bootstrap Select</a>
@@ -260,10 +263,13 @@
 										<li>
 											<a href="form-layout4.html">Form Horizontal</a>
 										</li>
+										<li>
+											<a href="form-layout5.html">Form Layout Tabs</a>
+										</li>
 									</ul>
 								</div>
 							</li>
-							<li class="sidebar-dropdown">
+							<li class="sidebar-dropdown active">
 								<a href="#">
 									<i class="bi bi-window-split"></i>
 									<span class="menu-text">Tables</span>
@@ -274,7 +280,7 @@
 											<a href="tables.html">Tables</a>
 										</li>
 										<li>
-											<a href="data-tables.html">Data Tables</a>
+											<a href="data-tables_00.html" class="current-page">Data Tables</a>
 										</li>
 									</ul>
 								</div>
@@ -369,8 +375,8 @@
 							<i class="bi bi-house"></i>
 							<a href="index.html">Home</a>
 						</li>
-						<li class="breadcrumb-item">Product</li>
-						<li class="breadcrumb-item breadcrumb-active" aria-current="page">Add Product</li>
+						<li class="breadcrumb-item">UI Elements</li>
+						<li class="breadcrumb-item breadcrumb-active" aria-current="page">Accordions</li>
 					</ol>
 					<!-- Breadcrumb end -->
 
@@ -454,185 +460,94 @@
 
 				<!-- Content wrapper scroll start -->
 				<div class="content-wrapper-scroll">
-				
-				<div class="header" style="padding-left : 1%; padding-bottom : 3%">
-					<h4>Add Product</h4>
-				</div>
 
 					<!-- Content wrapper start -->
-					<div class="content-wrapper" >
-					<form name="prodValidation"  method="post" action="ProductInsert">
+					<div class="content-wrapper">
+
 						<!-- Row start -->
 						<div class="row">
-							<div class="col-xl-4 col-sm-6 col-12">
+							<div class="col-sm-12 col-12">
+
+								<!-- Card start -->
 								<div class="card">
 									<div class="card-body">
-										<label for="prodDelNY" class="form-label">DelNY<span class="text-danger fs-0">*</span></label>
-										<select class="form-select" id="prodDelNY" required="">
-											<option selected="" disabled="" value="">Choose...</option>
-											<option th:value="${item?.delNY}"value="0">N</option>
-											<option th:value="${item?.delNY}" value="1">Y</option>
-										</select>
-										<div class="invalid-feedback" id="prodDelNYFeedback"></div>
-									</div>
-								</div>
-							</div>
-<!-- 							
-							<div class="col-xl-4 col-sm-6 col-12">
-								<div class="card">
-									<div class="card-body">
-										<div>
-											<label for="ProductName" class="form-label">ProductName<span class="text-danger fs-0">*</span></label>
-											<input type="text" id="ProductName"  class="form-control" name="ProductName"  required="required"  th:value="${item.ProductName}">
-											<div class="invalid-feedback" id="ProductNameFeedback"></div>
-										</div>
-									</div>
-								</div>
-							</div>
-							 -->
-							<div class="col-xl-4 col-sm-6 col-12">
-								<div class="card">
-									<div class="card-body">
-										<label for="ProductName" class="form-label">ProductName <span class="text-danger fs-0">*</span></label>
-											<input type="text" id="ProductName" name="ProductName" th:value="${item?.ProductName}" maxlength="20" class="form-control" required=""/>
-											<div class="invalid-feedback" id="ProductNameFeedback"></div>
-									</div>
-								</div>
-							</div>
-
-						</div>
-						<!-- CD 입력 input 부분, DelNY 부분은 select로 대체 가능한지 여쭤보기 / select 값 code seq 번호로 변환하는 방법 서치 -->
-						<div class="row" th:fragment="productCD">
-							<div class="col-xl-4 col-sm-6 col-12">
-								<div class="card">
-									<div class="card-body">
-										<label for="productCD" class="form-label">Product Status(CD)<span class="text-danger fs-0">*</span></label>
-											<select class="form-select" id="productCD" required="">
-												<option selected="" disabled="" value="">Choose...</option>
-												<option value="7">New</option>
-												<option value="8">Best</option>
-												<option value="9">Restock</option>
-												<option value="10">N/A</option>
-											</select>
-										<div class="invalid-feedback" id="productNameFeedback"></div>
-									</div>
-								</div>
-							</div>
-
-							<div class="col-xl-4 col-sm-6 col-12">
-								<div class="card">
-									<div class="card-body">
-										<label for="prodCategory1" class="form-label">Category1(CD)</label>
-											<select class="form-select" id="prodCategory1">
-												<option selected="" disabled="" value="">Choose...</option>
-												<option value="11">Outer</option>
-												<option value="12">Top</option>
-												<option value="13">Bottom</option>
-												<option value="14">Dress</option>
-											</select>
-											<div class="invalid-feedback" id="prodCategory1Feedback">
-										</div>
-									</div>
-								</div>
-							</div>
-							
-							<div class="col-xl-4 col-sm-6 col-12">
-							<div class="card">
-									<div class="card-body">
-										<label for="prodCategory2" class="form-label">Category2(CD)</label>
-											<select class="form-select" id="prodCategory2" >
-												<option selected="" disabled="" value="">Choose...</option>
-												<option value="15">Bag</option>
-												<option value="16">Shoes</option>
-												<option value="17">Accessory</option>
-												<option value="18">etc.</option>
-											</select>
-											<div class="invalid-feedback" id="prodCategory2Feedback">
-										</div>
-									</div>
-								</div>
-							</div>
-
-
-
+									
 						<div class="row">
-						<th:block th:fragment="productprice">
-							<div class="col-xl-4 col-sm-6 col-12" >
-								<div class="card">
-									<div class="card-body">
-										<div>
-											<label for="prodOrgPrice" class="form-label">Product Org Price<span class="text-danger fs-0">*</span></label>
-												<input type="text" class="form-control" id="prodOrgPrice" required="">
-												<div class="invalid-feedback" id="prodOrgPriceFeedback"></div>
-										</div>
+							<div class="col-sm-12 col-12">
+								<div class="card" style="background-color : snow">
+									<div class="card-header">
+										<div class="card-title mb-4">Product View</div>
 									</div>
-								</div>
-							</div>
+									</div>
+									<div class="card-body">
+									
+									<table style="width : 30%">
+									<tr>
+									<td>seq :</td>
+									<td  th:text=" ${item.productSeq}"></td>
+									</tr>
+									<tr>
+									<td>name :</td>
+									<td  th:text="${item.ProductName}"></td>
+									</tr>
 
-							<div class="col-xl-4 col-sm-6 col-12">
-								<div class="card">
-									<div class="card-body">
-										<div>
-											<label for="prodDiscPrice" class="form-label">Product Discounted Price</label>
-												<input type="text" class="form-control" id="prodDiscPrice">
-												<div class="invalid-feedback" id="prodDiscPriceFeedback"></div>
+									</table>
+									
+									<div class="row mt-5">
+										<div class="col-9">
+										<a  th:href="@{/Porders}" >
+										<button type="button" class="btn btn-dark" th:text="이동"></button>
+										</a>
 										</div>
+										<div class="col-1 ">
+										<a  th:href="@{/PordersForm(seq=${item.productSeq})}">
+										<button type="button" class="btn btn-success">Edit</button>
+										</a>
+										</div>
+										
+										<!-- 
+										<a th:href="@{/Corders}" th:text="이동"></a>
+										<a th:href="@{/CordersForm(seq=${item.memberSeq})}"  th:text="수정"></a>
+										 -->
+											<div class="col-1">
+											<form method="post" action="ProductUelete"> 
+												<input type="hidden" name="productSeq" th:value="${item.productSeq}">
+												<input type="hidden" name="Productame" th:value="${item.ProductName}">
+												<input type="hidden" name="delNY" th:value="${item.delNY}">
+												
+												<button type="submit" class="btn btn-warning"th:href="@{/Porders}" th:text="Uelete"></button>
+											
+											</form>
+											</div>
+									
+										<div class="col-1 ">
+										
+											<form method="post" action="codeDelete"> 
+											<input type="hidden" name="seq" th:value="${item.productSeq}">
+											<input type="hidden" name="name" th:value="${item.ProductName}">
+											
+											<button type="submit" class="btn btn-danger" th:href="@{/Porders}" th:text="Delete"></button>
+											
+											</form>
+										</div>
+									
 									</div>
-								</div>
-							</div>
-							</th:block>
+	
+									</div>
 
-							<div class="col-xl-4 col-sm-6 col-12">
-								<div class="card">
-									<div class="card-body">
-										<div>
-											<label for="prodDetails" class="form-label">Product Description</label>
-												<input type="text" class="form-control" id="prodDetails" required="">
-												<div class="invalid-feedback" id="prodDetailsFeedback">Please enter a description of the product</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
 
-						<div class="row" th:fragment="prodSize">
-							<div class="col-xl-4 col-sm-6 col-12">
-								<div class="card">
-									<div class="card-body">
-										<div>
-											<label for="prodSize" class="form-label">Product Size<span class="text-danger fs-0">*</span></label>
-												<input type="text" class="form-control" id="prodSize" required="">
-												<div class="invalid-feedback" id="prodSizeFeedback"></div>
-										</div>
-									</div>
-								</div>
-							</div>
 
-							<div class="col-xl-4 col-sm-6 col-12">
-								<div class="card">
-									<div class="card-body">
-										<div>
-											<label for="prodColor" class="form-label">Product Color<span class="text-danger fs-0">*</span></label>
-												<input type="text" class="form-control" id="prodColor" required="">
-												<div class="invalid-feedback" id="prodColorFeedback"></div>
+
+
 										</div>
 									</div>
 								</div>
+								<!-- Card end -->
+
 							</div>
 						</div>
 						<!-- Row end -->
 
-
-						<!-- Form actions footer start -->
-						<div class="form-actions-footer">
-							<a  th:href="@{/Porders}" >
-								<button class="btn btn-light">Cancel</button>
-							</a>
-
-							<button class="btn btn-success" type="submit" th:href="@{/Porders}">Submit</button>
-						</div>
-										<!-- Form actions footer end -->
-					</form>
 					</div>
 					<!-- Content wrapper end -->
 
@@ -670,111 +585,15 @@
 		<script src="/adm/vendor/overlay-scroll/jquery.overlayScrollbars.min.js"></script>
 		<script src="/adm/vendor/overlay-scroll/custom-scrollbar.js"></script>
 
+		<!-- Data Tables -->
+		<script src="/adm/vendor/datatables/dataTables.min.js"></script>
+		<script src="/adm/vendor/datatables/dataTables.bootstrap.min.js"></script>
+
+		<!-- Custom Data tables -->
+		<script src="/adm/vendor/datatables/custom/custom-datatables.js"></script>
+
 		<!-- Main Js Required -->
 		<script src="/adm/js/main.js"></script>
-		
-		<script type="text/javascript">
-	
-/* 		window.addEventListener('load', function() {
-				$("#shDateStart, #shDateEnd").datepicker();
-		}); */
-		
-		let goUrlXdmList = "/Porders";								/* ### */
-		let goUrlXdmForm = "/PordersAdd";								/* ### */
-		let goUrlXdmMultiUele = "/v1/infra/codegroup/codeGroupXdmMultiUele";			/* ### */
-		let goUrlXdmMultiDele = "/v1/infra/codegroup/codeGroupXdmMultiDele";			/* ### */
-		let goUrlXdmView = "/PordersView";								/* ### */
-		
-		let seq = document.querySelector("input[ProductName=productSeq]");									/* ### */
-	
-		document.getElementById("btnSubmit").onclick = function () {
-		    location.href = goUrlXdmList;
-		}
-
-/* 	document.getElementById("btnForm").onclick = function () {
-	    goForm(0);
-	}
- */
-
-	goForm = function (keyValue) {
-	    seq.value = keyValue;
-	    form.action = goUrlXdmForm;
-	    form.submit();
-	}
-	
-	/* document.getElementById("btnSearch").onclick = function () {
-	    form.action = goUrlXdmList;
-	    form.submit();
-	};
-	 */
-	 
-	let form = document.querySelector("form[name=formList]");
-	
-	</script>
-	
-	<script>
-	
-
-	document.getElementById("btnSubmit").onclick = function() {
-		
-		if(validationInst() == false) {
-				return false;
-			} else {
-				form.action = goUrlXdmList;
-				form.submit();
-			}
-		}
-		
-	function validationInst() {
-		if(validationUpdt() == false) {
-			alert("웩");
-			return false;
-			} 
-	}
-		
-			
-		
-		function validationUpdt(){
-			if(!nullToEmpty(document.getElementById("name").value)) {
-				("너 데이터 없음");
-				return false;
-			}
-			
-		}
-		nullToEmpty = function(value){
-			if(value == null || value == 'null' || value.length == 0){
-				return false;
-			} else{
-				return true;
-			}
-		}
-	</script>
-	
-	<!-- validation function -->
-	<script>
-	function ProductUpdate() {
-		if(!checkSelectNull('prodSize', 2, "Please select the product sizes")) return false;
-		if(!checkSelectNull('prodColor', 2, "Please enter the product colors one by one (you can leave the remaining fields blank)")) return false;
-		if(!checkSelectNull('prodDelNY', 2, "Please choose whether to delete the product")) return false;
-		if(!checkSelectNull('productCD', 2, "Please enter the product status using the code number")) return false;
-		if(!checkSelectNull('prodCategory1', 2, "If the product category is clothing, Please enter the Category1 using the code number")) return false;
-		if(!checkSelectNull('prodCategory2', 2, "If the product category is not clothing, Please enter the Category2 using the code number")) return false;
-		if(!checkOnlyNumber('prodOrgPrice', 2, 0, 1, 0, 1000000, "Please enter the cost of the product")) return false;
-		if(!checkOnlyNumber('prodDiscPrice', 2, 0, 1, 0, 1000000, "Please enter how much the product is discounted")) return false;
-		if(!checkOnlyKoreanEnglishNumber('ProductName', 2, 0, "Please enter product name")) return false;
-		if(!checkOnlyKoreanEnglishNumber('prodDetails', 2, 1, "Please enter a description of the product")) return false;
-		
-		if(!checkOnlyNumber('ifcdOrder', 2, 0, 1, 0, 255, "순서는 숫자(0~255)만 입력 가능합니다.")) return false;
-		if(!checkOnlyEnglishNumber('ifcdReferenceV1', 2, 1, "예비1 (varchar type)은 영문대소문자, 숫자만 입력 가능합니다.")) return false;
-		if(!checkOnlyEnglishNumber('ifcdReferenceV2', 2, 1, "예비2 (varchar type)은 영문대소문자, 숫자만 입력 가능합니다.")) return false;
-		if(!checkOnlyEnglishNumber('ifcdReferenceV3', 2, 1, "예비3 (varchar type)은 영문대소문자, 숫자만 입력 가능합니다.")) return false;
-		if(!checkOnlyEnglishNumber('ifcdReferenceV4', 2, 1, "예비4 (varchar type)은 영문대소문자, 숫자만 입력 가능합니다.")) return false;		
-		if(!checkOnlyNumber('ifcdReferenceI1', 2, 1, 1, -128, 127, "예비1 (Int type)은 숫자(-128~127)만 입력 가능합니다.")) return false;
-		if(!checkOnlyNumber('ifcdReferenceI2', 2, 1, 1, -128, 127, "예비2 (Int type)은 숫자(-128~127)만 입력 가능합니다.")) return false;
-		if(!checkOnlyNumber('ifcdReferenceI3', 2, 1, 1, -128, 127, "예비3 (Int type)은 숫자(-128~127)만 입력 가능합니다.")) return false;
-		if(!checkOnlyNumber('ifcdReferenceI4', 2, 1, 1, -128, 127, "예비4 (Int type)은 숫자(-128~127)만 입력 가능합니다.")) return false;
-	}
-	</script>
 
 	</body>
 

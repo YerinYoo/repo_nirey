@@ -28,6 +28,10 @@ dependencies {
 	//for log4j2 by Yerin 24.03.06
 	// https://mvnrepository.com/artifact/org.bgee.log4jdbc-log4j2/log4jdbc-log4j2-jdbc4.1
 	implementation group: 'org.bgee.log4jdbc-log4j2', name: 'log4jdbc-log4j2-jdbc4.1', version: '1.16'
+	
+	//validation 사용 위해 의존성 추가
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation
+implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.5.2'
 
 }
 
