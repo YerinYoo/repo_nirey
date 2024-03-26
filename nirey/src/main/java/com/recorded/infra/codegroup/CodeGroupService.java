@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.recorded.infra.code.CodeDao;
 import com.recorded.infra.code.CodeDto;
+import com.recorded.infra.code.CodeVo;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -73,5 +74,14 @@ public class CodeGroupService {
     	return dao.selectListWithoutPaging();
     }
     
+    //페이지네이션 관련
+    public List<CodeGroupDto> selectPagedCodeGroupList(CodeGroupVo vo) {
+    	return dao.selectPagedCodeGroupList(vo);
+    }
+    
+    //개수 리턴
+    public int getTotalCodeGroupCount(CodeGroupVo vo) {
+    	return dao.getTotalCodeGroupCount(vo);
+    }
 
 }

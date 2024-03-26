@@ -88,6 +88,7 @@ function checkOnlyNumber(objName, pattern, nullAllowedNy, minMaxCheckNy, min, ma
 */
 
 function checkSelectNull(objName, pattern, message) {
+	alert("aaaa");
 	var obj = document.getElementById(objName);
 	var objValue = document.getElementById(objName).value;
 	var objFeedback = document.getElementById(objName + "Feedback");

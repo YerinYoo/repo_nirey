@@ -39,6 +39,16 @@ public class MemberService {
     public List<MemberDto> selectList(MemberVo vo) { 
     	return dao.selectList(vo); 
     }
+    
+    //페이지네이션 관련
+    public List<MemberDto> selectPagedMemberList(MemberVo vo) {
+    	return dao.selectPagedMemberList(vo);
+    }
+    
+    //개수 리턴
+    public int getTotalMemberCount(MemberVo vo) {
+    	return dao.getTotalMemberCount(vo);
+    }
 	
 
 }

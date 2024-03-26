@@ -14,5 +14,9 @@ public interface ProductDao {
 	
 	public List<ProductDto> selectList(ProductVo vo);
 
-	
+    //페이징 처리 리스트 
+    public List<ProductDto> selectPagedProductList(ProductVo vo);
+    
+    //개수 리턴
+    public int getTotalProductCount(ProductVo vo);
 }

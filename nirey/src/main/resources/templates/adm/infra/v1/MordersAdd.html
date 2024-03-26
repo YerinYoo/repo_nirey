@@ -18,13 +18,14 @@
 		<link rel="shortcut icon" href="/adm/images/favicon.svg">
 
 		<!-- Title -->
-		<title>Member List</title>
+		<title>Bootstrap Admin Dashboards</title>
 
 
 		<!-- *************
 			************ Common Css Files *************
 		************ -->
-		<!-- Animated css -->
+
+		<!-- Animated css --> 
 		<link rel="stylesheet" href="/adm/css/animate.css">
 
 		<!-- Bootstrap font icons css -->
@@ -40,10 +41,13 @@
 
 		<!-- Scrollbar CSS -->
 		<link rel="stylesheet" href="/adm/vendor/overlay-scroll/OverlayScrollbars.min.css">
-
-		<!-- Data Tables -->
-		<link rel="stylesheet" href="/adm/vendor/datatables/dataTables.bs5.css" />
-		<link rel="stylesheet" href="/adm/vendor/datatables/dataTables.bs5-custom.css" />
+		
+		 <!--  강사님 데이트 피커 -->
+		 <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" media="screen"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+		
 
 	</head>
 
@@ -220,7 +224,7 @@
 									<span class="menu-text">Calendar</span>
 								</a>
 							</li>
-							<li class="sidebar-dropdown">
+							<li class="sidebar-dropdown active">
 								<a href="#">
 									<i class="bi bi-columns-gap"></i>
 									<span class="menu-text">Forms</span>
@@ -237,7 +241,7 @@
 											<a href="form-file-input.html">File Input</a>
 										</li>
 										<li>
-											<a href="form-validations.html">Validations</a>
+											<a href="form-validations.html" class="current-page">Validations</a>
 										</li>
 										<li>
 											<a href="bs-select.html">Bootstrap Select</a>
@@ -263,13 +267,10 @@
 										<li>
 											<a href="form-layout4.html">Form Horizontal</a>
 										</li>
-										<li>
-											<a href="form-layout5.html">Form Layout Tabs</a>
-										</li>
 									</ul>
 								</div>
 							</li>
-							<li class="sidebar-dropdown active">
+							<li class="sidebar-dropdown">
 								<a href="#">
 									<i class="bi bi-window-split"></i>
 									<span class="menu-text">Tables</span>
@@ -280,7 +281,7 @@
 											<a href="tables.html">Tables</a>
 										</li>
 										<li>
-											<a href="data-tables_00.html" class="current-page">Data Tables</a>
+											<a href="data-tables.html">Data Tables</a>
 										</li>
 									</ul>
 								</div>
@@ -375,8 +376,8 @@
 							<i class="bi bi-house"></i>
 							<a href="index.html">Home</a>
 						</li>
-						<li class="breadcrumb-item">UI Elements</li>
-						<li class="breadcrumb-item breadcrumb-active" aria-current="page">Accordions</li>
+						<li class="breadcrumb-item">Product</li>
+						<li class="breadcrumb-item breadcrumb-active" aria-current="page">Add Product</li>
 					</ol>
 					<!-- Breadcrumb end -->
 
@@ -460,42 +461,168 @@
 
 				<!-- Content wrapper scroll start -->
 				<div class="content-wrapper-scroll">
+				
+				<div class="header" style="padding-left : 1%; padding-bottom : 3%">
+					<h4>Add Member</h4>
+				</div>
 
 					<!-- Content wrapper start -->
-					<div class="content-wrapper">
-
+					<div class="content-wrapper" >
+					<form name="formInsert"  id="formInsert" method="post" action="memberInsert">
+					
 						<!-- Row start -->
 						<div class="row">
-							<div class="col-sm-12 col-12">
-
-								<!-- Card start -->
+							<div class="col-xl-4 col-sm-6 col-12">
 								<div class="card">
 									<div class="card-body">
-									
-						<div class="row">
-							<div class="col-sm-12 col-12">
-								<div class="card" style="background-color : snow">
-									<div class="card-header">
-										<div class="card-title">코드  관리</div>
-									</div>
-											<form method="post" action="codeInsert">
-	
-												<input type="text" name="name" placeholder="CodeName" > 
-												<input type="text" name="memo"  placeholder="memo">
-												<input type="text" name="CodeGroupSeq" placeholder="CodeGroupSeq">
-												<button type="submit" th:href="@{/Corders}">add</button>
-												
-											</form>
-
-											</div>
+										<label for="quitNY" class="form-label">QuitNY<span class="text-danger fs-0">*</span></label>
+											<select class="form-select" id="quitNY" name="quitNY" >
+ 												<option selected="" disabled="" value="">Choose...</option>
+												<option value="0">N</option>
+												<option value="1">Y</option>
+											</select>
+										<div class="invalid-feedback" id="quitNYFeedback"></div>
 									</div>
 								</div>
-								<!-- Card end -->
+							</div>
+							
+							<div class="col-xl-4 col-sm-6 col-12">
+								<div class="card">
+									<div class="card-body">
+										<label for="dormantNY" class="form-label">DormantNY<span class="text-danger fs-0">*</span></label>
+											<select class="form-select" id="dormantNY" name="dormantNY" >
+ 												<option selected="" disabled="" value="">Choose...</option>
+												<option value="0">N</option>
+												<option value="1">Y</option>
+											</select>
+										<div class="invalid-feedback" id="dormantNYFeedback"></div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="col-xl-4 col-sm-6 col-12">
+								<div class="card">
+									<div class="card-body">
+										<label for="memberName" class="form-label">Name <span class="text-danger fs-0">*</span></label>
+											<input type="text" id="memberName" name="memberName" th:value="${item?.name}" maxlength="20" class="form-control" />
+											<div class="invalid-feedback" id="memberNameFeedback"></div>
+									</div>
+								</div>
+							</div>
 
+						</div>
+
+						<div class="row">
+							<div class="col-xl-4 col-sm-6 col-12" >
+								<div class="card">
+									<div class="card-body">
+										<div>
+											<label for="memberID" class="form-label">ID<span class="text-danger fs-0">*</span></label>
+												<input type="text" class="form-control" id="memberID" name="memberID">
+												<div class="invalid-feedback" id="memberIDFeedback"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xl-4 col-sm-6 col-12">
+								<div class="card">
+									<div class="card-body">
+										<div>
+											<label for="memberPwd" class="form-label">Password</label>
+												<input type="password" class="form-control" id="memberPwd" name="memberPwd">
+												<div class="invalid-feedback" id="memberPwdFeedback"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="col-xl-4 col-sm-6 col-12">
+								<div class="card">
+									<div class="card-body">
+										<div>
+											<label for="memberPwd" class="form-label">Check Password</label>
+												<input type="password" class="form-control" id="memberPwd" name="memberPwd">
+												<div class="invalid-feedback" id="memberPwdFeedback"></div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
+						
+						<div class="row">
+						
+							<div class="col-xl-4 col-sm-6 col-12">
+								<div class="card">
+									<div class="card-body">
+										<div>
+											<label for="memberEmail" class="form-label">Email</label>
+												<input type="text" class="form-control" id="memberEmail">
+												<div class="invalid-feedback" id="memberEmailFeedback"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="col-xl-4 col-sm-6 col-12">
+								<div class="card">
+									<div class="card-body">
+										<label for="memberGender" class="form-label">Gender<span class="text-danger fs-0">*</span></label>
+											<select class="form-select" id="dormantNY" name="memberGender" >
+ 												<option selected="" disabled="" value="">Choose...</option>
+												<option value="1">Male</option>
+												<option value="2">Female</option>
+												<option value="3">Etc.</option>
+											</select>
+										<div class="invalid-feedback" id="dormantNYFeedback"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-xl-4 col-sm-6 col-12">
+								<div class="card">
+									<div class="card-body">
+										<div>
+											<label for="memberNum" class="form-label">Mobile</label>
+												<input type="text" class="form-control" id="memberNum">
+												<div class="invalid-feedback" id="memberNumFeedback"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xl-4 col-sm-6 col-12">
+								<div class="card">
+									<div class="card-body">
+										<div>
+											<label for="memberBD" class="form-label">Birthday</label>
+												<input type="text" id="memberBD" name="memberBD" class="form-control form-control-sm" autocomplete="off">
+												<div class="invalid-feedback" id="memberBDFeedback"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+
+							
+
 						<!-- Row end -->
 
+
+						<!-- Form actions footer start -->
+						<div class="form-actions-footer">
+							<a  th:href="@{/Morders}" >
+								<button class="btn btn-light">Cancel</button>
+							</a>
+
+							<button class="btn btn-success" type="submit" th:href="@{/Morders}">Submit</button>
+						</div>
+										<!-- Form actions footer end -->
+					</form>
 					</div>
 					<!-- Content wrapper end -->
 
@@ -524,6 +651,8 @@
 		<script src="/adm/js/bootstrap.bundle.min.js"></script>
 		<script src="/adm/js/modernizr.js"></script>
 		<script src="/adm/js/moment.js"></script>
+		<!--  Validation JS -->
+		<script src="/adm/js/validationXdm.js"></script>
 
 		<!-- *************
 			************ Vendor Js Files *************
@@ -533,15 +662,97 @@
 		<script src="/adm/vendor/overlay-scroll/jquery.overlayScrollbars.min.js"></script>
 		<script src="/adm/vendor/overlay-scroll/custom-scrollbar.js"></script>
 
-		<!-- Data Tables -->
-		<script src="/adm/vendor/datatables/dataTables.min.js"></script>
-		<script src="/adm/vendor/datatables/dataTables.bootstrap.min.js"></script>
-
-		<!-- Custom Data tables -->
-		<script src="/adm/vendor/datatables/custom/custom-datatables.js"></script>
-
 		<!-- Main Js Required -->
 		<script src="/adm/js/main.js"></script>
+		
+		<script type="text/javascript">
+	
+/* 		window.addEventListener('load', function() {
+				$("#shDateStart, #shDateEnd").datepicker();
+		}); */
+		let goUrlXdmList = "/Morders";								/* ### */
+		let goUrlXdmForm = "/MordersAdd";								/* ### */
+/* 		let goUrlXdmMultiUele = "/v1/infra/codegroup/codeGroupXdmMultiUele";			
+		let goUrlXdmMultiDele = "/v1/infra/codegroup/codeGroupXdmMultiDele";	 */		
+		let goUrlXdmView = "/MordersView";								/* ### */
+		
+		let seq = document.querySelector("input[name=seq]");	
+		
+		let form = document.querySelector("form[name=formInsert]");
+	
+		document.getElementById("btnInsert").onclick = function () {
+		    location.href = goUrlXdmList;
+		}
+
+/* 	document.getElementById("btnForm").onclick = function () {
+	    goForm(0);
+	}
+ */
+
+/* 	goForm = function (keyValue) {
+	    seq.value = keyValue;
+	    form.action = goUrlXdmForm;
+	    form.submit();
+	} */
+	
+	/* document.getElementById("btnSearch").onclick = function () {
+	    form.action = goUrlXdmList;
+	    form.submit();
+	};
+	 */
+	 
+
+	
+	// 등록버튼
+     document.getElementById("btnInsert").onclick = function () {
+         if (validationInst() == false) {
+             return false;
+         } else {
+             form.action = goUrlXdmInstForm
+             form.submit();
+         }
+     }
+     function validationInst() {
+         if (validationUpdt() == false) {
+             return false;
+         }
+     }
+
+     
+	function validationUpdt() {
+/* 	alert ("ddd");
+	return false; */
+		if(!checkSelectNull('quitNY', 2, "코드그룹을 선택해 주세요.")) return false;
+		if(!checkSelectNull('delNY', 2, "삭제 여부를 선택해 주세요.")) return false;
+		if(!checkOnlyEnglishNumber('name', 2, 0, "제품 이름은 영문대소문자, 숫자만 입력 가능합니다.")) return false;
+
+		/* if(!checkOnlyEnglishNumber('ifcdSeqAnother', 2, 1, "코드 (Another)는 영대소문자, 숫자만 입력 가능합니다.")) return false;
+		if(!checkOnlyEnglishNumber('ProductName', 2, 0, "제품 이름은 영문대소문자, 숫자만 입력 가능합니다.")) return false;
+		if(!checkOnlyEnglishNumber('ifcdNameEng', 2, 1, "코드 이름 (영문)는 영대소문자, 숫자만 입력 가능합니다.")) return false;
+		if(!checkOnlyNumber('ifcdOrder', 2, 0, 1, 0, 255, "순서는 숫자(0~255)만 입력 가능합니다.")) return false;
+		if(!checkOnlyEnglishNumber('ifcdReferenceV1', 2, 1, "예비1 (varchar type)은 영문대소문자, 숫자만 입력 가능합니다.")) return false;
+		if(!checkOnlyEnglishNumber('ifcdReferenceV2', 2, 1, "예비2 (varchar type)은 영문대소문자, 숫자만 입력 가능합니다.")) return false;
+		if(!checkOnlyEnglishNumber('ifcdReferenceV3', 2, 1, "예비3 (varchar type)은 영문대소문자, 숫자만 입력 가능합니다.")) return false;
+		if(!checkOnlyEnglishNumber('ifcdReferenceV4', 2, 1, "예비4 (varchar type)은 영문대소문자, 숫자만 입력 가능합니다.")) return false;		
+		if(!checkOnlyNumber('ifcdReferenceI1', 2, 1, 1, -128, 127, "예비1 (Int type)은 숫자(-128~127)만 입력 가능합니다.")) return false;
+		if(!checkOnlyNumber('ifcdReferenceI2', 2, 1, 1, -128, 127, "예비2 (Int type)은 숫자(-128~127)만 입력 가능합니다.")) return false;
+		if(!checkOnlyNumber('ifcdReferenceI3', 2, 1, 1, -128, 127, "예비3 (Int type)은 숫자(-128~127)만 입력 가능합니다.")) return false;
+		if(!checkOnlyNumber('ifcdReferenceI4', 2, 1, 1, -128, 127, "예비4 (Int type)은 숫자(-128~127)만 입력 가능합니다.")) return false; */
+	}
+	</script>
+	
+		<!-- 강사님 데이터 피커 -->
+<!--데이터피커 자바스크립트 구문-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+        <script type="text/javascript">
+            $(function () {
+            	$("#memberBD").datetimepicker({
+                    format: "Y-m-d",
+                    timepicker:false,
+                });
+            });
+        </script>
+	
 
 	</body>
 

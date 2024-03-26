@@ -53,17 +53,18 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/Porders")
-	public String Porders(@ModelAttribute("vo") ProductVo vo, Model model ) throws Exception {
+	public String Morders(@ModelAttribute("vo") ProductVo vo, Model model) throws Exception {
+		
 		setSearch(vo);
-
-		System.out.println("===========================================");
-		System.out.println(vo.toString());
-		System.out.println("vo.getShDateStart() : " + vo.getShDateStart());
-		System.out.println("vo.getShDateEnd() : " + vo.getShDateEnd());
-
+		int rowcount = service.getTotalProductCount(vo);
+		model.addAttribute("listCount", rowcount);
+		
+		System.out.println(rowcount);
+		
 		model.addAttribute("list", service.selectList(vo));
-		model.addAttribute("vo", vo);
-
+		
+//		 model.addAttribute("vo", vo);
+		
 		return "adm/infra/v1/Porders";
 	}
 	

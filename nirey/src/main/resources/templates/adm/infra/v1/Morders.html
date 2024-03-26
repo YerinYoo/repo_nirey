@@ -484,7 +484,7 @@
 									
 						<div class="row">
 							<div class="col-sm-12 col-12">
-								<div class="card" style="background-color : snow">
+								<div class="card">
 									<div class="card-header">
 										<div class="card-title">멤버  관리</div>
 									</div>
@@ -545,23 +545,27 @@
 											<!-- search e -->	
 										
 										</form>
-
-								
-								
-									<div class="col-1">
-										<select class="select-single js-states form-control" title="Select Product Category"
-													data-live-search="true">
-													<option>-</option>
-													<option>5</option>
-													<option>10</option>
-													<option>25</option>
-													<option>50</option>
-													<option>100</option>
-												</select>
+										<div class="row">
+										<div class="col">
+											<div>Total Count: <span th:text="${listCount}"></span></div>
+										</div>
 									</div>
-									</div>
-									                          
-									 <a th:href="@{/CordersAdd}" th:text="등록"></a>
+									 <div class="row mb-3">
+									 	<div class="col">
+									 		<a th:href="@{/MordersAdd}" >
+									 		<button type="button" class="btn btn-outline-primary">등록</button>
+									 		</a>
+									 	</div>
+									 	<div class="col-1">
+										    <select id="pageSizeSelect" class="select-single js-states form-control" title="Select Product Category" data-live-search="true">
+										        <option value="5">5</option>
+										        <option value="10">10</option>
+										        <option value="25">25</option>
+										        <option value="50">50</option>
+										        <option value="100">100</option>
+										    </select>
+									 	</div>
+									 </div>
 	
 												    
 				<!-- Content wrapper scroll start -->

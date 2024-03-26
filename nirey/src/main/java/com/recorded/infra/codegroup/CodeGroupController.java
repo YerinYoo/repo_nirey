@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.recorded.common.constants.Constants;
 import com.recorded.common.util.UtilDateTime;
+import com.recorded.infra.code.CodeVo;
 
 
 
@@ -21,35 +23,35 @@ public class CodeGroupController {
 	CodeGroupService service;
 	// CodeGroupService codeGroupService;
 
-	@RequestMapping(value = "/codeGroupXdmList")
-	public String codeGroupXdmList(Model model, CodeGroupVo vo) throws Exception {
-
-		// List<CodeGroupDto> codeGroupDtos =service.selectList();
-
-		// for (CodeGroupDto a : codeGroupDtos) {
-		// System.out.println(a.getName());
-		// }
-
-		model.addAttribute("list", service.selectList(vo)); // 리턴 데이터 값 = list, 받아오자마자 바로 넘겨버림
-															// model = html에서 넘기려는 데이터가 model이라는 이름으로 존재한다는 뜻
-
-		// model.addAttribute("list", codeGroupDtos); //의미 : list = codeGroupDtos
-		// model 객체의 addAttribute 함수가 작업을 처리함
-
-		return "codeGroupXdmList"; //
-	}
-
+	
+	/*
+	 * @RequestMapping(value = "/orders") public String orders(CodeGroupVo vo, Model
+	 * model) throws Exception {
+	 * 
+	 * System.out.println("===========================================");
+	 * System.out.println(vo.toString());
+	 * System.out.println("vo.getShDateStart() : " + vo.getShDateStart());
+	 * System.out.println("vo.getShDateEnd() : " + vo.getShDateEnd());
+	 * 
+	 * model.addAttribute("list", service.selectList(vo)); model.addAttribute("vo",
+	 * vo);
+	 * 
+	 * return "adm/infra/v1/orders"; }
+	 */
+	
 	@RequestMapping(value = "/orders")
-	public String orders(CodeGroupVo vo, Model model) throws Exception {
-
-		System.out.println("===========================================");
-		System.out.println(vo.toString());
-		System.out.println("vo.getShDateStart() : " + vo.getShDateStart());
-		System.out.println("vo.getShDateEnd() : " + vo.getShDateEnd());
-
+	public String orders(@ModelAttribute("vo") CodeGroupVo vo, Model model) throws Exception {
+		
+		setSearch(vo);
+		int rowcount = service.getTotalCodeGroupCount(vo);
+		model.addAttribute("listCount", rowcount);
+		
+		System.out.println(rowcount);
+		
 		model.addAttribute("list", service.selectList(vo));
-		model.addAttribute("vo", vo);
-
+		
+//		 model.addAttribute("vo", vo);
+		
 		return "adm/infra/v1/orders";
 	}
 	public void setSearch(CodeGroupVo vo) throws Exception {
@@ -101,30 +103,6 @@ public class CodeGroupController {
 
 	}
 
-//	@RequestMapping(value="/codeGroupForm")
-//	public String codeGroupForm(CodeGroupDto dto) throws Exception {
-//		
-//		System.out.println("dto.getSeq() : " + dto.getSeq());
-//		
-//		return "codeGroupForm";
-//		
-//	}
-
-	// html에 데이터를 표시할 수 있도록
-	@RequestMapping(value = "/codeGroupForm")
-	public String codeGroupForm(CodeGroupDto dto, Model model) throws Exception {
-
-		model.addAttribute("item", service.selectOne(dto));
-
-		return "codeGroupForm";
-	}
-
-	@RequestMapping(value = "/codeGroupAdd")
-	public String codeGroupAdd() throws Exception {
-
-		return "codeGroupAdd";
-
-	}
 
 	@RequestMapping(value = "/codeGroupInsert")
 	public String codeGroupInsert(CodeGroupDto dto) throws Exception {
@@ -159,52 +137,6 @@ public class CodeGroupController {
 		return "redirect:/orders";
 	}
 
-	// adm page
-
-	@RequestMapping(value = "account-settings")
-	public String accountSettings() throws Exception {
-		return "adm/infra/v1/account-settings";
-	}
-
-	@RequestMapping(value = "calendar")
-	public String calendar() throws Exception {
-		return "adm/infra/v1/calendar";
-	}
-
-	@RequestMapping(value = "checkout")
-	public String checkout() throws Exception {
-		return "adm/infra/v1/checkout";
-	}
-
-	@RequestMapping(value = "customers")
-	public String customers(Model model, CodeGroupVo vo) throws Exception {
-
-		model.addAttribute("list", service.selectList(vo));
-		return "adm/infra/v1/customers";
-	}
-
-	@RequestMapping(value = "forgot_password")
-	public String forgotPwd() throws Exception {
-		return "adm/infra/v1/forgot_password";
-	}
-
-	@RequestMapping(value = "/")
-	public String index() throws Exception {
-		return "adm/infra/v1/index";
-	}
-
-	@RequestMapping(value = "loginAdm")
-	public String loginAdm() throws Exception {
-		return "adm/infra/v1/loginAdm";
-	}
-
-	@RequestMapping(value = "/ordersOrg")
-	public String ordersOrg(Model model, CodeGroupVo vo) throws Exception {
-
-		model.addAttribute("list", service.selectList(vo));
-		return "adm/infra/v1/ordersOrg";
-	}
-
 	@RequestMapping(value = "/ordersView")
 	public String ordersView(CodeGroupDto dto, Model model) throws Exception {
 
@@ -228,28 +160,4 @@ public class CodeGroupController {
 
 	}
 
-	@RequestMapping(value = "products")
-	public String products() throws Exception {
-		return "adm/infra/v1/products";
-	}
-
-	@RequestMapping(value = "reviews")
-	public String reviews() throws Exception {
-		return "adm/infra/v1/reviews";
-	}
-
-	@RequestMapping(value = "signup")
-	public String signup() throws Exception {
-		return "adm/infra/v1/signup";
-	}
-
-	@RequestMapping(value = "tables")
-	public String tables() throws Exception {
-		return "adm/infra/v1/tables";
-	}
-
-	@RequestMapping(value = "view-cart")
-	public String viewCart() throws Exception {
-		return "adm/infra/v1/view-cart";
-	}
 }

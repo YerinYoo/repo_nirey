@@ -109,5 +109,96 @@
 		ORDER BY a.seq DESC
 	</select>
 	
+	<!--  페이징 -->
+	<!-- Total count -->
+		 <select id="getTotalCodeGroupCount" resultType="int">
+	    SELECT COUNT(*) FROM CodeGroup a 
+	    
+	    <if test="shDelNy != null and shDelNy != ''">
+	        WHERE a.delNY = #{shDelNy}
+	    </if>
+	    
+	    <choose>
+	    
+	        <when test="shOption == 1">
+	            AND a.seq = #{shValue}
+	        </when>
+	        
+	        <when test="shOption == 2">
+	            AND a.name LIKE CONCAT('%',#{shValue},'%')
+	        </when>
+	        
+	    </choose>
+	</select>
+	
+	<!-- 페이징을 위해 DB 단에서 뿌리는 데이터 셀렉 -->
+	<select id="selectPagedCodeList" resultMap="resultMapObj">
+	
+	    SELECT
+	    a.delNY,
+	    a.seq,
+	    a.name,
+	    a.regDatetime,
+	    a.modDatetime	    
+	    
+	    FROM CodeGroup a
+	    
+	    <if test="shDelNy != null and shDelNy != ''">
+	        AND a.delNY = #{shDelNy}
+	    </if>
+	    
+	    <choose>
+	    
+	        <when test="shOption == 1">
+	            AND a.seq = #{shValue}
+	        </when>
+	        
+	        <when test="shOption == 2">
+	            AND a.name LIKE CONCAT('%',#{shValue},'%')
+	        </when>
+	        
+	    </choose>
+	    LIMIT #{start}, #{pageSize}
+	</select>
+
+	
+	<!-- select 공통 구문 SQL -->
+	<sql id ="selectCommon">
+		FROM codeGroup a
+
+				and a.DelNy = 0
+		where 1=1
+		<!-- 추가, 사용여부 사용시 진행 필요 건 -->
+		<!-- <if test="shUseNy != null and !shUseNy.equals('')">AND ifcgUseNy = #{shUseNy}</if> -->
+		<if test="shDelNy != null and !shDelNy.equals('')">AND a.DelNy = #{shDelNy}</if>
+			  
+		<choose>
+			<when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			<when test="shOptionDate == 2">AND a.modDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+		</choose>
+		
+		limit 99999999999
+		) aa
+		limit 5 offset 0
+			
+		<choose> 
+            <when test="shOption == 3">AND a.seq = #{shValue}</when>
+            <when test="shOption == 4">AND a.name LIKE CONCAT('%',#{shValue},'%')</when>
+   		</choose>
+	
+	</sql>
+	
+	 <!-- 페이지네이션 관련 base mapper 쿼리-->
+	<sql id="selectListUpperForMysql">
+		select aa.* from (
+	</sql>
+	
+	
+	<sql id="selectListLowerForMysql">	
+		) aa
+		limit #{rowNumToShow} offset #{startRnumForMysql}
+	</sql>
+	
+	
     
 </mapper>

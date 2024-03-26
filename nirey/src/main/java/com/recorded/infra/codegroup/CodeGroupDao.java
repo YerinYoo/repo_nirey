@@ -23,4 +23,10 @@ public interface CodeGroupDao { //쿼리 실행 역할 (selectList, selectOne, d
     public List<CodeGroupDto> selectList(CodeGroupVo vo);
 	
     public List<CodeGroupDto> selectListWithoutPaging();
+    
+    //페이징 처리 리스트 
+    public List<CodeGroupDto> selectPagedCodeGroupList(CodeGroupVo vo);
+    
+    //개수 리턴
+    public int getTotalCodeGroupCount(CodeGroupVo vo);
     }

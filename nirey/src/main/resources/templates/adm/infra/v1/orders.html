@@ -564,33 +564,27 @@
 			</form>
 											
 											
-								<div class="row">
-									<div class="col-11">
-											<p>Total</p>
-											<!-- 해당 구문 들어가면 왜 먹지 않는지 물어보기 / mySQL 및 콘솔에서는 해당 mapper 쿼리 잘 작동되어 출력됨 -->
-											<!-- <p>Total : <span th:text="${list.cgSeqCount" ></span></p>  -->
-											
-
+							<div class="row">
+										<div class="col">
+											<div>Total Count: <span th:text="${listCount}"></span></div>
+										</div>
 									</div>
-
-								
-								
-									<div class="col-1">
-										<select class="select-single js-states form-control" title="Select Product Category"
-													data-live-search="true">
-													<option>-</option>
-													<option>5</option>
-													<option>10</option>
-													<option>25</option>
-													<option>50</option>
-													<option>100</option>
-												</select>
-									</div>
-									</div>
-									                          
-									 <a th:href="@{/ordersAdd}" th:text="등록">
-									 
-									 </a>
+									 <div class="row mb-3">
+									 	<div class="col">
+									 		<a th:href="@{/ordersAdd}" >
+									 		<button type="button" class="btn btn-outline-primary">등록</button>
+									 		</a>
+									 	</div>
+									 	<div class="col-1">
+										    <select id="pageSizeSelect" class="select-single js-states form-control" title="Select Product Category" data-live-search="true">
+										        <option value="5">5</option>
+										        <option value="10">10</option>
+										        <option value="25">25</option>
+										        <option value="50">50</option>
+										        <option value="100">100</option>
+										    </select>
+									 	</div>
+									 </div>
 	
 												    
 				<!-- Content wrapper scroll start -->

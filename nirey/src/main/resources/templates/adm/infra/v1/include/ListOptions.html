@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="ListOptions">
+
+									<div class="row">
+										<div class="col">
+											<div>Total Count: <span th:text="${listCount}"></span></div>
+										</div>
+									</div>
+									 <div class="row mb-3">
+									 	<div class="col">
+									 		<a th:href="@{/CordersAdd}" >
+									 		<button type="button" class="btn btn-outline-primary">등록</button>
+									 		</a>
+									 	</div>
+									 	<div class="col-1">
+										    <select id="pageSizeSelect" class="select-single js-states form-control" title="Select Product Category" data-live-search="true">
+										        <option value="5">5</option>
+										        <option value="10">10</option>
+										        <option value="25">25</option>
+										        <option value="50">50</option>
+										        <option value="100">100</option>
+										    </select>
+									 	</div>
+									 </div>
+
+			
+			
+</th:block>
+</html>

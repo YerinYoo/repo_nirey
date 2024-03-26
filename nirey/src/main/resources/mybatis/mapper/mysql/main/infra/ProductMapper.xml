@@ -116,4 +116,111 @@
   	where productSeq=#{productSeq}
   	</delete>
 	  
+	  <!-- 페이징 -->
+	    <!-- Total count -->
+		 <select id="getTotalProductCount" resultType="int">
+	    SELECT COUNT(*) FROM product a 
+	    
+	    <if test="shDelNy != null and shDelNy != ''">
+	        WHERE a.delNY = #{shDelNy}
+	    </if>
+	    
+	    <choose>
+	    
+	        <when test="shOption == 1">
+	            AND a.productSeq = #{shValue}
+	        </when>
+	        
+	        <when test="shOption == 2">
+	            AND a.ProductName LIKE CONCAT('%',#{shValue},'%')
+	        </when>
+	        
+	    </choose>
+	</select>
+	
+	<!-- 페이징을 위해 DB 단에서 뿌리는 데이터 셀렉 -->
+	<select id="selectPagedProductList" resultMap="resultMapObj">
+	
+	    SELECT
+				a.productSeq
+				, a.delNY
+				, a.ProductName
+				, a.OrgPrice
+				, a.DiscountedPrice
+				, a.ProductDescription
+				, a.prodStockCD
+				, a.category1CD
+				, a.category2CD
+				, a.regDateTime
+				, a.modDateTime
+                , b.color
+                , c.size
+			
+			from 
+			    product a
+			inner join 
+				prodColor b
+			on
+				 a.productSeq=b.Product_productSeq
+			inner join 
+				prodSize c
+			on 
+				b.Product_productSeq=c.Product_productSeq
+			
+	    
+	    <if test="shDelNy != null and shDelNy != ''">
+	        AND a.delNY = #{shDelNy}
+	    </if>
+	    
+	    <choose>
+	    
+	        <when test="shOption == 1">
+	            AND a.productSeq = #{shValue}
+	        </when>
+	        
+	        <when test="shOption == 2">
+	            AND a.ProductName LIKE CONCAT('%',#{shValue},'%')
+	        </when>
+	        
+	    </choose>
+	    LIMIT #{start}, #{pageSize}
+	</select>
+
+	
+	<!-- select 공통 구문 SQL -->
+	<sql id ="selectCommon">
+		FROM product a
+
+				and a.delNY = 0
+		where 1=1
+		<!-- 추가, 사용여부 사용시 진행 필요 건 -->
+		<!-- <if test="shUseNy != null and !shUseNy.equals('')">AND ifcgUseNy = #{shUseNy}</if> -->
+		<if test="shDelNy != null and !shDelNy.equals('')">AND a.delNY = #{shDelNy}</if>
+			  
+		<choose>
+			<when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			<when test="shOptionDate == 2">AND a.modDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+		</choose>
+		
+		limit 99999999999
+		) aa
+		limit 5 offset 0
+			
+		<choose> 
+            <when test="shOption == 3">AND a.productSeq = #{shValue}</when>
+            <when test="shOption == 4">AND a.ProductName LIKE CONCAT('%',#{shValue},'%')</when>
+   		</choose>
+	
+	</sql>
+	
+	 <!-- 페이지네이션 관련 base mapper 쿼리-->
+	<sql id="selectListUpperForMysql">
+		select aa.* from (
+	</sql>
+	
+	
+	<sql id="selectListLowerForMysql">	
+		) aa
+		limit #{rowNumToShow} offset #{startRnumForMysql}
+	</sql>
 </mapper>
