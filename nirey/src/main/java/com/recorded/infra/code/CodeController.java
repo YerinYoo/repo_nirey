@@ -59,17 +59,22 @@ public class CodeController {
 	
 	@RequestMapping(value = "/Corders")
 	public String Corders(CodeVo vo, Model model) throws Exception {
+	    System.out.println("===========================================");
+	    System.out.println(vo.toString());
+	    System.out.println("vo.getShDateStart() : " + vo.getShDateStart());
+	    System.out.println("vo.getShDateEnd() : " + vo.getShDateEnd());
 
-		System.out.println("===========================================");
-		System.out.println(vo.toString());
-		System.out.println("vo.getShDateStart() : " + vo.getShDateStart());
-		System.out.println("vo.getShDateEnd() : " + vo.getShDateEnd());
+	    model.addAttribute("list", service.selectList(vo)); // 첫 번째 데이터 추가, "listData"라는 이름 사용
+	    model.addAttribute("vo", vo);
+	    
+	    int rowCount = service.getTotalCodeCount(vo);
+	    model.addAttribute("rowCount", rowCount);
 
-		model.addAttribute("list", service.selectList(vo));
-		model.addAttribute("vo", vo);
+	    System.out.println("Row count: " + rowCount);
 
-		return "adm/infra/v1/Corders";
+	    return "adm/infra/v1/Corders";
 	}
+
 	
 	@RequestMapping(value = "/CordersView")
 	public String CordersView(CodeDto dto, Model model) throws Exception {

@@ -20,7 +20,7 @@ public interface CodeDao {
     public List<CodeDto> selectPagedCodeList(CodeVo vo);
     
     //개수 리턴
-    public int getTotalCodeCount();
+    public int getTotalCodeCount(CodeVo vo);
 }
     
    

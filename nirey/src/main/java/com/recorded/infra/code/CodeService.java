@@ -66,9 +66,8 @@ public class CodeService {
     }
     
     //개수 리턴
-    public int getTotalCodeCount() {
-    	System.out.println("total : " + getTotalCodeCount());
-    	return dao.getTotalCodeCount();
+    public int getTotalCodeCount(CodeVo vo) {
+    	return dao.getTotalCodeCount(vo);
     }
     
     
