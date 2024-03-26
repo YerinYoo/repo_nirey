@@ -3,106 +3,185 @@
 
 <mapper namespace="com.recorded.infra.code.CodeDao">
 
-	<resultMap id="resultMapObj" type="com.recorded.infra.code.CodeDto"></resultMap>
+    <resultMap id="resultMapObj" type="com.recorded.infra.code.CodeDto"></resultMap>
 
     <select id="selectList" resultMap="resultMapObj">
-
-			select
-				a.seq as CodeGroupSeq
-			    ,a.name as CodeGroupName
-			    ,b.delNY
-			    ,b.seq
-			    ,b.name
-			    ,b.regDatetime
-			    ,b.modDatetime
-			  	<!-- , (select count(*) from code b) as SeqCount -->
-			
-			from 
-			    CodeGroup a
-			    
-			left join  code b
-			
-			on  a.seq=b.CodeGroupSeq
-			
-	        <if test="shDelNy != null and shDelNy.equals('')">AND b.delNY = #{shDelNy}</if>
-	      <!-- 
-			<choose>
-				<when test="shOptionDate == 1">AND a.regDatetime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-				<when test="shOptionDate == 2">AND a.modDatetime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-			</choose>
-	 -->
-	    	 <choose>
-	         	 <when test="shOption == 1">AND b.seq = #{shValue}</when>
-	            <when test="shOption == 2">AND a.name LIKE CONCAT('%',#{shValue},'%')</when>
-	       	 </choose>
-
+        SELECT
+        a.seq as CodeGroupSeq,
+        a.name as CodeGroupName,
+        b.delNY,
+        b.seq,
+        b.name,
+        b.regDatetime,
+        b.modDatetime
+        FROM
+        CodeGroup a
+        LEFT JOIN code b ON a.seq = b.CodeGroupSeq
+        <if test="shDelNy != null and shDelNy != ''">
+            AND b.delNY = #{shDelNy}
+        </if>
+        <choose>
+            <when test="shOption == 1">
+                AND b.seq = #{shValue}
+            </when>
+            <when test="shOption == 2">
+                AND a.name LIKE CONCAT('%',#{shValue},'%')
+            </when>
+        </choose>
     </select>
-	  
-	      <select id="selectOne" resultMap="resultMapObj">
-    
-    		select
-    		
-    		a.delNY
-    		, a.seq
-    		, a.name
-    		, a.modDateTime
-    		, a.CodeGroupSeq
-    		
-    		
-    		from code a
-    		
-    		where 1=1
-    			and a.seq=#{seq} 
-    			
-    </select>
-    
-    	<select id="selectListCachedCodeArrayList" resultMap="resultMapObj">
-    	
-		SELECT 
-			seq
-			, name
-			, CodeGroupSeq
-		FROM
-			code
-		WHERE 1=1
-			AND DelNY = 0
 
-   </select>
-    
-	  <insert id="insert">
-			insert into code (
-			name
-			, delNY
-			, CodeGroupSeq
-			) values (
-			#{name}
-			, #{delNY}
-			, #{CodeGroupSeq}) 
-	  </insert>
-	  
-	   
+    <select id="selectOne" resultMap="resultMapObj">
+        SELECT
+        a.delNY,
+        a.seq,
+        a.name,
+        a.modDateTime,
+        a.CodeGroupSeq
+        FROM code a
+        WHERE 1=1
+        AND a.seq=#{seq}
+    </select>
+
+    <select id="selectListCachedCodeArrayList" resultMap="resultMapObj">
+        SELECT
+        seq,
+        name,
+        CodeGroupSeq
+        FROM
+        code
+        WHERE 1=1
+        AND DelNY = 0
+    </select>
+
+    <insert id="insert">
+        INSERT INTO code (
+        name,
+        delNY,
+        CodeGroupSeq
+        ) VALUES (
+        #{name},
+        #{delNY},
+        #{CodeGroupSeq})
+    </insert>
+
     <update id="update">
-   	update code
-   	set
-   		name = #{name}
-   	WHERE 1=1
-   		and seq = #{seq}
-  	
-  	</update>
-  	
-  	<update id="uelete">
-  			update code
-  			set
-  			delNY=1
-  			where 1=1
-  			and seq = #{seq}
-  	</update>
-  	
-  	
-  	<delete id="delete">
-  	
-  	delete from code
-  	where seq=#{seq}
-  	</delete>
-	  
+        UPDATE code
+        SET name = #{name}
+        WHERE 1=1
+        AND seq = #{seq}
+    </update>
+
+    <update id="uelete">
+        UPDATE code
+        SET delNY=1
+        WHERE 1=1
+        AND seq = #{seq}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM code
+        WHERE seq=#{seq}
+    </delete>
+	
+	<!-- ==================================================================== -->
+	
+	<!--  페이징 관련 쿼리 여기서부터 -->
+	
+	<!-- Total count -->
+		 <select id="getTotalCodeCount" resultType="int">
+	    SELECT COUNT(*) FROM CodeGroup a LEFT JOIN code b ON a.seq = b.CodeGroupSeq
+	    
+	    <if test="shDelNy != null and shDelNy != ''">
+	        WHERE b.delNY = #{shDelNy}
+	    </if>
+	    
+	    <choose>
+	    
+	        <when test="shOption == 1">
+	            AND b.seq = #{shValue}
+	        </when>
+	        
+	        <when test="shOption == 2">
+	            AND a.name LIKE CONCAT('%',#{shValue},'%')
+	        </when>
+	        
+	    </choose>
+	</select>
+	
+	<!-- 페이징을 위해 DB 단에서 뿌리는 데이터 셀렉 -->
+	<select id="selectPagedCodeList" resultMap="resultMapObj">
+	
+	    SELECT
+	    a.seq as CodeGroupSeq,
+	    a.name as CodeGroupName,
+	    b.delNY,
+	    b.seq,
+	    b.name,
+	    b.regDatetime,
+	    b.modDatetime
+	    b.CodeGroupSeq
+	    
+	    
+	    FROM CodeGroup a
+	    LEFT JOIN code b ON a.CodeGroupSeq = b.CodeGroupSeq
+	    
+	    <if test="shDelNy != null and shDelNy != ''">
+	        AND b.delNY = #{shDelNy}
+	    </if>
+	    
+	    <choose>
+	    
+	        <when test="shOption == 1">
+	            AND b.seq = #{shValue}
+	        </when>
+	        
+	        <when test="shOption == 2">
+	            AND a.name LIKE CONCAT('%',#{shValue},'%')
+	        </when>
+	        
+	    </choose>
+	    LIMIT #{start}, #{pageSize}
+	</select>
+
+	
+	<!-- select 공통 구문 SQL -->
+	<sql id ="selectCommon">
+		FROM code a
+		left join codeGroup b 
+			on a.codeGroup_eq = b.codeGroupSeq 
+				and a.codeDelNy = 0
+		where 1=1
+		<!-- 추가, 사용여부 사용시 진행 필요 건 -->
+		<!-- <if test="shUseNy != null and !shUseNy.equals('')">AND ifcgUseNy = #{shUseNy}</if> -->
+		<if test="shDelNy != null and !shDelNy.equals('')">AND a.codeDelNy = #{shDelNy}</if>
+			  
+		<choose>
+			<when test="shOptionDate == 1">AND a.codeRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			<when test="shOptionDate == 2">AND a.codeModDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+		</choose>
+		
+		limit 99999999999
+		) aa
+		limit 5 offset 0
+			
+		<choose> 
+            <when test="shOption == 1">AND b.codeGroupSeq = #{shValue}</when>
+            <when test="shOption == 2">AND b.codeGroupName LIKE CONCAT('%',#{shValue},'%')</when>
+            <when test="shOption == 3">AND a.codeSeq = #{shValue}</when>
+            <when test="shOption == 4">AND a.codeName LIKE CONCAT('%',#{shValue},'%')</when>
+            <when test="shOption == 5">AND a.codeMemo LIKE CONCAT('%',#{shValue},'%')</when>
+   		</choose>
+	
+	</sql>
+	
+	 <!-- 페이지네이션 관련 base mapper 쿼리-->
+	<sql id="selectListUpperForMysql">
+		select aa.* from (
+	</sql>
+	
+	
+	<sql id="selectListLowerForMysql">	
+		) aa
+		limit #{rowNumToShow} offset #{startRnumForMysql}
+	</sql>
 </mapper>

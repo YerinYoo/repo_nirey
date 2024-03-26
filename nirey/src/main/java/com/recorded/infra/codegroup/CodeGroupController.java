@@ -5,7 +5,9 @@ package com.recorded.infra.codegroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.recorded.common.constants.Constants;
 import com.recorded.common.util.UtilDateTime;
@@ -20,7 +22,7 @@ public class CodeGroupController {
 	// CodeGroupService codeGroupService;
 
 	@RequestMapping(value = "/codeGroupXdmList")
-	public String codeGroupXdmList(Model model) throws Exception {
+	public String codeGroupXdmList(Model model, CodeGroupVo vo) throws Exception {
 
 		// List<CodeGroupDto> codeGroupDtos =service.selectList();
 
@@ -28,7 +30,7 @@ public class CodeGroupController {
 		// System.out.println(a.getName());
 		// }
 
-		model.addAttribute("list", service.selectList()); // 리턴 데이터 값 = list, 받아오자마자 바로 넘겨버림
+		model.addAttribute("list", service.selectList(vo)); // 리턴 데이터 값 = list, 받아오자마자 바로 넘겨버림
 															// model = html에서 넘기려는 데이터가 model이라는 이름으로 존재한다는 뜻
 
 		// model.addAttribute("list", codeGroupDtos); //의미 : list = codeGroupDtos
@@ -175,9 +177,9 @@ public class CodeGroupController {
 	}
 
 	@RequestMapping(value = "customers")
-	public String customers(Model model) throws Exception {
+	public String customers(Model model, CodeGroupVo vo) throws Exception {
 
-		model.addAttribute("list", service.selectList());
+		model.addAttribute("list", service.selectList(vo));
 		return "adm/infra/v1/customers";
 	}
 
@@ -197,9 +199,9 @@ public class CodeGroupController {
 	}
 
 	@RequestMapping(value = "/ordersOrg")
-	public String ordersOrg(Model model) throws Exception {
+	public String ordersOrg(Model model, CodeGroupVo vo) throws Exception {
 
-		model.addAttribute("list", service.selectList());
+		model.addAttribute("list", service.selectList(vo));
 		return "adm/infra/v1/ordersOrg";
 	}
 
@@ -250,5 +252,4 @@ public class CodeGroupController {
 	public String viewCart() throws Exception {
 		return "adm/infra/v1/view-cart";
 	}
-
 }

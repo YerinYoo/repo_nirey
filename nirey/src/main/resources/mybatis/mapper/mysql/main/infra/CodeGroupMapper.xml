@@ -97,6 +97,7 @@
   	where seq=#{seq}
   	</delete>
   	
+  	<!-- 코드에서 코드 그룹 불러오기 -->
   	<select id="selectListWithoutPaging" resultMap="resultMapObj">
 		SELECT
 			a.seq
@@ -107,5 +108,6 @@
 
 		ORDER BY a.seq DESC
 	</select>
+	
     
 </mapper>

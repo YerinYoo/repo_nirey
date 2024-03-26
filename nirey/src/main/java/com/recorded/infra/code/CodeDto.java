@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 public class CodeDto {
-	
+	//데이터 관련 객체
 	private String CodeGroupSeq;
 	private String CodeGroupName;
 	private Integer delNY;
@@ -14,7 +14,8 @@ public class CodeDto {
 	private String name;
 	private Date regDatetime;
 	private Date modDatetime;
-	
+
+	 //데이터 관련 getter, setter
 	public String getCodeGroupSeq() {
 		return CodeGroupSeq;
 	}
@@ -63,19 +64,17 @@ public class CodeDto {
 				+ ", seq=" + seq + ", name=" + name + ", regDatetime=" + regDatetime + ", modDatetime=" + modDatetime
 				+ "]";
 	}
-	
+
 //	for cache
 	public static List<CodeDto> cachedCodeArrayList = new ArrayList<CodeDto>();
 
+	
 	public static List<CodeDto> getCachedCodeArrayList() {
 		return cachedCodeArrayList;
 	}
 	public static void setCachedCodeArrayList(List<CodeDto> cachedCodeArrayList) {
 		CodeDto.cachedCodeArrayList = cachedCodeArrayList;
 	}
-	
-	
-	
 	
 	
 }

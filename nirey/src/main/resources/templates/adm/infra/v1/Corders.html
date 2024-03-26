@@ -484,7 +484,7 @@
 									
 						<div class="row">
 							<div class="col-sm-12 col-12">
-								<div class="card" style="background-color : snow">
+								<div class="card">
 									<div class="card-header">
 										<div class="card-title">코드  관리</div>
 									</div>
@@ -545,23 +545,24 @@
 											<!-- search e -->	
 										
 										</form>
+									</div>
+									 <div class="row mb-3">
+									 	<div class="col">
+									 		<a th:href="@{/CordersAdd}" >
+									 		<button type="button" class="btn btn-outline-primary">등록</button>
+									 		</a>
+									 	</div>
+									 	<div class="col-1">
+										    <select id="pageSizeSelect" class="select-single js-states form-control" title="Select Product Category" data-live-search="true">
+										        <option value="5">5</option>
+										        <option value="10">10</option>
+										        <option value="25">25</option>
+										        <option value="50">50</option>
+										        <option value="100">100</option>
+										    </select>
+									 	</div>
+									 </div>
 
-								
-								
-									<div class="col-1">
-										<select class="select-single js-states form-control" title="Select Product Category"
-													data-live-search="true">
-													<option>-</option>
-													<option>5</option>
-													<option>10</option>
-													<option>25</option>
-													<option>50</option>
-													<option>100</option>
-												</select>
-									</div>
-									</div>
-									                          
-									 <a th:href="@{/CordersAdd}" th:text="등록"></a>
 	
 												    
 				<!-- Content wrapper scroll start -->
@@ -574,7 +575,7 @@
 						<div class="row">
 							<div class="col-sm-12 col-12">
 								
-										<div class="table-responsive">
+										<div class="table-responsive mt-2">
 										<table class="table v-middle" style="table-layout:fixed;" >
 									    	<tr>
 									    		<td>
@@ -619,70 +620,62 @@
 									</div>
 								</div>
 											
-											<nav aria-label="Page Navigation">
-											<div class="row">
-                                                <ul class="pagination justify-content-center mt-5">
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#" aria-label="Previous">
-                                                            <span aria-hidden="true">
-                                                                <i class="bi bi-arrow-left"></i>
-                                                            </span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="page-item active">
-                                                        <a class="page-link" href="#">1</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#">2</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#">3</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#">4</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#">5</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#">6</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#">7</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#" aria-label="Next">
-                                                            <span aria-hidden="true">
-                                                                <i class="bi bi-arrow-right"></i>
-                                                            </span>
-                                                        </a>
-                                                    </li>
-												</ul>
-											</div>
+<nav aria-label="Page Navigation">
 
-												<div class="row">
+<div class="row">
+    <ul class="pagination justify-content-center mt-5">
+        <li class="page-item">
+            <a class="page-link" href="#" onclick="prevPage()" aria-label="Previous">
+                <span aria-hidden="true">
+                    <i class="bi bi-arrow-left"></i>
+                </span>
+            </a>
+        </li>
+        <!-- 이 부분은 자바스크립트로 동적으로 생성됩니다 -->
+        <li class="page-item active">
+            <a class="page-link" href="#">1</a>
+        </li>
+        <!-- 예시로 1부터 5까지만 표시합니다 -->
+        <li class="page-item">
+            <a class="page-link" href="#">2</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="#">3</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="#">4</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="#">5</a>
+        </li>
+        <!-- 이 부분은 자바스크립트로 동적으로 생성됩니다 -->
+        <li class="page-item">
+            <a class="page-link" href="#" onclick="nextPage()" aria-label="Next">
+                <span aria-hidden="true">
+                    <i class="bi bi-arrow-right"></i>
+                </span>
+            </a>
+        </li>
+    </ul>
+</div>
 
-													<div class="col-1" style="float : left;">
-                                                            <span class="me-2">
-                                                                <a class="btn btn-primary btn-m" href="#" th:href="@{/CordersAdd}">
-                                                                    <i class="bi bi-pencil"></i>
-                                                                </a>
-                                                            </span>
-                                                           </div>
-                                                           
-                                                           <div class="col-1" style="float : right; padding-left : 1270px;">
-                                                           
-                                                            <span>
-                                                            
-                                                                <a class="btn btn-danger btn-icon btn-m mb-1" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                                    <i class="bi bi-trash"></i>
-                                                                </a>
-                                                            </span>
-                                                            </div>
-                                                    </div>
-												</div>
-											</nav>
-											
+    <div class="row">
+        <div class="col-1" style="float: left;">
+            <span class="me-2">
+                <a class="btn btn-primary btn-m" href="#" th:href="@{/CordersAdd}">
+                    <i class="bi bi-pencil"></i>
+                </a>
+            </span>
+        </div>
+        <div class="col-1" style="float: right; padding-left: 1270px;">
+            <span>
+                <a class="btn btn-danger btn-icon btn-m mb-1" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <i class="bi bi-trash"></i>
+                </a>
+            </span>
+        </div>
+    </div>
+</nav>
 
 								<!-- Card end -->
 
@@ -813,7 +806,6 @@
                 });
             });
         </script>
-
 
 	<!-- Date Range JS -->
 	<!-- 

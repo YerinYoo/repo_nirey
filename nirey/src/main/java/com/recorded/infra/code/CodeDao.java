@@ -13,7 +13,14 @@ public interface CodeDao {
 	public int delete(CodeDto dto);
 	public List<CodeDto> selectList(CodeVo vo);
 	
-    public List<CodeDto> selectListCachedCodeArrayList();
 
-	
+    public List<CodeDto> selectListCachedCodeArrayList();
+    
+    //페이징 처리 리스트 
+    public List<CodeDto> selectPagedCodeList(CodeVo vo);
+    
+    //개수 리턴
+    public int getTotalCodeCount();
 }
+    
+   

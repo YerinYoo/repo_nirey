@@ -2,8 +2,16 @@ package com.recorded.infra.codegroup;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.recorded.infra.code.CodeDao;
+import com.recorded.infra.code.CodeDto;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @Service
 //Service = 로직, DAO를 호출하여 조합시키는 곳
@@ -21,7 +29,7 @@ public class CodeGroupService {
 //		return list;
 //	}
 	//위의 구문과 같은 내용임, 아래 구문을 더 많이 사용함
-	public List<CodeGroupDto> selectList() { return dao.selectList();}
+	/* public List<CodeGroupDto> selectList() { return dao.selectList();} */
 	
 //	public CodeGroupDto selectOne(CodeGroupDto dto) {
 //		CodeGroupDto codeGroupDto = dao.selectOne(dto);
@@ -64,4 +72,6 @@ public class CodeGroupService {
     public List<CodeGroupDto> selectListWithoutPaging() {
     	return dao.selectListWithoutPaging();
     }
+    
+
 }
