@@ -518,7 +518,7 @@
 														</select>
 													</div>  
 													<div class="col">
-														<input type="text" id="birthday" name="birthday" th:value="${#strings.substring(vo.birthday, 0, 10)}" placeholder="생일" class="form-control form-control-sm" autocomplete="off">
+														<input type="text" id="shDateStart" name="shDateStart" th:value="${#strings.substring(vo.shDateStart, 0, 10)}" placeholder="시작일" class="form-control form-control-sm" autocomplete="off">
 														
 													</div>              
 													<div class="col">
@@ -548,7 +548,7 @@
 										</form>
 
 								
-									<div class="row">
+										<div class="row mt-1 mb-3">
 										<div class="col">
 											<div>Total Count: <span th:text="${listCount}"></span></div>
 										</div>

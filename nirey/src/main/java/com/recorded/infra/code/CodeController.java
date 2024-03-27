@@ -1,19 +1,14 @@
 package com.recorded.infra.code;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import com.recorded.common.constants.Constants;
 import com.recorded.common.util.UtilDateTime;
 import com.recorded.infra.codegroup.CodeGroupService;
-import com.recorded.infra.product.ProductVo;
+
 
 @Controller
 public class CodeController {
@@ -80,21 +75,34 @@ public class CodeController {
 	 * return "adm/infra/v1/Corders"; }
 	 */
 
+	/*
+	 * @RequestMapping(value = "/Corders") public String
+	 * Corders(@ModelAttribute("vo") CodeVo vo, Model model) throws Exception {
+	 * 
+	 * setSearch(vo); int rowcount = service.getTotalCodeCount(vo);
+	 * model.addAttribute("listCount", rowcount);
+	 * 
+	 * System.out.println(rowcount);
+	 * 
+	 * model.addAttribute("list", service.selectList(vo));
+	 * 
+	 * // model.addAttribute("vo", vo);
+	 * 
+	 * return "adm/infra/v1/Corders"; }
+	 */
+	
 	@RequestMapping(value = "/Corders")
-	public String Corders(@ModelAttribute("vo") CodeVo vo, Model model) throws Exception {
-		
+	public String Corders(@ModelAttribute("vo") CodeVo vo, Model model) throws Exception{
+
 		setSearch(vo);
-		int rowcount = service.getTotalCodeCount(vo);
-		model.addAttribute("listCount", rowcount);
+		vo.setParamsPaging(service.getTotalCodeCount(vo));
 		
-		System.out.println(rowcount);
-		
-		model.addAttribute("list", service.selectList(vo));
-		
-//		 model.addAttribute("vo", vo);
-		
-		return "adm/infra/v1/Corders";
-	}
+		if (vo.getTotalRows() > 0) {
+			model.addAttribute("list", service.selectPagedCodeList(vo));
+		}
+
+		return "adm/infra/v1/Corders"; 
+  	}
 	
 	@RequestMapping(value = "/CordersView")
 	public String CordersView(CodeDto dto, Model model) throws Exception {

@@ -13,10 +13,6 @@ public class CodeService {
     @Autowired
     private CodeDao dao;
 
-    public List<CodeDto> selectList() {
-        return dao.selectList();
-    }
-
     public CodeDto selectOne(CodeDto dto) {
         return dao.selectOne(dto);
     }

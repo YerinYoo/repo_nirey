@@ -1,6 +1,8 @@
 package com.recorded.infra.code;
 
-public class CodeVo {
+import com.recorded.common.base.BaseVo;
+
+public class CodeVo extends BaseVo {
 
 		private Integer shDelNy = 0; /* null 값을 받아야 되는 경우가 있어서 int 대신 Integer 사용 */
 		private Integer shOptionDate = 2; /* null 값을 받아야 되는 경우가 있어서 int 대신 Integer 사용 */

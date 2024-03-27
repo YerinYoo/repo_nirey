@@ -564,7 +564,7 @@
 			</form>
 											
 											
-							<div class="row">
+										<div class="row mt-1 mb-3">
 										<div class="col">
 											<div>Total Count: <span th:text="${listCount}"></span></div>
 										</div>
@@ -575,15 +575,17 @@
 									 		<button type="button" class="btn btn-outline-primary">등록</button>
 									 		</a>
 									 	</div>
-									 	<div class="col-1">
-										    <select id="pageSizeSelect" class="select-single js-states form-control" title="Select Product Category" data-live-search="true">
-										        <option value="5">5</option>
-										        <option value="10">10</option>
-										        <option value="25">25</option>
-										        <option value="50">50</option>
-										        <option value="100">100</option>
-										    </select>
-									 	</div>
+<div class="col-1">
+    <select id="pageSizeSelect" class="select-single js-states form-control" title="Select Product Category" data-live-search="true">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+    </select>
+</div>
+
+
 									 </div>
 	
 												    
@@ -602,7 +604,7 @@
 												 	<tr>
 											    		<td>
 												    		<div class="form-check form-check-inline">
-																	<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+																	<input class="form-check-input" type="checkbox" id="pageNumToShow " name="pageNumToShow " value="option1">
 															</div>
 											    		</td>
 											    		<td>#</td>
@@ -633,69 +635,24 @@
 									</div>
 								</div>
 											
-											<nav aria-label="Page Navigation">
-											<div class="row">
-                                                <ul class="pagination justify-content-center mt-5">
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#" aria-label="Previous">
-                                                            <span aria-hidden="true">
-                                                                <i class="bi bi-arrow-left"></i>
-                                                            </span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="page-item active">
-                                                        <a class="page-link" href="#">1</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#">2</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#">3</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#">4</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#">5</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#">6</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#">7</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#" aria-label="Next">
-                                                            <span aria-hidden="true">
-                                                                <i class="bi bi-arrow-right"></i>
-                                                            </span>
-                                                        </a>
-                                                    </li>
-												</ul>
-											</div>
+										<nav aria-label="Page Navigation" class="mt-3">
+											<ul class="pagination justify-content-center">
+												<li th:if="${vo.startPage gt vo.pageNumToShow}" class="page-item"><a class="page-link" href="javascript:goList(${vo.startPage - 1})"
+														aria-label="Previous"> <span aria-hidden="true">
+															<i class="bi bi-arrow-left"></i>
+														</span>
+													</a></li>
 
-												<div class="row">
+												<li th:each="num:${#numbers.sequence(vo.startPage, vo.endPage)}" th:classappend="${num eq vo.thisPage} ? active : ''"  class="page-item "><a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}" href="#">nums</a></li>
+											
 
-													<div class="col-1" style="float : left;">
-                                                            <span class="me-2">
-                                                                <a class="btn btn-primary btn-m" href="#" th:href="@{/ordersAdd}">
-                                                                    <i class="bi bi-pencil"></i>
-                                                                </a>
-                                                            </span>
-                                                           </div>
-                                                           
-                                                           <div class="col-1" style="float : right; padding-left : 1270px;">
-                                                           
-                                                            <span>
-                                                            
-                                                                <a class="btn btn-danger btn-icon btn-m mb-1" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                                    <i class="bi bi-trash"></i>
-                                                                </a>
-                                                            </span>
-                                                            </div>
-                                                    </div>
-												</div>
-											</nav>
+												<li th:if="${vo.endPage ne vo.totalPages}" class="page-item"><a class="page-link" th:attr="onclick=|goList('${vo.endPage + 1}')|" aria-label="Next">
+														<span aria-hidden="true"> <i class="bi bi-arrow-right"></i>
+														</span>
+													</a></li>
+											</ul>
+										</nav>
+
 											
 
 								<!-- Card end -->
@@ -779,43 +736,69 @@
 		<script src="/adm/js/main.js"></script>
 		
 		
-		<script type="text/javascript">
+<script type="text/javascript">
+    window.addEventListener('load', function() {
+        $("#shDateStart, #shDateEnd").datepicker();
+    });
 
-	window.addEventListener('load', function() {
-			$("#shDateStart, #shDateEnd").datepicker();
-	}); 
-	
-	let goUrlXdmList = "/orders";								/* ### */
-	let goUrlXdmForm = "/v1/infra/codegroup/codeGroupXdmForm";								/* ### */
-	let goUrlXdmMultiUele = "/v1/infra/codegroup/codeGroupXdmMultiUele";			/* ### */
-	let goUrlXdmMultiDele = "/v1/infra/codegroup/codeGroupXdmMultiDele";			/* ### */
-	let goUrlXdmView = "/v1/infra/codegroup/codeGroupXdmView";								/* ### */
-	
-	let seq = document.querySelector("input[name=ifcgSeq]");									/* ### */
+    let goUrlXdmList = "/orders";  /* ### */
+    let goUrlXdmForm = "/v1/infra/codegroup/codeGroupXdmForm"; /* ### */
+    let goUrlXdmMultiUele = "/v1/infra/codegroup/codeGroupXdmMultiUele"; /* ### */
+    let goUrlXdmMultiDele = "/v1/infra/codegroup/codeGroupXdmMultiDele"; /* ### */
+    let goUrlXdmView = "/v1/infra/codegroup/codeGroupXdmView"; /* ### */
 
-	document.getElementById("btnReset").onclick = function () {
-	    location.href = goUrlXdmList;
-	}
+    let seq = document.querySelector("input[name=ifcgSeq]"); /* ### */
 
-/* 	document.getElementById("btnForm").onclick = function () {
-	    goForm(0);
-	}
- */
+    document.getElementById("btnReset").onclick = function () {
+        location.href = goUrlXdmList;
+    }
 
-	goForm = function (keyValue) {
-	    seq.value = keyValue;
-	    form.action = goUrlXdmForm;
-	    form.submit();
-	}
-	
-	document.getElementById("btnSearch").onclick = function () {
-	    form.action = goUrlXdmList;
-	    form.submit();
-	};
-	
-	let form = document.querySelector("form[name=formList]");
-	</script>
-	
+    /* document.getElementById("btnForm").onclick = function () {
+        goForm(0);
+    } */
+
+    goForm = function (keyValue) {
+        seq.value = keyValue;
+        form.action = goUrlXdmForm;
+        form.submit();
+    }
+
+    // goList 함수를 중복으로 정의하지 않도록 수정
+    function goList(thisPage) {
+        document.querySelector("input[name=thisPage]").value = thisPage;
+        document.getElementById("formList").submit();
+    }
+
+    document.getElementById("btnSearch").onclick = function () {
+        form.action = goUrlXdmList;
+        form.submit();
+    };
+
+    let form = document.querySelector("form[name=formList]");
+
+    function changePageSize(selectElement) {
+        var selectedPageSize = selectElement.value;
+        // 페이지 크기를 설정하는 부분을 수정
+        document.querySelector("input[name=rowNumToShow]").value = selectedPageSize;
+
+        // 변경된 페이지 크기를 기반으로 페이지를 다시 로드
+        form.action = goUrlXdmList; // 페이지 로드할 URL 설정
+        form.submit(); // 페이지 다시 로드
+    }
+
+    // URL에 쿼리 매개변수를 업데이트하는 함수는 사용되지 않으므로 제거
+    // function updateQueryStringParameter(uri, key, value) {
+    //     var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+    //     var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+    //     if (uri.match(re)) {
+    //         return uri.replace(re, '$1' + key + "=" + value + '$2');
+    //     }
+    //     else {
+    //         return uri + separator + key + "=" + value;
+    //     }
+    // }
+</script>
+
 	<!-- 강사님 데이터 피커 -->
 <!--데이터피커 자바스크립트 구문-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>

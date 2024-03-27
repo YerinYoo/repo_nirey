@@ -4,7 +4,6 @@ import java.util.List;
 
 public interface CodeDao {
 
-	public List<CodeDto> selectList(); 
 	public CodeDto selectOne(CodeDto dto);
 	
 	public int insert(CodeDto dto);

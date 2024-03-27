@@ -2,17 +2,14 @@ package com.recorded.infra.codegroup;
 
 import java.util.Date;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 public class CodeGroupDto {
 
-	private String seq;
-	private String name;
-	private Integer delNY;
-	private Date  regDatetime;
-	private Date modDatetime;
-	private  Integer cdSeqCount;
-	//private Integer cgSeqCount;
+    private String seq;
+    private String name;
+    private Integer delNY;
+    private Date regDatetime;
+    private Date modDatetime;
+    private Integer cdSeqCount;
 		
 	//getter, setter
 	public String getSeq() {

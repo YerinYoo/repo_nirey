@@ -3,202 +3,93 @@
 
 <mapper namespace="com.recorded.infra.codegroup.CodeGroupDao">
 
-	<resultMap id="resultMapObj" type="com.recorded.infra.codegroup.CodeGroupDto"></resultMap>
+    <resultMap id="resultMapObj" type="com.recorded.infra.codegroup.CodeGroupDto"></resultMap>
+
+    <!-- 공통구문 -->
+    <sql id="selectCommon" >
+        from
+        codeGroup a
+        WHERE 1=1
+
+        <if test="shDelNy != null and shDelNy.equals('')">AND a.delNY = #{shDelNy}</if>
+        
+        <choose>
+            <when test="shOption == 1">AND a.seq = #{shValue}</when>
+            <when test="shOption == 2">AND a.name LIKE CONCAT('%',#{shValue},'%')</when>
+        </choose>
+    </sql>
 
     <select id="selectList" resultMap="resultMapObj">
-    
         select
-			a.seq
-			,a.name
-			,(select count(*)
-			from code aa
-			where 1=1
-				and	aa.CodeGroupSeq = a.seq) as cdSeqCount
-			,a.delNy
-			,a.regDatetime
-			,a.modDatetime
-			from
-			codeGroup a
-        WHERE 1=1
-	   
-	   <!-- 이게 머임?? 도대체 머임??ㅜㅜㅜㅜ -->
-	        <if test="shDelNy != null and shDelNy.equals('')">AND a.delNY = #{shDelNy}</if>
-	     <!--  
-			<choose>
-				<when test="shOptionDate == 1">AND a.regDatetime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-				<when test="shOptionDate == 2">AND a.modDatetime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-			</choose>
-	 -->
-	    	 <choose>
-	         	 <when test="shOption == 1">AND a.seq = #{shValue}</when>
-	            <when test="shOption == 2">AND a.name LIKE CONCAT('%',#{shValue},'%')</when>
-	       	 </choose>
-    </select>
-    
-    <!--  total count -->
-    <!-- 
-           <select id="selectOne" resultMap="resultMapObj">
-       
-         select
-        count(*) as cgSeqCount
-        from CodeGroup
-        
-       </select>
-     -->
+            a.seq
+            ,a.name
+            ,(select count(*)
+              from code aa
+              where 1=1
+                and aa.CodeGroupSeq = a.seq) as cdSeqCount
+            ,a.delNy
+            ,a.regDatetime
+            ,a.modDatetime
 
-       
+        <include refid="selectCommon"/>
+        order by a.seq
+        LIMIT #{startRnumForMysql}, #{rowNumToShow}
+    </select>
+
+    <!-- total count -->
+    <select id="getTotalCodeGroupCount" resultType="java.lang.Integer">
+        SELECT COUNT(*) 
+
+        <include refid="selectCommon"/>
+    </select>
+
     <select id="selectOne" resultMap="resultMapObj">
-    <!--  result에서 받아올 값이 여러 개 =  selectList, 하나 = selectOne -->
-    
-    		select
-    		
-    		delNY
-    		, seq
-    		, name
-    		, modDateTime
-    		
-    		from CodeGroup 
-    		
-    		where 1=1
-    			and seq=#{seq} 
-    			
-<!--  #{_______} = html에서 받아올 값 / 불러올 값 -->
+        select
+            delNY
+            ,seq
+            ,name
+            ,modDateTime
+        from CodeGroup 
+        where 1=1
+            and seq=#{seq} 
     </select>
-    
+
     <insert id="insert">
-    
-            insert into CodeGroup (name, memo)
-    		values (#{name}, #{memo}) 
-
+        insert into CodeGroup (name, memo)
+        values (#{name}, #{memo}) 
     </insert>
-    
+
     <update id="update">
-   	update codeGroup
-   	set
-   		memo=#{memo}
-   		, name = #{name}
-   	WHERE 1=1
-   		and seq = #{seq}
-  	
-  	</update>
-  	
-  	<update id="updtDel">
-  			update CodeGroup
-  			set
-  			delNY=1
-  			where 1=1
-  			and seq = #{seq}
-  	</update>
-  	
-  	
-  	<delete id="delete">
-  	
-  	delete from CodeGroup
-  	where seq=#{seq}
-  	</delete>
-  	
-  	<!-- 코드에서 코드 그룹 불러오기 -->
-  	<select id="selectListWithoutPaging" resultMap="resultMapObj">
-		SELECT
-			a.seq
-			, a.name
-		FROM codeGroup a
-		WHERE 1=1
-			AND delNy = 0
+        update codeGroup
+        set
+            memo=#{memo}
+            ,name = #{name}
+        WHERE 1=1
+            and seq = #{seq}
+    </update>
 
-		ORDER BY a.seq DESC
-	</select>
-	
-	<!--  페이징 -->
-	<!-- Total count -->
-		 <select id="getTotalCodeGroupCount" resultType="int">
-	    SELECT COUNT(*) FROM CodeGroup a 
-	    
-	    <if test="shDelNy != null and shDelNy != ''">
-	        WHERE a.delNY = #{shDelNy}
-	    </if>
-	    
-	    <choose>
-	    
-	        <when test="shOption == 1">
-	            AND a.seq = #{shValue}
-	        </when>
-	        
-	        <when test="shOption == 2">
-	            AND a.name LIKE CONCAT('%',#{shValue},'%')
-	        </when>
-	        
-	    </choose>
-	</select>
-	
-	<!-- 페이징을 위해 DB 단에서 뿌리는 데이터 셀렉 -->
-	<select id="selectPagedCodeList" resultMap="resultMapObj">
-	
-	    SELECT
-	    a.delNY,
-	    a.seq,
-	    a.name,
-	    a.regDatetime,
-	    a.modDatetime	    
-	    
-	    FROM CodeGroup a
-	    
-	    <if test="shDelNy != null and shDelNy != ''">
-	        AND a.delNY = #{shDelNy}
-	    </if>
-	    
-	    <choose>
-	    
-	        <when test="shOption == 1">
-	            AND a.seq = #{shValue}
-	        </when>
-	        
-	        <when test="shOption == 2">
-	            AND a.name LIKE CONCAT('%',#{shValue},'%')
-	        </when>
-	        
-	    </choose>
-	    LIMIT #{start}, #{pageSize}
-	</select>
+    <update id="updtDel">
+        update CodeGroup
+        set
+            delNY=1
+        where 1=1
+            and seq = #{seq}
+    </update>
 
-	
-	<!-- select 공통 구문 SQL -->
-	<sql id ="selectCommon">
-		FROM codeGroup a
+    <delete id="delete">
+        delete from CodeGroup
+        where seq=#{seq}
+    </delete>
 
-				and a.DelNy = 0
-		where 1=1
-		<!-- 추가, 사용여부 사용시 진행 필요 건 -->
-		<!-- <if test="shUseNy != null and !shUseNy.equals('')">AND ifcgUseNy = #{shUseNy}</if> -->
-		<if test="shDelNy != null and !shDelNy.equals('')">AND a.DelNy = #{shDelNy}</if>
-			  
-		<choose>
-			<when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-			<when test="shOptionDate == 2">AND a.modDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-		</choose>
-		
-		limit 99999999999
-		) aa
-		limit 5 offset 0
-			
-		<choose> 
-            <when test="shOption == 3">AND a.seq = #{shValue}</when>
-            <when test="shOption == 4">AND a.name LIKE CONCAT('%',#{shValue},'%')</when>
-   		</choose>
-	
-	</sql>
-	
-	 <!-- 페이지네이션 관련 base mapper 쿼리-->
-	<sql id="selectListUpperForMysql">
-		select aa.* from (
-	</sql>
-	
-	
-	<sql id="selectListLowerForMysql">	
-		) aa
-		limit #{rowNumToShow} offset #{startRnumForMysql}
-	</sql>
-	
-	
-    
+    <!-- 코드에서 코드 그룹 불러오기 -->
+    <select id="selectListWithoutPaging" resultMap="resultMapObj">
+        SELECT
+            a.seq
+            ,a.name
+        FROM codeGroup a
+        WHERE 1=1
+            AND delNy = 0
+        ORDER BY a.seq DESC
+    </select>
+
 </mapper>
