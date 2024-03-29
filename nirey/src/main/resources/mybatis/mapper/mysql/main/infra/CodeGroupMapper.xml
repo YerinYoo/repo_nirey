@@ -54,11 +54,11 @@
             and seq=#{seq} 
     </select>
 
-    <insert id="insert">
-        insert into CodeGroup (name, memo)
-        values (#{name}, #{memo}) 
+	<insert id="insert">
+        insert into CodeGroup (delNY, name, regDatetime, modDatetime)
+        values (#{delNY}, #{name}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) 
     </insert>
-
+    
     <update id="update">
         update codeGroup
         set

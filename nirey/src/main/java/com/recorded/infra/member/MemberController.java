@@ -1,40 +1,92 @@
 package com.recorded.infra.member;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.recorded.common.base.BaseController;
 import com.recorded.common.constants.Constants;
 import com.recorded.common.util.UtilDateTime;
 
+import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class MemberController {
+public class MemberController extends BaseController{
 	
 	@Autowired
 	 MemberService service;
 	
-	@RequestMapping(value="/MemberInsert")
-	public String MemberInsert(MemberDto dto) throws Exception {
+	@RequestMapping(value = "/loginAdm")
+	public String loginAdm(MemberDto dto) throws Exception {
 		
-		System.out.println(dto.toString());
-		
-		service.insert(dto);
-		
-		return "redirect:/Morders";
+		/* service.selectOne(dto); */
+
+		return "adm/infra/v1/loginAdm"; 
 	}
+
+
+	@PostMapping("/loginAdmPg")
+	@ResponseBody
+	public Map<String, Object> loginAdmPg(@ModelAttribute MemberDto dto, HttpSession httpSession) throws Exception {
+	    Map<String, Object> returnMap = new HashMap<>();
+
+	    // 입력된 아이디와 비밀번호를 서비스 레이어로 전달하여 인증 수행
+	    MemberDto authenticatedMember = service.authenticate(dto.getID(), dto.getPwd());
+	    System.out.println(authenticatedMember.getID());
+
+	    // 인증된 회원이 존재하고, 입력된 비밀번호가 암호화된 비밀번호와 일치하는지 확인
+	    if (authenticatedMember != null && matchesBcrypt(dto.getPwd(), authenticatedMember.getPwd(), 10)) {
+	        // 로그인 성공 시 세션에 회원 정보 저장
+	        httpSession.setAttribute("authenticatedMember", authenticatedMember);
+	        returnMap.put("rt", "success");
+	    } else {
+	        // 인증 실패 시 처리
+	        returnMap.put("rt", "fail");
+	    }
+
+	    return returnMap;
+	}
+
+
+    //관리자 회원가입
+	@RequestMapping(value="/signup")
+	public String signup() throws Exception {
+		
+		return "adm/infra/v1/signup";
+		
+	}
+
 	
-	@RequestMapping(value="/MemberUpdate")
-	public String MemberUpdate(MemberDto dto) throws Exception {
-		
-		System.out.println(dto.getName());
-		
-		service.update(dto);
-		
-		return "redirect:/Morders";
+	@PostMapping("/memberInsert")
+	public String MemberInsert(MemberDto dto) throws Exception {
+	    String originalPwd = dto.getPwd(); // 사용자가 입력한 비밀번호 저장
+
+	    // 사용자가 입력한 비밀번호를 암호화하여 DTO 객체에 설정
+	    dto.setPwd(encodeBcrypt(dto.getPwd(), 9));
+
+	    // 데이터베이스에 삽입하기 전에 암호화된 비밀번호를 확인하고 출력
+	    System.out.println("Encrypted Password: " + dto.getPwd());
+
+	    // 사용자가 입력한 비밀번호와 암호화된 비밀번호를 비교하여 출력
+	    if (matchesBcrypt(originalPwd, dto.getPwd(), 10)) {
+	        System.out.println("Password Matches!");
+	    } else {
+	        System.out.println("Password Does Not Match!");
+	    }
+
+	    // 나머지 로직은 그대로 유지
+	    System.out.println(dto.toString());
+	    service.insert(dto);
+	    return "redirect:/Morders";
 	}
+
 	
 	
 	@RequestMapping(value="/MemberUelete")
@@ -113,7 +165,7 @@ public class MemberController {
 //		vo.setShDateEnd(vo.getShDateEnd() == null || vo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(vo.getShDateEnd()));
 		
 		
-	}
+}
 
 	
 	

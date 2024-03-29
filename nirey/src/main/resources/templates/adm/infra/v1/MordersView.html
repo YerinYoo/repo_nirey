@@ -1,600 +1,426 @@
 <!doctype html>
 <html lang="en">
 
-	<head>
-		<!-- Required meta tags -->
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-		<!-- Meta -->
-		<meta name="description" content="Best Bootstrap Admin Dashboards">
-		<meta name="author" content="Bootstrap Gallery" />
-		<link rel="canonical" href="https://www.bootstrap.gallery/">
-		<meta property="og:url" content="https://www.bootstrap.gallery">
-		<meta property="og:title" content="Admin Templates - Dashboard Templates | Bootstrap Gallery">
-		<meta property="og:description" content="Marketplace for Bootstrap Admin Dashboards">
-		<meta property="og:type" content="Website">
-		<meta property="og:site_name" content="Bootstrap Gallery">
-		<link rel="shortcut icon" href="/adm/images/favicon.svg">
+    <!-- Meta -->
+    <meta name="description" content="Best Bootstrap Admin Dashboards">
+    <meta name="author" content="Bootstrap Gallery" />
+    <link rel="canonical" href="https://www.bootstrap.gallery/">
+    <meta property="og:url" content="https://www.bootstrap.gallery">
+    <meta property="og:title" content="Admin Templates - Dashboard Templates | Bootstrap Gallery">
+    <meta property="og:description" content="Marketplace for Bootstrap Admin Dashboards">
+    <meta property="og:type" content="Website">
+    <meta property="og:site_name" content="Bootstrap Gallery">
+    <link rel="shortcut icon" href="/adm/images/favicon.svg">
 
-		<!-- Title -->
-		<title>Member List</title>
+    <!-- Title -->
+    <title>Bootstrap Admin Dashboards</title>
+
+    <!-- *************
+        ************ Common Css Files *************
+    ************ -->
+
+    <!-- Animated css -->
+    <link rel="stylesheet" href="/adm/css/animate.css">
+
+    <!-- Bootstrap font icons css -->
+    <link rel="stylesheet" href="/adm/fonts/bootstrap/bootstrap-icons.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="/adm/css/main.min.css">
 
 
-		<!-- *************
-			************ Common Css Files *************
-		************ -->
-		<!-- Animated css -->
-		<link rel="stylesheet" href="/adm/css/animate.css">
+    <!-- *************
+        ************ Vendor Css Files *************
+    ************ -->
 
-		<!-- Bootstrap font icons css -->
-		<link rel="stylesheet" href="/adm/fonts/bootstrap/bootstrap-icons.css">
+    <!-- Scrollbar CSS -->
+    <link rel="stylesheet" href="/adm/vendor/overlay-scroll/OverlayScrollbars.min.css">
 
-		<!-- Main css -->
-		<link rel="stylesheet" href="/adm/css/main.min.css">
+    <!--  강사님 데이트 피커 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
 
 
-		<!-- *************
-			************ Vendor Css Files *************
-		************ -->
+</head>
 
-		<!-- Scrollbar CSS -->
-		<link rel="stylesheet" href="/adm/vendor/overlay-scroll/OverlayScrollbars.min.css">
+<body>
 
-		<!-- Data Tables -->
-		<link rel="stylesheet" href="/adm/vendor/datatables/dataTables.bs5.css" />
-		<link rel="stylesheet" href="/adm/vendor/datatables/dataTables.bs5-custom.css" />
+    <!-- Page wrapper start -->
+    <div class="page-wrapper">
 
-	</head>
+        <div th:replace="~{/adm/infra/v1/include/SideBar :: SideBar}"></div>
 
-	<body>
+        <!-- Main container start -->
+        <div class="main-container">
 
-		<!-- Loading wrapper start -->
-		<!-- <div id="loading-wrapper">
-			<div class="spinner">
-                <div class="line1"></div>
-				<div class="line2"></div>
-				<div class="line3"></div>
-				<div class="line4"></div>
-				<div class="line5"></div>
-				<div class="line6"></div>
+            <!-- Page header starts -->
+            <div class="page-header">
+
+                <div class="toggle-sidebar" id="toggle-sidebar"><i class="bi bi-list"></i></div>
+
+                <!-- Breadcrumb start -->
+                <ol class="breadcrumb d-md-flex d-none">
+                    <li class="breadcrumb-item">
+                        <i class="bi bi-house"></i>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li class="breadcrumb-item">Product</li>
+                    <li class="breadcrumb-item breadcrumb-active" aria-current="page">Add Product</li>
+                </ol>
+                <!-- Breadcrumb end -->
+
+                <!-- Header actions ccontainer start -->
+                <div class="header-actions-container">
+
+                    <!-- Search container start -->
+                    <div class="search-container">
+
+                        <!-- Search input group start -->
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search anything">
+                            <button class="btn" type="button">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                        <!-- Search input group end -->
+
+                    </div>
+                    <!-- Search container end -->
+
+                    <!-- Leads start -->
+                    <a href="orders.html" class="leads d-none d-xl-flex">
+                        <div class="lead-details">You have <span class="count"> 21 </span> new leads </div>
+                        <span class="lead-icon"><i
+                                class="bi bi-bell-fill animate__animated animate__swing animate__infinite infinite"></i><b
+                                class="dot animate__animated animate__heartBeat animate__infinite"></b></span>
+                    </a>
+                    <!-- Leads end -->
+
+                    <!-- Header actions start -->
+                    <ul class="header-actions">
+                        <li class="dropdown d-none d-md-block">
+                            <a href="#" id="countries" data-toggle="dropdown" aria-haspopup="true">
+                                <img src="/adm/images/flags/1x1/br.svg" class="flag-img" alt="Admin Panels" />
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end mini" aria-labelledby="countries">
+                                <div class="country-container">
+                                    <a href="index.html">
+                                        <img src="/adm/images/flags/1x1/us.svg" alt="Clean Admin Dashboards" />
+                                    </a>
+                                    <a href="index.html">
+                                        <img src="/adm/images/flags/1x1/in.svg" alt="Google Dashboards" />
+                                    </a>
+                                    <a href="index.html">
+                                        <img src="/adm/images/flags/1x1/gb.svg" alt="AI Admin Dashboards" />
+                                    </a>
+                                    <a href="index.html">
+                                        <img src="/adm/images/flags/1x1/tr.svg" alt="Modern Dashboards" />
+                                    </a>
+                                    <a href="index.html">
+                                        <img src="/adm/images/flags/1x1/ca.svg" alt="Best Admin Dashboards" />
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" id="userSettings" class="user-settings" data-toggle="dropdown"
+                                aria-haspopup="true">
+                                <span class="user-name d-none d-md-block">Abigale Heaney</span>
+                                <span class="avatar">
+                                    <img src="/adm/images/user.png" alt="Admin Templates">
+                                    <span class="status online"></span>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userSettings">
+                                <div class="header-profile-actions">
+                                    <a href="profile.html">Profile</a>
+                                    <a href="account-settings.html">Settings</a>
+                                    <a href="login.html">Logout</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <!-- Header actions end -->
+
+                </div>
+                <!-- Header actions ccontainer end -->
+
             </div>
-		</div> -->
-		<!-- Loading wrapper end -->
+            <!-- Page header ends -->
 
-		<!-- Page wrapper start -->
-		<div class="page-wrapper">
+            <!-- Content wrapper scroll start -->
+            <div class="content-wrapper-scroll">
 
-			<!-- Sidebar wrapper start -->
-			<nav class="sidebar-wrapper">
+                <div class="header" style="padding-left: 1%; padding-bottom: 3%">
+                    <h4>View Member</h4>
+                </div>
 
-				<!-- Sidebar brand starts -->
-				<div class="sidebar-brand">
-					<a href="index.html" class="logo">
-						<img src="/adm/images/logo.png" alt="Admin Dashboards"/>
-					</a>
-				</div>
-				<!-- Sidebar brand starts -->
-
-				<!-- Sidebar menu starts -->
-				<div class="sidebar-menu">
-					<div class="sidebarMenuScroll">
-						<ul>
-							<li class="sidebar-dropdown">
-								<a href="#">
-									<i class="bi bi-house"></i>
-									<span class="menu-text">Dashboards</span>
-								</a>
-								<div class="sidebar-submenu">
-									<ul>
-										<li>
-											<a href="index.html">Analytics</a>
-										</li>
-										<li>
-											<a href="reports.html">Reports</a>
-										</li>
-									</ul>
-								</div>
-							</li>
-							<li class="sidebar-dropdown">
-								<a href="#">
-									<i class="bi bi-handbag"></i>
-									<span class="menu-text">Product</span>
-								</a>
-								<div class="sidebar-submenu">
-									<ul>
-										<li>
-											<a href="orders.html">Order History</a>
-										</li>
-										<li>
-											<a href="products.html">Products</a>
-										</li>
-										<li>
-											<a href="view-cart.html">Shopping Cart</a>
-										</li>
-										<li>
-											<a href="checkout.html">Billing Details</a>
-										</li>
-										<li>
-											<a href="customers.html">Customers</a>
-										</li>
-										<li>
-											<a href="add-product.html">Add Product</a>
-										</li>
-										<li>
-											<a href="reviews.html">Reviews</a>
-										</li>
-									</ul>
-								</div>
-							</li>
-							<li class="sidebar-dropdown">
-								<a href="#">
-									<i class="bi bi-gem"></i>
-									<span class="menu-text">Widgets</span>
-								</a>
-								<div class="sidebar-submenu">
-									<ul>
-										<li>
-											<a href="widgets.html">Widgets</a>
-										</li>
-										<li>
-											<a href="graph-widgets.html">Graph Widgets</a>
-										</li>
-									</ul>
-								</div>
-							</li>
-							<li class="sidebar-dropdown">
-								<a href="#">
-									<i class="bi bi-collection"></i>
-									<span class="menu-text">UI Elements</span>
-								</a>
-								<div class="sidebar-submenu">
-									<ul>
-										<li>
-											<a href="accordions.html">Accordions</a>
-										</li>
-										<li>
-											<a href="alerts.html">Alerts</a>
-										</li>
-										<li>
-											<a href="buttons.html">Buttons</a>
-										</li>
-										<li>
-											<a href="badges.html">Badges</a>
-										</li>
-										<li>
-											<a href="cards.html">Cards</a>
-										</li>
-										<li>
-											<a href="carousel.html">Carousel</a>
-										</li>
-										<li>
-											<a href="dropdowns.html">Dropdowns</a>
-										</li>
-										<li>
-											<a href="icons.html">Icons</a>
-										</li>
-										<li>
-											<a href="modals.html">Modals</a>
-										</li>
-										<li>
-											<a href="offcanvas.html">Off Canvas</a>
-										</li>
-										<li>
-											<a href="progress.html">Progress Bars</a>
-										</li>
-										<li>
-											<a href="spinners.html">Spinners</a>
-										</li>
-										<li>
-											<a href="tabs.html">Tabs</a>
-										</li>
-										<li>
-											<a href="tooltips.html">Tooltips</a>
-										</li>
-										<li>
-											<a href="typography.html">Typography</a>
-										</li>
-									</ul>
-								</div>
-							</li>
-							<li class="sidebar-dropdown">
-								<a href="#">
-									<i class="bi bi-stickies"></i>
-									<span class="menu-text">Pages</span>
-								</a>
-								<div class="sidebar-submenu">
-									<ul>
-										<li>
-											<a href="profile.html">Profile</a>
-										</li>
-										<li>
-											<a href="account-settings.html">Account Settings</a>
-										</li>
-									</ul>
-								</div>
-							</li>
-							<li>
-								<a href="calendar.html">
-									<i class="bi bi-calendar4"></i>
-									<span class="menu-text">Calendar</span>
-								</a>
-							</li>
-							<li class="sidebar-dropdown">
-								<a href="#">
-									<i class="bi bi-columns-gap"></i>
-									<span class="menu-text">Forms</span>
-								</a>
-								<div class="sidebar-submenu">
-									<ul>
-										<li>
-											<a href="form-inputs.html">Form Inputs</a>
-										</li>
-										<li>
-											<a href="form-checkbox-radio.html">Checkbox &amp; Radio</a>
-										</li>
-										<li>
-											<a href="form-file-input.html">File Input</a>
-										</li>
-										<li>
-											<a href="form-validations.html">Validations</a>
-										</li>
-										<li>
-											<a href="bs-select.html">Bootstrap Select</a>
-										</li>
-										<li>
-											<a href="date-time-pickers.html">Date Time Pickers</a>
-										</li>
-										<li>
-											<a href="input-mask.html">Input Masks</a>
-										</li>
-										<li>
-											<a href="editor.html">Editor</a>
-										</li>
-										<li>
-											<a href="form-layout1.html">Form Layout</a>
-										</li>
-										<li>
-											<a href="form-layout2.html">Form Layout 2</a>
-										</li>
-										<li>
-											<a href="form-layout3.html">Form Layout 3</a>
-										</li>
-										<li>
-											<a href="form-layout4.html">Form Horizontal</a>
-										</li>
-										<li>
-											<a href="form-layout5.html">Form Layout Tabs</a>
-										</li>
-									</ul>
-								</div>
-							</li>
-							<li class="sidebar-dropdown active">
-								<a href="#">
-									<i class="bi bi-window-split"></i>
-									<span class="menu-text">Tables</span>
-								</a>
-								<div class="sidebar-submenu">
-									<ul>
-										<li>
-											<a href="tables.html">Tables</a>
-										</li>
-										<li>
-											<a href="data-tables_00.html" class="current-page">Data Tables</a>
-										</li>
-									</ul>
-								</div>
-							</li>
-							<li class="sidebar-dropdown">
-								<a href="#">
-									<i class="bi bi-pie-chart"></i>
-									<span class="menu-text">Graphs &amp; Maps</span>
-								</a>
-								<div class="sidebar-submenu">
-									<ul>
-										<li>
-											<a href="apex.html">Apex</a>
-										</li>
-										<li>
-											<a href="morris.html">Morris</a>
-										</li>
-										<li>
-											<a href="maps.html">Maps</a>
-										</li>
-									</ul>
-								</div>
-							</li>
-							<li class="sidebar-dropdown">
-								<a href="#">
-									<i class="bi bi-layout-sidebar"></i>
-									<span class="menu-text">Layouts</span>
-								</a>
-								<div class="sidebar-submenu">
-									<ul>
-										<li>
-											<a href="layout.html">Default Layout</a>
-										</li>
-										<li>
-											<a href="layout-grid.html">Grid Layout</a>
-										</li>
-										<li>
-											<a href="layout-welcome.html">Welcome Layout</a>
-										</li>
-									</ul>
-								</div>
-							</li>
-							<li class="sidebar-dropdown">
-								<a href="#">
-									<i class="bi bi-x-diamond"></i>
-									<span class="menu-text">Authentication</span>
-								</a>
-								<div class="sidebar-submenu">
-									<ul>
-										<li>
-											<a href="login.html">Login</a>
-										</li>
-										<li>
-											<a href="signup.html">Signup</a>
-										</li>
-										<li>
-											<a href="error.html">Error</a>
-										</li>
-										<li>
-											<a href="maintenance.html">Maintenance</a>
-										</li>
-									</ul>
-								</div>
-							</li>
-							<li>
-								<a href="starter-page.html">
-									<i class="bi bi-hand-index-thumb"></i>
-									<span class="menu-text">Link</span>
-								</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<!-- Sidebar menu ends -->
-
-			</nav>
-			<!-- Sidebar wrapper end -->
-
-			<!-- *************
-				************ Main container start *************
-			************* -->
-			<div class="main-container">
-
-				<!-- Page header starts -->
-				<div class="page-header">
-
-					<div class="toggle-sidebar" id="toggle-sidebar"><i class="bi bi-list"></i></div>
-
-					<!-- Breadcrumb start -->
-					<ol class="breadcrumb d-md-flex d-none">
-						<li class="breadcrumb-item">
-							<i class="bi bi-house"></i>
-							<a href="index.html">Home</a>
-						</li>
-						<li class="breadcrumb-item">UI Elements</li>
-						<li class="breadcrumb-item breadcrumb-active" aria-current="page">Accordions</li>
-					</ol>
-					<!-- Breadcrumb end -->
-
-					<!-- Header actions ccontainer start -->
-					<div class="header-actions-container">
-
-						<!-- Search container start -->
-						<div class="search-container">
-
-							<!-- Search input group start -->
-							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Search anything">
-								<button class="btn" type="button">
-									<i class="bi bi-search"></i>
-								</button>
-							</div>
-							<!-- Search input group end -->
-
+                <!-- Content wrapper start -->
+                <div class="content-wrapper">
+                     <form name="formInsert" id="formInsert" method="post" action="MemberUpdate"> 
+				    <!-- Row start -->
+				    <div class="row">
+				        <div class="col-xl-4 col-sm-6 col-12">
+						    <div class="card">
+						        <div class="card-body">
+						            <label for="quitNY" class="form-label">QuitNY<span class="text-danger fs-0">*</span></label>
+						            <select class="form-select" id="quitNY" name="quitNY">
+						                <option value="" th:selected="${item.quitNY eq null}">Choose...</option>
+						                <option value="1" th:selected="${item.quitNY == 0}">N</option>
+						                <option value="2" th:selected="${item.quitNY == 1}">Y</option>
+						            </select>
+						            <div class="invalid-feedback" id="quitNYFeedback"></div>
+						        </div>
+						    </div>
 						</div>
-						<!-- Search container end -->
-
-						<!-- Leads start -->
-						<a href="orders.html" class="leads d-none d-xl-flex">
-							<div class="lead-details">You have <span class="count"> 21 </span> new leads </div>
-							<span class="lead-icon"><i
-									class="bi bi-bell-fill animate__animated animate__swing animate__infinite infinite"></i><b
-									class="dot animate__animated animate__heartBeat animate__infinite"></b></span>
-						</a>
-						<!-- Leads end -->
-
-						<!-- Header actions start -->
-						<ul class="header-actions">
-							<li class="dropdown d-none d-md-block">
-								<a href="#" id="countries" data-toggle="dropdown" aria-haspopup="true">
-									<img src="/adm/images/flags/1x1/br.svg" class="flag-img" alt="Admin Panels" />
-								</a>
-								<div class="dropdown-menu dropdown-menu-end mini" aria-labelledby="countries">
-									<div class="country-container">
-										<a href="index.html">
-											<img src="/adm/images/flags/1x1/us.svg" alt="Clean Admin Dashboards" />
-										</a>
-										<a href="index.html">
-											<img src="/adm/images/flags/1x1/in.svg" alt="Google Dashboards" />
-										</a>
-										<a href="index.html">
-											<img src="/adm/images/flags/1x1/gb.svg" alt="AI Admin Dashboards" />
-										</a>
-										<a href="index.html">
-											<img src="/adm/images/flags/1x1/tr.svg" alt="Modern Dashboards" />
-										</a>
-										<a href="index.html">
-											<img src="/adm/images/flags/1x1/ca.svg" alt="Best Admin Dashboards" />
-										</a>
-									</div>
-								</div>
-							</li>
-							<li class="dropdown">
-								<a href="#" id="userSettings" class="user-settings" data-toggle="dropdown" aria-haspopup="true">
-									<span class="user-name d-none d-md-block">Abigale Heaney</span>
-									<span class="avatar">
-										<img src="/adm/images/user.png" alt="Admin Templates">
-										<span class="status online"></span>
-									</span>
-								</a>
-								<div class="dropdown-menu dropdown-menu-end" aria-labelledby="userSettings">
-									<div class="header-profile-actions">
-										<a href="profile.html">Profile</a>
-										<a href="account-settings.html">Settings</a>
-										<a href="login.html">Logout</a>
-									</div>
-								</div>
-							</li>
-						</ul>
-						<!-- Header actions end -->
-
-					</div>
-					<!-- Header actions ccontainer end -->
-
-				</div>
-				<!-- Page header ends -->
-
-				<!-- Content wrapper scroll start -->
-				<div class="content-wrapper-scroll">
-
-					<!-- Content wrapper start -->
-					<div class="content-wrapper">
-
-						<!-- Row start -->
-						<div class="row">
-							<div class="col-sm-12 col-12">
-
-								<!-- Card start -->
-								<div class="card">
-									<div class="card-body">
-									
-						<div class="row">
-							<div class="col-sm-12 col-12">
-								<div class="card" style="background-color : snow">
-									<div class="card-header">
-										<div class="card-title mb-4">코드 관리</div>
-									</div>
-									</div>
-									<div class="card-body">
-									
-									<table style="width : 30%">
-									<tr>
-									<td>seq :</td>
-									<td  th:text=" ${item.memberSeq}"></td>
-									</tr>
-									<tr>
-									<td>name :</td>
-									<td  th:text="${item.name}"></td>
-									</tr>
-
-									</table>
-									
-									<div class="row mt-5">
-										<div class="col-9">
-										<a  th:href="@{/Corders}" >
-										<button type="button" class="btn btn-dark" th:text="이동"></button>
-										</a>
-										</div>
-										<div class="col-1 ">
-										<a  th:href="@{/CordersForm(seq=${item.memberSeq})}">
-										<button type="button" class="btn btn-success">Edit</button>
-										</a>
-										</div>
-										
-										<!-- 
-										<a th:href="@{/Corders}" th:text="이동"></a>
-										<a th:href="@{/CordersForm(seq=${item.memberSeq})}"  th:text="수정"></a>
-										 -->
-											<div class="col-1">
-											<form method="post" action="codeUelete"> 
-												<input type="hidden" name="memberSeq" th:value="${item.memberSeq}">
-												<input type="hidden" name="name" th:value="${item.name}">
-												<input type="hidden" name="quitNY" th:value="${item.quitNY}">
+				
+				        <div class="col-xl-4 col-sm-6 col-12">
+				            <div class="card">
+				                <div class="card-body">
+				                     <label for="dormantNY" class="form-label">DormantNY<span class="text-danger fs-0">*</span></label>
+						            <select class="form-select" id="dormantNY" name="dormantNY">
+						                <option value="" th:selected="${item.dormantNY eq null}">Choose...</option>
+						                <option value="1" th:selected="${item.dormantNY== 0}">N</option>
+						                <option value="2" th:selected="${item.dormantNY == 1}">Y</option>
+						            </select>
+						            <div class="invalid-feedback" id="dormantNYFeedback"></div>
+				                </div>
+				            </div>
+				        </div>
+				
+				        <div class="col-xl-4 col-sm-6 col-12">
+				            <div class="card">
+				                <div class="card-body">
+				                    <label for="memberName" class="form-label">Name <span class="text-danger fs-0">*</span></label>
+				                    <input type="text" id="name" name="name" maxlength="20" class="form-control"  th:value="${item.name}">
+				                    <div class="invalid-feedback" id="nameFeedback"></div>
+				                </div>
+				            </div>
+				        </div>
+				
+				    </div>
+				
+				    <div class="row">
+				        <div class="col-xl-4 col-sm-6 col-12">
+				            <div class="card">
+				                <div class="card-body">
+				                    <div>
+				                        <label for="memberID" class="form-label">ID<span class="text-danger fs-0">*</span></label>
+				                        <input type="text" id="ID" name="ID"  class="form-control"  th:value="${item.ID}">
+				                        <div class="invalid-feedback" id="IDFeedback"></div>
+				                    </div>
+				                </div>
+				            </div>
+				        </div>
+				
+				        <div class="col-xl-4 col-sm-6 col-12">
+				            <div class="card">
+				                <div class="card-body">
+				                    <div>
+				                        <label for="pwd" class="form-label">Password</label>
+				                        <input type="password" class="form-control" id="pwd" name="pwd" th:value="${item.pwd}">
+				                        <div class="invalid-feedback" id="pwdFeedback"></div>
+				                    </div>
+				                </div>
+				            </div>
+				        </div>
+				
+				        <div class="col-xl-4 col-sm-6 col-12">
+				            <div class="card">
+				                <div class="card-body">
+				                    <div>
+				                        <label for="confirmPwd" class="form-label">Confirm Password</label>
+				                        <input type="password" class="form-control" id="confirmPwd" name="confirmPwd" th:value="${item.pwd}">
+				                        <div class="invalid-feedback" id="confirmPwdFeedback"></div>
+				                    </div>
+				                </div>
+				            </div>
+				        </div>
+				    </div>
+				
+				    <div class="row">
+				        <div class="col-xl-4 col-sm-6 col-12">
+				            <div class="card">
+				                <div class="card-body">
+				                    <div>
+				                        <label for="email" class="form-label">Email</label>
+				                        <input type="text" class="form-control" id="email" name="email" th:value="${item.email}">
+				                        <div class="invalid-feedback" id="emailFeedback"></div>
+				                    </div>
+				                </div>
+				            </div>
+				        </div>
+						
+						<div class="col-xl-4 col-sm-6 col-12">
+						    <div class="card">
+						        <div class="card-body">
+						            <label for="genderCD" class="form-label">Gender<span class="text-danger fs-0">*</span></label>
+						            <select class="form-select" id="genderCD" name="genderCD">
+						                <option value="" th:selected="${item.genderCD eq null}">Choose...</option>
+						                <option value="1" th:selected="${item.genderCD == 1}">Male</option>
+						                <option value="2" th:selected="${item.genderCD == 2}">Female</option>
+						                <option value="3" th:selected="${item.genderCD == 3}">Etc.</option>
+						            </select>
+						            <div class="invalid-feedback" id="genderCDFeedback"></div>
+						        </div>
+						    </div>
+						</div>
+				
+				
+				
+				    <div class="row">
+				        <div class="col-xl-4 col-sm-6 col-12">
+				            <div class="card">
+				                <div class="card-body">
+				                    <div>
+				                        <label for="MobileNum" class="form-label">Mobile</label>
+				                        <input type="text" class="form-control" id="MobileNum" name="MobileNum" th:value="${item.MobileNum}">
+				                        <div class="invalid-feedback" id="MobileNumFeedback"></div>
+				                    </div>
+				                </div>
+				            </div>
+				        </div>
+				
+				        <div class="col-xl-4 col-sm-6 col-12">
+				            <div class="card">
+				                <div class="card-body">
+				                    <div>
+				                        <label for="birthday" class="form-label">Birthday</label>
+				                        <input type="text" id="birthday" name="birthday" class="form-control form-control-sm"
+				                            autocomplete="off" th:value="${item.birthday}">
+				                        <div class="invalid-feedback" id="birthdayFeedback"></div>
+				                    </div>
+				                </div>
+				            </div>
+				        </div>
+				    </div>
+				
+				    <!-- Form actions footer start -->
+				    <div class="form-actions-footer">
+				        <a th:href="@{/Morders}">
+				            <button class="btn btn-light">Cancel</button>
+				        </a>
+				
+				        <button class="btn btn-success" type="submit" th:href="@{/Morders}" id="btnUpdate">Edit</button>
+				    </div>
+				    <!-- Form actions footer end -->
+				</form> 
+                    <form method="post" action="MemberUelete"> 
+						<input type="hidden" name="ID" th:value="${item.ID}">
+						<input type="hidden" name="name" th:value="${item.name}">
+						<input type="hidden" name="quitNY" th:value="${item.quitNY}">
 												
-												<button type="submit" class="btn btn-warning"th:href="@{/Corders}" th:text="Uelete"></button>
+						<button type="submit" class="btn btn-warning"th:href="@{/Morders}" th:text="Uelete"></button>
 											
-											</form>
-											</div>
-									
-										<div class="col-1 ">
-										
-											<form method="post" action="codeDelete"> 
-											<input type="hidden" name="seq" th:value="${item.memberSeq}">
-											<input type="hidden" name="name" th:value="${item.name}">
+					</form>
+					
+					<form method="post" action="codeGroupDelete"> 
+						<input type="hidden" name="seq" th:value="${item.seq}">
+						<input type="hidden" name="name" th:value="${item.name}">
 											
-											<button type="submit" class="btn btn-danger" th:href="@{/orders}" th:text="Delete"></button>
+						<button type="submit" class="btn btn-danger" th:href="@{/orders}" th:text="Delete"></button>
 											
-											</form>
-										</div>
-									
-									</div>
-	
-									</div>
+					</form>
+                </div>
+                <!-- Content wrapper end -->
 
+                <!-- App Footer start -->
+                <div class="app-footer">
+                    <span>© Arise admin 2023</span>
+                </div>
+                <!-- App footer end -->
 
+            </div>
+            <!-- Content wrapper scroll end -->
 
+        </div>
+        <!-- *************
+            ************ Main container end *************
+        ************* -->
 
+    </div>
+    <!-- Page wrapper end -->
 
-										</div>
-									</div>
-								</div>
-								<!-- Card end -->
+    <!-- *************
+        ************ Required JavaScript Files *************
+    ************* -->
+    <!-- Required jQuery first, then Bootstrap Bundle JS -->
+    <script src="/adm/js/jquery.min.js"></script>
+    <script src="/adm/js/bootstrap.bundle.min.js"></script>
+    <script src="/adm/js/modernizr.js"></script>
+    <script src="/adm/js/moment.js"></script>
+    <!--  Validation JS -->
+    <script src="/adm/js/validationXdm.js"></script>
 
-							</div>
-						</div>
-						<!-- Row end -->
+    <!-- *************
+        ************ Vendor Js Files *************
+    ************* -->
 
-					</div>
-					<!-- Content wrapper end -->
+    <!-- Overlay Scroll JS -->
+    <script src="/adm/vendor/overlay-scroll/jquery.overlayScrollbars.min.js"></script>
+    <script src="/adm/vendor/overlay-scroll/custom-scrollbar.js"></script>
 
-					<!-- App Footer start -->
-					<div class="app-footer">
-						<span>© Arise admin 2023</span>
-					</div>
-					<!-- App footer end -->
+    <!-- Main Js Required -->
+    <script src="/adm/js/main.js"></script>
+    
+    <script type="text/javascript">
 
-				</div>
-				<!-- Content wrapper scroll end -->
+        $(function () {
+            // Edit 버튼 클릭 이벤트
+            $("#btnUpdate").click(function () {
+                if (validationUpdt() == false) {
+                    return false;
+                } else {
+                    $("#formUpdate").attr("action", goUrlXdmInstForm);
+                    $("#formUpdate").submit();
+                }
+            });
+        });
+    </script>
 
-			</div>
-			<!-- *************
-				************ Main container end *************
-			************* -->
+    <!-- 강사님 데이터 피커 -->
+    <!--데이터피커 자바스크립트 구문-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js">
+    </script>
+      <script type="text/javascript">
+        $(function () {
+            // 데이터 피커 초기화
+            $("#birthday").datetimepicker({
+                format: "Y-m-d",
+                timepicker: false,
+            });
 
-		</div>
-		<!-- Page wrapper end -->
+            // 등록 버튼 클릭 이벤트
+            $("#btnInsert").click(function () {
+                if (validationInst() == false) {
+                    return false;
+                } else {
+                    $("#formInsert").attr("action", goUrlXdmInstForm);
+                    $("#formInsert").submit();
+                }
+            });
+        });
 
-		<!-- *************
-			************ Required JavaScript Files *************
-		************* -->
-		<!-- Required jQuery first, then Bootstrap Bundle JS -->
-		<script src="/adm/js/jquery.min.js"></script>
-		<script src="/adm/js/bootstrap.bundle.min.js"></script>
-		<script src="/adm/js/modernizr.js"></script>
-		<script src="/adm/js/moment.js"></script>
+        // 전체 유효성 검사 함수
+        function validationInst() {
+            // 각 요소의 유효성 검사를 수행하고, 하나라도 실패하면 false를 반환합니다.
+            if (!checkSelectNull('quitNY', 2, "회원의 탈퇴 여부를 선택해 주세요.")) return false;
+            if (!checkSelectNull('dormantNY', 2, "휴면 계정 여부를 선택해 주세요.")) return false;
+            if (!checkOnlyKoreanEnglishNumber('name', 2, 0, "이름은 한글, 영어로만 입력 가능합니다.")) return false;
+            if (!checkOnlyEnglishNumber('ID', 2, 1, "ID는 영대소문자, 숫자만 입력 가능합니다.")) return false;
+            if (!checkOnlyEnglishNumber('pwd', 2, 0, "제품 이름은 영문대소문자, 숫자만 입력 가능합니다.")) return false;
+            if (!checkOnlyEnglishNumber('email', 2, 1, "이메일은 영대소문자, 숫자만 입력 가능합니다.")) return false;
+            if (!checkSelectNull('genderCD', 2, "성별을 선택해 주세요.")) return false;
+            if (!checkOnlyNumber('MobileNum', 2, 0, 1, 0, 255, "순서는 숫자(0~255)만 입력 가능합니다.")) return false;
+            return true; // 모든 유효성 검사를 통과하면 true 반환
+        }
+    </script>
 
-		<!-- *************
-			************ Vendor Js Files *************
-		************* -->
-
-		<!-- Overlay Scroll JS -->
-		<script src="/adm/vendor/overlay-scroll/jquery.overlayScrollbars.min.js"></script>
-		<script src="/adm/vendor/overlay-scroll/custom-scrollbar.js"></script>
-
-		<!-- Data Tables -->
-		<script src="/adm/vendor/datatables/dataTables.min.js"></script>
-		<script src="/adm/vendor/datatables/dataTables.bootstrap.min.js"></script>
-
-		<!-- Custom Data tables -->
-		<script src="/adm/vendor/datatables/custom/custom-datatables.js"></script>
-
-		<!-- Main Js Required -->
-		<script src="/adm/js/main.js"></script>
-
-	</body>
+</body>
 
 </html>

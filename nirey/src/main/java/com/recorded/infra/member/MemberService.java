@@ -49,6 +49,15 @@ public class MemberService {
     public int getTotalMemberCount(MemberVo vo) {
     	return dao.getTotalMemberCount(vo);
     }
-	
+    
+    // 사용자 인증을 수행하는 메서드
+    public MemberDto authenticate(String ID, String pwd) {
+        MemberDto member = dao.selectOneById(ID);
 
+        if (member != null && member.getPwd().equals(pwd)) {
+            return member;
+        } else {
+            return null;
+        }
+    }
 }

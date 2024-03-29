@@ -1,5 +1,7 @@
 package com.recorded.infra.member;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MemberDto {
@@ -19,6 +21,9 @@ public class MemberDto {
 
 	
 	
+	
+
+
 	public String getName() {
 		return name;
 	}
@@ -68,12 +73,20 @@ public class MemberDto {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Date getBirthday() {
-		return birthday;
-	}
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            this.birthday = dateFormat.parse(birthday);
+        } catch (ParseException e) {
+            System.err.println("Failed to parse birthday: " + birthday);
+            e.printStackTrace();
+        }
+    }
+
 	public String getMobileNum() {
 		return MobileNum;
 	}

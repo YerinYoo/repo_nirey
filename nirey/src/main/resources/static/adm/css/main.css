@@ -14269,7 +14269,7 @@ ul.recent-orders li .order-details p.order-revenue span {
   padding: 15px;
   margin: 0;
   display: flex;
-  justify-content: end;
+/*   justify-content: end; */
 }
 .form-actions-footer .btn {
   margin: 0 0 0 10px;

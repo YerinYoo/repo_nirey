@@ -43,21 +43,8 @@
     
     		select
     		
-    		a.quitNY
-    		, a.memberSeq
-    		, a.name
-    		, a.modDateTime
-    		
-    		from member  a
-    		
-    		where 1=1
-    			and a.memberSeq=#{memberSeq} 
-    			
-    </select>
-    
-	  <insert id="insert">
-			insert into code (
-				 a.name
+				a.memberSeq
+				, a.name
 				, a.quitNY
 				, a.dormantNY
 				, a.ID
@@ -66,23 +53,49 @@
 			    , a.email
 			    , a.birthday
 			    , a. MobileNum
+			    , a. joinDate
+			    , a.modDateTime
+    		
+    		from member  a
+    		
+    		where 1=1
+    			and a.memberSeq=#{memberSeq} 
+    			
+    </select>
+    
+<insert id="insert">
+    insert into member (
+        name
+        , quitNY
+        , dormantNY
+        , ID
+        , pwd
+        , genderCD
+        , email
+        , birthday
+        , MobileNum
+        , joinDate
+        ,modDateTime
+    ) values (
+        #{name}
+        , #{quitNY}
+        , #{dormantNY}
+        , #{ID}
+        , #{pwd}
+        , #{genderCD}
+        , #{email}
+        , #{birthday}
+        , #{MobileNum}
+        , NOW()  <!-- MySQL에서 현재 시간을 가져오는 함수 -->
+        , NOW()
+    )
+</insert>
 
-			) values (
-			#{name}
-			, #{quitNY}
-			,#{dormantNY}
-			,#{ID}
-			,#{pwd}
-			,#{genderCD}
-			,#{email}
-			,#{birthday}
-			,#{MobileNum}
-			
-	  </insert>
+
 	  
 	   
     <update id="update">
-   	update code
+   	update member
    	set
    		name = #{name}
    	WHERE 1=1
@@ -91,7 +104,7 @@
   	</update>
   	
   	<update id="uelete">
-  			update code
+  			update member
   			set
   			quitNY=1
   			where 1=1
@@ -101,8 +114,9 @@
   	
   	<delete id="delete">
   	
-  	delete from code
-  	where memberSeq=#{memberSeq}
+  	delete from member
+  	where 1=1 
+  	and memberSeq=#{memberSeq}
   	</delete>
 	  
 	  <!-- 페이징 -->
@@ -179,10 +193,6 @@
 			<when test="shOptionDate == 1">AND a.joinDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
 			<when test="shOptionDate == 2">AND a.modDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
 		</choose>
-		
-		limit 99999999999
-		) aa
-		limit 5 offset 0
 			
 		<choose> 
             <when test="shOption == 3">AND a.memberSeq = #{shValue}</when>
@@ -202,4 +212,25 @@
 		limit #{rowNumToShow} offset #{startRnumForMysql}
 	</sql>
 	
+	<!-- 로그인 관련 매퍼 쿼리 -->
+<select id="selectOneById" resultMap="resultMapObj">
+    SELECT
+        memberSeq,
+        name,
+        quitNY,
+        dormantNY,
+        ID,
+        pwd,
+        genderCD,
+        email,
+        birthday,
+        MobileNum,
+        joinDate,
+        modDateTime
+    FROM
+        member
+    WHERE
+        ID = #{ID}
+</select>
+
 </mapper>

@@ -1,128 +1,164 @@
 <!doctype html>
 <html lang="en">
 
-	<head>
-		<!-- Required meta tags -->
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-		<!-- Meta -->
-		<meta name="description" content="Best Bootstrap Admin Dashboards">
-		<meta name="author" content="Bootstrap Gallery" />
-		<link rel="canonical" href="https://www.bootstrap.gallery/">
-		<meta property="og:url" content="https://www.bootstrap.gallery">
-		<meta property="og:title" content="Admin Templates - Dashboard Templates | Bootstrap Gallery">
-		<meta property="og:description" content="Marketplace for Bootstrap Admin Dashboards">
-		<meta property="og:type" content="Website">
-		<meta property="og:site_name" content="Bootstrap Gallery">
-		<link rel="shortcut icon" href="/adm/images/favicon.svg">
+    <!-- Meta -->
+    <meta name="description" content="Best Bootstrap Admin Dashboards">
+    <meta name="author" content="Bootstrap Gallery" />
+    <link rel="canonical" href="https://www.bootstrap.gallery/">
+    <meta property="og:url" content="https://www.bootstrap.gallery">
+    <meta property="og:title" content="Admin Templates - Dashboard Templates | Bootstrap Gallery">
+    <meta property="og:description" content="Marketplace for Bootstrap Admin Dashboards">
+    <meta property="og:type" content="Website">
+    <meta property="og:site_name" content="Bootstrap Gallery">
+    <link rel="shortcut icon" href="/adm/images/favicon.svg">
 
-		<!-- Title -->
-		<title>로그인</title>
+    <!-- Title -->
+    <title>LogIn</title>
+
+    <!-- *************
+        ************ Common Css Files *************
+    ************ -->
+
+    <!-- Animated css -->
+    <link rel="stylesheet" href="/adm/css/animate.css">
+
+    <!-- Bootstrap font icons css -->
+    <link rel="stylesheet" href="/adm/fonts/bootstrap/bootstrap-icons.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="/adm/css/main.min.css">
 
 
-		<!-- *************
-			************ Common Css Files *************
-		************ -->
+</head>
 
-		<!-- Animated css -->
-		<link rel="stylesheet" href="/adm/css/animate.css">
+<body class="login-container">
 
-		<!-- Bootstrap font icons css -->
-		<link rel="stylesheet" href="/adm/fonts/bootstrap/bootstrap-icons.css">
+    <!-- Login box start -->
+    <form id="formLogin">
+        <div class="login-box">
+            <div class="login-form">
+                <a href="index.html" class="login-logo">
+                    <img src="/adm/images/logo.png" alt="Logo"  style="width:30%; height:auto;">
+                </a>
+                <div class="login-welcome">
+                    <h5>Login to access the Administrator page</h5>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">ID</label>
+                    <input type="text" id="ID" name="ID" class="form-control" placeholder="Enter your ID">
+                    <div class="invalid-feedback" id="IDFeedback"></div>
+                </div>
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                        <label class="form-label">password</label>
 
-		<!-- Main css -->
-		<link rel="stylesheet" href="/adm/css/main.min.css">
+                    </div>
+                    <input type="password" id="pwd" name="pwd" class="form-control" placeholder="Enter your Password">
+					<div class="invalid-feedback" id="pwdFeedback"></div>
+                    <br>
 
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Save ID
+                        </label>
+                        <a href="forgot-password.html" class="btn-link ml-auto">Forgot the password?</a>
+                    </div>
 
-	</head>
-
-	<body class="login-container">
-
-		<!-- Loading wrapper start -->
-		<!-- <div id="loading-wrapper">
-			<div class="spinner">
-                <div class="line1"></div>
-				<div class="line2"></div>
-				<div class="line3"></div>
-				<div class="line4"></div>
-				<div class="line5"></div>
-				<div class="line6"></div>
+                    <div class="login-form-actions">
+						<button type="button" class="btn" id="buttonLogIn" style="margin : 10px" onclick="validationInst()">
+						 <span class="icon"> <i class="bi bi-arrow-right-circle"></i> </span> Login</button>
+                    </div>
+                    <div class="login-form-footer">
+                        <div class="additional-link">
+                            	Don't have an account?<a href="signup.html">Join In</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-		</div> -->
-		<!-- Loading wrapper end -->
+        </div>
+    </form>
+    
+    <!-- Modal -->
+<div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="alertModalLabel">Error</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Incorrect ID or password. Please try again.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- Login box end -->
 
-		<!-- Login box start -->
-		<form action="index.html">
-			<div class="login-box">
-				<div class="login-form">
-					<a href="index.html" class="login-logo">
-						<img src=".//adm/images/logo.jpg" alt="Logo" />
-					</a>
-					<div class="login-welcome">
-						<h5>관리자 페이지에 접근하려면 로그인하세요.</h5>
-					</div>
-					<div class="mb-3">
-						<label class="form-label">아이디</label>
-						<input type="text" class="form-control" placeholder="아이디를 입력하세요">
-					</div>
-					<div class="mb-3">
-						<div class="d-flex justify-content-between">
-							<label class="form-label">비밀번호</label>
+    <!-- *************
+        ************ Required JavaScript Files *************
+    ************* -->
+    <!-- Required jQuery first, then Bootstrap Bundle JS -->
+    <script src="/adm/js/jquery.min.js"></script>
+    <script src="/adm/js/bootstrap.bundle.min.js"></script>
+    <script  src="/adm/js/validationXdm.js"></script>
 
-						</div>
-						<input type="password" class="form-control" placeholder="비밀번호를 입력하세요">
+    <!-- 로그인 관련 JS -->
+   <script src="/adm/js/validationXdm.js"></script>
+	<script>
+    document.getElementById("buttonLogIn").onclick = function () {
+        var ID = document.getElementById("ID").value.trim();
+        var pwd = document.getElementById("pwd").value.trim();
 
-						
-						<br>
+        // 입력값이 비어 있는지 확인하여 입력되지 않은 경우 클래스를 추가하여 시각적으로 사용자에게 표시
+        if (ID === '') {
+            document.getElementById("ID").classList.add('is-invalid');
+            document.getElementById("IDFeedback").innerText = "Please enter your ID";
+            return;
+        } else {
+            document.getElementById("ID").classList.remove('is-invalid');
+        }
 
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-							<label class="form-check-label" for="flexCheckDefault">
-								아이디 저장
-							</label>
-						<a href="forgot-password.html" class="btn-link ml-auto">비밀번호를 잊으셨나요?</a>
-						</div>
-						
-					
-					<div class="login-form-actions">
-						<button type="submit" class="btn" style="margin : 10px"> <span class="icon"> <i class="bi bi-arrow-right-circle"></i> </span>
-							로그인</button>
-					</div>
-					<div class="login-form-actions">
-						<button type="submit" class="btn"> <img src="/adm/images/google.svg" class="login-icon"
-								alt="Login with Google">
-							Login with Google</button>
-						<button type="submit" class="btn"> <img src="/adm/images/facebook.svg" class="login-icon"
-								alt="Login with Facebook">
-							Login with Facebook</button>
-					</div>
-					<div class="login-form-footer">
-						<div class="additional-link">
-							계정이 없으신가요? <a href="signup.html"> 회원가입</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</form>
-		<!-- Login box end -->
+        if (pwd === '') {
+            document.getElementById("pwd").classList.add('is-invalid');
+            document.getElementById("pwdFeedback").innerText = "Please enter your Password";
+            return;
+        } else {
+            document.getElementById("pwd").classList.remove('is-invalid');
+        }
 
-		<!-- *************
-			************ Required JavaScript Files *************
-		************* -->
-		<!-- Required jQuery first, then Bootstrap Bundle JS -->
-		<script src="/adm/js/jquery.min.js"></script>
-		<script src="/adm/js/bootstrap.bundle.min.js"></script>
-		<script src="/adm/js/modernizr.js"></script>
-		<script src="/adm/js/moment.js"></script>
+        // 서버로 로그인 정보 전송
+        $.ajax({
+            async: true,
+            cache: false,
+            type: "post",
+            url: "/loginAdmPg",
+            data: {
+                "ID": $("#ID").val(),
+                "pwd": $("#pwd").val()
+            },
+            success: function (response) {
+                if (response.rt == "success") {
+                    // 로그인 성공 시 페이지 이동
+                    location.href = "/Morders";
+                } else {
+                    // 로그인 실패 시 모달 띄움
+                    $('#alertModal').modal('show');
+                    return false;
+                }
+            }
+        });
+    };
 
-		<!-- *************
-			************ Vendor Js Files *************
-		************* -->
+</script>
 
-		<!-- Main Js Required -->
-		<script src="/adm/js/main.js"></script>
-
-	</body>
-
+</body>
 </html>

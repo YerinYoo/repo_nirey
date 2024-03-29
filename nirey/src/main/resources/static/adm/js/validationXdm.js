@@ -3,7 +3,7 @@ validationTest = function() {
 }
 
 
-/*function checkNull(objName, pattern, message) {
+function checkNull(objName, pattern, message) {
 	// checkNull = function(obj, value, message) {
 	var obj = document.getElementById(objName);
 	var objValue = document.getElementById(objName).value.trim();
@@ -16,7 +16,7 @@ validationTest = function() {
 		obj.classList.remove('is-invalid');
 		return true;
 	}
-}*/
+}
 
 /*
 function checkNullWithoutFocus (value, message) {
@@ -31,16 +31,15 @@ function checkNullWithoutFocus (value, message) {
 */
 
 
-/*function checkOnlyKoreanEnglishNumber(objName, pattern, nullAllowedNy, message) {
+function checkOnlyKoreanEnglishNumber(objName, pattern, nullAllowedNy, message) {
 	// checkOnlyKoreanEnglishNumber = function(obj, value, message) {
 	var regExp = /^[ㄱ-ㅎ가-힣A-Za-z0-9]+$/;
 	return checkLogic(objName, pattern, nullAllowedNy, message, regExp);
 }
-*/
+
 
 function checkOnlyEnglishNumber(objName, pattern, nullAllowedNy, message) {
 	// checkOnlyEnglishNumber = function(obj, value, message) {
-		alert("aaaa");
 	var regExp = /^[A-Za-z0-9]+$/;
 	return checkLogic(objName, pattern, nullAllowedNy, message, regExp);
 }

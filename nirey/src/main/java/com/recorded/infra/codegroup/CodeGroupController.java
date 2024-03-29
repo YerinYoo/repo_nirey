@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.recorded.common.constants.Constants;
 import com.recorded.common.util.UtilDateTime;
@@ -16,7 +17,7 @@ public class CodeGroupController {
 
 	@Autowired
 	private CodeGroupService service;
-
+	
 	@RequestMapping(value = "/orders")
 	public String orders(@ModelAttribute("vo") CodeGroupVo vo, Model model) throws Exception {
 	    // 페이징 관련 정보 설정
@@ -43,11 +44,19 @@ public class CodeGroupController {
 		return "codeGroupView";
 	}
 
+	// 코드 그룹 추가를 처리하는 메서드 수정
 	@RequestMapping(value = "/codeGroupInsert")
-	public String codeGroupInsert(CodeGroupDto dto) throws Exception {
-		service.insert(dto);
-		return "redirect:/orders";
+	public String codeGroupInsert(@RequestParam(name = "name", required = false) String name) throws Exception {
+	    // name 파라미터를 사용하여 원하는 작업을 수행
+	    // 예: CodeGroupDto 객체를 생성하여 name 값을 설정하고 서비스에 전달
+	    CodeGroupDto dto = new CodeGroupDto();
+	    dto.setName(name);
+	    dto.setDelNY(0); // delNY 필드에 대한 값을 설정
+	    service.insert(dto);
+	    return "redirect:/orders";
 	}
+
+
 
 	@RequestMapping(value = "/codeGroupUpdt")
 	public String codeGroupUpdt(CodeGroupDto dto) throws Exception {

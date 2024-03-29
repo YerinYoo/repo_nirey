@@ -6,6 +6,7 @@ public interface MemberDao {
 
 	public List<MemberDto> selectList(); 
 	public MemberDto selectOne(MemberDto dto);
+    
 	
 	public int insert(MemberDto dto);
 	public int update(MemberDto dto);
@@ -19,5 +20,9 @@ public interface MemberDao {
     
     //개수 리턴
     public int getTotalMemberCount(MemberVo vo);
+    
+	public MemberDto selectOneById(String ID);
+    
+    
 	
 }
