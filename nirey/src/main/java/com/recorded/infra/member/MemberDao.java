@@ -21,8 +21,10 @@ public interface MemberDao {
     //개수 리턴
     public int getTotalMemberCount(MemberVo vo);
     
-	public MemberDto selectOneById(String ID);
+    // ID를 사용하여 회원 정보를 가져오는 메소드
+    public MemberDto selectOneById(String ID);
+
+    // 입력된 ID와 비밀번호가 일치하는지 확인하는 메소드
+    public boolean checkPassword(String ID, String password);
     
-    
-	
 }

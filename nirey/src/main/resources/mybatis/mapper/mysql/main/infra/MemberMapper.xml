@@ -175,7 +175,7 @@
 	        </when>
 	        
 	    </choose>
-	    LIMIT #{start}, #{pageSize}
+			LIMIT #{startRnumForMysql}, #{rowNumToShow}
 	</select>
 
 	

@@ -1,6 +1,8 @@
 package com.recorded.infra.member;
 
-public class MemberVo {
+import com.recorded.common.base.BaseVo;
+
+public class MemberVo extends BaseVo {
 
 			private Integer shDelNy = 0; /* null 값을 받아야 되는 경우가 있어서 int 대신 Integer 사용 */
 			private Integer shOptionDate = 2; /* null 값을 받아야 되는 경우가 있어서 int 대신 Integer 사용 */
@@ -77,7 +79,7 @@ public class MemberVo {
 
 			@Override
 			public String toString() {
-				return "CodeGroupVo [shDelNy=" + shDelNy + ", shOptionDate=" + shOptionDate + ", shDateStart=" + shDateStart
+				return "MemberVo [shDelNy=" + shDelNy + ", shOptionDate=" + shOptionDate + ", shDateStart=" + shDateStart
 						+ ", shDateEnd=" + shDateEnd + ", shOption=" + shOption + ", shValue=" + shValue + ", ifcgSeq="
 						+ ifcgSeq + "]";
 			}

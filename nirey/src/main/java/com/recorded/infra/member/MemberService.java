@@ -3,58 +3,61 @@ package com.recorded.infra.member;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder; // BCryptPasswordEncoder import 추가
 import org.springframework.stereotype.Service;
 
 @Service
-//Service = 로직, DAO를 호출하여 조합시키는 곳
 public class MemberService {
-	
-	@Autowired
-	MemberDao dao; 
 
-	public List<MemberDto> selectList() { return dao.selectList();}
+    @Autowired
+    MemberDao dao;
+    
+    // Spring Security의 BCryptPasswordEncoder를 사용하여 비밀번호를 암호화합니다.
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-	public MemberDto selectOne(MemberDto dto) {
-		return dao.selectOne(dto);
-	}
+    public List<MemberDto> selectList() { 
+        return dao.selectList();
+    }
 
-	public int insert(MemberDto dto) {
-		return dao.insert(dto);
-	}
-	
-	public int update(MemberDto dto ) {
-		return dao.update(dto);
-	}
-	
-	
-	public int uelete(MemberDto dto) {
-		return dao.uelete(dto);
-	}
-	
-	
-	public int delete(MemberDto dto) {
-		return dao.delete(dto);
-	}
+    public MemberDto selectOne(MemberDto dto) {
+        return dao.selectOne(dto);
+    }
+
+    public int insert(MemberDto dto) {
+        // 비밀번호를 BCryptPasswordEncoder를 사용하여 암호화합니다.
+        dto.setPwd(passwordEncoder.encode(dto.getPwd()));
+        return dao.insert(dto);
+    }
+    
+    public int update(MemberDto dto ) {
+        return dao.update(dto);
+    }
+    
+    public int uelete(MemberDto dto) {
+        return dao.uelete(dto);
+    }
+    
+    public int delete(MemberDto dto) {
+        return dao.delete(dto);
+    }
 
     public List<MemberDto> selectList(MemberVo vo) { 
-    	return dao.selectList(vo); 
+        return dao.selectList(vo); 
     }
     
-    //페이지네이션 관련
     public List<MemberDto> selectPagedMemberList(MemberVo vo) {
-    	return dao.selectPagedMemberList(vo);
+        return dao.selectPagedMemberList(vo);
     }
     
-    //개수 리턴
     public int getTotalMemberCount(MemberVo vo) {
-    	return dao.getTotalMemberCount(vo);
+        return dao.getTotalMemberCount(vo);
     }
     
-    // 사용자 인증을 수행하는 메서드
     public MemberDto authenticate(String ID, String pwd) {
         MemberDto member = dao.selectOneById(ID);
 
-        if (member != null && member.getPwd().equals(pwd)) {
+        // 회원 정보가 존재하고, 입력된 비밀번호와 암호화된 비밀번호가 일치하는지 확인합니다.
+        if (member != null && passwordEncoder.matches(pwd, member.getPwd())) {
             return member;
         } else {
             return null;

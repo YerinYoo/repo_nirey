@@ -56,10 +56,9 @@
                 <div class="mb-3">
                     <div class="d-flex justify-content-between">
                         <label class="form-label">password</label>
-
                     </div>
                     <input type="password" id="pwd" name="pwd" class="form-control" placeholder="Enter your Password">
-					<div class="invalid-feedback" id="pwdFeedback"></div>
+                    <div class="invalid-feedback" id="pwdFeedback"></div>
                     <br>
 
                     <div class="form-check">
@@ -71,36 +70,37 @@
                     </div>
 
                     <div class="login-form-actions">
-						<button type="button" class="btn" id="buttonLogIn" style="margin : 10px" onclick="validationInst()">
-						 <span class="icon"> <i class="bi bi-arrow-right-circle"></i> </span> Login</button>
+                        <button type="button" class="btn" id="buttonLogIn" style="margin : 10px">
+                            <span class="icon"> <i class="bi bi-arrow-right-circle"></i> </span> Login
+                        </button>
                     </div>
                     <div class="login-form-footer">
                         <div class="additional-link">
-                            	Don't have an account?<a href="signup.html">Join In</a>
+                            Don't have an account?<a href="signup.html">Join In</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </form>
-    
+
     <!-- Modal -->
-<div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="alertModalLabel">Error</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Incorrect ID or password. Please try again.
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="alertModalLabel">Error</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Incorrect ID or password. Please try again.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
     <!-- Login box end -->
 
     <!-- *************
@@ -112,53 +112,54 @@
     <script  src="/adm/js/validationXdm.js"></script>
 
     <!-- 로그인 관련 JS -->
-   <script src="/adm/js/validationXdm.js"></script>
-	<script>
-    document.getElementById("buttonLogIn").onclick = function () {
-        var ID = document.getElementById("ID").value.trim();
-        var pwd = document.getElementById("pwd").value.trim();
+    <script>
+        $(document).ready(function() {
+            $("#buttonLogIn").click(function() {
+                var ID = $("#ID").val().trim();
+                var pwd = $("#pwd").val().trim();
 
-        // 입력값이 비어 있는지 확인하여 입력되지 않은 경우 클래스를 추가하여 시각적으로 사용자에게 표시
-        if (ID === '') {
-            document.getElementById("ID").classList.add('is-invalid');
-            document.getElementById("IDFeedback").innerText = "Please enter your ID";
-            return;
-        } else {
-            document.getElementById("ID").classList.remove('is-invalid');
-        }
-
-        if (pwd === '') {
-            document.getElementById("pwd").classList.add('is-invalid');
-            document.getElementById("pwdFeedback").innerText = "Please enter your Password";
-            return;
-        } else {
-            document.getElementById("pwd").classList.remove('is-invalid');
-        }
-
-        // 서버로 로그인 정보 전송
-        $.ajax({
-            async: true,
-            cache: false,
-            type: "post",
-            url: "/loginAdmPg",
-            data: {
-                "ID": $("#ID").val(),
-                "pwd": $("#pwd").val()
-            },
-            success: function (response) {
-                if (response.rt == "success") {
-                    // 로그인 성공 시 페이지 이동
-                    location.href = "/Morders";
+                // 입력값이 비어 있는지 확인하여 입력되지 않은 경우 클래스를 추가하여 시각적으로 사용자에게 표시
+                if (ID === '') {
+                    $("#ID").addClass('is-invalid');
+                    $("#IDFeedback").text("Please enter your ID");
+                    return;
                 } else {
-                    // 로그인 실패 시 모달 띄움
-                    $('#alertModal').modal('show');
-                    return false;
+                    $("#ID").removeClass('is-invalid');
                 }
-            }
-        });
-    };
 
-</script>
+                if (pwd === '') {
+                    $("#pwd").addClass('is-invalid');
+                    $("#pwdFeedback").text("Please enter your Password");
+                    return;
+                } else {
+                    $("#pwd").removeClass('is-invalid');
+                }
+
+                // 서버로 로그인 정보 전송
+                $.ajax({
+                    async: true,
+                    cache: false,
+                    type: "post",
+                    url: "/loginAdmPg",
+                    data: {
+                        "ID": $("#ID").val(),
+                        "pwd": $("#pwd").val()
+                    },
+                    success: function (response) {
+                        if (response.rt == "success") {
+                            // 로그인 성공 시 페이지 이동
+                            location.href = "/Morders";
+                        } else {
+                            // 로그인 실패 시 모달 띄움
+                            $('#alertModal').modal('show');
+                            return false;
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
 
 </body>
 </html>
