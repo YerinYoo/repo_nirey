@@ -1,23 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<th:block th:fragment="Header">
 
-			<!-- Page header starts -->
-				<div class="page-header">
 
-					<div class="toggle-sidebar" id="toggle-sidebar"><i class="bi bi-list"></i></div>
 
-					<!-- Breadcrumb start -->
-					<ol class="breadcrumb d-md-flex d-none">
-						<li class="breadcrumb-item">
-							<i class="bi bi-house"></i>
-							<a href="index.html">Home</a>
-						</li>
-						<li class="breadcrumb-item">Product</li>
-						<li class="breadcrumb-item breadcrumb-active" aria-current="page">Add Product</li>
-					</ol>
-					<!-- Breadcrumb end -->
-
+					<th:block th:fragment="Header">
 					<!-- Header actions ccontainer start -->
 					<div class="header-actions-container">
 
@@ -36,46 +22,16 @@
 						</div>
 						<!-- Search container end -->
 
-						<!-- Leads start -->
-						<a href="orders.html" class="leads d-none d-xl-flex">
-							<div class="lead-details">You have <span class="count"> 21 </span> new leads </div>
-							<span class="lead-icon"><i
-									class="bi bi-bell-fill animate__animated animate__swing animate__infinite infinite"></i><b
-									class="dot animate__animated animate__heartBeat animate__infinite"></b></span>
-						</a>
-						<!-- Leads end -->
-
 						<!-- Header actions start -->
 						<ul class="header-actions">
-							<li class="dropdown d-none d-md-block">
-								<a href="#" id="countries" data-toggle="dropdown" aria-haspopup="true">
-									<img src="/adm/images/flags/1x1/br.svg" class="flag-img" alt="Admin Panels" />
-								</a>
-								<div class="dropdown-menu dropdown-menu-end mini" aria-labelledby="countries">
-									<div class="country-container">
-										<a href="index.html">
-											<img src="/adm/images/flags/1x1/us.svg" alt="Clean Admin Dashboards" />
-										</a>
-										<a href="index.html">
-											<img src="/adm/images/flags/1x1/in.svg" alt="Google Dashboards" />
-										</a>
-										<a href="index.html">
-											<img src="/adm/images/flags/1x1/gb.svg" alt="AI Admin Dashboards" />
-										</a>
-										<a href="index.html">
-											<img src="/adm/images/flags/1x1/tr.svg" alt="Modern Dashboards" />
-										</a>
-										<a href="index.html">
-											<img src="/adm/images/flags/1x1/ca.svg" alt="Best Admin Dashboards" />
-										</a>
-									</div>
-								</div>
-							</li>
 							<li class="dropdown">
 								<a href="#" id="userSettings" class="user-settings" data-toggle="dropdown" aria-haspopup="true">
-									<span class="user-name d-none d-md-block">Abigale Heaney</span>
+									<div class="user-name" >
+										<h6 class="user-name d-none d-md-block" >[[${session.sessNameXdm}]] 님, 안녕하세요!</h6>
+									</div>
+									
 									<span class="avatar">
-										<img src="/adm/images/user.png" alt="Admin Templates">
+										<img src="/adm/images/user.png" alt="Admin Templates" style="padding-left : 10%;">
 										<span class="status online"></span>
 									</span>
 								</a>
@@ -83,7 +39,7 @@
 									<div class="header-profile-actions">
 										<a href="profile.html">Profile</a>
 										<a href="account-settings.html">Settings</a>
-										<a href="login.html">Logout</a>
+										<a href="/loginAdm" id="buttonLogout">Logout</a>
 									</div>
 								</div>
 							</li>
@@ -95,6 +51,7 @@
 
 				</div>
 				<!-- Page header ends -->
+				</th:block>
 
 
 </html>

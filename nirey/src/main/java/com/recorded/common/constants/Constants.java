@@ -15,7 +15,7 @@ public final class Constants {
 	public static final int INSERT_AFTER_TYPE = 1;		
 	public static final int UPDATE_AFTER_TYPE = 1;		
 	
-	public static final int SESSION_MINUTE_XDM = 30;
+	public static final int SESSION_MINUTE_XDM = 1;
 	
 	public static final String URL_LOGINFORM = "/member/loginForm";
 	

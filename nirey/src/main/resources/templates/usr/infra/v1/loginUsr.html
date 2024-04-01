@@ -248,24 +248,26 @@
 		<main class="main">
 			<div class="container login-container" style="height : 700px">
 				<div class="row mt-10 justify-content-center">
-					<div class="col-4">
+					<div class="col-3">
 
 								<div class="heading mb-1 mt-10">
 									<h2 class="title">Login</h2>
 								</div>
 
 								<form action="#">
-									<label for="login-email">
+									<label for="ID">
 										Username or email address
 										<span class="required">*</span>
 									</label>
-									<input type="email" class="form-input form-wide" id="login-email" required />
+									<input type="text" class="form-input form-wide" id="ID" name="ID">
+									<div class="invalid-feedback" id="IDFeedback"></div>
 
 									<label for="login-password">
 										Password
 										<span class="required">*</span>
 									</label>
-									<input type="password" class="form-input form-wide" id="login-password" required />
+									<input type="password" class="form-input form-wide" id="pwd" >
+									<div class="invalid-feedback" id="pwdFeedback"></div>
 
 
 										<div class="custom-control custom-checkbox mb-0">
@@ -273,7 +275,7 @@
 											<label class="custom-control-label mb-0" for="lost-password">Remember My Account</label>
 										</div>
 										
-										<button type="submit" class="btn btn-dark btn-md w-100 mt-3" href="demo3.html">
+										<button type="button" class="btn btn-dark btn-md w-100 mt-3" href="demo3.html" id="buttonLogIn">
 										LOGIN
 									</button>
 
@@ -291,6 +293,22 @@
 					</div>
 				</div>
 			</div>
+			
+			    <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="alertModalLabel">Error</h5>
+                </div>
+                <div class="modal-body">
+                    Incorrect ID or password. Please try again.
+                </div>
+                <div class="modal-footer">
+                   <button type="button" class="btn btn-secondary" id="modalCloseButton">Close Modal</button>
+                </div>
+            </div>
+        </div>
+    </div>
 		</main><!-- End .main -->
 
 		<footer class="footer bg-dark">
@@ -604,6 +622,59 @@
 
 	<!-- Main JS File -->
 	<script src="/usr/js/main.min.js"></script>
+	
+	  <!-- 로그인 관련 JS -->
+<script>
+    $(document).ready(function() {
+
+        $("#buttonLogIn").click(function(e) {
+        	e.preventDefault(); // 폼 제출 방지
+            var ID = $("#ID").val().trim();
+            var pwd = $("#pwd").val().trim();
+
+            // 입력값이 비어 있는지 확인하여 입력되지 않은 경우 클래스를 추가하여 시각적으로 사용자에게 표시
+            if (ID === '') {
+                $("#ID").addClass('is-invalid');
+                $("#IDFeedback").text("Please enter your ID");
+                return;
+            } else {
+                $("#ID").removeClass('is-invalid');
+            }
+
+            if (pwd === '') {
+                $("#pwd").addClass('is-invalid');
+                $("#pwdFeedback").text("Please enter your Password");
+                return;
+            } else {
+                $("#pwd").removeClass('is-invalid');
+            }
+
+            // 서버로 로그인 정보 전송
+            $.ajax({
+                async: true,
+                cache: false,
+                type: "post",
+                url: "/loginAdmPg",
+                data: {
+                    "ID": $("#ID").val(),
+                    "pwd": $("#pwd").val()
+                },
+                success: function (response) {
+                    if (response.rt == "success") {
+                        // 로그인 성공 시 페이지 이동
+                        location.href = "/Morders";
+                    } else {
+                        // 로그인 실패 시 모달 띄움
+                        $('#alertModal').modal('show');
+                        return false;
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+
 </body>
 
 </html>

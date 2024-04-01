@@ -50,109 +50,36 @@
 
 <body>
 
-    <!-- Page wrapper start -->
-    <div class="page-wrapper">
+   	<!-- Page wrapper start -->
+		<div class="page-wrapper">
 
-        <div th:replace="~{/adm/infra/v1/include/SideBar :: SideBar}"></div>
+			<!-- SideBar th:block 구문 -->
+		<div th:replace="~{/adm/infra/v1/include/SideBar :: SideBar}"></div>
+			<!-- *************
+				************ Main container start *************
+			************* -->
+			<div class="main-container mr-3">
 
-        <!-- Main container start -->
-        <div class="main-container">
+				<!-- Page header starts -->
+				<div class="page-header">
 
-            <!-- Page header starts -->
-            <div class="page-header">
+					<div class="toggle-sidebar" id="toggle-sidebar"><i class="bi bi-list"></i></div>
 
-                <div class="toggle-sidebar" id="toggle-sidebar"><i class="bi bi-list"></i></div>
+					<!-- Breadcrumb start -->
+					<ol class="breadcrumb d-md-flex d-none">
+						<li class="breadcrumb-item">
+							<i class="bi bi-house"></i>
+							<a href="index.html">Home</a>
+						</li>
+						<li class="breadcrumb-item">Members</li>
+						<li class="breadcrumb-item breadcrumb-active" aria-current="page">Add Member</li>
+					</ol>
+					<!-- Breadcrumb end -->
 
-                <!-- Breadcrumb start -->
-                <ol class="breadcrumb d-md-flex d-none">
-                    <li class="breadcrumb-item">
-                        <i class="bi bi-house"></i>
-                        <a href="index.html">Home</a>
-                    </li>
-                    <li class="breadcrumb-item">Product</li>
-                    <li class="breadcrumb-item breadcrumb-active" aria-current="page">Add Product</li>
-                </ol>
-                <!-- Breadcrumb end -->
+					<!-- Header th:block 구문 -->
+					<div th:replace="~{/adm/infra/v1/include/Header :: Header}"></div>
 
-                <!-- Header actions ccontainer start -->
-                <div class="header-actions-container">
-
-                    <!-- Search container start -->
-                    <div class="search-container">
-
-                        <!-- Search input group start -->
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search anything">
-                            <button class="btn" type="button">
-                                <i class="bi bi-search"></i>
-                            </button>
-                        </div>
-                        <!-- Search input group end -->
-
-                    </div>
-                    <!-- Search container end -->
-
-                    <!-- Leads start -->
-                    <a href="orders.html" class="leads d-none d-xl-flex">
-                        <div class="lead-details">You have <span class="count"> 21 </span> new leads </div>
-                        <span class="lead-icon"><i
-                                class="bi bi-bell-fill animate__animated animate__swing animate__infinite infinite"></i><b
-                                class="dot animate__animated animate__heartBeat animate__infinite"></b></span>
-                    </a>
-                    <!-- Leads end -->
-
-                    <!-- Header actions start -->
-                    <ul class="header-actions">
-                        <li class="dropdown d-none d-md-block">
-                            <a href="#" id="countries" data-toggle="dropdown" aria-haspopup="true">
-                                <img src="/adm/images/flags/1x1/br.svg" class="flag-img" alt="Admin Panels" />
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end mini" aria-labelledby="countries">
-                                <div class="country-container">
-                                    <a href="index.html">
-                                        <img src="/adm/images/flags/1x1/us.svg" alt="Clean Admin Dashboards" />
-                                    </a>
-                                    <a href="index.html">
-                                        <img src="/adm/images/flags/1x1/in.svg" alt="Google Dashboards" />
-                                    </a>
-                                    <a href="index.html">
-                                        <img src="/adm/images/flags/1x1/gb.svg" alt="AI Admin Dashboards" />
-                                    </a>
-                                    <a href="index.html">
-                                        <img src="/adm/images/flags/1x1/tr.svg" alt="Modern Dashboards" />
-                                    </a>
-                                    <a href="index.html">
-                                        <img src="/adm/images/flags/1x1/ca.svg" alt="Best Admin Dashboards" />
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" id="userSettings" class="user-settings" data-toggle="dropdown"
-                                aria-haspopup="true">
-                                <span class="user-name d-none d-md-block">Abigale Heaney</span>
-                                <span class="avatar">
-                                    <img src="/adm/images/user.png" alt="Admin Templates">
-                                    <span class="status online"></span>
-                                </span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userSettings">
-                                <div class="header-profile-actions">
-                                    <a href="profile.html">Profile</a>
-                                    <a href="account-settings.html">Settings</a>
-                                    <a href="login.html">Logout</a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                    <!-- Header actions end -->
-
-                </div>
-                <!-- Header actions ccontainer end -->
-
-            </div>
-            <!-- Page header ends -->
-
+				<!-- Content wrapper scroll start -->
             <!-- Content wrapper scroll start -->
             <div class="content-wrapper-scroll">
 
@@ -353,6 +280,26 @@
     <script src="/adm/js/main.js"></script>
 
     <script type="text/javascript">
+    //비밀번호 입력 값과 비밀번호 확인 입력 값 일치 여부 판단
+	function pwdConfirm() {
+	/* 비밀번호, 비밀번호 확인 입력창에 입력된 값을 비교해서 같다면 비밀번호 일치, 그렇지 않으면 불일치 라는 텍스트 출력.*/
+	/* document : 현재 문서를 의미함. 작성되고 있는 문서를 뜻함. */
+	/* getElementByID('아이디') : 아이디에 적힌 값을 가진 id의 value를 get을 해서 password 변수 넣기 */
+		var pwd = document.getElementById('pwd');					//비밀번호 
+		var confirmPwd = document.getElementById('confirmPwd');	//비밀번호 확인 값
+		var confrimMsg = document.getElementById('confirmMsg');				//확인 메세지
+		var correctColor = "#00ff00";	//맞았을 때 출력되는 색깔.
+		var wrongColor ="#ff0000";	//틀렸을 때 출력되는 색깔
+		
+		if(pwd.value.equals(confirmPwd.value)){ //password 변수의 값과 passwordConfirm 변수의 값과 동일하다.
+			confirmMsg.style.color = correctColor;/* span 태그의 ID(confirmMsg) 사용  */
+			confirmMsg.innerHTML ="비밀번호 일치";/* innerHTML : HTML 내부에 추가적인 내용을 넣을 때 사용하는 것. */
+		}else{
+			confirmMsg.style.color = wrongColor;
+			confirmMsg.innerHTML ="비밀번호 불일치";
+		}
+	}
+    
         $(function () {
             // 등록버튼 클릭 이벤트
             $("#btnInsert").click(function () {

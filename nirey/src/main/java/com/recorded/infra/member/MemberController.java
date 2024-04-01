@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.recorded.common.base.BaseController;
-
+import com.recorded.common.constants.Constants;
+import com.recorded.infra.codegroup.CodeGroupDto;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -21,7 +22,9 @@ public class MemberController extends BaseController {
 
     @Autowired
     MemberService service;
-
+    
+    //Admin Controller S
+    
     // 로그인 페이지로 이동
     @RequestMapping(value = "/loginAdm")
     public String loginAdm(MemberDto dto) throws Exception {
@@ -29,9 +32,9 @@ public class MemberController extends BaseController {
     }
 
     // 로그인 처리
-    @PostMapping("/loginAdmPg")
     @ResponseBody
-    public Map<String, Object> loginAdmPg(@ModelAttribute MemberDto dto, HttpSession httpSession) throws Exception {
+    @RequestMapping(value = "loginAdmPg")
+    public Map<String, Object> loginAdmPg(MemberDto dto, HttpSession httpSession) throws Exception {
         Map<String, Object> returnMap = new HashMap<>();
 
         // 입력된 아이디와 비밀번호를 서비스 레이어로 전달하여 인증 수행
@@ -39,7 +42,17 @@ public class MemberController extends BaseController {
 
         // 인증된 회원이 존재하면 세션에 회원 정보 저장하고 성공 메시지 반환
         if (authenticatedMember != null) {
+            // 로그인 성공 시 세션에 회원 정보 저장
             httpSession.setAttribute("authenticatedMember", authenticatedMember);
+            httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE_XDM); // 60초 * 30분 = 30분
+            httpSession.setAttribute("sessSeqXdm", authenticatedMember.getMemberSeq());
+            httpSession.setAttribute("sessIdXdm", authenticatedMember.getID());
+            httpSession.setAttribute("sessNameXdm", authenticatedMember.getName());
+            
+			System.out.println("---------------------");
+			System.out.println("httpSession.getAttribute(\"sessNameXdm\"): " + httpSession.getAttribute("sessNameXdm"));
+			System.out.println("---------------------");
+
             returnMap.put("rt", "success");
         } else {
             // 인증 실패 시 처리
@@ -48,6 +61,17 @@ public class MemberController extends BaseController {
 
         return returnMap;
     }
+    
+    //로그아웃 - 연결 페이지 헤더의 session 부분 초기화됨
+    @ResponseBody
+    @RequestMapping(value="/logoutAdm")
+    public Map<String, Object> logoutAdm(HttpSession httpSession) throws Exception{
+    	Map<String, Object> returnMap=new HashMap<String, Object>();
+    	httpSession.invalidate();
+    	returnMap.put("rt", "success");
+    	return returnMap;
+    }
+
 
     // 회원 가입 페이지로 이동
     @RequestMapping(value = "/signup")
@@ -128,4 +152,65 @@ public class MemberController extends BaseController {
     public void setSearch(MemberVo vo) throws Exception {
         // 검색 조건 설정
     }
+    
+    //-----------------------------------------------------------Admin Controller E
+    //-----------------------------------------------------------eCommerce Controller S
+    
+  
+    //-----------------------------------------------------------eCommerce Controller E
+    
+    //  회원 로그인 페이지
+    @RequestMapping(value = "/loginUsr")
+    public String loginUsr(MemberDto dto) throws Exception {
+        return "usr/infra/v1/loginUsr"; 
+    }
+
+    // 로그인 처리
+    @ResponseBody
+    @RequestMapping(value = "loginUsrPg")
+    public Map<String, Object> loginUsrPg(MemberDto dto, HttpSession httpSession) throws Exception {
+        Map<String, Object> returnMap = new HashMap<>();
+
+        // 입력된 아이디와 비밀번호를 서비스 레이어로 전달하여 인증 수행
+        MemberDto authenticatedMember = service.authenticate(dto.getID(), dto.getPwd());
+
+        // 인증된 회원이 존재하면 세션에 회원 정보 저장하고 성공 메시지 반환
+        if (authenticatedMember != null) {
+            // 로그인 성공 시 세션에 회원 정보 저장
+            httpSession.setAttribute("authenticatedMember", authenticatedMember);
+            httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE_XDM); // 60초 * 30분 = 30분
+            httpSession.setAttribute("sessSeqXdm", authenticatedMember.getMemberSeq());
+            httpSession.setAttribute("sessIdXdm", authenticatedMember.getID());
+            httpSession.setAttribute("sessNameXdm", authenticatedMember.getName());
+            
+			System.out.println("---------------------");
+			System.out.println("httpSession.getAttribute(\"sessNameXdm\"): " + httpSession.getAttribute("sessNameXdm"));
+			System.out.println("---------------------");
+
+            returnMap.put("rt", "success");
+        } else {
+            // 인증 실패 시 처리
+            returnMap.put("rt", "fail");
+        }
+
+        return returnMap;
+    }
+    
+    //로그아웃 - 연결 페이지 헤더의 session 부분 초기화됨
+    @ResponseBody
+    @RequestMapping(value="/logoutUsr")
+    public Map<String, Object> logoutUsr(HttpSession httpSession) throws Exception{
+    	Map<String, Object> returnMap=new HashMap<String, Object>();
+    	httpSession.invalidate();
+    	returnMap.put("rt", "success");
+    	return returnMap;
+    }
+    
+    //adm page index
+    @RequestMapping(value = "/index")
+	public String ordersAdd(MemberDto dto) throws Exception {
+		return "adm/infra/v1/index";
+	}
+
+    
 }
