@@ -16412,4 +16412,9 @@ i.wishlist-empty {
   .login-container form {
     margin-bottom: 50px;
   }
+  
+  /*Validation*/
+  .is-invalid {
+    border: 1px solid red; /* 빨간색 테두리 */
+}
 }

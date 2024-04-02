@@ -625,53 +625,52 @@
 	
 	  <!-- 로그인 관련 JS -->
 <script>
-    $(document).ready(function() {
+$(document).ready(function() {
+    $("#buttonLogIn").click(function(e) {
+        e.preventDefault(); // 폼 제출 방지
+        var ID = $("#ID").val().trim();
+        var pwd = $("#pwd").val().trim();
 
-        $("#buttonLogIn").click(function(e) {
-        	e.preventDefault(); // 폼 제출 방지
-            var ID = $("#ID").val().trim();
-            var pwd = $("#pwd").val().trim();
+        // 입력값이 비어 있는지 확인하여 입력되지 않은 경우 클래스를 추가하여 시각적으로 사용자에게 표시
+        if (ID === '') {
+            $("#ID").addClass('is-invalid');
+            $("#IDFeedback").text("Please enter your ID");
+            return;
+        } else {
+            $("#ID").removeClass('is-invalid');
+        }
 
-            // 입력값이 비어 있는지 확인하여 입력되지 않은 경우 클래스를 추가하여 시각적으로 사용자에게 표시
-            if (ID === '') {
-                $("#ID").addClass('is-invalid');
-                $("#IDFeedback").text("Please enter your ID");
-                return;
-            } else {
-                $("#ID").removeClass('is-invalid');
-            }
+        if (pwd === '') {
+            $("#pwd").addClass('is-invalid');
+            $("#pwdFeedback").text("Please enter your Password");
+            return;
+        } else {
+            $("#pwd").removeClass('is-invalid');
+        }
 
-            if (pwd === '') {
-                $("#pwd").addClass('is-invalid');
-                $("#pwdFeedback").text("Please enter your Password");
-                return;
-            } else {
-                $("#pwd").removeClass('is-invalid');
-            }
-
-            // 서버로 로그인 정보 전송
-            $.ajax({
-                async: true,
-                cache: false,
-                type: "post",
-                url: "/loginAdmPg",
-                data: {
-                    "ID": $("#ID").val(),
-                    "pwd": $("#pwd").val()
-                },
-                success: function (response) {
-                    if (response.rt == "success") {
-                        // 로그인 성공 시 페이지 이동
-                        location.href = "/recorded";
-                    } else {
-                        // 로그인 실패 시 모달 띄움
-                        $('#alertModal').modal('show');
-                        return false;
-                    }
+        // 서버로 로그인 정보 전송
+        $.ajax({
+            async: true,
+            cache: false,
+            type: "post",
+            url: "/loginAdmPg",
+            data: {
+                "ID": $("#ID").val(),
+                "pwd": $("#pwd").val()
+            },
+            success: function(response) {
+                if (response.rt == "success") {
+                    // 로그인 성공 시 페이지 이동
+                    location.href = "/recorded";
+                } else {
+                    // 로그인 실패 시 모달 띄움
+                    $('#alertModal').modal('show');
+                    return false;
                 }
-            });
+            }
         });
     });
+});
 </script>
 
 
