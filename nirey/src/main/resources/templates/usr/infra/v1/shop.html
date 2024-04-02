@@ -46,35 +46,35 @@
                             <i class="fas fa-bars"></i>
                         </button>
 
-                        <a href="demo3.html" class="logo">
+                        <a th:href="@{/recorded}"  class="logo">
                             <img src="/usr/images/logo-dear.png" alt="Porto Logo">
                         </a>
 
                         <nav class="main-nav font2">
                             <ul class="menu">
                                 <li class="active">
-                                    <a href="demo3.html">Home</a>
+                                    <a th:href="@{/recorded}" >Home</a>
                                 </li>
                                 <li>
-                                    <a href="demo3-shop.html">Shop</a>
+                                    <a th:href="@{/recordedShop}" >Shop</a>
                                     <div class="megamenu megamenu-fixed-width megamenu-3cols">
                                         <div class="row">
                                             <div class="col-lg-4">
                                                 <a href="#" class="nolink">Clothes</a>
                                                 <ul class="submenu">
-                                                    <li><a href="demo3-shop.html">Outer</a></li>
-                                                    <li><a href="demo3-shop.html">Top</a></li>
-                                                    <li><a href="demo3-shop.html">Bottom</a></li>
-                                                    <li><a href="demo3-shop.html">Dress</a></li>
+                                                    <li><a th:href="@{/recordedShop}" >Outer</a></li>
+                                                    <li><a th:href="@{/recordedShop}" >Top</a></li>
+                                                    <li><a th:href="@{/recordedShop}" >Bottom</a></li>
+                                                    <li><a th:href="@{/recordedShop}" >Dress</a></li>
                                                 </ul>
                                             </div>
                                             <div class="col-lg-4">
                                                 <a href="#" class="nolink">Etc.</a>
                                                 <ul class="submenu">
-                                                    <li><a href="demo3-shop.html">Bag</a></li>
-                                                    <li><a href="demo3-shop.html">Shoes</a></li>
-                                                    <li><a href="demo3-shop.html">Acc</a></li>
-                                                    <li><a href="demo3-shop.html">etc.</a></li>
+                                                    <li><a th:href="@{/recordedShop}" >Bag</a></li>
+                                                    <li><a th:href="@{/recordedShop}" >Shoes</a></li>
+                                                    <li><a th:href="@{/recordedShop}" >Acc</a></li>
+                                                    <li><a th:href="@{/recordedShop}" >etc.</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -83,15 +83,15 @@
 
                                 <!--new, best, restock : shop 페이지 참조하여 구현하기-->
                                 <li class="new">
-                                    <a href="demo3-shop.html">New</a>
+                                    <a th:href="@{/recordedShop}" >New</a>
                                 </li>
 
                                 <li class="best">
-                                    <a href="demo3-shop.html">Best</a>
+                                    <a th:href="@{/recordedShop}" >Best</a>
                                 </li>
 
                                 <li class="restock">
-                                    <a href="demo3-shop.html">ReStock!</a>
+                                    <a th:href="@{/recordedShop}" >ReStock!</a>
                                 </li>
 
                                 <li class="mypage">
@@ -335,17 +335,13 @@
                         </nav>
 
                         <div class="row">
-                            <div class="col-6 col-sm-4 col-md-3 col-xl-5col">
+                            <div class="col-6 col-sm-4 col-md-3 col-xl-5col" th:each="list:${list}">
                                 <div class="product-default inner-quickview inner-icon">
                                     <figure>
                                         <a href="demo3-product.html">
                                             <img src="/usr/images/demoes/demo3/products/product-1.jpg" width="273"
                                                 height="273" alt="productr" />
                                         </a>
-                                        <div class="label-group">
-                                            <div class="product-label label-hot">HOT</div>
-                                            <div class="product-label label-sale">-20%</div>
-                                        </div>
                                         <div class="btn-icon-group">
                                             <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
                                                     class="icon-shopping-cart"></i></a>
@@ -357,11 +353,17 @@
                                     <div class="product-details">
                                         <div class="category-wrap">
                                             <div class="category-list">
-                                                <a href="demo3-shop.html" class="product-category">category</a>
+                                                
+                                                <a th:if="${list.category1CD!= null}" th:text="${@codeService.selectOneCachedCode(list.category1CD)}" class="category1CD align-middle"></a>
+												<a th:unless="${list.category1CD != null}" class="category1CD align-middle"></a>
+																								
+												<a th:if="${list.category2CD!= null}" th:text="${@codeService.selectOneCachedCode(list.category2CD)}" class="category2CD align-middle"></a>
+												<a th:unless="${list.category2CD != null}" class="category2CD align-middle"></a>
+												
                                             </div>
                                         </div>
                                         <h3 class="product-title">
-                                            <a href="demo3-product.html">Women Shoes</a>
+                                            <a href="demo3-product.html"  th:text="${list.ProductName}"></a>
                                         </h3>
                                         <div class="ratings-container">
                                             <div class="product-ratings">
@@ -732,19 +734,7 @@
                             </div>
                         </div>
 
-                        <nav class="toolbox toolbox-pagination">
-                            <div class="toolbox-item toolbox-show">
-                                <label>Show:</label>
-
-                                <div class="select-custom">
-                                    <select name="count" class="form-control">
-                                        <option value="12">12</option>
-                                        <option value="24">24</option>
-                                        <option value="36">36</option>
-                                    </select>
-                                </div><!-- End .select-custom -->
-                            </div><!-- End .toolbox-item -->
-
+                        <nav class="toolbox toolbox-pagination" style="float : right;">
                             <ul class="pagination toolbox-item">
                                 <li class="page-item active">
                                     <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
@@ -766,7 +756,7 @@
                         <div class="sidebar-wrapper">
                             <div class="widget">
                                 <h3 class="widget-title">
-                                    <a data-toggle="collapse" href="demo3.html" role="button" aria-expanded="true"
+                                    <a data-toggle="collapse" href="/home" role="button" aria-expanded="true"
                                         aria-controls="widget-body-2">Categories</a>
                                 </h3>
 

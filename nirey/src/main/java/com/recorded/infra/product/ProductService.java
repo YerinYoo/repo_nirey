@@ -14,6 +14,8 @@ public class ProductService {
 
 	public List<ProductDto> selectList() { return dao.selectList();}
 
+	public List<ProductDto> prodList() {return dao.prodList();}
+	
 	public ProductDto selectOne(ProductDto dto) {
 		return dao.selectOne(dto);
 	}

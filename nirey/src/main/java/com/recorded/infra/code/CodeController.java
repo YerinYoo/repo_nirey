@@ -98,7 +98,7 @@ public class CodeController {
 		vo.setParamsPaging(service.getTotalCodeCount(vo));
 		
 		if (vo.getTotalRows() > 0) {
-			model.addAttribute("list", service.selectPagedCodeList(vo));
+			model.addAttribute("list", service.selectPagedCodeList(null, vo));
 		}
 
 		return "adm/infra/v1/Corders"; 
@@ -122,7 +122,7 @@ public class CodeController {
 	
 	@RequestMapping(value="/CordersAdd")
 	public String CordersAdd(CodeDto dto, Model model) throws Exception {
-		
+		//code add 페이지에서 codeGroup 셀렉트 박스로 값 받아오기
 		model.addAttribute("listCodeGroup", codeGroupService.selectListWithoutPaging());
 		
 		return "adm/infra/v1/CordersAdd";

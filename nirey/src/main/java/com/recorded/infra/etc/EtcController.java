@@ -18,5 +18,4 @@ public class EtcController {
         return "usr/infra/v1/home"; 
     }
     
-
 }

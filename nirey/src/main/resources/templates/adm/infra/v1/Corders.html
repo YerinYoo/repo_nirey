@@ -1,7 +1,59 @@
 <!doctype html>
 <html lang="en">
 
-<div th:replace="~{/adm/infra/v1/include/ListHead :: ListHead}"></div>
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<!-- Meta -->
+		<meta name="description" content="Best Bootstrap Admin Dashboards">
+		<meta name="author" content="Bootstrap Gallery" />
+		<link rel="canonical" href="https://www.bootstrap.gallery/">
+		<meta property="og:url" content="https://www.bootstrap.gallery">
+		<meta property="og:title" content="Admin Templates - Dashboard Templates | Bootstrap Gallery">
+		<meta property="og:description" content="Marketplace for Bootstrap Admin Dashboards">
+		<meta property="og:type" content="Website">
+		<meta property="og:site_name" content="Bootstrap Gallery">
+		<link rel="shortcut icon" href="/adm/images/favicon.svg">
+
+		<!-- Title -->
+		<title>Admin</title>
+
+
+		<!-- *************
+			************ Common Css Files *************
+		************ -->
+		<!-- Animated css -->
+		<link rel="stylesheet" href="/adm/css/animate.css">
+
+		<!-- Bootstrap font icons css -->
+		<link rel="stylesheet" href="/adm/fonts/bootstrap/bootstrap-icons.css">
+
+		<!-- Main css -->
+		<link rel="stylesheet" href="/adm/css/main.min.css">
+
+
+		<!-- *************
+			************ Vendor Css Files *************
+		************ -->
+
+		<!-- Scrollbar CSS -->
+		<link rel="stylesheet" href="/adm/vendor/overlay-scroll/OverlayScrollbars.min.css">
+
+		<!-- Data Tables -->
+		<link rel="stylesheet" href="/adm/vendor/datatables/dataTables.bs5.css" />
+		<link rel="stylesheet" href="/adm/vendor/datatables/dataTables.bs5-custom.css" />
+		
+				 
+		 <!--  강사님 데이트 피커 -->
+		 <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" media="screen"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+		
+
+	</head>
 
 	<body>
 
@@ -21,19 +73,32 @@
 		<!-- Page wrapper start -->
 		<div class="page-wrapper">
 
+			<!-- SideBar th:block 구문 -->
 		<div th:replace="~{/adm/infra/v1/include/SideBar :: SideBar}"></div>
-
 			<!-- *************
 				************ Main container start *************
 			************* -->
-			<div class="main-container">
+			<div class="main-container mr-3">
 
-			<div th:replace="~{/adm/infra/v1/include/Header 	 :: Header}"></div>
+				<!-- Page header starts -->
+				<div class="page-header">
 
+					<div class="toggle-sidebar" id="toggle-sidebar"><i class="bi bi-list"></i></div>
 
-				<!-- Content wrapper scroll start -->
-				
-				
+					<!-- Breadcrumb start -->
+					<ol class="breadcrumb d-md-flex d-none">
+						<li class="breadcrumb-item">
+							<i class="bi bi-house"></i>
+							<a href="index.html">Home</a>
+						</li>
+						<li class="breadcrumb-item">Code</li>
+						<li class="breadcrumb-item breadcrumb-active" aria-current="page">Code List</li>
+					</ol>
+					<!-- Breadcrumb end -->
+
+					<!-- Header th:block 구문 -->
+					<div th:replace="~{/adm/infra/v1/include/Header :: Header}"></div>
+
 				<div class="content-wrapper-scroll">
 
 					<!-- Content wrapper start -->
@@ -113,7 +178,7 @@
 									</div>
 										<div class="row mt-1 mb-3">
 										<div class="col">
-											<div>Total Count: <span th:text="${listCount}"></span></div>
+											<div>Total Count: <span th:text="${getTotalCodeCount}"></span></div>
 										</div>
 									</div>
 									 <div class="row mb-3">
@@ -135,7 +200,7 @@
 
 	
 												    
-				<!-- Content wrapper scroll start -->
+<!-- Content wrapper scroll start -->
 				<div class="content-wrapper-scroll">
 
 					<!-- Content wrapper start -->
@@ -163,10 +228,6 @@
 									    		<td>modDatetime</td>
 									    		
 									    	</tr>
-									    	
-									    	<tr th:if="${!#lists.isEmpty(list)}" >
-									    		<td colspan="9"></td>
-									    	</tr>
 										
 									    	<tr th:if="${!#lists.isEmpty(list)}" th:each="list:${list}"> 
 									    	    <td>
@@ -192,42 +253,24 @@
 											
 <nav aria-label="Page Navigation">
 
-<div class="row">
-    <ul class="pagination justify-content-center mt-5">
-        <li class="page-item">
-            <a class="page-link" href="#" onclick="prevPage()" aria-label="Previous">
-                <span aria-hidden="true">
-                    <i class="bi bi-arrow-left"></i>
-                </span>
-            </a>
-        </li>
-        <!-- 이 부분은 자바스크립트로 동적으로 생성됩니다 -->
-        <li class="page-item active">
-            <a class="page-link" href="#">1</a>
-        </li>
-        <!-- 예시로 1부터 5까지만 표시합니다 -->
-        <li class="page-item">
-            <a class="page-link" href="#">2</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="#">3</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="#">4</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="#">5</a>
-        </li>
-        <!-- 이 부분은 자바스크립트로 동적으로 생성됩니다 -->
-        <li class="page-item">
-            <a class="page-link" href="#" onclick="nextPage()" aria-label="Next">
-                <span aria-hidden="true">
-                    <i class="bi bi-arrow-right"></i>
-                </span>
-            </a>
-        </li>
-    </ul>
-</div>
+								<form name="formList" id="formList" method="post" autocomplete="off">
+									<input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/>
+									<input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}"/>
+								<!-- 페이징 기능 -->
+								<!-- paging s  -->				
+									<div class="container-fluid px-0 mt-2 mb-2">
+										<div class="row">
+											<div class="col">
+												<ul class="pagination justify-content-center mb-0">
+													<li th:if="${vo.startPage gt vo.pageNumToShow}" class="page-item" style="cursor: pointer;"><a class="page-link" href="javascript:goList(${vo.startPage - 1})" th:attr="onclick=|goList('${vo.startPage - 1}')|"><i class="fa-solid fa-angle-left"></i></a></li>
+													<li th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}" th:classappend="${num eq vo.thisPage} ? active : ''" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"><!-- ${i.index} --></a></li>
+													<li th:if="${vo.endPage ne vo.totalPages}" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${vo.endPage + 1}')|"><i class="fa-solid fa-angle-right"></i></a></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+									<!-- paging e  -->	
+								</form>
 
     <div class="row">
         <div class="col-1" style="float: left;">

@@ -106,13 +106,23 @@ public class ProductController {
 		vo.setShDateEnd(vo.getShDateEnd() == null
 		    ? UtilDateTime.nowString()
 		    : UtilDateTime.add59TimeString(vo.getShDateEnd()));		
+	}
 		
 //		/* 초기값 세팅이 없는 경우 사용 */
 //		vo.setShDateStart(vo.getShDateStart() == null || vo.getShDateStart() == "" ? null : UtilDateTime.add00TimeString(vo.getShDateStart()));
 //		vo.setShDateEnd(vo.getShDateEnd() == null || vo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(vo.getShDateEnd()));
 		
-		
+		//사용자 페이지 관련 s
+	// Shop Page
+	@RequestMapping(value = "/recordedShop")
+	public String recordedShop(@ModelAttribute("vo") ProductVo vo, Model model) throws Exception {
+	    model.addAttribute("prodList", service.selectList(vo));
+	    return "usr/infra/v1/shop";
 	}
+
+	    
+		//사용자 페이지 관련  e
+		
 
 	
 	

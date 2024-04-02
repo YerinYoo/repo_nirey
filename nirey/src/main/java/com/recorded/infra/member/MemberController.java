@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -102,6 +103,16 @@ public class MemberController extends BaseController {
         service.insert(dto);
         return "redirect:/Morders";
     }
+    
+ // MemberController.java
+
+ // 회원 정보 수정 처리
+ @PostMapping("/MemberUpdate")
+ public String MemberUpdate(@ModelAttribute MemberDto dto) throws Exception {
+     service.update(dto); // 서비스 계층으로 수정된 값 전달
+     return "redirect:/MordersView"; // 수정된 정보가 표시된 상세 페이지로 이동
+ }
+
 
     // 회원 탈퇴 처리
     @RequestMapping(value = "/MemberUelete")
@@ -129,12 +140,12 @@ public class MemberController extends BaseController {
     }
 
     // 회원 상세 정보 조회
-    @RequestMapping(value = "/MordersView")
-    public String MordersView(MemberDto dto, Model model) throws Exception {
-        model.addAttribute("item", service.selectOne(dto)); 
-        return "adm/infra/v1/MordersView"; 
+    @GetMapping("/MordersView")
+    public String mOrdersView(Model model) {
+        MemberDto item = MemberService.authenticate("memberSeq"); // 기존 데이터 가져오기
+        model.addAttribute("item", item); // 모델에 데이터 설정
+        return "adm/infra/v1/MordersView"; // 템플릿 이름 반환
     }
-
     // 회원 정보 수정 페이지로 이동
     @RequestMapping(value = "/MordersForm")
     public String MordersForm(MemberDto dto, Model model) throws Exception {

@@ -17,20 +17,20 @@ public class CodeGroupController {
 
 	@Autowired
 	private CodeGroupService service;
-	
-	@RequestMapping(value = "/orders")
-	public String orders(@ModelAttribute("vo") CodeGroupVo vo, Model model) throws Exception {
-	    // 페이징 관련 정보 설정
-	    vo.setParamsPaging(service.getTotalCodeGroupCount(vo));
-	    
-	    // 페이징 정보를 기반으로 리스트 조회
-	    if (vo.getTotalRows() > 0) {
-	        List<CodeGroupDto> list = service.selectList(vo);
-	        model.addAttribute("list", list);
-	    }
-	    
-	    return "adm/infra/v1/orders"; // 뷰 이름 반환
-	}
+    
+    @RequestMapping(value = "/orders")
+    public String orders(@ModelAttribute("vo") CodeGroupVo vo, Model model) throws Exception {
+        // 페이징 관련 정보 설정
+        vo.setParamsPaging(service.getTotalCodeGroupCount(vo));
+        
+        // 페이징 정보를 기반으로 리스트 조회
+        if (vo.getTotalRows() > 0) {
+            List<CodeGroupDto> list = service.selectList(vo);
+            model.addAttribute("list", list);
+        }
+        
+        return "adm/infra/v1/orders"; // 수정된 부분: 뷰 이름 반환
+    }
 
 
 	public void setSearch(CodeGroupVo vo) throws Exception {

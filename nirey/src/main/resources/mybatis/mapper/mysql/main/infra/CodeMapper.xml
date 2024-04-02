@@ -8,19 +8,31 @@
     <!-- Select Paged Code List -->
     <select id="selectPagedCodeList" resultMap="resultMapObj">
         <!-- Common SQL -->
-        <include refid="selectCommon"/>
-        FROM CodeGroup a
-        LEFT JOIN code b ON a.CodeGroupSeq = b.CodeGroupSeq
+        SELECT 
+        a.*
+        , b.seq as CodeGroupSeq
+        , b.name as CodeGroupName 
+        FROM code a
+        LEFT JOIN codeGroup b 
+            ON b.seq = a.CodeGroupSeq 
+                AND a.DelNy = 0
+        WHERE 1=1
+        <!-- Additional conditions -->
+        <if test="shDelNy != null and !shDelNy.equals('')">AND a.delNy = #{shDelNy}</if>
         <choose>
-            <when test="shOption == 1">
-                AND b.seq = #{shValue}
-            </when>
-            <when test="shOption == 2">
-                AND a.name LIKE CONCAT('%',#{shValue},'%')
-            </when>
+            <when test="shOptionDate == 1">AND a.RegDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+            <when test="shOptionDate == 2">AND a.ModDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+        </choose>
+        <!-- Options -->
+        <choose> 
+            <when test="shOption == 1">AND b.codeGroupSeq = #{shValue}</when>
+            <when test="shOption == 2">AND b.codeGroupName LIKE CONCAT('%',#{shValue},'%')</when>
+            <when test="shOption == 3">AND a.codeSeq = #{shValue}</when>
+            <when test="shOption == 4">AND a.codeName LIKE CONCAT('%',#{shValue},'%')</when>
+            <when test="shOption == 5">AND a.codeMemo LIKE CONCAT('%',#{shValue},'%')</when>
         </choose>
         <!-- Pagination -->
-        limit #{rowNumToShow} offset #{startRnumForMysql}
+        LIMIT #{rowNumToShow} OFFSET #{startRnumForMysql}
     </select>
 
     <!-- Select One -->
@@ -78,44 +90,19 @@
 
     <!-- Get Total Code Count -->
     <select id="getTotalCodeCount" resultType="int">
-        <!-- Common SQL -->
-        <include refid="selectCommon"/>
-        <!-- Count -->
-        SELECT COUNT(*) FROM CodeGroup a LEFT JOIN code b ON a.seq = b.CodeGroupSeq
+        SELECT COUNT(*) 
+        FROM codeGroup b 
+        LEFT JOIN code a ON b.seq = a.CodeGroupSeq
         <if test="shDelNy != null and shDelNy != ''">
-            WHERE b.delNY = #{shDelNy}
+            WHERE a.delNY = #{shDelNy}
         </if>
-        <!-- Option -->
         <choose>
             <when test="shOption == 1">
-                AND b.seq = #{shValue}
+                AND a.seq = #{shValue}
             </when>
             <when test="shOption == 2">
-                AND a.name LIKE CONCAT('%',#{shValue},'%')
+                AND b.name LIKE CONCAT('%',#{shValue},'%')
             </when>
         </choose>
     </select>
-
-    <!-- Common SQL -->
-    <sql id ="selectCommon">
-        FROM code a
-        left join codeGroup b 
-            on b.codeGroup_seq = a.codeGroupSeq 
-                and a.codeDelNy = 0
-        where 1=1
-        <!-- Additional conditions -->
-        <if test="shDelNy != null and !shDelNy.equals('')">AND a.delNy = #{shDelNy}</if>
-        <choose>
-            <when test="shOptionDate == 1">AND a.RegDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-            <when test="shOptionDate == 2">AND a.ModDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-        </choose>
-        <!-- Options -->
-        <choose> 
-            <when test="shOption == 1">AND b.codeGroupSeq = #{shValue}</when>
-            <when test="shOption == 2">AND b.codeGroupName LIKE CONCAT('%',#{shValue},'%')</when>
-            <when test="shOption == 3">AND a.codeSeq = #{shValue}</when>
-            <when test="shOption == 4">AND a.codeName LIKE CONCAT('%',#{shValue},'%')</when>
-            <when test="shOption == 5">AND a.codeMemo LIKE CONCAT('%',#{shValue},'%')</when>
-        </choose>
-    </sql>
 </mapper>

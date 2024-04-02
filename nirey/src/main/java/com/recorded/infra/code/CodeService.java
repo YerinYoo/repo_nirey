@@ -57,7 +57,7 @@ public class CodeService {
     }
     
     //페이지네이션 관련
-    public List<CodeDto> selectPagedCodeList(CodeVo vo) {
+    public List<CodeDto> selectPagedCodeList(CodeDto dto, CodeVo vo) {
     	return dao.selectPagedCodeList(vo);
     }
     

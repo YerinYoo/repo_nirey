@@ -223,4 +223,45 @@
 		) aa
 		limit #{rowNumToShow} offset #{startRnumForMysql}
 	</sql>
+	
+	
+	
+<!-- 제품 리스트 페이지 관련 리스트 -->
+<select id="prodList" resultMap="resultMapObj">
+    select
+        a.productSeq
+        , a.delNY
+        , a.ProductName
+        , a.OrgPrice
+        , a.DiscountedPrice
+        , a.ProductDescription
+        , a.prodStockCD
+        , a.category1CD
+        , a.category2CD
+        , a.regDateTime
+        , a.modDateTime
+        , b.color
+        , c.size
+    from 
+        product a
+    inner join 
+        prodColor b
+    on
+        a.productSeq=b.Product_productSeq
+    inner join 
+        prodSize c
+    on 
+        b.Product_productSeq=c.Product_productSeq
+    where 1=1
+    <if test="shDelNy != null and shDelNy.equals('')">AND a.delNY = #{shDelNy}</if>
+    <choose>
+        <when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+        <when test="shOptionDate == 2">AND a.modDatetime IS NOT NULL AND a.modDatetime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+    </choose> 
+    <choose>
+        <when test="shOption == 1">AND a.productSeq = #{shValue}</when>
+        <when test="shOption==2">AND a.ProductName LIKE CONCAT('%',#{shValue},'%')</when>
+    </choose>
+</select>
+
 </mapper>
