@@ -2,12 +2,16 @@ package com.recorded.infra.product;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public interface ProductDao {
 
 	public List<ProductDto> selectList(); 
-	public ProductDto selectOne(ProductDto dto);
 	
-	public List<ProductDto> prodList();
+	public List<ProductDto> prodList(); 
+	
+	public ProductDto selectOne(ProductDto dto);
 	
 	public int insert(ProductDto dto);
 	public int update(ProductDto dto);

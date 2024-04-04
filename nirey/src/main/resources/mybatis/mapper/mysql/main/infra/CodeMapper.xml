@@ -105,4 +105,15 @@
             </when>
         </choose>
     </select>
+    
+        <!-- 제품 및 타 페이지에서 코드 불러오기 -->
+    <select id="selectListWithoutPaging" resultMap="resultMapObj">
+        SELECT
+            a.seq
+            ,a.name
+        FROM code a
+        WHERE 1=1
+            AND delNy = 0
+        ORDER BY a.seq DESC
+    </select>
 </mapper>

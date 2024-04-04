@@ -306,21 +306,13 @@
 					</div>
 					<div class="col-8 mt-3">
 						<div class="tab-pane fade show active" id="dashboard" role="tabpanel">
-							<div class="dashboard-content">
-								<p>
-									안녕하세요, <strong class="text-dark">"김땡땡"</strong>님! (
-									<strong class="text-dark">"김땡땡"</strong>님이 아니신가요?
-									<a href="login.html" class="btn btn-link ">Log out</a>)
-								</p>
-
-								
 							<div class="order-content">
 								<h3 class="account-sub-title d-none d-md-block"><i
 										class="sicon-social-dropbox align-middle mr-3"></i>Orders</h3>
 								<div class="order-table-container">
 								<div class="row">
 
-								<div class="container">
+								<div class="container" th:each="order:${orderList}">
 									<div class="mt-3" id="accordion1">
 										<div class="card card-accordion">
 											<a class="card-header collapsed" href="#" data-toggle="collapse" data-target="#collapse1"
@@ -332,19 +324,19 @@
 												<table class="table table-orderdetails">
 													<tr>
 														<td class="order-id col-3">Order ID</td>
-														<td class="order-id">24-0227089</td>
+														<td class="order-id" th:text="${order.orderSeq}"></td>
 													</tr>
 													<tr>
 														<td class="order-date">Order Date</td>
-														<td class="order-date">2024-02-27 16:47</td>
+														<td class="order-date" th:text="${order.OrderDate}"></td>
 													</tr>
 													<tr>
 														<td class="orderer">Orderer</td>
-														<td class="orderer">김땡땡</td>
+														<td class="orderer" th:text="${order.name}"></td>
 													</tr>
 													<tr>
 														<td class="order-status mr-5">Order Status</td>
-														<td class="order-status">배송 준비 중</td>
+														<td class="order-status"  th:text="${@codeService.selectOneCachedCode(order.orderStatus)}"></td>
 													</tr>
 												</table>
 											</div>
@@ -363,7 +355,8 @@
 														<th style="text-align:center; vertical-align : middle;">Order Product</th>
 														<th style="text-align:center; vertical-align : middle;">Tracking Number</th>
 														<th style="text-align:center; vertical-align : middle;">Status</th>
-														<th style="text-align:center; vertical-align : middle;">Option</th>
+														<th style="text-align:center; vertical-align : middle;">Color</th>
+														<th style="text-align:center; vertical-align : middle;">Size</th>
 														<th style="text-align:center; vertical-align : middle;">Price</th>
 
 													</tr>
@@ -371,62 +364,18 @@
 														<td class="product-img" style="text-align:center; vertical-align : middle;">
 															<img src="/usr/images/demoes/demo3/products/product-3.jpg" style="height : 80px;">
 														</td>
-														<td class="order-product-name" style="text-align:center; vertical-align : middle;">Angora Knit</td>
-														<td class="tracking-number" style="text-align:center; vertical-align : middle;">2306090525326</td>
-														<td class="tracking-status" style="text-align:center; vertical-align : middle;">배송 완료</td>
-														<td class="order-option" style="text-align:center; vertical-align : middle">White</td>
-														<td class="order-product-price" style="text-align:center; vertical-align : middle">26,900원</td>
+														<td class="order-product-name" style="text-align:center; vertical-align : middle;" th:text="${order.ProductName}"></td>
+														<td class="tracking-number" style="text-align:center; vertical-align : middle;" th:text="${order.orderTrackingNo}"></td>
+														<td class="tracking-status" style="text-align:center; vertical-align : middle;" th:text="${@codeService.selectOneCachedCode(order.orderStatus)}"></td>
+														<td class="order-color" style="text-align:center; vertical-align : middle" th:text="${order.colorOption}"></td>
+														<td class="order-size" style="text-align:center; vertical-align : middle" th:text="${order.sizeOption}"></td>
+														<td class="order-product-price" style="text-align:center; vertical-align : middle" th:text="${order.DiscountedPrice}"></td>
 														<td class="write-review" style="text-align:center; vertical-align : middle;">
 															<button class="btn btn-write-review product-type-simple btn-shop">
 																Write Review
 															</button></td>
 														</td>
 													</tr>
-													<tr>
-														<td class="product-img" style="text-align:center; vertical-align : middle;">
-															<img src="/usr/images/demoes/demo3/products/product-3.jpg" style="height : 80px;">
-														</td>
-														<td class="order-product-name" style="text-align:center; vertical-align : middle;">Angora Knit</td>
-														<td class="tracking-number" style="text-align:center; vertical-align : middle;">2306090525326</td>
-														<td class="tracking-status" style="text-align:center; vertical-align : middle;">배송 완료</td>
-														<td class="order-option" style="text-align:center; vertical-align : middle">White</td>
-														<td class="order-product-price" style="text-align:center; vertical-align : middle">26,900원</td>
-														<td class="write-review" style="text-align:center; vertical-align : middle;">
-															<button class="btn btn-write-review product-type-simple btn-shop">
-																Write Review
-															</button></td>
-														</td>
-													</tr>
-													<tr>
-														<td class="product-img" style="text-align:center; vertical-align : middle;">
-															<img src="/usr/images/demoes/demo3/products/product-3.jpg" style="height : 80px;">
-														</td>
-														<td class="order-product-name" style="text-align:center; vertical-align : middle;">Angora Knit</td>
-														<td class="tracking-number" style="text-align:center; vertical-align : middle;">2306090525326</td>
-														<td class="tracking-status" style="text-align:center; vertical-align : middle;">배송 완료</td>
-														<td class="order-option" style="text-align:center; vertical-align : middle">White</td>
-														<td class="order-product-price" style="text-align:center; vertical-align : middle">26,900원</td>
-														<td class="write-review" style="text-align:center; vertical-align : middle;">
-															<button class="btn btn-write-review product-type-simple btn-shop">
-																Write Review
-															</button></td>
-														</td>
-													</tr>
-													<tr>
-														<td class="product-img" style="text-align:center; vertical-align : middle;">
-															<img src="/usr/images/demoes/demo3/products/product-3.jpg" style="height : 80px;">
-														</td>
-														<td class="order-product-name" style="text-align:center; vertical-align : middle;">Angora Knit</td>
-														<td class="tracking-number" style="text-align:center; vertical-align : middle;">2306090525326</td>
-														<td class="tracking-status" style="text-align:center; vertical-align : middle;">배송 완료</td>
-														<td class="order-option" style="text-align:center; vertical-align : middle">White</td>
-														<td class="order-product-price" style="text-align:center; vertical-align : middle">26,900원</td>
-														<td class="write-review" style="text-align:center; vertical-align : middle;">
-															<button class="btn btn-write-review product-type-simple btn-shop">
-																Write Review
-															</button></td>
-														</td>
-													</tr> 
 												</table>
 											</div>
 										</div>
@@ -443,15 +392,17 @@
 												<table class="table table-orderdetails">
 													<tr>
 														<td class="order-payment">Payment</td>
-														<td class="order-paymentid" style="text-align : right;">무통장 입금</td>
+														<td class="order-paymentid" style="text-align : right;" th:text="${@codeService.selectOneCachedCode(order.paymentCD)}"
+														></td>
 													</tr>
 													<tr>
 														<td class="order-payment-details">Payment Details</td>
-														<td class="order-payment-detailsid" style="text-align : right;">입금자 : 유예린, 계좌번호 : [신한은행] 110-448-717302 (유예린)  </td>
+														<td class="order-payment-detailsid" style="text-align : right;" 
+														th:text="${@codeService.selectOneCachedCode(order.cardCompCD)}"></td>
 													</tr>
 													<tr>
 														<td class="total-payprice">Total Price</td>
-														<td class="total=payprice" style="text-align : right;">392,020원</td>
+														<td class="total=payprice" style="text-align : right;" th:text="${order.TotalPrice}"></td>
 													</tr>
 												</table>
 													<div id="accordion5">
@@ -465,7 +416,7 @@
 																<table class="table table-totalprice">
 																	<tr>
 																		<td class="order-total-price">Product Price</td>
-																		<td class="order-total-price" style="text-align : right;">396,000원</td>
+																		<td class="order-total-price" style="text-align : right;" th:text="${order.TotalOrgPrice}"></td>
 																	</tr>
 																	<tr>
 																		<td class="order-payment-details">Shipping Price</td>
@@ -486,15 +437,11 @@
 																	<table class="table table-discoumnted">
 																		<tr>
 																			<td class="order-discountedprod">Product Discounted Price</td>
-																			<td class="order-discountedprod"style="text-align : right;">-13,600원</td>
-																		</tr>
-																		<tr>
-																			<td class="order-discountedcoupon">Used Coupon</td>
-																			<td class="order-discountedcoupon"style="text-align : right;">-5,300원</td>
+																			<td class="order-discountedprod"style="text-align : right;" th:text="${order.TotalDiscPrice}"></td>
 																		</tr>
 																		<tr>
 																			<td class="order-totalpayprice">Paid Price</td>
-																			<td class="order-totalpayprice"style="text-align : right;">377,100원</td>
+																			<td class="order-totalpayprice"style="text-align : right;" th:text="${order.TotalPrice}"></td>
 																		</tr>
 																	</table>
 																</div>
@@ -516,23 +463,27 @@
 												<table class="table table-orderdetails">
 													<tr>
 														<td class="order-recipient">Recipient</td>
-														<td class="order-recipient">유예린</td>
+														<td class="order-recipient" th:text="${order.recipient}"></td>
 													</tr>
 													<tr>
 														<td class="order-zipcode">Zip Code</td>
-														<td class="order-zipcode">12146</td>
+														<td class="order-zipcode" th:text="${order.zipcode}"></td>
 													</tr>
 													<tr>
 														<td class="order-addr">Address</td>
-														<td class="order-addr">경기도 남양주시 호평로 93, 1706동 203호</td>
+														<td class="order-addr" th:text="${order.addr}"></td>
+													</tr>
+													<tr>
+														<td class="order-addrDetail">Address</td>
+														<td class="order-addrDetail" th:text="${order.addrDetail}"></td>
 													</tr>
 													<tr>
 														<td class="order-phonenum">Phone Number</td>
-														<td class="order-phonenum">010-4951-5254</td>
+														<td class="order-phonenum" th:text="${order.phoneNum}"></td>
 													</tr>
 													<tr>
 														<td class="order-message">Message</td>
-														<td class="order-message">부재 시, 문 앞에 두고 가주세요</td>
+														<td class="order-message" th:text="${order.shippingMsg}"></td>
 													</tr>
 												</table>
 											</div>

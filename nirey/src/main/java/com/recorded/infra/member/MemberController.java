@@ -3,11 +3,13 @@ package com.recorded.infra.member;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,6 +18,7 @@ import com.recorded.common.base.BaseController;
 import com.recorded.common.constants.Constants;
 import com.recorded.infra.codegroup.CodeGroupDto;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -141,8 +144,8 @@ public class MemberController extends BaseController {
 
     // 회원 상세 정보 조회
     @GetMapping("/MordersView")
-    public String mOrdersView(Model model) {
-        MemberDto item = MemberService.authenticate("memberSeq"); // 기존 데이터 가져오기
+    public String MordersView(Model model) {
+        MemberDto item = MemberService.authenticate("ID", "pwd"); // 기존 데이터 가져오기
         model.addAttribute("item", item); // 모델에 데이터 설정
         return "adm/infra/v1/MordersView"; // 템플릿 이름 반환
     }
@@ -164,11 +167,15 @@ public class MemberController extends BaseController {
         // 검색 조건 설정
     }
     
+    
+    //adm page index
+    @RequestMapping(value = "/index")
+	public String ordersAdd(MemberDto dto) throws Exception {
+		return "adm/infra/v1/index";
+	}
+    
     //-----------------------------------------------------------Admin Controller E
     //-----------------------------------------------------------eCommerce Controller S
-    
-  
-    //-----------------------------------------------------------eCommerce Controller E
     
     //  회원 로그인 페이지
     @RequestMapping(value = "/loginUsr")
@@ -216,12 +223,28 @@ public class MemberController extends BaseController {
     	returnMap.put("rt", "success");
     	return returnMap;
     }
-    
-    //adm page index
-    @RequestMapping(value = "/index")
-	public String ordersAdd(MemberDto dto) throws Exception {
-		return "adm/infra/v1/index";
-	}
 
+    @GetMapping(value="/MyAccount")
+    public String myAccount(HttpSession session, Model model) {
+        // 세션에서 로그인한 아이디 가져오기
+        String loginID = (String) session.getAttribute("loginID");
+
+        // 세션에 로그인한 아이디가 없으면 로그인 페이지로 리다이렉트
+        if (loginID == null) {
+            return "redirect:/loginUsr";
+        }
+
+        // 로그인한 아이디와 일치하는 회원 정보 조회
+        MemberDto member = service.selectOneById(loginID);
+
+        // 회원 정보를 모델에 추가하여 뷰에 전달
+        model.addAttribute("member", member);
+
+        // 회원 정보 수정 페이지로 이동하는 뷰 이름 반환
+        return "usr/infra/v1/account-details";
+    }
+
+
+    //-----------------------------------------------------------eCommerce Controller E
     
 }

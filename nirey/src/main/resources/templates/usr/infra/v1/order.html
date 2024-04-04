@@ -306,13 +306,6 @@
 					</div>
 					<div class="col-10 mt-3">
 						<div class="tab-pane fade show active" id="dashboard" role="tabpanel">
-							<div class="dashboard-content">
-								<p>
-									안녕하세요, <strong class="text-dark">"김땡땡"</strong>님! (
-									<strong class="text-dark">"김땡땡"</strong>님이 아니신가요?
-									<a href="login.html" class="btn btn-link ">Log out</a>)
-								</p>
-
 							<div class="order-content">
 								<h3 class="account-sub-title d-none d-md-block"><i
 										class="sicon-social-dropbox align-middle mr-3"></i>Orders</h3>
@@ -358,100 +351,18 @@
 												<th class="order-more" style="text-align:center; vertical-align : middle;"></th>
 											</tr>
 										</thead>
-										<tbody>
-											<tr style="height : 50px">
-												<td class="order-id"style="text-align:center; vertical-align : middle;">24-0227089</td>
-												<td class="order-date"style="text-align:center; vertical-align : middle;">24-02-27</td>
-                                                <td class="order-price"style="text-align:center; vertical-align : middle;">213,000원</td>
-                                                <td class="payment"style="text-align:center; vertical-align : middle;">신용카드</td>
-												<td class="order-status"style="text-align:center; vertical-align : middle;">배송 준비 중</td>
+										<tbody >
+											<tr style="height : 50px" th:each="order:${orderList}">
+												<td class="order-id"style="text-align:center; vertical-align : middle;" th:text="${order.orderSeq}"></td>
+												<td class="order-date"style="text-align:center; vertical-align : middle;" th:text="${order.OrderDate}"></td>
+                                                <td class="order-price"style="text-align:center; vertical-align : middle;" th:text="${order.TotalPrice}"></td>
+                                                <td class="payment"style="text-align:center; vertical-align : middle;" 
+                                                th:text="${@codeService.selectOneCachedCode(order.paymentCD)}"></td>
+												<td class="order-status"style="text-align:center; vertical-align : middle;"
+												th:text="${@codeService.selectOneCachedCode(order.orderStatus)}"></td>
 												<td class="order-more" style="text-align:center; vertical-align : middle;">
-													<button class="btn btn-view-order product-type-simple btn-shop" href="order-details.html">
-														View More
-													</button></td>
-											</tr>
-
-                                            <tr style="height : 50px">
-												<td class="order-id"style="text-align:center; vertical-align : middle;">24-0203239</td>
-												<td class="order-date"style="text-align:center; vertical-align : middle;">24-02-03</td>
-                                                <td class="order-price"style="text-align:center; vertical-align : middle;">78,000원</td>
-                                                <td class="payment"style="text-align:center; vertical-align : middle;">무통장 입금</td>
-												<td class="order-status"style="text-align:center; vertical-align : middle;">구매 확정</td>
-												<td class="order-more" style="text-align:center; vertical-align : middle;">
-													<button class="btn btn-view-order product-type-simple btn-shop" href="order-details.html">
-														View More
-													</button></td>
-											</tr>
-
-                                            <tr style="height : 50px">
-												<td class="order-id"style="text-align:center; vertical-align : middle;">24-0131326</td>
-												<td class="order-date"style="text-align:center; vertical-align : middle;">24-01-31</td>
-                                                <td class="order-price"style="text-align:center; vertical-align : middle;">148,000원</td>
-                                                <td class="payment"style="text-align:center; vertical-align : middle;">무통장 입금</td>
-												<td class="order-status"style="text-align:center; vertical-align : middle;">주문 취소</td>
-												<td class="order-more" style="text-align:center; vertical-align : middle;">
-													<button class="btn btn-view-order product-type-simple btn-shop" href="order-details.html">
-														View More
-													</button></td>
-											</tr>
-
-                                            <tr style="height : 50px">
-												<td class="order-id"style="text-align:center; vertical-align : middle;">24-0121874</td>
-												<td class="order-date"style="text-align:center; vertical-align : middle;">24-01-21</td>
-                                                <td class="order-price"style="text-align:center; vertical-align : middle;">31,000원</td>
-                                                <td class="payment"style="text-align:center; vertical-align : middle;">신용카드</td>
-												<td class="order-status"style="text-align:center; vertical-align : middle;">배송 완료</td>
-												<td class="order-more" style="text-align:center; vertical-align : middle;">
-													<button class="btn btn-view-order product-type-simple btn-shop" href="order-details.html">
-														View More
-													</button></td>
-											</tr>
-
-                                            <tr style="height : 50px">
-												<td class="order-id"style="text-align:center; vertical-align : middle;">23-1203285</td>
-												<td class="order-date"style="text-align:center; vertical-align : middle;">23-12-03</td>
-                                                <td class="order-price"style="text-align:center; vertical-align : middle;">649,000원</td>
-                                                <td class="payment"style="text-align:center; vertical-align : middle;">신용카드</td>
-												<td class="order-status"style="text-align:center; vertical-align : middle;">구매 확정</td>
-												<td class="order-more" style="text-align:center; vertical-align : middle;">
-													<button class="btn btn-view-order product-type-simple btn-shop" href="order-details.html">
-														View More
-													</button></td>
-											</tr>
-
-                                            <tr style="height : 50px">
-												<td class="order-id"style="text-align:center; vertical-align : middle;">23-0917478</td>
-												<td class="order-date"style="text-align:center; vertical-align : middle;">23-09-17</td>
-                                                <td class="order-price"style="text-align:center; vertical-align : middle;">97,000원</td>
-                                                <td class="payment"style="text-align:center; vertical-align : middle;">무통장 입금</td>
-												<td class="order-status"style="text-align:center; vertical-align : middle;">주문 보류</td>
-												<td class="order-more" style="text-align:center; vertical-align : middle;">
-													<button class="btn btn-view-order product-type-simple btn-shop" href="order-details.html">
-														View More
-													</button></td>
-											</tr>
-
-                                            <tr style="height : 50px">
-												<td class="order-id"style="text-align:center; vertical-align : middle;">23-0708239</td>
-												<td class="order-date"style="text-align:center; vertical-align : middle;">23-07-08</td>
-                                                <td class="order-price"style="text-align:center; vertical-align : middle;">217,000원</td>
-                                                <td class="payment"style="text-align:center; vertical-align : middle;">신용카드</td>
-												<td class="order-status"style="text-align:center; vertical-align : middle;">배송 준비 중</td>
-												<td class="order-more" style="text-align:center; vertical-align : middle;">
-													<button class="btn btn-view-order product-type-simple btn-shop" href="order-details.html">
-														View More
-													</button></td>
-											</tr>
-
-                                            <tr style="height : 50px">
-												<td class="order-id"style="text-align:center; vertical-align : middle;">23-0525128</td>
-												<td class="order-date"style="text-align:center; vertical-align : middle;">23-05-25</td>
-                                                <td class="order-price"style="text-align:center; vertical-align : middle;">53,000원</td>
-                                                <td class="payment"style="text-align:center; vertical-align : middle;">신용카드</td>
-												<td class="order-status"style="text-align:center; vertical-align : middle;">구매 확정</td>
-												<td class="order-more" style="text-align:center; vertical-align : middle;">
-													<button class="btn btn-view-order product-type-simple btn-shop" href="order-details.html">
-														View More
+													<button class="btn btn-view-order product-type-simple btn-shop" >
+													<a th:href="@{/MyOrdersDetail}">View Details</a>
 													</button>
 												</td>
 											</tr>

@@ -296,16 +296,10 @@
 					</div>
 					<div class="col-8 mt-3">
 						<div class="tab-pane fade show active" id="dashboard" role="tabpanel">
-							<div class="dashboard-content">
-								<p>
-									안녕하세요, <strong class="text-dark">"김땡땡"</strong>님! (
-									<strong class="text-dark">"김땡땡"</strong>님이 아니신가요?
-									<a href="login.html" class="btn btn-link ">Log out</a>)
-								</p>
-                            </div>
+						
                         </div>
                         
-			<div class="container login-container">
+			<div class="container login-container"  th:each="account : ${selectList}">
 				<div class="row">
 					<div class="col-lg-10 mx-auto">
 						<div class="row">
@@ -315,38 +309,38 @@
 									<h4 class="title">Basic Info</h4>
 								</div>
 
-								<form action="#">
+								 <form name="formInsert" id="formInsert" method="post" action="MemberUpdate"> 
 									<label for="register-id">
 										ID
 										<span class="required">*</span>
 									</label>
-									<input type="id" class="form-input form-wide" placeholder="Your ID" id="register-id" disabled />
+									<input type="id" class="form-input form-wide" placeholder="Your ID" id="register-id"  th:text="${account.ID}" disabled />
 
 									<label for="register-password">
 										Change Password
 										<span class="required">*</span>
 									</label>
-									<input type="password" class="form-input form-wide" id="register-password"
+									<input type="password" class="form-input form-wide" id="register-password " th:text="${account.pwd}"
 										required />
 									
 									<label for="register-password">
 										Password Check
 										<span class="required">*</span>
 									</label>
-									<input type="password" class="form-input form-wide" id="register-password"
+									<input type="password" class="form-input form-wide" id="register-password" th:text="${account.pwd}"
 										required />
 
 									<label for="register-email">
 										email
 										<span class="required">*</span>
 									</label>
-									<input type="email" class="form-input form-wide" id="register-email" required />
+									<input type="email" class="form-input form-wide" id="register-email" th:text="${account.email}" required />
 
 										<label for="register-email">
 											name
 											<span class="required">*</span>
 										</label>
-										<input type="name" class="form-input form-wide" id="register-name" required />
+										<input type="name" class="form-input form-wide" id="register-name" th:text="${account.name}"required />
 								
 							</div>
 
@@ -356,29 +350,27 @@
 									<h4 class="title">Additional Info</h4>
 								</div>
 
-								<form action="#">
 									<label for="register-birthday">
 										BirthDay [yyyy - mm - dd]</label>
-									<input type="bitrhday" class="form-input form-wide" id="register-birthday" />
+									<input type="bitrhday" class="form-input form-wide" id="register-birthday" th:text="${account.birthday}"/>
+									
+									<div class="mt-3">
+									    <label for="register-gender">Gender</label>
+									    <input id="register-gender-male" name="register-gender" value="1" type="radio" autocomplete="off" th:checked="${item.genderCD == 1}">
+									    <label for="register-gender-male">Male</label>
+									    
+									    <input id="register-gender-female" name="register-gender" value="2" type="radio" autocomplete="off" th:checked="${item.genderCD == 2}">
+									    <label for="register-gender-female">Female</label>
+									
+									    <input id="register-gender-etc" name="register-gender" value="3" type="radio" autocomplete="off" th:checked="${item.genderCD == 3}">
+									    <label for="register-gender-etc">etc.</label>
+									</div>
 
-								<div class="mt-3">
-
-									<label for="register-gender">Gender</label>
-									<input id="register-gender" name="register-gender" value="M" type="radio" autocomplete="off">
-									<label for="gender1">Male</label>
-								
-									<input id="register-gender" name="register-gender" value="F" type="radio" autocomplete="off">
-									<label for="gender1">Female</label>
-
-									<input id="register-gender" name="register-gender" value="etc" type="radio" autocomplete="off">
-									<label for="gender1">etc.</label>
-								</div>
 
 								<div class="mt-2">
-								<form action="#">
 									<label for="register-mobile">
 										Mobile</label>
-									<input type="mobile" class="form-input form-wide" id="mobile" />
+									<input type="mobile" class="form-input form-wide" id="mobile" th:text="${account.MobileNum}" />
 								</div>
 
 								<div class="form-footer mb-2 mt-8" style="width : 300px; float : right">

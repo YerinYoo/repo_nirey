@@ -12,10 +12,11 @@ public class EtcController {
         return "etc/pfIndex"; 
     }
     
-	//쇼핑몰 메인 페이지 연결 컨트롤러
-    @RequestMapping(value = "/recorded")
-    public String recorded() throws Exception {
-        return "usr/infra/v1/home"; 
+	//사용자 화면 > My Page > Dashboard컨트롤러
+    @RequestMapping(value = "/dashboard")
+    public String dashboard() throws Exception {
+        return "usr/infra/v1/dashboard"; 
     }
+
     
 }

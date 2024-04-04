@@ -1,7 +1,9 @@
 package com.recorded.infra.member;
 
+
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -31,6 +33,10 @@ public class MemberService {
         return dao.update(dto);
     }
     
+    public int uelete(MemberDto dto) {
+    	return dao.uelete(dto);
+    }
+    
     public int delete(MemberDto dto) {
         return dao.delete(dto);
     }
@@ -47,13 +53,18 @@ public class MemberService {
         return dao.getTotalMemberCount(vo);
     }
     
-    public MemberDto authenticate(String ID, String pwd) {
-        MemberDto member = dao.selectOneById(ID);
+	    public MemberDto authenticate(String ID, String pwd) {
+	        MemberDto member = dao.selectOneById(ID);
+	
+	        if (member != null && passwordEncoder.matches(pwd, member.getPwd())) {
+	            return member;
+	        } else {
+	            return null;
+	        }
+	        
+	    }
 
-        if (member != null && passwordEncoder.matches(pwd, member.getPwd())) {
-            return member;
-        } else {
-            return null;
-        }
-    }
+	    public MemberDto selectOneById(@Param("ID") String ID) {
+			return null;
+		}
 }

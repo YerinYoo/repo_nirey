@@ -34,7 +34,7 @@
 				b.Product_productSeq=c.Product_productSeq
 			
 			where 1=1
-	        <if test="shDelNy != null and shDelNy.equals('')">AND a.delNY = #{shDelNy}</if>
+	    <!--     <if test="shDelNy != null and shDelNy.equals('')">AND a.delNY = #{shDelNy}</if>
 	      
 			<choose>
 				<when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
@@ -44,7 +44,7 @@
 	    	 <choose>
 	         	 <when test="shOption == 1">AND a.productSeq = #{shValue}</when>
 	         	 <when test="shOption==2"> AND a.ProductName LIKE CONCAT('%',#{shValue},'%')</when>
-	       	 </choose>
+	       	 </choose> -->
 
     </select>
 	  
@@ -65,7 +65,7 @@
     </select>
     
 	  <insert id="insert">
-			insert into code (
+			insert into product (
 				a.delNY
 				, a.ProductName
 				, a.OrgPrice
@@ -93,7 +93,7 @@
 	  
 	   
     <update id="update">
-   	update code
+   	update product
    	set
    		ProductName = #{ProductName}
    	WHERE 1=1
@@ -102,7 +102,7 @@
   	</update>
   	
   	<update id="uelete">
-  			update code
+  			update product
   			set
   			delNY=1
   			where 1=1
@@ -112,7 +112,7 @@
   	
   	<delete id="delete">
   	
-  	delete from code
+  	delete from product
   	where productSeq=#{productSeq}
   	</delete>
 	  
@@ -226,8 +226,32 @@
 	
 	
 	
-<!-- 제품 리스트 페이지 관련 리스트 -->
+<!-- 제품 리스트 페이지 관련 쿼리 - color, size는 상세 화면에서만 조인할 거임-->
 <select id="prodList" resultMap="resultMapObj">
+    select
+        a.productSeq
+        , a.ProductName
+        , a.OrgPrice
+        , a.DiscountedPrice
+        , a.category1CD
+        , a.category2CD
+    from 
+        product a
+    where 1=1
+    <!-- <if test="shDelNy != null and shDelNy.equals('')">AND a.delNY = #{shDelNy}</if> -->
+    <!-- <choose>
+        <when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+        <when test="shOptionDate == 2">AND a.modDatetime IS NOT NULL AND a.modDatetime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+    </choose> -->
+    <!-- <choose>
+        <when test="shOption == 1">AND a.productSeq = #{shValue}</when>
+        <when test="shOption==2">AND a.ProductName LIKE CONCAT('%',#{shValue},'%')</when>
+    </choose> -->
+    and a.productSeq is not null 
+</select>
+
+<!-- 제품 상세 관련 매퍼 -->
+<select id="prodDetailList" resultMap="resultMapObj">
     select
         a.productSeq
         , a.delNY
@@ -253,15 +277,18 @@
     on 
         b.Product_productSeq=c.Product_productSeq
     where 1=1
-    <if test="shDelNy != null and shDelNy.equals('')">AND a.delNY = #{shDelNy}</if>
-    <choose>
+    <!-- <if test="shDelNy != null and shDelNy.equals('')">AND a.delNY = #{shDelNy}</if> -->
+    <!-- <choose>
         <when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
         <when test="shOptionDate == 2">AND a.modDatetime IS NOT NULL AND a.modDatetime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-    </choose> 
-    <choose>
+    </choose> -->
+    <!-- <choose>
         <when test="shOption == 1">AND a.productSeq = #{shValue}</when>
         <when test="shOption==2">AND a.ProductName LIKE CONCAT('%',#{shValue},'%')</when>
-    </choose>
+    </choose> -->
+    and a.productSeq is not null 
 </select>
+
+
 
 </mapper>

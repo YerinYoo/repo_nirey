@@ -8,12 +8,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.recorded.common.constants.Constants;
 import com.recorded.common.util.UtilDateTime;
+import com.recorded.infra.member.MemberService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class ProductController {
 	
 	@Autowired
 	 ProductService service;
+	@Autowired
+	MemberService serviceM;
 	
 	@RequestMapping(value="/ProductInsert")
 	public String ProductInsert(ProductDto dto) throws Exception {
@@ -113,20 +118,35 @@ public class ProductController {
 //		vo.setShDateEnd(vo.getShDateEnd() == null || vo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(vo.getShDateEnd()));
 		
 		//사용자 페이지 관련 s
-	// Shop Page
-	@RequestMapping(value = "/recordedShop")
-	public String recordedShop(@ModelAttribute("vo") ProductVo vo, Model model) throws Exception {
-	    model.addAttribute("prodList", service.selectList(vo));
-	    return "usr/infra/v1/shop";
+	
+	// Index Page
+	@RequestMapping(value = "/recorded")
+	public String recorded(HttpSession session, Model model) throws Exception {
+	    // 세션에서 사용자 아이디를 가져옵니다.
+	    String userID = (String) session.getAttribute("userID");
+
+	    // 세션에 사용자 아이디가 없으면 로그인 페이지로 리다이렉트합니다.
+	    if (userID == null) {
+	        return "redirect:/loginUsr";
+	    }
+
+	    // 사용자가 로그인한 경우에만 데이터를 조회하고 모델에 추가합니다.
+	    model.addAttribute("prodList", service.prodList());
+
+	    // 홈 화면으로 이동합니다.
+	    return "usr/infra/v1/home";
 	}
 
-	    
+	
+	// Shop Page
+	@RequestMapping(value = "/recordedShop")
+	public String recordedShop(Model model) throws Exception {
+	    model.addAttribute("prodList", service.prodList());
+	    return "usr/infra/v1/shop"; 
+	}
+
 		//사용자 페이지 관련  e
 		
 
-	
-	
-	
-	
 
 }

@@ -335,403 +335,43 @@
                         </nav>
 
                         <div class="row">
-                            <div class="col-6 col-sm-4 col-md-3 col-xl-5col" th:each="list:${list}">
-                                <div class="product-default inner-quickview inner-icon">
-                                    <figure>
-                                        <a href="demo3-product.html">
-                                            <img src="/usr/images/demoes/demo3/products/product-1.jpg" width="273"
-                                                height="273" alt="productr" />
-                                        </a>
-                                        <div class="btn-icon-group">
-                                            <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
-                                                    class="icon-shopping-cart"></i></a>
-                                        </div>
-                                        <a href="ajax/product-quick-view.html" class="btn-quickview"
-                                            title="Quick View">Quick
-                                            View</a>
-                                    </figure>
-                                    <div class="product-details">
-                                        <div class="category-wrap">
-                                            <div class="category-list">
-                                                
-                                                <a th:if="${list.category1CD!= null}" th:text="${@codeService.selectOneCachedCode(list.category1CD)}" class="category1CD align-middle"></a>
-												<a th:unless="${list.category1CD != null}" class="category1CD align-middle"></a>
-																								
-												<a th:if="${list.category2CD!= null}" th:text="${@codeService.selectOneCachedCode(list.category2CD)}" class="category2CD align-middle"></a>
-												<a th:unless="${list.category2CD != null}" class="category2CD align-middle"></a>
-												
-                                            </div>
-                                        </div>
-                                        <h3 class="product-title">
-                                            <a href="demo3-product.html"  th:text="${list.ProductName}"></a>
-                                        </h3>
-                                        <div class="ratings-container">
-                                            <div class="product-ratings">
-                                                <span class="ratings" style="width:100%"></span><!-- End .ratings -->
-                                                <span class="tooltiptext tooltip-top"></span>
-                                            </div><!-- End .product-ratings -->
-                                        </div><!-- End .product-container -->
-                                        <div class="price-box">
-                                            <span class="old-price">$59.00</span>
-                                            <span class="product-price">$49.00</span>
-                                        </div><!-- End .price-box -->
-                                    </div><!-- End .product-details -->
-                                </div>
-                            </div>
-                            <div class="col-6 col-sm-4 col-md-3 col-xl-5col">
-                                <div class="product-default inner-quickview inner-icon">
-                                    <figure>
-                                        <a href="demo3-product.html">
-                                            <img src="/usr/images/demoes/demo3/products/product-2.jpg" width="273"
-                                                height="273" alt="productr" />
-                                            <img src="/usr/images/demoes/demo3/products/product-2-2.jpg" width="273"
-                                                height="273" alt="productr" />
-                                        </a>
-                                        <div class="label-group">
-                                            <div class="product-label label-hot">HOT</div>
-                                            <div class="product-label label-sale">-20%</div>
-                                        </div>
-                                        <div class="btn-icon-group">
-                                            <a href="demo3-product.html" class="btn-icon btn-add-cart"><i
-                                                    class="fa fa-arrow-right"></i>
-                                            </a>
-                                        </div>
-                                        <a href="ajax/product-quick-view.html" class="btn-quickview"
-                                            title="Quick View">Quick
-                                            View</a>
-                                    </figure>
-                                    <div class="product-details">
-                                        <div class="category-wrap">
-                                            <div class="category-list">
-                                                <a href="demo3-shop.html" class="product-category">category</a>
-                                            </div>
-                                        </div>
-                                        <h3 class="product-title">
-                                            <a href="demo3-product.html">Porto Transparent Images</a>
-                                        </h3>
-                                        <div class="ratings-container">
-                                            <div class="product-ratings">
-                                                <span class="ratings" style="width:100%"></span><!-- End .ratings -->
-                                                <span class="tooltiptext tooltip-top"></span>
-                                            </div><!-- End .product-ratings -->
-                                        </div><!-- End .product-container -->
-                                        <div class="price-box">
-                                            <span class="old-price">$59.00</span>
-                                            <span class="product-price">$49.00</span>
-                                        </div><!-- End .price-box -->
-                                    </div><!-- End .product-details -->
-                                </div>
-                            </div>
-                            <div class="col-6 col-sm-4 col-md-3 col-xl-5col">
-                                <div class="product-default inner-quickview inner-icon">
-                                    <figure>
-                                        <a href="demo3-product.html">
-                                            <img src="/usr/images/demoes/demo3/products/product-3.jpg" width="273"
-                                                height="273" alt="productr" />
-                                        </a>
-                                        <div class="btn-icon-group">
-                                            <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
-                                                    class="icon-shopping-cart"></i></a>
-                                        </div>
-                                        <a href="ajax/product-quick-view.html" class="btn-quickview"
-                                            title="Quick View">Quick
-                                            View</a>
-                                    </figure>
-                                    <div class="product-details">
-                                        <div class="category-wrap">
-                                            <div class="category-list">
-                                                <a href="demo3-shop.html" class="product-category">category</a>
-                                            </div>
-                                        </div>
-                                        <h3 class="product-title">
-                                            <a href="demo3-product.html">Ideapad</a>
-                                        </h3>
-                                        <div class="ratings-container">
-                                            <div class="product-ratings">
-                                                <span class="ratings" style="width:100%"></span><!-- End .ratings -->
-                                                <span class="tooltiptext tooltip-top"></span>
-                                            </div><!-- End .product-ratings -->
-                                        </div><!-- End .product-container -->
-                                        <div class="price-box">
-                                            <span class="old-price">$59.00</span>
-                                            <span class="product-price">$49.00</span>
-                                        </div><!-- End .price-box -->
-                                    </div><!-- End .product-details -->
-                                </div>
-                            </div>
-                            <div class="col-6 col-sm-4 col-md-3 col-xl-5col">
-                                <div class="product-default inner-quickview inner-icon">
-                                    <figure>
-                                        <a href="demo3-product.html">
-                                            <img src="/usr/images/demoes/demo3/products/product-4.jpg" width="273"
-                                                height="273" alt="productr" />
-                                            <img src="/usr/images/demoes/demo3/products/product-4-2.jpg" width="273"
-                                                height="273" alt="productr" />
-                                        </a>
-                                        <div class="btn-icon-group">
-                                            <a href="demo3-product.html" class="btn-icon btn-add-cart"><i
-                                                    class="fa fa-arrow-right"></i>
-                                            </a>
-                                        </div>
-                                        <a href="ajax/product-quick-view.html" class="btn-quickview"
-                                            title="Quick View">Quick
-                                            View</a>
-                                    </figure>
-                                    <div class="product-details">
-                                        <div class="category-wrap">
-                                            <div class="category-list">
-                                                <a href="demo3-shop.html" class="product-category">category</a>
-                                            </div>
-                                        </div>
-                                        <h3 class="product-title">
-                                            <a href="demo3-product.html">Black Men Shoes</a>
-                                        </h3>
-                                        <div class="ratings-container">
-                                            <div class="product-ratings">
-                                                <span class="ratings" style="width:100%"></span><!-- End .ratings -->
-                                                <span class="tooltiptext tooltip-top"></span>
-                                            </div><!-- End .product-ratings -->
-                                        </div><!-- End .product-container -->
-                                        <div class="price-box">
-                                            <span class="old-price">$59.00</span>
-                                            <span class="product-price">$49.00</span>
-                                        </div><!-- End .price-box -->
-                                    </div><!-- End .product-details -->
-                                </div>
-                            </div>
-                            <div class="col-6 col-sm-4 col-md-3 col-xl-5col">
-                                <div class="product-default inner-quickview inner-icon">
-                                    <figure>
-                                        <a href="demo3-product.html">
-                                            <img src="/usr/images/demoes/demo3/products/product-5.jpg" width="273"
-                                                height="273" alt="productr" />
-                                        </a>
-                                        <div class="btn-icon-group">
-                                            <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
-                                                    class="icon-shopping-cart"></i></a>
-                                        </div>
-                                        <a href="ajax/product-quick-view.html" class="btn-quickview"
-                                            title="Quick View">Quick
-                                            View</a>
-                                    </figure>
-                                    <div class="product-details">
-                                        <div class="category-wrap">
-                                            <div class="category-list">
-                                                <a href="demo3-shop.html" class="product-category">category</a>
-                                            </div>
-                                        </div>
-                                        <h3 class="product-title">
-                                            <a href="demo3-product.html">Watch</a>
-                                        </h3>
-                                        <div class="ratings-container">
-                                            <div class="product-ratings">
-                                                <span class="ratings" style="width:100%"></span><!-- End .ratings -->
-                                                <span class="tooltiptext tooltip-top"></span>
-                                            </div><!-- End .product-ratings -->
-                                        </div><!-- End .product-container -->
-                                        <div class="price-box">
-                                            <span class="old-price">$59.00</span>
-                                            <span class="product-price">$49.00</span>
-                                        </div><!-- End .price-box -->
-                                    </div><!-- End .product-details -->
-                                </div>
-                            </div>
-                            <div class="col-6 col-sm-4 col-md-3 col-xl-5col">
-                                <div class="product-default inner-quickview inner-icon">
-                                    <figure>
-                                        <a href="demo3-product.html">
-                                            <img src="/usr/images/demoes/demo3/products/product-6.jpg" width="273"
-                                                height="273" alt="productr" />
-                                            <img src="/usr/images/demoes/demo3/products/product-6-2.jpg" width="273"
-                                                height="273" alt="productr" />
-                                        </a>
-                                        <div class="label-group">
-                                            <span class="product-label label-hot">HOT</span>
-                                        </div>
-                                        <div class="btn-icon-group">
-                                            <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
-                                                    class="icon-shopping-cart"></i></a>
-                                        </div>
-                                        <a href="ajax/product-quick-view.html" class="btn-quickview"
-                                            title="Quick View">Quick
-                                            View</a>
-                                    </figure>
-                                    <div class="product-details">
-                                        <div class="category-wrap">
-                                            <div class="category-list">
-                                                <a href="demo3-shop.html" class="product-category">category</a>
-                                            </div>
-                                        </div>
-                                        <h3 class="product-title">
-                                            <a href="demo3-product.html">Woman Dress</a>
-                                        </h3>
-                                        <div class="ratings-container">
-                                            <div class="product-ratings">
-                                                <span class="ratings" style="width:100%"></span><!-- End .ratings -->
-                                                <span class="tooltiptext tooltip-top"></span>
-                                            </div><!-- End .product-ratings -->
-                                        </div><!-- End .product-container -->
-                                        <div class="price-box">
-                                            <span class="old-price">$59.00</span>
-                                            <span class="product-price">$49.00</span>
-                                        </div><!-- End .price-box -->
-                                    </div><!-- End .product-details -->
-                                </div>
-                            </div>
-                            <div class="col-6 col-sm-4 col-md-3 col-xl-5col">
-                                <div class="product-default inner-quickview inner-icon">
-                                    <figure>
-                                        <a href="demo3-product.html">
-                                            <img src="/usr/images/demoes/demo3/products/product-7.jpg" width="273"
-                                                height="273" alt="productr" />
-                                        </a>
-                                        <div class="btn-icon-group">
-                                            <a href="demo3-product.html" class="btn-icon btn-add-cart"><i
-                                                    class="fa fa-arrow-right"></i>
-                                            </a>
-                                        </div>
-                                        <a href="ajax/product-quick-view.html" class="btn-quickview"
-                                            title="Quick View">Quick
-                                            View</a>
-                                    </figure>
-                                    <div class="product-details">
-                                        <div class="category-wrap">
-                                            <div class="category-list">
-                                                <a href="demo3-shop.html" class="product-category">category</a>
-                                            </div>
-                                        </div>
-                                        <h3 class="product-title">
-                                            <a href="demo3-product.html">Black Bag</a>
-                                        </h3>
-                                        <div class="ratings-container">
-                                            <div class="product-ratings">
-                                                <span class="ratings" style="width:100%"></span><!-- End .ratings -->
-                                                <span class="tooltiptext tooltip-top"></span>
-                                            </div><!-- End .product-ratings -->
-                                        </div><!-- End .product-container -->
-                                        <div class="price-box">
-                                            <span class="old-price">$59.00</span>
-                                            <span class="product-price">$49.00</span>
-                                        </div><!-- End .price-box -->
-                                    </div><!-- End .product-details -->
-                                </div>
-                            </div>
-                            <div class="col-6 col-sm-4 col-md-3 col-xl-5col">
-                                <div class="product-default inner-quickview inner-icon">
-                                    <figure>
-                                        <a href="demo3-product.html">
-                                            <img src="/usr/images/demoes/demo3/products/product-8.jpg" width="273"
-                                                height="273" alt="productr" />
-                                            <img src="/usr/images/demoes/demo3/products/product-8-2.jpg" width="273"
-                                                height="273" alt="productr" />
-                                        </a>
-                                        <div class="btn-icon-group">
-                                            <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
-                                                    class="icon-shopping-cart"></i></a>
-                                        </div>
-                                        <a href="ajax/product-quick-view.html" class="btn-quickview"
-                                            title="Quick View">Quick
-                                            View</a>
-                                    </figure>
-                                    <div class="product-details">
-                                        <div class="category-wrap">
-                                            <div class="category-list">
-                                                <a href="demo3-shop.html" class="product-category">category</a>
-                                            </div>
-                                        </div>
-                                        <h3 class="product-title">
-                                            <a href="demo3-product.html">Porto Both Sticky Info</a>
-                                        </h3>
-                                        <div class="ratings-container">
-                                            <div class="product-ratings">
-                                                <span class="ratings" style="width:100%"></span><!-- End .ratings -->
-                                                <span class="tooltiptext tooltip-top"></span>
-                                            </div><!-- End .product-ratings -->
-                                        </div><!-- End .product-container -->
-                                        <div class="price-box">
-                                            <span class="old-price">$59.00</span>
-                                            <span class="product-price">$49.00</span>
-                                        </div><!-- End .price-box -->
-                                    </div><!-- End .product-details -->
-                                </div>
-                            </div>
-                            <div class="col-6 col-sm-4 col-md-3 col-xl-5col">
-                                <div class="product-default inner-quickview inner-icon">
-                                    <figure>
-                                        <a href="demo3-product.html">
-                                            <img src="/usr/images/demoes/demo3/products/product-9.jpg" width="273"
-                                                height="273" alt="productr" />
-                                            <img src="/usr/images/demoes/demo3/products/product-9-2.jpg" width="273"
-                                                height="273" alt="productr" />
-                                        </a>
-                                        <div class="btn-icon-group">
-                                            <a href="demo3-product.html" class="btn-icon btn-add-cart"><i
-                                                    class="fa fa-arrow-right"></i>
-                                            </a>
-                                        </div>
-                                        <a href="ajax/product-quick-view.html" class="btn-quickview"
-                                            title="Quick View">Quick
-                                            View</a>
-                                    </figure>
-                                    <div class="product-details">
-                                        <div class="category-wrap">
-                                            <div class="category-list">
-                                                <a href="demo3-shop.html" class="product-category">category</a>
-                                            </div>
-                                        </div>
-                                        <h3 class="product-title">
-                                            <a href="demo3-product.html">Glasses</a>
-                                        </h3>
-                                        <div class="ratings-container">
-                                            <div class="product-ratings">
-                                                <span class="ratings" style="width:100%"></span><!-- End .ratings -->
-                                                <span class="tooltiptext tooltip-top"></span>
-                                            </div><!-- End .product-ratings -->
-                                        </div><!-- End .product-container -->
-                                        <div class="price-box">
-                                            <span class="old-price">$59.00</span>
-                                            <span class="product-price">$49.00</span>
-                                        </div><!-- End .price-box -->
-                                    </div><!-- End .product-details -->
-                                </div>
-                            </div>
-                            <div class="col-6 col-sm-4 col-md-3 col-xl-5col">
-                                <div class="product-default inner-quickview inner-icon">
-                                    <figure>
-                                        <a href="demo3-product.html">
-                                            <img src="/usr/images/demoes/demo3/products/product-10.jpg" width="273"
-                                                height="273" alt="productr" />
-                                        </a>
-                                        <div class="btn-icon-group">
-                                            <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
-                                                    class="icon-shopping-cart"></i></a>
-                                        </div>
-                                        <a href="ajax/product-quick-view.html" class="btn-quickview"
-                                            title="Quick View">Quick
-                                            View</a>
-                                    </figure>
-                                    <div class="product-details">
-                                        <div class="category-wrap">
-                                            <div class="category-list">
-                                                <a href="demo3-shop.html" class="product-category">category</a>
-                                            </div>
-                                        </div>
-                                        <h3 class="product-title">
-                                            <a href="demo3-product.html">Black Men Coat</a>
-                                        </h3>
-                                        <div class="ratings-container">
-                                            <div class="product-ratings">
-                                                <span class="ratings" style="width:100%"></span><!-- End .ratings -->
-                                                <span class="tooltiptext tooltip-top"></span>
-                                            </div><!-- End .product-ratings -->
-                                        </div><!-- End .product-container -->
-                                        <div class="price-box">
-                                            <span class="old-price">$59.00</span>
-                                            <span class="product-price">$49.00</span>
-                                        </div><!-- End .price-box -->
-                                    </div><!-- End .product-details -->
-                                </div>
-                            </div>
+							<div class="col-6 col-sm-4 col-md-3 col-xl-5col" th:each="product : ${prodList}">
+							    <div class="product-default inner-quickview inner-icon" >
+							        <figure>
+							            <a href="demo3-product.html">
+							                <img src="/usr/images/demoes/demo3/products/product-1.jpg" width="273" height="273" alt="productr" />
+							            </a>
+							            <div class="btn-icon-group">
+							                <a href="#" class="btn-icon btn-add-cart product-type-simple"><i class="icon-shopping-cart"></i></a>
+							            </div>
+							            <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick View</a>
+							        </figure>
+							        <div class="product-details">
+							            <div class="category-wrap">
+							                <div class="category-list">
+							                    <!-- <a th:text="${product.category1CD}"></a> -->
+												<a th:if="${product.category1CD != null}" th:text="${@codeService.selectOneCachedCode(product.category1CD)}"></a>
+												<a th:unless="${product.category1CD != null}" th:text="${product.category1CD}" ></a>
+												<a th:if="${product.category2CD != null}" th:text="${@codeService.selectOneCachedCode(product.category2CD)}"></a>
+												<a th:unless="${product.category2CD != null}" th:text="${product.category2CD}" ></a>
+							                </div>
+							            </div>
+							            <h3 class="product-title">
+							                <a href="demo3-product.html" th:text="${product.ProductName}"></a>
+							            </h3>
+							            <div class="ratings-container">
+							                <div class="product-ratings">
+							                    <span class="ratings" style="width:100%"></span>
+							                    <span class="tooltiptext tooltip-top"></span>
+							                </div>
+							            </div>
+							            <div class="price-box">
+							                <span class="old-price" th:text="${product.OrgPrice}"></span>
+							                <span class="product-price" th:text="${product.DiscountedPrice}"></span>
+							            </div>
+							        </div>
+							    </div>
+							</div>
                         </div>
 
                         <nav class="toolbox toolbox-pagination" style="float : right;">
@@ -937,7 +577,7 @@
                                     <ul class="link-part col-xl-4 mb-0">
                                         <li><a href="demo3-about.html">About Us</a></li>
                                         <li><a href="demo3-contact.html">Contact Us</a></li>
-                                        <li><a href="dashboard.html">My Account</a></li>
+                                        <li><a th:href="@{/dashboard}"  >My Account</a></li>
                                     </ul>
                                     <ul class="link-part col-xl-8">
                                         <li class="pl-xl-2 ml-xl-1"><a href="#">Orders History</a></li>

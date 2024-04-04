@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.recorded.infra.code.CodeDto;
 
 public class ProductDto {
 
@@ -112,13 +111,13 @@ public String toString() {
 }
 
 //for cache
-public static List<CodeDto> cachedCodeArrayList = new ArrayList<CodeDto>();
+public static List<ProductDto> cachedProductArrayList = new ArrayList<ProductDto>();
 
-public static List<CodeDto> getCachedCodeArrayList() {
-	return cachedCodeArrayList;
+public static List<ProductDto> getCachedCodeArrayList() {
+	return cachedProductArrayList;
 }
-public static void setCachedCodeArrayList(List<CodeDto> cachedCodeArrayList) {
-	CodeDto.cachedCodeArrayList = cachedCodeArrayList;
+public static void setCachedProductArrayList(List<ProductDto> cachedProductArrayList) {
+	ProductDto.cachedProductArrayList = cachedProductArrayList;
 }
 
 

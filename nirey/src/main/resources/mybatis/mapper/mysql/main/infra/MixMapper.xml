@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.recorded.infra.mix.MixDao">
+
+	<resultMap id="resultMapObj" type="com.recorded.infra.mix.MixDto"></resultMap>
+	
+	<!-- 주문 정보 관련 매퍼 - member, product, order 조인 -->
+	<select id="orderList" resultMap="resultMapObj">
+	    select
+	        a.orderSeq <!-- a = 주문 관련 테이블 -->
+	        , a.orderStatus
+	        , a.RefundNY
+	        , a.TotalOrgPrice
+	        , a.TotalDiscPrice
+	        , a.TotalPrice
+	        , a.OrderDate
+	        , a.CardNo
+	        , a.CVV
+	        , a.CardDate
+	        , a.CardOwner
+	        , a.orderTrackingNo
+	        , a.paymentCD
+	        , a.cardCompCD
+	        , a.colorOption
+	        , a.sizeOption
+	        ,b.ID <!--  b = 회원 관련 테이블 -->
+	        ,b.name
+	        ,c.ProductName <!--  c = 상품 관련 테이블 -->
+	        ,c.DiscountedPrice
+	        ,d.addrTypeCD <!--  f = 배송 주소지 테이블 -->
+	        ,d.addr
+	        ,d.addrDetail
+	        ,d.zipcode
+	        ,d.recipient
+	        ,d.phoneNum
+	        ,d.shippingMsg
+	    from 
+	        orders a
+	    inner join 
+	        member b
+	    on
+	        a.MemberSeq=b.memberSeq
+	    inner join 
+	        product c
+	    on 
+	        a.ProductSeq=c.productSeq
+		 inner join
+		    address d
+		 on 
+		 	b.memberSeq=d.Member_seq
+	    where 1=1
+
+	    and a.orderSeq is not null 
+	</select>
+	
+	<!-- 회원 정보 관련 매퍼 
+		<select id="memberInfo" resultMap="resultMapObj">
+	    select
+	        a.ID 
+	        ,a.pwd
+	        ,a.genderCD
+	        ,a.email
+	        ,a.birthday
+	        ,a.MobileNum
+	        ,a.
+	        ,a.name
+	        ,c.ProductName 
+	        ,c.DiscountedPrice
+	        ,b.addrTypeCD
+	        ,b.addr
+	        ,b.addrDetail
+	        ,b.zipcode
+	        ,b.recipient
+	        ,b.phoneNum
+	        ,b.shippingMsg
+	    from 
+	        member a
+		 inner join
+		    address b
+		 on 
+		 	a.memberSeq=b.Member_seq
+	    where 1=1
+
+	    and a.memberSeq is not null 
+	</select>
+	 -->
+	
+
+</mapper>
