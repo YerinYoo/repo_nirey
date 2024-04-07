@@ -1,8 +1,11 @@
 package com.recorded.infra.product;
 
-public class ProductVo {
+import com.recorded.common.base.BaseVo;
 
-			private Integer shDelNy = 0; /* null 값을 받아야 되는 경우가 있어서 int 대신 Integer 사용 */
+
+public class ProductVo extends BaseVo {
+
+			private Integer shDelNy = 0;  // null 값을 받아야 되는 경우가 있어서 int 대신 Integer 사용 
 			private Integer shOptionDate = 2; /* null 값을 받아야 되는 경우가 있어서 int 대신 Integer 사용 */
 			private String shDateStart;
 			private String shDateEnd;
@@ -65,13 +68,22 @@ public class ProductVo {
 			public void setIfcgSeq(String ifcgSeq) {
 				this.ifcgSeq = ifcgSeq;
 			}
-
+			
+			public void setParamsPaging(int totalRows, int thisPage, int rowNumToShow, int pageNumToShow) {
+			}
+			/*
+			 * @Override public String toString() { return "CodeGroupVo [shDelNy=" + shDelNy
+			 * + ", shOptionDate=" + shOptionDate + ", shDateStart=" + shDateStart +
+			 * ", shDateEnd=" + shDateEnd + ", shOption=" + shOption + ", shValue=" +
+			 * shValue + ", ifcgSeq=" + ifcgSeq + "]"; }
+			 */
 			@Override
 			public String toString() {
-				return "CodeGroupVo [shDelNy=" + shDelNy + ", shOptionDate=" + shOptionDate + ", shDateStart=" + shDateStart
-						+ ", shDateEnd=" + shDateEnd + ", shOption=" + shOption + ", shValue=" + shValue + ", ifcgSeq="
-						+ ifcgSeq + "]";
+			    return "ProductVo{" +
+			            "shValue='" + shValue + '\'' +
+			            '}';
 			}
+
 
 		}
 

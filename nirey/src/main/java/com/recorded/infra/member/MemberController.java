@@ -3,22 +3,20 @@ package com.recorded.infra.member;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.recorded.common.base.BaseController;
 import com.recorded.common.constants.Constants;
-import com.recorded.infra.codegroup.CodeGroupDto;
+import com.recorded.infra.code.CodeDto;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -83,13 +81,21 @@ public class MemberController extends BaseController {
         return "adm/infra/v1/signup";
     }
 
-    // 회원 가입 처리
+ // 회원 가입 처리
     @PostMapping("/memberInsert")
     public String MemberInsert(MemberDto dto) throws Exception {
         String originalPwd = dto.getPwd(); // 사용자가 입력한 비밀번호 저장
 
         // 사용자가 입력한 비밀번호를 암호화하여 DTO 객체에 설정
         dto.setPwd(encodeBcrypt(dto.getPwd(), 9));
+
+        // 입력 값이 없으면 0으로 설정
+        if (dto.getDormantNY() == null) {
+            dto.setDormantNY(0);
+        }
+        if (dto.getQuitNY() == null) {
+            dto.setQuitNY(0);
+        }
 
         // 데이터베이스에 삽입하기 전에 암호화된 비밀번호를 확인하고 출력
         System.out.println("Encrypted Password: " + dto.getPwd());
@@ -104,8 +110,9 @@ public class MemberController extends BaseController {
         // 나머지 로직은 그대로 유지
         System.out.println(dto.toString());
         service.insert(dto);
-        return "redirect:/Morders";
+        return "redirect:/recorded";
     }
+
     
  // MemberController.java
 
@@ -145,7 +152,7 @@ public class MemberController extends BaseController {
     // 회원 상세 정보 조회
     @GetMapping("/MordersView")
     public String MordersView(Model model) {
-        MemberDto item = MemberService.authenticate("ID", "pwd"); // 기존 데이터 가져오기
+        MemberDto item = service.authenticate("ID", "pwd"); // 기존 데이터 가져오기
         model.addAttribute("item", item); // 모델에 데이터 설정
         return "adm/infra/v1/MordersView"; // 템플릿 이름 반환
     }
@@ -197,18 +204,25 @@ public class MemberController extends BaseController {
             // 로그인 성공 시 세션에 회원 정보 저장
             httpSession.setAttribute("authenticatedMember", authenticatedMember);
             httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE_XDM); // 60초 * 30분 = 30분
-            httpSession.setAttribute("sessSeqXdm", authenticatedMember.getMemberSeq());
-            httpSession.setAttribute("sessIdXdm", authenticatedMember.getID());
-            httpSession.setAttribute("sessNameXdm", authenticatedMember.getName());
-            
+            httpSession.setAttribute("sessSeqUsr", authenticatedMember.getMemberSeq());
+            httpSession.setAttribute("sessIdUsr", authenticatedMember.getID());
+            httpSession.setAttribute("sessPwdUsr", authenticatedMember.getPwd());
+            httpSession.setAttribute("sessNameUsr", authenticatedMember.getName());
+            httpSession.setAttribute("sessEmailUsr", authenticatedMember.getEmail());
+            httpSession.setAttribute("sessGenderUsr", authenticatedMember.getGenderCD());
+            httpSession.setAttribute("sessMobileNumUsr", authenticatedMember.getMobileNum());
+            httpSession.setAttribute("sessBirthDayUsr", authenticatedMember.getBirthday());
+         
 			System.out.println("---------------------");
-			System.out.println("httpSession.getAttribute(\"sessNameXdm\"): " + httpSession.getAttribute("sessNameXdm"));
+			System.out.println("httpSession.getAttribute(\"sessNameUsr\"): " + httpSession.getAttribute("sessNameUsr"));
 			System.out.println("---------------------");
 
             returnMap.put("rt", "success");
+            System.out.println("로그인 성공");
         } else {
             // 인증 실패 시 처리
             returnMap.put("rt", "fail");
+            System.out.println("로그인 실패");
         }
 
         return returnMap;
@@ -224,26 +238,37 @@ public class MemberController extends BaseController {
     	return returnMap;
     }
 
-    @GetMapping(value="/MyAccount")
+    @GetMapping(value="/MyPage/AccountSettings")
     public String myAccount(HttpSession session, Model model) {
-        // 세션에서 로그인한 아이디 가져오기
-        String loginID = (String) session.getAttribute("loginID");
+        // 세션에서 로그인한 회원 정보 가져오기
+        MemberDto authenticatedMember = (MemberDto) session.getAttribute("authenticatedMember");
 
-        // 세션에 로그인한 아이디가 없으면 로그인 페이지로 리다이렉트
-        if (loginID == null) {
+        // 세션에 로그인한 정보가 없으면 로그인 페이지로 리다이렉트
+        if (authenticatedMember == null) {
             return "redirect:/loginUsr";
         }
 
-        // 로그인한 아이디와 일치하는 회원 정보 조회
-        MemberDto member = service.selectOneById(loginID);
-
-        // 회원 정보를 모델에 추가하여 뷰에 전달
-        model.addAttribute("member", member);
+        // 모델에 세션에 저장된 회원 정보 추가
+        model.addAttribute("account", authenticatedMember);
 
         // 회원 정보 수정 페이지로 이동하는 뷰 이름 반환
         return "usr/infra/v1/account-details";
     }
+    
+    // 회원 정보 수정 처리
+    @PostMapping("/UserUpdate")
+    public String UserUpdate(@ModelAttribute MemberDto dto) throws Exception {
+        service.update(dto); // 서비스 계층으로 수정된 값 전달
+        return "redirect:/MyAccount"; // 수정된 정보가 표시된 상세 페이지로 이동
+    }
 
+
+    //회원가입 페이지
+	@RequestMapping(value="/recorded/JoinIn")
+	public String JoinIn(MemberDto dto, Model model) throws Exception {		
+		return "usr/infra/v1/register";
+		
+	}
 
     //-----------------------------------------------------------eCommerce Controller E
     

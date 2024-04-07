@@ -17,14 +17,14 @@ public class MixController {
 	
     
     //사용자 화면 > My Page > Orders 컨트롤러
-    @RequestMapping(value="/MyOrders")
+    @RequestMapping(value="/MyPage/Orders")
     public String MyOrders(Model model) throws Exception {
     	model.addAttribute("orderList", service.orderList());
     	return "usr/infra/v1/order";
     }
     
     //orders > Orders Detail 컨트롤러
-    @RequestMapping(value="/MyOrdersDetail")
+    @RequestMapping(value="/MyPage/OrderDetails")
     public String MyOrdersDetail(Model model) throws Exception {
     	model.addAttribute("orderList", service.orderList());
     	return "usr/infra/v1/order-details";

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+
+<th:block th:fragment="Footer">
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-middle">
+                    <div class="row">
+                        <div class="col-lg-6 col-xl-4">
+                            <div class="widget">
+                                <h4 class="widget-title">Contact Info</h4>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="contact-widget">
+                                            <h4 class="widget-title">ADDRESS:</h4>
+                                            <a href="#">1234 Street Name, City, England</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 pl-xl-0">
+                                        <div class="contact-widget">
+                                            <h4 class="widget-title">PHONE:</h4>
+                                            <a href="#">(+82) 10-4951-5254</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="contact-widget email">
+                                            <h4 class="widget-title">EMAIL:</h4>
+                                            <a href="mailto:mail@example.com">ooyo.che1s@gmail.com</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 pl-xl-0">
+                                        <div class="contact-widget">
+                                            <h4 class="widget-title">WORKING DAYS/HOURS:</h4>
+                                            <a href="#">Mon - Fri / 9:00 AM - 8:00 PM</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3 col-xl-4">
+                            <div class="widget">
+                                <h4 class="widget-title">My Account</h4>
+                                <div class="links link-parts row">
+                                    <ul class="link-part col-xl-4 mb-0">
+                                        <li><a th:href="@{/dashboard}">My Page</a></li>
+                                        <li><a href="order.html">Orders</a></li>
+                                        <li><a href="wishlist.html">My Wishlist</a></li>
+                                    </ul>
+                                    <ul class="link-part col-xl-8">
+                                        <li></li>
+                                        <li><a href="account-details.html">My Account</a></li>
+                                        <li><a href="address.html">My Address</a></li>
+                                    </ul>
+                                </div>
+                            </div><!-- End .widget -->
+                        </div>
+                        <div class="col-sm-6 col-lg-3 col-xl-4">
+                            <div class="widget">
+                                <h4 class="widget-title">Main Features</h4>
+                                <div class="links link-parts row">
+                                    <ul class="link-part col-xl-6 mb-0">
+                                        <li><a href="#">Super Fast HTML Template</a></li>
+                                        <li><a href="#">1st Fully working Ajax Theme</a></li>
+                                        <li><a href="#">33 Unique Shop Layouts</a></li>
+                                    </ul>
+                                    <ul class="link-part col-xl-6 pl-xl-2">
+                                        <li><a href="#">Powerful Admin Panel</a></li>
+                                        <li><a href="#">Mobile &amp; Retina Optimized</a></li>
+                                    </ul>
+                                </div>
+                            </div><!-- End .widget -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-bottom d-sm-flex align-items-center">
+                    <div class="footer-left">
+                        <span class="footer-copyright">Porto eCommerce. © 2021. All Rights Reserved</span>
+                    </div>
+
+                    <div class="footer-right ml-auto mt-1 mt-sm-0">
+                        <div class="payment-icons mr-0">
+                            <span class="payment-icon visa"
+                                style="background-image: url(/usr/images/payments/payment-visa.svg)"></span>
+                            <span class="payment-icon paypal"
+                                style="background-image: url(/usr/images/payments/payment-paypal.svg)"></span>
+                            <span class="payment-icon stripe"
+                                style="background-image: url(/usr/images/payments/payment-stripe.png)"></span>
+                            <span class="payment-icon verisign"
+                                style="background-image:  url(/usr/images/payments/payment-verisign.svg)"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+</th:block>
+
+
+</html>

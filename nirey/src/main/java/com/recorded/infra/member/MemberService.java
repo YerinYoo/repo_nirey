@@ -64,7 +64,11 @@ public class MemberService {
 	        
 	    }
 
-	    public MemberDto selectOneById(@Param("ID") String ID) {
-			return null;
-		}
+	    public MemberDto selectOneById(String id) {
+	        MemberDto dto = new MemberDto();
+	        dto.setID(id);
+	        return dao.selectOne(dto);
+	    }
+
+
 }

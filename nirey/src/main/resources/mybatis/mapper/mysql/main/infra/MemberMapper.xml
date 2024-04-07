@@ -78,8 +78,8 @@
         ,modDateTime
     ) values (
         #{name}
-        , #{quitNY}
-        , #{dormantNY}
+        , IFNULL(#{quitNY}, 0)
+        , IFNULL(#{dormantNY}, 0)
         , #{ID}
         , #{pwd}
         , #{genderCD}

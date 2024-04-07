@@ -1,6 +1,7 @@
 package com.recorded.infra.product;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -25,4 +26,8 @@ public interface ProductDao {
     
     //개수 리턴
     public int getTotalProductCount(ProductVo vo);
+
+    //필터링 된 값을 불러오는 메서드
+    public List<ProductDto> getProductListByCategoryAndStock(ProductDto dto);
+
 }
