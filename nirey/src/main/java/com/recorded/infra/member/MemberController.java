@@ -185,7 +185,7 @@ public class MemberController extends BaseController {
     //-----------------------------------------------------------eCommerce Controller S
     
     //  회원 로그인 페이지
-    @RequestMapping(value = "/loginUsr")
+    @RequestMapping(value = "/recorded/Login")
     public String loginUsr(MemberDto dto) throws Exception {
         return "usr/infra/v1/loginUsr"; 
     }

@@ -1985,7 +1985,6 @@
 					Porto.miniPopup.open( {
 						name: 'Mobile Speaker',
 						nameLink: 'product.html',
-						imageSrc: 'assets/images/products/small/product-1.jpg',
 						content: 'Someone Purchased',
 						action: '<span class="text-primary" style="font-size: 11px;">12 MINUTES AGO</span>',
 					} );

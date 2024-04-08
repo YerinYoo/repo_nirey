@@ -60,13 +60,10 @@ public class ProductService {
     }
     
     // 카테고리 및 재고 상태에 따른 상품 목록 필터링
-    public List<ProductDto> getProductListByCategoryAndStock(ProductVo vo) {
-        return dao.selectList(vo);
-    }
-
-    // 필터링된 상품 목록 가져오기
     public List<ProductDto> getProductListByCategoryAndStock(ProductDto dto) {
         return dao.getProductListByCategoryAndStock(dto);
     }
 
-}
+    
+    }
+

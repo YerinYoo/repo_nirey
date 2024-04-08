@@ -315,23 +315,24 @@
 <!-- ProductMapper.xml -->
 
 <select id="getProductListByCategoryAndStock" parameterType="com.recorded.infra.product.ProductVo" resultType="com.recorded.infra.product.ProductDto">
-    SELECT 
-        productSeq,
-        delNY,
-        ProductName,
-        OrgPrice,
-        DiscountedPrice,
-        ProductDescription,
-        prodStockCD,
-        category1CD,
-        category2CD,
-        regDateTime,
-        modDateTime
-    FROM product
-    WHERE (category1CD = #{category1CD} AND #{category1CD} IS NOT NULL)
-        OR (category2CD = #{category2CD} AND #{category2CD} IS NOT NULL)
-        OR (prodStockCD = #{prodStockCD} AND #{prodStockCD} IS NOT NULL)
+SELECT 
+    productSeq,
+    delNY,
+    ProductName,
+    OrgPrice,
+    DiscountedPrice,
+    ProductDescription,
+    prodStockCD,
+    category1CD,
+    category2CD,
+    regDateTime,
+    modDateTime
+FROM product
+WHERE (category1CD = #{category1CD} AND #{category1CD} IS NOT NULL)
+    OR (category2CD = #{category2CD} AND #{category2CD} IS NOT NULL)
+    OR (prodStockCD = #{prodStockCD} AND #{prodStockCD} IS NOT NULL)
 </select>
+
 
 
 

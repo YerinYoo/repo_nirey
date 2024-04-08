@@ -1,16 +1,11 @@
 package com.recorded.infra.product;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -187,88 +182,27 @@ public class ProductController {
 	@RequestMapping(value = "/recorded/Shop")
 	public String recordedShop(@ModelAttribute("vo") ProductVo vo, ProductDto dto,
 	        @RequestParam(name = "count", required = false, defaultValue = "20") Integer pageSize, 
-	        @RequestParam(name = "category1", required = false) Integer category1,
-	        @RequestParam(name = "category2", required = false) Integer category2,
-	        @RequestParam(name = "prodStockCD", required = false) Integer prodStockCD,
 	        Model model) throws Exception {
 
 	    // 검색 기능 관련 설정
 	    setSearch(vo, vo.getShValue(), null); // 사용자 아이디를 null로 설정
-	    
-		 // 페이징 기능 관련 설정
-		 vo.setParamsPaging(service.getTotalProductCount(vo)); // 총 상품 수 설정
-		  
-		  // 페이징 처리된 상품 리스트 조회 List<ProductDto> productListFiltered =
-		  service.selectPagedProductList(vo);
-			/*
-			 * model.addAttribute("prodList", ); model.addAttribute("vo",vo); // 페이징을 위한 검색
-			 * 조건을 모델에 추가
-			 */
 
-	    // 카테고리 값이 요청 파라미터로 전달되었을 경우 DTO에 설정
-	    if (category1 != null) {
-	        dto.setCategory1CD(category1);
-	    }
-	    if (category2 != null) {
-	        dto.setCategory2CD(category2);
-	    }
-	    if (prodStockCD != null) {
-	        dto.setProdStockCD(prodStockCD);
-	    }
-
-	    // 검색 기능 관련 설정
-	    ProductDto searchDto = new ProductDto();
-	    searchDto.setCategory1CD(dto.getCategory1CD()); // 카테고리1 설정
-	    searchDto.setCategory2CD(dto.getCategory2CD()); // 카테고리2 설정
-	    searchDto.setProdStockCD(dto.getProdStockCD()); // 재고 상태 설정
-
-	    // 카테고리가 전달되면 검색 조건에 추가
-	    if (dto.getCategory1CD() != null) {
-	        searchDto.setCategory1CD(dto.getCategory1CD());
-	    }
-	    if (dto.getCategory2CD() != null) {
-	        searchDto.setCategory2CD(dto.getCategory2CD());
-	    }
-	    if (dto.getProdStockCD() != null) {
-	        searchDto.setProdStockCD(dto.getProdStockCD());
-	    }
+	    // 페이징 기능 관련 설정
+	    vo.setParamsPaging(service.getTotalProductCount(vo)); // 총 상품 수 설정
+	    // 페이징 처리된 상품 리스트 조회 List<ProductDto> productListFiltered =
+	    service.selectPagedProductList(vo);
+	    /*
+	     * model.addAttribute("prodList", ); model.addAttribute("vo",vo); // 페이징을 위한 검색
+	     * 조건을 모델에 추가
+	     */
 
 	    // 전체 상품 리스트를 가져와서 모델에 추가
 	    model.addAttribute("prodList", service.prodList());
-	    
+
 	    // recordedShop 페이지로 이동
 	    return "usr/infra/v1/shop";
 	}
 
-
-
-
-
-	/*
-	 * // 검색 기능 컨트롤러
-	 * 
-	 * @RequestMapping(value = "/search", method = RequestMethod.GET) public String
-	 * searchProducts(@RequestParam(name = "shValue", required = false) String
-	 * shValue, Model model) { try { // 검색어를 가지고 있는 VO 객체 생성 ProductVo vo = new
-	 * ProductVo();
-	 * 
-	 * if (shValue != null && !shValue.isEmpty()) { vo.setShValue(shValue);
-	 * 
-	 * // 검색 메서드를 통해 검색 결과 조회 List<ProductDto> searchResults =
-	 * service.searchProducts(vo);
-	 * 
-	 * // 검색 결과가 있는지 확인하고 모델에 추가 if (!searchResults.isEmpty()) {
-	 * model.addAttribute("searchResults", searchResults); } else { // 검색 결과가 없는
-	 * 경우에는 전체 상품 목록을 가져와서 모델에 추가 List<ProductDto> prodList = service.prodList();
-	 * model.addAttribute("prodList", prodList); // 검색 결과가 없는 경우에도 모달을 표시하기 위한 속성 추가
-	 * model.addAttribute("showModal", true); } } else { // 검색어가 없는 경우에는 전체 상품 목록을
-	 * 가져와서 모델에 추가 List<ProductDto> prodList = service.prodList();
-	 * model.addAttribute("prodList", prodList); // 검색 결과가 없는 경우에도 모달을 표시하기 위한 속성 추가
-	 * model.addAttribute("showModal", true); }
-	 * 
-	 * // 검색 결과 페이지로 이동 return "usr/infra/v1/shop"; } catch (Exception e) { // 에러 처리
-	 * return "errorPage"; } }
-	 */
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String searchProducts(@RequestParam(name = "shValue", required = false) String shValue, Model model) {
 	    try {
@@ -314,25 +248,35 @@ public class ProductController {
 	    // 페이지로 이동
 	    return "usr/infra/v1/shop";
 	}
-
-
+	
+	
 	//카테고리, stockCD에 따른 제품 호출
 	@RequestMapping("/filterProducts")
-	public ResponseEntity<List<ProductDto>> filterProducts(@RequestParam(required = false, name = "category1CD") Integer category1CD,
-	                                                       @RequestParam(required = false, name = "category2CD") Integer category2CD,
-	                                                       @RequestParam(required = false, name = "prodStockCD") Integer prodStockCD, Model model) {
+	public String filterProducts(@RequestParam(required = false, name = "category1CD") Integer category1CD,
+	                             @RequestParam(required = false, name = "category2CD") Integer category2CD,
+	                             @RequestParam(required = false, name = "prodStockCD") Integer prodStockCD,
+	                             @RequestParam(name = "page", defaultValue = "1") Integer page,
+	                             Model model) {
 	    // 요청 파라미터를 DTO에 설정
 	    ProductDto dto = new ProductDto();
 	    dto.setCategory1CD(category1CD);
 	    dto.setCategory2CD(category2CD);
 	    dto.setProdStockCD(prodStockCD);
 
-	    // 필터링된 결과 반환
+	    // 필터링된 결과를 모델에 추가
 	    List<ProductDto> filteredProducts = service.getProductListByCategoryAndStock(dto);
 	    model.addAttribute("filteredProducts", filteredProducts);
-	    return ResponseEntity.ok(filteredProducts);
+	    
+	    // 필요한 데이터가 포함된 ProductVo 객체를 생성하여 모델에 추가
+	    ProductVo vo = new ProductVo();
+		/*
+		 * vo.setStartPage(page); // 시작 페이지 설정 vo.setPageNumToShow(20); // 페이지에 표시할 항목 수
+		 * 설정 등
+		 */	    model.addAttribute("vo", vo);
+	    
+	    return "usr/infra/v1/shop"; 
 	}
+
 }
-	
 
 // 사용자 페이지 관련 e
