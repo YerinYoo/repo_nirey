@@ -66,7 +66,7 @@
                     <li><a th:href="@{/MyPage/Dashboard}">Dashboard</a></li>
                     <li><a th:href="@{/MyPage/Orders}">Orders</a></li>
                     <li><a href="wishlist.html">Wishlist</a></li>
-                    <li><a th:href="@{/logoutUsr}">Logout</a></li>
+                    <li><a id="buttonUsrSignOut" th:href="@{/logoutUsr}">Logout</a></li>
                 </ul>
         </li>
     </ul>
@@ -190,6 +190,34 @@
                 </div><!-- End .container -->
             </div><!-- End .header-middle -->
         </header><!-- End .header -->
+        
+        <script>
+        //로그아웃 구문
+        if(document.getElementById("buttonUsrSignOut")){
+		document.getElementById("buttonUsrSignOut").onclick = function () {
+			
+			$.ajax({
+				async: true 
+				,cache: false
+				,type: "post"
+				/* ,dataType:"json" */
+				,url: "/logoutUsr"
+				
+				,success: function(response) {
+					if(response.rt == "success") {
+						location.href = "/loginUsrPg";
+						
+					} else {
+						alert("logOut Fail");
+					}
+				}
+				,error : function(jqXHR, textStatus, errorThrown){
+					alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+				}
+			});
+		}
+	}
+        </script>
         
         
 </th:block>

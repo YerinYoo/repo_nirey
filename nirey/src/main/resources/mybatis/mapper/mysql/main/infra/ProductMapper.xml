@@ -38,10 +38,20 @@
     
     		select
     		
-    		a.delNY
-    		, a.productSeq
-    		, a.ProductName
-    		, a.modDateTime
+	        a.productSeq,
+	        a.delNY,
+	        a.ProductName,
+	        a.OrgPrice,
+	        a.DiscountedPrice,
+	        a.ProductDescription,
+	        a.prodStockCD,
+	        a.category1CD,
+	        a.category2CD,
+	        a.regDateTime,
+	        a.modDateTime,
+	        a.DetailDescription,
+	        a.fabric,
+	        a.detailSize
     		
     		from product  a
     		
@@ -315,22 +325,27 @@
 <!-- ProductMapper.xml -->
 
 <select id="getProductListByCategoryAndStock" parameterType="com.recorded.infra.product.ProductVo" resultType="com.recorded.infra.product.ProductDto">
-SELECT 
-    productSeq,
-    delNY,
-    ProductName,
-    OrgPrice,
-    DiscountedPrice,
-    ProductDescription,
-    prodStockCD,
-    category1CD,
-    category2CD,
-    regDateTime,
-    modDateTime
-FROM product
-WHERE (category1CD = #{category1CD} AND #{category1CD} IS NOT NULL)
-    OR (category2CD = #{category2CD} AND #{category2CD} IS NOT NULL)
-    OR (prodStockCD = #{prodStockCD} AND #{prodStockCD} IS NOT NULL)
+		SELECT 
+		    productSeq,
+		    delNY,
+		    ProductName,
+		    OrgPrice,
+		    DiscountedPrice,
+		    ProductDescription,
+		    prodStockCD,
+		    category1CD,
+		    category2CD,
+		    regDateTime,
+		    modDateTime
+		    
+		FROM 
+				product
+		
+		WHERE 
+			(category1CD = #{category1CD} AND #{category1CD} IS NOT NULL)
+		   	 	OR (category2CD = #{category2CD} AND #{category2CD} IS NOT NULL)
+		    	OR (prodStockCD = #{prodStockCD} AND #{prodStockCD} IS NOT NULL)
+		    	
 </select>
 
 

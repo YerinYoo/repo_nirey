@@ -83,6 +83,11 @@
                                     <img src="/usr/images/demoes/demo3/products/product-1.jpg" width="273"
                                         height="273" alt="productr" />
                                 </a>
+                                <div class="label-group">
+                                     <div th:if="${product.prodStockCD == 7}" class="product-label label-hot">NEW</div>
+                                    <div th:if="${product.prodStockCD == 8}" class="product-label label-sale">BEST</div>
+                                    <div th:if="${product.prodStockCD == 9}" class="product-label label-hot" style="background-color : navy">RESTOCK</div>
+                                </div>
                                 <div class="btn-icon-group">
                                     <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
                                             class="icon-shopping-cart"></i></a>
@@ -160,6 +165,36 @@
 	        searchProducts();
 	        alert("나 검색 버튼 누른다? 모달 띄워??");
 	    });
+	    
+	  //가격 관련 스크립트
+        function formatPriceElements() {
+            // HTML 요소를 가져와서 가격 포맷팅 적용
+            var oldPriceElements = document.querySelectorAll('.old-price');
+            var productPriceElements = document.querySelectorAll('.product-price');
+
+            oldPriceElements.forEach(function(element) {
+                var price = parseFloat(element.textContent);
+                element.textContent = formatPrice(price);
+            });
+
+            productPriceElements.forEach(function(element) {
+                var price = parseFloat(element.textContent);
+                element.textContent = formatPrice(price);
+            });
+        }
+
+        // 가격 포맷팅 함수
+        function formatPrice(price) {
+            // 세 자리마다 컴마 추가
+            var formattedPrice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            // '원'을 추가하여 반환
+            return "₩" + formattedPrice ;
+        }
+
+        // 문서 로드 후에 실행
+        document.addEventListener('DOMContentLoaded', function() {
+            formatPriceElements();
+        });
 	</script>
 
 </body>

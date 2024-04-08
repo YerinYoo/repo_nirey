@@ -84,6 +84,12 @@
 											</label>
 											<input type="id" class="form-input form-wide" placeholder="Your ID" id="register-id"  th:value="${session.sessIdUsr}"disabled />
 		
+											<label for="register-name">
+												name
+												<span class="required">*</span>
+											</label>
+											<input type="name" class="form-input form-wide" id="name" th:value="${session.sessNameUsr}"required />
+												
 											<label for="register-password">
 												Change Password
 												<span class="required">*</span>
@@ -104,11 +110,7 @@
 											</label>
 											<input type="email" class="form-input form-wide" id="register-email" th:value="${session.sessEmailUsr}"required />
 		
-												<label for="register-email">
-													name
-													<span class="required">*</span>
-												</label>
-												<input type="name" class="form-input form-wide" id="name" th:value="${session.sessNameUsr}"required />
+
 									</div>
 									<div class="col-md-6 mt-6">
 										<div class="heading mb-1 mt-3">
@@ -118,7 +120,7 @@
 		
 											<label for="register-birthday">
 												BirthDay [yyyy - mm - dd]</label>
-												<input class="datepicker form-control" type="text" th:value="${session.sessBirthdayUsr}"/>
+												<input class="datepicker form-control" type="text" th:value="${session.sessBirthDayUsr}"/>
 													<script type="text/javascript">
 														$('.datepicker').datepicker({
 															weekStart:1,

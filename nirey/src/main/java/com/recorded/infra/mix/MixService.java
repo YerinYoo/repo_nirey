@@ -17,4 +17,8 @@ public class MixService {
 	public List<MixDto> memberInfo(){
 		return dao.memberInfo();
 	}
+	
+	public List<MixDto> memberAddr(){
+		return dao.memberAddr();
+	}
 }

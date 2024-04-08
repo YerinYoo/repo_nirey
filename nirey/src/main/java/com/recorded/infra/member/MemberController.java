@@ -245,7 +245,7 @@ public class MemberController extends BaseController {
 
         // 세션에 로그인한 정보가 없으면 로그인 페이지로 리다이렉트
         if (authenticatedMember == null) {
-            return "redirect:/loginUsr";
+            return "redirect:/recorded/Login";
         }
 
         // 모델에 세션에 저장된 회원 정보 추가

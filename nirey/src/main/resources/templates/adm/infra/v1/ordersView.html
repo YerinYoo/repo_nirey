@@ -522,11 +522,11 @@
 									
 										<div class="col-1 ">
 										
-											<form method="post" action="MemberDelete"> 
-											<input type="hidden" name="ID" th:value="${item.ID}">
+											<form method="post" action="codeGroupDelete"> 
+											<input type="hidden" name="ID" th:value="${item.seq}">
 											<input type="hidden" name="name" th:value="${item.name}">
 											
-											<button type="submit" class="btn btn-danger" th:href="@{/Morders}" th:text="Delete"></button>
+											<button type="submit" class="btn btn-danger" th:href="@{/orders}" th:text="Delete"></button>
 											
 											</form>
 										</div>

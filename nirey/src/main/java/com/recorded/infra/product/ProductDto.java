@@ -21,6 +21,10 @@ private Date regDateTime;
 private Date modDateTime;
 private String color;
 private String size;
+private String DetailDescription;
+private String detailSize;
+private String fabric;
+
 public String getProductSeq() {
 	return productSeq;
 }
@@ -100,6 +104,25 @@ public String getSize() {
 public void setSize(String size) {
 	this.size = size;
 }
+public String getDetailDescription() {
+	return DetailDescription;
+}
+public void setDetailDescription(String detailDescription) {
+	DetailDescription = detailDescription;
+}
+public String getDetailSize() {
+	return detailSize;
+}
+public void setDetailSize(String detailSize) {
+	this.detailSize = detailSize;
+}
+public String getFabric() {
+	return fabric;
+}
+public void setFabric(String fabric) {
+	this.fabric = fabric;
+}
+
 
 @Override
 public String toString() {
@@ -107,8 +130,9 @@ public String toString() {
 			+ OrgPrice + ", DiscountedPrice=" + DiscountedPrice + ", ProductDescription=" + ProductDescription
 			+ ", prodStockCD=" + prodStockCD + ", category1CD=" + category1CD + ", category2CD=" + category2CD
 			+ ", regDateTime=" + regDateTime + ", modDateTime=" + modDateTime + ", color=" + color + ", size=" + size
-			+ "]";
+			+ ", DetailDescription=" + DetailDescription + ", detailSize=" + detailSize + ", fabric=" + fabric + "]";
 }
+
 
 //for cache
 public static List<ProductDto> cachedProductArrayList = new ArrayList<ProductDto>();

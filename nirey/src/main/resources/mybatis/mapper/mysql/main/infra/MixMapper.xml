@@ -54,6 +54,29 @@
 	    and a.orderSeq is not null 
 	</select>
 	
+		<select id="memberAddr" resultMap="resultMapObj">
+	    select
+	    	a.memberSeq
+	        ,a.ID 
+	        ,a.name
+	        ,b.addrTypeCD 
+	        ,b.addrDetail
+	        ,b.addr
+	        ,b.zipcode
+	        ,b.recipient
+	        ,b.phoneNum
+	        ,b.shippingMsg
+	    from 
+	        member a
+	    inner join 
+	        address b
+	    on
+	        a.memberSeq=b.Member_seq
+	   
+	    where 1=1
+
+	    and a.memberSeq is not null 
+	</select>
 	<!-- 회원 정보 관련 매퍼 
 		<select id="memberInfo" resultMap="resultMapObj">
 	    select
