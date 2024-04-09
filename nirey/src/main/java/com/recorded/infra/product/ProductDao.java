@@ -14,7 +14,10 @@ public interface ProductDao {
 	
 	public ProductDto selectOne(ProductDto dto);
 	
+	public ProductDto selectProd(ProductDto dto);
+	
 	public int insert(ProductDto dto);
+	public int insertRev(ProductDto dto);
 	public int update(ProductDto dto);
 	public int uelete(ProductDto dto);
 	public int delete(ProductDto dto);

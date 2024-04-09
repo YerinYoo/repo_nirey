@@ -420,8 +420,13 @@
 						                <a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq}, ProudctName=${product.ProductName})}" >
 						                    <img src="/usr/images/demoes/demo3/products/product-15.jpg" width="273" height="273" alt="productr"/>
 						                </a>
+						                <div class="label-group">
+		                                     <div th:if="${product.prodStockCD == 7}" class="product-label label-hot">NEW</div>
+		                                    <div th:if="${product.prodStockCD == 8}" class="product-label label-sale">BEST</div>
+		                                    <div th:if="${product.prodStockCD == 9}" class="product-label label-hot" style="background-color: rgb(96, 133, 165);">RESTOCK</div>
+		                                </div>
 						                <div class="btn-icon-group">
-						                    <a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq}, ProudctName=${product.ProductName})}"  class="btn-icon btn-add-cart product-type-simple"><i class="icon-shopping-cart"></i></a>
+						                    <a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq})}"  class="btn-icon btn-add-cart product-type-simple"><i class="icon-shopping-cart"></i></a>
 						                </div>
 						                <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick View</a>
 						            </figure>
@@ -779,6 +784,7 @@ function formatPriceElements() {
 document.addEventListener('DOMContentLoaded', function() {
     formatPriceElements();
 });
+}
 
 
 

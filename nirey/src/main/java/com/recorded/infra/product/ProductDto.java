@@ -24,6 +24,14 @@ private String size;
 private String DetailDescription;
 private String detailSize;
 private String fabric;
+private Integer reviewScoreCD;
+private String ReviewContent;
+private String Member_seq;
+private String Product_seq;
+private String memberSeq;
+private String name;
+private Date revRegDateTime;
+private Integer totalReviewCount;
 
 public String getProductSeq() {
 	return productSeq;
@@ -122,16 +130,68 @@ public String getFabric() {
 public void setFabric(String fabric) {
 	this.fabric = fabric;
 }
-
-
+public Integer getReviewScoreCD() {
+	return reviewScoreCD;
+}
+public void setReviewScoreCD(Integer reviewScoreCD) {
+	this.reviewScoreCD = reviewScoreCD;
+}
+public String getReviewContent() {
+	return ReviewContent;
+}
+public void setReviewContent(String reviewContent) {
+	ReviewContent = reviewContent;
+}
+public String getMember_seq() {
+	return Member_seq;
+}
+public void setMember_seq(String member_seq) {
+	Member_seq = member_seq;
+}
+public String getProduct_seq() {
+	return Product_seq;
+}
+public void setProduct_seq(String product_seq) {
+	Product_seq = product_seq;
+}
+public String getMemberSeq() {
+	return memberSeq;
+}
+public void setMemberSeq(String memberSeq) {
+	this.memberSeq = memberSeq;
+}
+public String getName() {
+	return name;
+}
+public void setName(String name) {
+	this.name = name;
+}
+public Date getRevRegDateTime() {
+	return revRegDateTime;
+}
+public void setRevRegDateTime(Date revRegDateTime) {
+	this.revRegDateTime = revRegDateTime;
+}
+public Integer getTotalReviewCount() {
+	return totalReviewCount;
+}
+public void setTotalReviewCount(Integer totalReviewCount) {
+	this.totalReviewCount = totalReviewCount;
+}
 @Override
 public String toString() {
 	return "ProductDto [productSeq=" + productSeq + ", delNY=" + delNY + ", ProductName=" + ProductName + ", OrgPrice="
 			+ OrgPrice + ", DiscountedPrice=" + DiscountedPrice + ", ProductDescription=" + ProductDescription
 			+ ", prodStockCD=" + prodStockCD + ", category1CD=" + category1CD + ", category2CD=" + category2CD
 			+ ", regDateTime=" + regDateTime + ", modDateTime=" + modDateTime + ", color=" + color + ", size=" + size
-			+ ", DetailDescription=" + DetailDescription + ", detailSize=" + detailSize + ", fabric=" + fabric + "]";
+			+ ", DetailDescription=" + DetailDescription + ", detailSize=" + detailSize + ", fabric=" + fabric
+			+ ", reviewScoreCD=" + reviewScoreCD + ", ReviewContent=" + ReviewContent + ", Member_seq=" + Member_seq
+			+ ", Product_seq=" + Product_seq + ", memberSeq=" + memberSeq + ", name=" + name + ", revRegDateTime="
+			+ revRegDateTime + "]";
 }
+
+
+
 
 
 //for cache

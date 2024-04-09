@@ -21,9 +21,17 @@ public class ProductService {
 	public ProductDto selectOne(ProductDto dto) {
 		return dao.selectOne(dto);
 	}
+	
+	public ProductDto selectProd(ProductDto dto) {
+		return dao.selectProd(dto);
+	}
 
 	public int insert(ProductDto dto) {
 		return dao.insert(dto);
+	}
+	
+	public int insertRev(ProductDto dto) {
+		return dao.insertRev(dto);
 	}
 	
 	public int update(ProductDto dto ) {

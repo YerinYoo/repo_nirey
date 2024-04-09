@@ -60,6 +60,51 @@
     			
     </select>
     
+    	      <select id="selectProd" resultMap="resultMapObj">
+    
+    		select
+    		
+	        a.productSeq,
+	        a.delNY,
+	        a.ProductName,
+	        a.OrgPrice,
+	        a.DiscountedPrice,
+	        a.ProductDescription,
+	        a.prodStockCD,
+	        a.category1CD,
+	        a.category2CD,
+	        a.regDateTime,
+	        a.modDateTime,
+	        a.DetailDescription,
+	        a.fabric,
+	        a.detailSize,
+	        b.reviewScoreCD,
+	        b.ReviewContent,
+	        b.regDateTime as revRegDateTime,
+	        b.Member_seq,
+	        b.Product_seq,
+	        c.memberSeq,
+	      	c.name,
+	      	(select count(*) from review) as totalReviewCount
+	      	
+	        
+    		
+    		from product  a
+    		
+    		 inner join 
+        			review b
+    on 
+        b.Product_seq=a.productSeq
+        
+        	inner join
+        			member c
+     on
+     		b.Member_seq=c.memberSeq
+    			
+    			where a.productSeq = #{productSeq}
+    			
+    	</select>
+    
 	  <insert id="insert">
 			insert into product (
 				a.delNY
@@ -85,6 +130,22 @@
 			,#{color}
 			,#{size}
 			)
+	  </insert>
+	  
+	  	  <insert id="insertRev">
+			insert into review (
+				delNY
+				, a.reviewScoreCD
+				, a.ReviewContent
+				, a.Member_seq
+				, a.Product_seq
+			) values (
+			#{delNY}
+			, #{reviewScoreCD}
+			,#{ReviewContent}
+			,#{Member_seq}
+			,#{Product_seq}
+		)
 	  </insert>
 	  
 	   

@@ -16,6 +16,7 @@ import com.recorded.common.util.UtilDateTime;
 import com.recorded.infra.code.CodeDto;
 import com.recorded.infra.member.MemberService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -35,6 +36,18 @@ public class ProductController {
 
 		return "redirect:/Porders";
 	}
+	
+	
+	  @RequestMapping(value = "/ReviewInsert") 
+	  public String ReviewtInsert(ProductDto dto) throws Exception {
+	  
+	  System.out.println(dto.toString());
+	  
+	  service.insertRev(dto);
+	  
+	  System.out.println("나 컨트롤러 불려왔다? 리뷰 데이터 넣는다?");
+	  return "redirect:/recorded/Shop/Product";
+	  }
 
 	@RequestMapping(value = "/ProductUpdate")
 	public String ProductUpdate(ProductDto dto) throws Exception {
@@ -102,7 +115,7 @@ public class ProductController {
 	}
 
 	public void setSearch(ProductVo vo, String string, String userSeq) throws Exception {
-		/* 최초 화면 로딩시에 세팅은 문제가 없지만 */
+		/* 최초 화면 로딩시에 세팅은 문제가 없지만 
 		/* 이후 전체적으로 데이터를 조회를 하려면 null 값이 넘어 오는 관계로 문제가 전체 데이터 조회가 되지 못한다. */
 		/* 해서 BaseVo.java 에서 기본값을 주어서 처리 */
 //		vo.setShUseNy(vo.getShUseNy() == null ? 1 : vo.getShUseNy());
@@ -168,10 +181,7 @@ public class ProductController {
 	@RequestMapping(value = "/recorded/Shop/Product")
 	public String ProductView(ProductDto dto, Model model) throws Exception {
 		
-		model.addAttribute("product", service.selectOne(dto)); 
-		
-		System.out.println("dto.getProductName(): " + dto.getProductName());
-		System.out.println("-----------------------------------------------");
+		model.addAttribute("product", service.selectProd(dto)); 
 		
 		return "usr/infra/v1/product"; 
 	}

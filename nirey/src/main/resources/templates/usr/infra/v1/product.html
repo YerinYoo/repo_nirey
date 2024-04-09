@@ -58,15 +58,11 @@
                     <div class="row">
                         <div class="col-lg-5 col-md-6 product-single-gallery">
                             <div class="product-slider-container">
-                                <div class="label-group">
-                                    <div th:if="${product.prodStockCD == 7}" class="product-label label-hot">NEW</div>
-                                    <div th:if="${product.prodStockCD == 8}" class="product-label label-sale">BEST</div>
-                                    <div th:if="${product.prodStockCD == 9}" class="product-label label-hot">RESTOCK</div>
-                                    
-                                    
-
-                                </div>
-
+								<div class="label-group">
+								    <div th:if="${product != null and (product.prodStockCD == 7)}" class="product-label label-hot">NEW</div>
+								    <div th:if="${product != null and (product.prodStockCD == 8)}" class="product-label label-sale">BEST</div>
+								    <div th:if="${product != null and (product.prodStockCD == 9)}" class="product-label " style="background-color: rgb(96, 133, 165);">RESTOCK</div>
+								</div>
                                 <div class="product-single-carousel owl-carousel owl-theme show-nav-hover">
                                     <div class="product-item">
                                         <img class="product-single-image" src="/usr/images/products/zoom/mj1.jpg" data-zoom-image="/usr/images/products/zoom/mj1.jpg" width="468" height="468" alt="product" />
@@ -113,7 +109,7 @@
                         <div class="col-lg-7 col-md-6 product-single-details">
 
                                     <strong>
-                                      <a th:if="${product.category1CD != null}" th:text="${@codeService.selectOneCachedCode(product.category1CD)}"></a>
+                                      			<a th:if="${product.category1CD != null}" th:text="${@codeService.selectOneCachedCode(product.category1CD)}"></a>
 						                        <a th:unless="${product.category1CD != null}" th:text="${product.category1CD}"></a>
 						                        <a th:if="${product.category2CD != null}" th:text="${@codeService.selectOneCachedCode(product.category2CD)}"></a>
 						                        <a th:unless="${product.category2CD != null}" th:text="${product.category2CD}"></a>
@@ -153,6 +149,7 @@
                                     </a>
                                 </div>
                             </div>
+                            <!-- 요기까지 전후 상품 -->
 
                             <div class="ratings-container">
                                 <div class="product-ratings">
@@ -311,86 +308,92 @@
                         <!-- End .tab-pane -->
 
                         <div class="tab-pane fade" id="product-reviews-content" role="tabpanel" aria-labelledby="product-tab-reviews">
-                            <div class="product-reviews-content">
-                                <h3 class="reviews-title" th:text="'1 review for ' + ${product.ProductName}"></h3>
-
-                                <div class="comment-list">
-                                    <div class="comments">
-                                        <figure class="img-thumbnail">
-                                            <img src="/usr/images/blog/author.jpg" alt="author" width="80" height="80">
-                                        </figure>
-
-                                        <div class="comment-block">
-                                            <div class="comment-header">
-                                                <div class="comment-arrow"></div>
-
-                                                <div class="ratings-container float-sm-right">
-                                                    <div class="product-ratings">
-                                                        <span class="ratings" style="width:60%"></span>
-                                                        <!-- End .ratings -->
-                                                        <span class="tooltiptext tooltip-top"></span>
-                                                    </div>
-                                                    <!-- End .product-ratings -->
-                                                </div>
-
-                                                <span class="comment-by">
-                                                    <strong>Joe Doe</strong> – April 12, 2018
-                                                </span>
-                                            </div>
-
-                                            <div class="comment-content">
-                                                <p>Excellent.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
+						    <div class="product-reviews-content">
+						        <h3 class="reviews-title" th:text=" ${product.totalReviewCount == 0 ? '아직 이 상품에 대한 리뷰가 없습니다' : product.totalReviewCount + ' review for ' + product.ProductName}"></h3>
+						        
+						        <div class="comment-list" th:if="${product.totalReviewCount > 0}">
+						            <div class="comments">
+						                <figure class="img-thumbnail">
+						                    <img src="/usr/images/blog/review.jpg" alt="author" width="80" height="80">
+						                </figure>
+						
+						                <div class="comment-block">
+						                    <div class="comment-header">
+						                        <div class="comment-arrow"></div>
+						
+						                        <div class="ratings-container float-sm-right">
+						                            <div class="product-ratings">
+						                                <span class="ratings" style="width:60%"></span>
+						                                <!-- End .ratings -->
+						                                <span class="tooltiptext tooltip-top"></span>
+						                            </div>
+						                            <!-- End .product-ratings -->
+						                        </div>
+						
+						                        <span class="comment-by">
+						                            <strong th:text="${product.name}"></strong> – <span th:text="${product.revRegDateTime}"></span>
+						                        </span>
+						                    </div>
+						
+						                    <div class="comment-content">
+						                        <a th:text="${product.ReviewContent}"></a>
+						                    </div>
+						                </div>
+						            </div>
+						        </div>
+						    </div>
+						    
                                 <div class="divider"></div>
 
                                 <div class="add-product-review">
                                     <h3 class="review-title">Add a review</h3>
 
-                                    <form action="#" class="comment-form m-0">
-                                        <div class="rating-form">
-                                            <label for="rating">Your rating <span class="required">*</span></label>
-                                            <span class="rating-stars">
-                                                <a class="star-1" href="#">1</a>
-                                                <a class="star-2" href="#">2</a>
-                                                <a class="star-3" href="#">3</a>
-                                                <a class="star-4" href="#">4</a>
-                                                <a class="star-5" href="#">5</a>
-                                            </span>
+							<form action="ReviewInsert" id="formInsert" name="formInsert" method="post" class="comment-form m-0">
+							    <!-- 현재 페이지의 상품 시퀀스와 리뷰 테이블의 상품 시퀀스 부분 매칭 -->
+							    <input type="hidden" name="productSeq" value="${productSeq}">
+    
+							    <!-- form 내용 -->
+							    <div class="rating-form">
+							        <label for="rating">Your rating <span class="required">*</span></label>
+							        <span class="rating-stars">
+							            <a class="star-1" href="#" th:text="${1}">1</a>
+							            <a class="star-2" href="#" th:text="${2}">2</a>
+							            <a class="star-3" href="#" th:text="${3}">3</a>
+							            <a class="star-4" href="#" th:text="${4}">4</a>
+							            <a class="star-5" href="#" th:text="${5}">5</a>
+							            <div class="invalid-feedback" id="reviewScoreCDFeedback"></div>
+							        </span>
+							
+							        <select name="reviewScoreCD" id="reviewScoreCD" required style="display: none;">
+							            <option value="">Rate…</option>
+							            <option value="5">Perfect</option>
+							            <option value="4">Good</option>
+							            <option value="3">Average</option>
+							            <option value="2">Not that bad</option>
+							            <option value="1">Very poor</option>
+							        </select>
+							    </div>
+							
+							    <div class="form-group">
+							        <label>Your review <span class="required">*</span></label>
+							        <textarea name="ReviewContent" id="ReviewContent" cols="5" rows="6" class="form-control form-control-sm"></textarea>
+							        <div class="invalid-feedback" id="ReviewContentFeedback"></div>
+							    </div>
+							    <!-- End .form-group -->
+							
+<!-- 							    <div class="col-md-12 mb-3">
+							        <input type="submit" name="btnAdd" id="btnInsert"class="btn btn-primary" value="Submit" style="float : right;">
+							    </div> -->
+							    <div class="col-md-12 mb-3">
+							        <!-- 추가 버튼 -->
+							        <button type="button" id="btnAdd" class="btn btn-secondary" style="float: right;">ADD</button>
+							    </div>
+							</form>
 
-                                            <select name="rating" id="rating" required="" style="display: none;">
-                                                <option value="">Rate…</option>
-                                                <option value="5">Perfect</option>
-                                                <option value="4">Good</option>
-                                                <option value="3">Average</option>
-                                                <option value="2">Not that bad</option>
-                                                <option value="1">Very poor</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Your review <span class="required">*</span></label>
-                                            <textarea cols="5" rows="6" class="form-control form-control-sm"></textarea>
-                                        </div>
-                                        <!-- End .form-group -->
-
-                                            <div class="col-md-12">
-                                                <div class=" custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="save-name" />
-                                                    <label class="custom-control-label mb-0" for="save-name">Save my
-                                                        name, email, and website in this browser for the next time I
-                                                        comment.</label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <input type="submit" class="btn btn-primary" value="Submit">
-                                    </form>
                                 </div>
                                 <!-- End .add-product-review -->
+						</div>
+
                             </div>
                             <!-- End .product-reviews-content -->
                         </div>
@@ -424,6 +427,8 @@
     <!-- Main JS File -->
     <script src="/usr/js/main.min.js"></script>
     
+    <script src="/adm/js/validationXdm.js"></script>
+    
     <script>
 	  //가격 관련 스크립트
     function formatPriceElements() {
@@ -454,6 +459,7 @@
     document.addEventListener('DOMContentLoaded', function() {
         formatPriceElements();
     });
+
     </script>
 </body>
 
