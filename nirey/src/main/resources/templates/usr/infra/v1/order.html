@@ -83,9 +83,9 @@
 
 
 									<div class="select-custom col-3">
-										<label>주문 상태</label>
+										<label>Order Status</label>
 										<select name="orderby" class="form-control" style="height : 45px;">
-											<option value="" selected="selected">전체 주문 상태</option>
+											<option value="" selected="selected">All of Status</option>
 											<option value="1">결제 대기 중</option>
 											<option value="2">결제 완료</option>
 											<option value="3">배송 준비 중</option>
@@ -96,7 +96,7 @@
 									</div>
 
 									<div class="select-date col-3">
-										<label>주문일</label>
+										<label>Order Date</label>
 										<div class="input-group flex-nowrap" style="height : 45px">
 											<input class="datepicker form-control" type="text"/>
 											<script type="text/javascript">
@@ -112,11 +112,11 @@
 									<table class="table table-order text-center mt-3" style="margin : auto;">
 										<thead>
 											<tr style="height : 50px;">
-												<th class="order-id" style="text-align:center; vertical-align : middle;">주문번호</th>
-												<th class="order-date" style="text-align:center; vertical-align : middle;">주문일자</th>
-												<th class="order-price" style="text-align:center; vertical-align : middle;">주문 금액</th>
-												<th class="payment" style="text-align:center; vertical-align : middle;">결제 수단</th>
-												<th class="order-status"style="text-align:center; vertical-align : middle;">주문 상태</th>
+												<th class="order-id" style="text-align:center; vertical-align : middle;">Order Number</th>
+												<th class="order-date" style="text-align:center; vertical-align : middle;">Order Date</th>
+												<th class="order-price" style="text-align:center; vertical-align : middle;">Order Price</th>
+												<th class="payment" style="text-align:center; vertical-align : middle;">Payment</th>
+												<th class="order-status"style="text-align:center; vertical-align : middle;">Order Status</th>
 												<th class="order-more" style="text-align:center; vertical-align : middle;"></th>
 											</tr>
 										</thead>
@@ -163,12 +163,37 @@
 	<script src="/usr/js/main.min.js"></script>
 
 	<!--DateTime Picker-->
-	<script type="text/javascript">
-		$('.datepicker').datepicker({
-		weekStart:1,
-		color: 'red'
-		});
-	   </script>
+	   
+	   <script>
+    $(document).ready(function() {
+        $('#datepicker').datepicker({
+            weekStart: 1,
+            color: 'red',
+            format: 'yyyy-mm-dd', // 선택한 날짜의 형식 설정
+            autoclose: true
+        }).on('changeDate', function(e) {
+            var selectedDate = e.format('yyyy-mm-dd'); // 선택한 날짜 가져오기
+            // 서버로 선택한 날짜를 전송하고 데이터를 업데이트하는 함수 호출
+            updateOrderData(selectedDate);
+        });
+    });
+
+    function updateOrderData(selectedDate) {
+        // AJAX를 사용하여 서버에 선택한 날짜를 전송하고 데이터를 가져옴
+        $.ajax({
+            type: 'GET',
+            url: '/getOrderData', // 서버에서 주문 데이터를 가져오는 엔드포인트
+            data: { date: selectedDate },
+            success: function(response) {
+                // 서버에서 받은 데이터를 사용하여 페이지 업데이트
+                // 예: 테이블의 특정 부분에 주문 데이터를 업데이트
+            },
+            error: function(xhr, status, error) {
+                // 에러 처리
+            }
+        });
+    }
+</script>
 
 </body>
 

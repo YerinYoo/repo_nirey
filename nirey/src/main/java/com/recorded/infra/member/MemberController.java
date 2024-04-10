@@ -235,6 +235,7 @@ public class MemberController extends BaseController {
     	Map<String, Object> returnMap=new HashMap<String, Object>();
     	httpSession.invalidate();
     	returnMap.put("rt", "success");
+    	returnMap.put("redirectUrl", "/recorded");
     	return returnMap;
     }
 
