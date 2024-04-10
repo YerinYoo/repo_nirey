@@ -79,7 +79,7 @@
                         data-animation-delay="300" data-animation-duration="1000" th:each="product : ${prodList}">
                         <div class="product-default inner-quickview inner-icon">
                             <figure>
-                                <a href="demo3-product.html">
+                                 <a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq}, ProudctName=${product.ProductName}, prodStockCD=${product.prodStockCD})}" >
                                     <img src="/usr/images/demoes/demo3/products/product-1.jpg" width="273"
                                         height="273" alt="productr" />
                                 </a>

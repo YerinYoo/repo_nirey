@@ -13,7 +13,6 @@ private Integer delNY;
 private String ProductName;
 private Integer OrgPrice;
 private Integer DiscountedPrice;
-private String ProductDescription;
 private Integer prodStockCD;
 private Integer category1CD;
 private Integer category2CD;
@@ -63,12 +62,6 @@ public Integer getDiscountedPrice() {
 }
 public void setDiscountedPrice(Integer discountedPrice) {
 	DiscountedPrice = discountedPrice;
-}
-public String getProductDescription() {
-	return ProductDescription;
-}
-public void setProductDescription(String productDescription) {
-	ProductDescription = productDescription;
 }
 public Integer getProdStockCD() {
 	return prodStockCD;
@@ -181,8 +174,7 @@ public void setTotalReviewCount(Integer totalReviewCount) {
 @Override
 public String toString() {
 	return "ProductDto [productSeq=" + productSeq + ", delNY=" + delNY + ", ProductName=" + ProductName + ", OrgPrice="
-			+ OrgPrice + ", DiscountedPrice=" + DiscountedPrice + ", ProductDescription=" + ProductDescription
-			+ ", prodStockCD=" + prodStockCD + ", category1CD=" + category1CD + ", category2CD=" + category2CD
+			+ OrgPrice + ", DiscountedPrice=" + DiscountedPrice 	+ ", prodStockCD=" + prodStockCD + ", category1CD=" + category1CD + ", category2CD=" + category2CD
 			+ ", regDateTime=" + regDateTime + ", modDateTime=" + modDateTime + ", color=" + color + ", size=" + size
 			+ ", DetailDescription=" + DetailDescription + ", detailSize=" + detailSize + ", fabric=" + fabric
 			+ ", reviewScoreCD=" + reviewScoreCD + ", ReviewContent=" + ReviewContent + ", Member_seq=" + Member_seq

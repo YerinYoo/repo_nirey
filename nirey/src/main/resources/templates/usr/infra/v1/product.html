@@ -150,7 +150,7 @@
                                 </div>
                             </div>
                             <!-- 요기까지 전후 상품 -->
-
+	
                             <div class="ratings-container">
                                 <div class="product-ratings">
                                     <span class="ratings" style="width:60%"></span>
@@ -159,7 +159,7 @@
                                 </div>
                                 <!-- End .product-ratings -->
 
-                                <a href="#" class="rating-link">( 1 Reviews )</a>
+                                <a href="#" class="rating-link" th:text="'(' + ${product.totalReviewCount} + ' Reviews)'"></a>
                             </div>
                             <!-- End .ratings-container -->
 
@@ -194,7 +194,7 @@
                                             <a href="javascript:;" class="filter-color border-0 " style="background-color: rgb(221, 181, 119);"></a>
                                         </li>
                                         <li class="">
-                                            <a href="javascript:;" class="filter-color border-0" style="background-color: rgb(96, 133, 165);"></a>
+                                            <a href="javascript:;" class="filter-color border-0" style="background-color: rgb(96, 133, 165);" border-radius: 50%;></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -272,15 +272,19 @@
                             <div class="product-single-tabs">
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="product-tab-desc" data-toggle="tab" href="#product-desc-content" role="tab" aria-controls="product-desc-content" aria-selected="true">Info</a>
+                            <a class="nav-link active" id="product-tab-desc" data-toggle="tab" href="#product-desc-content" role="tab" aria-controls="product-desc-content" aria-selected="true">Description</a>
                         </li>
 
+                        <li class="nav-item">
+                            <a class="nav-link" id="product-tab-detailDesc" data-toggle="tab" href="#product-detailDesc-content" role="tab" aria-controls="product-detailDesc-content" aria-selected="false">Details</a>
+                        </li>
+                        
                         <li class="nav-item">
                             <a class="nav-link" id="product-tab-tags" data-toggle="tab" href="#product-tags-content" role="tab" aria-controls="product-tags-content" aria-selected="false">Shippinfo</a>
                         </li>
-
+                        
                         <li class="nav-item">
-                            <a class="nav-link" id="product-tab-reviews" data-toggle="tab" href="#product-reviews-content" role="tab" aria-controls="product-reviews-content" aria-selected="false">Reviews (1)</a>
+                            <a class="nav-link" id="product-tab-reviews" data-toggle="tab" href="#product-reviews-content" role="tab" aria-controls="product-reviews-content" aria-selected="false" th:text="'REVIEWS (' + ${product.totalReviewCount} + ')'"></a>
                         </li>
                     </ul>
 
@@ -293,6 +297,15 @@
                         </div>
                         <!-- End .tab-pane -->
 
+                        <div class="tab-pane fade" id="product-detailDesc-content" role="tabpanel" aria-labelledby="product-tab-detailDesc">
+                            <div class="product-detailDesc-content" >
+                               <span th:text="'🧶Fabric : ' +${product.fabric}"></span>
+                               <br>
+                               <span th:utext="'📐Size : ' + ${product.detailSize}"></span>
+                            </div>
+                            <!-- End .product-detailDesc-content -->
+                        </div>
+                        
 						<!-- 배송 정보 > 이건 값에 따라 달라지지 않으니까 -->
                         <div class="tab-pane fade" id="product-tags-content" role="tabpanel" aria-labelledby="product-tab-tags">
                             <div class="shippinfo-content">
@@ -309,12 +322,12 @@
 
                         <div class="tab-pane fade" id="product-reviews-content" role="tabpanel" aria-labelledby="product-tab-reviews">
 						    <div class="product-reviews-content">
-						        <h3 class="reviews-title" th:text=" ${product.totalReviewCount == 0 ? '아직 이 상품에 대한 리뷰가 없습니다' : product.totalReviewCount + ' review for ' + product.ProductName}"></h3>
+						        <h3 class="reviews-title" th:text=" ${product.totalReviewCount == 0 ? 'There is no REVIEW of this product yet' : product.totalReviewCount + ' review for ' + product.ProductName}"></h3>
 						        
 						        <div class="comment-list" th:if="${product.totalReviewCount > 0}">
 						            <div class="comments">
 						                <figure class="img-thumbnail">
-						                    <img src="/usr/images/blog/review.jpg" alt="author" width="80" height="80">
+						                    <img src="/usr/images/blog/review.jpg" alt="review" width="80" height="80" >
 						                </figure>
 						
 						                <div class="comment-block">
@@ -331,7 +344,7 @@
 						                        </div>
 						
 						                        <span class="comment-by">
-						                            <strong th:text="${product.name}"></strong> – <span th:text="${product.revRegDateTime}"></span>
+						                            <a>♥<strong th:text="${product.name}"></strong> – <span th:text="${product.revRegDateTime}"></span>
 						                        </span>
 						                    </div>
 						

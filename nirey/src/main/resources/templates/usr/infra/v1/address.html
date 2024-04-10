@@ -40,7 +40,7 @@
     <div class="page-wrapper">
         <div th:replace="~{/usr/infra/v1/include/Header :: Header}"></div>
 
-		<main class="main">
+		<main class="main" style=" position: relative;">
 			<div class="page-header">
 				<div class="container d-flex flex-column align-items-center">
 					<nav aria-label="breadcrumb" class="breadcrumb-nav">
@@ -71,7 +71,7 @@
                             <h3 class="account-sub-title d-none d-md-block mb-1 mt-3"><i
                                     class="sicon-location-pin align-middle mr-3"></i>Addresses</h3>
 
-								<div class="order-content" > 
+								<div class="order-content"  > 
 									<div class="order-table-container text-center">
 										<table class="table table-order text-center vertical-align-middle" >
 											<thead>
@@ -88,6 +88,7 @@
 													<th class="addr-addr">Address</th>
 													<th class="addr-addrDet">Details</th>
 													<th class="addr-msg">Shipping MSG</th>
+													<th class="addr-modify"></th>
 													<th class="addr-modify"></th>
 												</tr>
 											</thead>
@@ -110,16 +111,16 @@
 															Edit
 														</button>
 													</td>
+													<td class="addr-modify" style="text-align:center; vertical-align : middle; ">
+														<button class="btn  btn-add-cart product-type-simple btn-shop">
+															Delete
+														</button>
+													</td>
 												</tr>
 											</tbody>
 										</table>
-												<div class="addrBtn" >
-													<div class="col-12 mt-3 font2" style="text-align: left;  ">
-														<a href="forgot-password.html"
-														class="forget-password font2">Delete Select</a>
-													</div>
-		
-													<div class="col-12 mb-3" style="text-align: end; ">
+												<div class="addrBtn " style=" bottom : 0; padding : 10px;" >
+													<div class="col-12  mt -3 mb-3" style="text-align: end; bottom : 0; position: absolute">
 														<a href="register.html"
 														class="register font2">Add Address</a>
 													</div>

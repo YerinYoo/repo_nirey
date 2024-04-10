@@ -66,12 +66,6 @@ public class ProductService {
     public List<ProductDto> searchProducts(ProductVo vo) throws Exception {
         return dao.selectList(vo);
     }
-    
-    // 카테고리 및 재고 상태에 따른 상품 목록 필터링
-    public List<ProductDto> getProductListByCategoryAndStock(ProductDto dto) {
-        return dao.getProductListByCategoryAndStock(dto);
-    }
 
-    
     }
 

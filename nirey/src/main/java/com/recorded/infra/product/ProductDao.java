@@ -30,6 +30,4 @@ public interface ProductDao {
     //개수 리턴
     public int getTotalProductCount(ProductVo vo);
 
-    //필터링 된 값을 불러오는 메서드
-    List<ProductDto> getProductListByCategoryAndStock(ProductDto dto);
 }

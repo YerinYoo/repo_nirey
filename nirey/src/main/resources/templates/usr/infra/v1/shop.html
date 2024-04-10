@@ -423,7 +423,7 @@
 						                <div class="label-group">
 		                                     <div th:if="${product.prodStockCD == 7}" class="product-label label-hot">NEW</div>
 		                                    <div th:if="${product.prodStockCD == 8}" class="product-label label-sale">BEST</div>
-		                                    <div th:if="${product.prodStockCD == 9}" class="product-label label-hot" style="background-color: rgb(96, 133, 165);">RESTOCK</div>
+		                                    <div th:if="${product.prodStockCD == 9}" class="product-label label-restock" style="background-color: rgb(96, 133, 165);">RESTOCK</div>
 		                                </div>
 						                <div class="btn-icon-group">
 						                    <a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq})}"  class="btn-icon btn-add-cart product-type-simple"><i class="icon-shopping-cart"></i></a>
@@ -462,7 +462,7 @@
 						    <div class="col-6 col-sm-4 col-md-3 col-xl-5col" th:each="product : ${searchResults}">
 						        <div class="product-default inner-quickview inner-icon">
 						            <figure>
-						                 <a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq}, ProudctName=${product.ProductName})}" >
+						                 <a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq}, ProudctName=${product.ProductName}, prodStockCD=${product.prodStockCD})}" >
 						                    <img src="/usr/images/demoes/demo3/products/product-15.jpg" width="273" height="273" alt="productr"/>
 						                </a>
 						                <div class="btn-icon-group">
@@ -587,21 +587,22 @@
 
 							<div class="collapse show" id="widget-body-2">
 							    <div class="widget-body">
-							        <dl class="clothes">
-							            <dt>Clothes</dt>
-							            <dd style="padding-left: 10%;"><a th:href="@{/recorded/Shop?category1=11}" >Outer</a></dd>
-							            <dd style="padding-left: 10%;"><a th:href="@{/recorded/Shop?category1=12}" >Top</a></dd>
-							            <dd style="padding-left: 10%;"><a th:href="@{/recorded/Shop?category1=13}" >Bottom</a></dd>
-							            <dd style="padding-left: 10%;"><a th:href="@{/recorded/Shop?category1=14}" >Dress</a></dd>
-							        </dl>
-							        <dl class="non-clothes">
-							            <dt>Non-Clothes</dt>
-							            <dd style="padding-left: 10%;"><a th:href="@{/recorded/Shop?category2=15}" >Bag</a></dd>
-							            <dd style="padding-left: 10%;"><a th:href="@{/recorded/Shop?category2=16}" >Shoes</a></dd>
-							            <dd style="padding-left: 10%;"><a th:href="@{/recorded/Shop?category2=17}" >Acc.</a></dd>
-							            <dd style="padding-left: 10%;"><a th:href="@{/recorded/Shop?category2=18}" >Etc.</a></dd>
-							        </dl>
-							    </div><!-- End .widget-body -->
+								    <div class="clothes">
+								        <ul>Clothes</ul>
+								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop(category1=11)}">Outer</a></li>
+								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop(category1=12)}">Top</a></li>
+								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop(category1=13)}">Bottom</a></li>
+								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop(category1=14)}">Dress</a></li>
+								    </div>
+								    <div class="non-clothes">
+								        <ul>Non-Clothes</ul>
+								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop(category2=15)}">Bag</a></li>
+								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop(category2=16)}">Shoes</a></li>
+								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop(category2=17)}">Acc.</a></li>
+								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop(category2=18)}">Etc.</a></li>
+								    </div>
+								</div><!-- End .widget-body -->
+
 							</div><!-- End .collapse -->
 
 
@@ -710,83 +711,36 @@
     <script src="/usr/js/main.min.js"></script>
     
 <script>
-$(document).ready(function() {
-    // 카테고리 1 클릭 이벤트
-    $(".clothes dd a").click(function(e) {
-        e.preventDefault();
-        var category1CD = parseInt($(this).attr("href").split("=")[1]);
-        filterProducts(category1CD, null, null);
-        console.log("의류 카테 누르기 성공");
-    });
 
-    // 카테고리 2 클릭 이벤트
-    $(".non-clothes dd a").click(function(e) {
-        e.preventDefault();
-        var category2CD = parseInt($(this).attr("href").split("=")[1]);
-        filterProducts(null, category2CD, null);
-        console.log("의류 아니지롱");
-    });
-
-    // 재고 클릭 이벤트
-    $(".main-nav .menu li").not(".active").click(function() {
-        var prodStockCD = parseInt($(this).find("a").attr("href").split("=")[1]);
-        filterProducts(null, null, prodStockCD);
-    });
-});
-
-function filterProducts(category1CD, category2CD, prodStockCD) {
-    $.ajax({
-        url: '/filterProducts',
-        type: 'GET',
-        data: {
-            category1CD: category1CD,
-            category2CD: category2CD,
-            prodStockCD: prodStockCD
-        },
-        success: function(response) {
-            // 기존 HTML을 대체하는 것이 아니라 새로운 HTML을 추가하도록 수정
-            $("row").empty().append(response);
-            console.log("필터링 다 했고");
-        },
-        error: function(xhr, status, error) {
-            console.error(xhr.responseText);
-            alert("필터링 실패!");
-        }
-    });
-}
-
-//가격 포맷팅 함수
-function formatPrice(price) {
-    // 세 자리마다 컴마 추가
-    var formattedPrice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    // '₩'를 추가하여 반환
-    return "₩" + formattedPrice ;
-}
-
-// 가격 요소를 포맷팅하는 함수
+//가격 관련 스크립트
 function formatPriceElements() {
-    // old-price 클래스를 가진 요소들을 찾아서 가격을 포맷팅
+    // HTML 요소를 가져와서 가격 포맷팅 적용
     var oldPriceElements = document.querySelectorAll('.old-price');
+    var productPriceElements = document.querySelectorAll('.product-price');
+
     oldPriceElements.forEach(function(element) {
         var price = parseFloat(element.textContent);
         element.textContent = formatPrice(price);
     });
-    
 
-    // product-price 클래스를 가진 요소들을 찾아서 가격을 포맷팅
-    var productPriceElements = document.querySelectorAll('.product-price');
     productPriceElements.forEach(function(element) {
         var price = parseFloat(element.textContent);
         element.textContent = formatPrice(price);
     });
+}
+
+// 가격 포맷팅 함수
+function formatPrice(price) {
+    // 세 자리마다 컴마 추가
+    var formattedPrice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    // '원'을 추가하여 반환
+    return "₩" + formattedPrice ;
+}
 
 // 문서 로드 후에 실행
 document.addEventListener('DOMContentLoaded', function() {
     formatPriceElements();
 });
-}
-
-
 
 </script>
 

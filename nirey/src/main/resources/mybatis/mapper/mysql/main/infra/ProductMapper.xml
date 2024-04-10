@@ -12,7 +12,6 @@
         a.ProductName,
         a.OrgPrice,
         a.DiscountedPrice,
-        a.ProductDescription,
         a.prodStockCD,
         a.category1CD,
         a.category2CD,
@@ -43,7 +42,6 @@
 	        a.ProductName,
 	        a.OrgPrice,
 	        a.DiscountedPrice,
-	        a.ProductDescription,
 	        a.prodStockCD,
 	        a.category1CD,
 	        a.category2CD,
@@ -69,7 +67,6 @@
 	        a.ProductName,
 	        a.OrgPrice,
 	        a.DiscountedPrice,
-	        a.ProductDescription,
 	        a.prodStockCD,
 	        a.category1CD,
 	        a.category2CD,
@@ -85,23 +82,24 @@
 	        b.Product_seq,
 	        c.memberSeq,
 	      	c.name,
-	      	(select count(*) from review) as totalReviewCount
-	      	
-	        
+	      	(select count(*) from review where Product_seq = a.productSeq) as totalReviewCount
     		
     		from product  a
     		
-    		 inner join 
+    		 left join 
         			review b
     on 
         b.Product_seq=a.productSeq
         
-        	inner join
+        	left join
         			member c
      on
      		b.Member_seq=c.memberSeq
     			
     			where a.productSeq = #{productSeq}
+    			
+    			
+    			
     			
     	</select>
     
@@ -111,7 +109,6 @@
 				, a.ProductName
 				, a.OrgPrice
 				, a.DiscountedPrice
-				, a.ProductDescription
 				, a.prodStockCD
 				, a.category1CD
 				, a.category2CD
@@ -123,7 +120,6 @@
 			, #{ProductName}
 			,#{OrgPrice}
 			,#{DiscountedPrice}
-			,#{ProductDescription}
 			,#{prodStockCD}
 			,#{category1CD}
 			,#{category2CD}
@@ -247,7 +243,6 @@
 			        , a.ProductName
 			        , a.OrgPrice
 			        , a.DiscountedPrice
-			        , a.ProductDescription
 			        , a.prodStockCD
 			        , a.category1CD
 			        , a.category2CD
@@ -352,7 +347,6 @@
         , a.ProductName
         , a.OrgPrice
         , a.DiscountedPrice
-        , a.ProductDescription
         , a.prodStockCD
         , a.category1CD
         , a.category2CD
@@ -384,35 +378,4 @@
 </select>
 
 <!-- ProductMapper.xml -->
-
-<select id="getProductListByCategoryAndStock" parameterType="com.recorded.infra.product.ProductVo" resultType="com.recorded.infra.product.ProductDto">
-		SELECT 
-		    productSeq,
-		    delNY,
-		    ProductName,
-		    OrgPrice,
-		    DiscountedPrice,
-		    ProductDescription,
-		    prodStockCD,
-		    category1CD,
-		    category2CD,
-		    regDateTime,
-		    modDateTime
-		    
-		FROM 
-				product
-		
-		WHERE 
-			(category1CD = #{category1CD} AND #{category1CD} IS NOT NULL)
-		   	 	OR (category2CD = #{category2CD} AND #{category2CD} IS NOT NULL)
-		    	OR (prodStockCD = #{prodStockCD} AND #{prodStockCD} IS NOT NULL)
-		    	
-</select>
-
-
-
-
-
-
-
 </mapper>
