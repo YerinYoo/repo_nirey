@@ -33,6 +33,7 @@ public class MixDto {
 	private String shippingMsg;
 	private String colorOption;
 	private String sizeOption;
+	private String defaultNY;
 	
 	public String getOrderSeq() {
 		return orderSeq;
@@ -207,6 +208,12 @@ public class MixDto {
 	}
 	public void setSizeOption(String sizeOption) {
 		this.sizeOption = sizeOption;
+	}
+	public String getDefaultNY() {
+		return defaultNY;
+	}
+	public void setDefaultNY(String defaultNY) {
+		this.defaultNY = defaultNY;
 	}
 	@Override
 	public String toString() {

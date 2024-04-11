@@ -298,14 +298,6 @@
 					</div>
 					<div class="col-10 mt-3">
 						<div class="tab-pane fade show active" id="dashboard" role="tabpanel">
-							<div class="dashboard-content">
-								<p>
-									안녕하세요, <strong class="text-dark">"김땡땡"</strong>님! (
-									<strong class="text-dark">"김땡땡"</strong>님이 아니신가요?
-									<a href="login.html" class="btn btn-link ">Log out</a>)
-								</p>
-                            </div>
-                        </div>
                         
 
             <div class="container ">
@@ -317,44 +309,16 @@
                         <thead>
                             <tr class="table-th" style="text-align:center;">
                                 <th class="thumbnail-col"></th>
-                                <th class="product-col">Product</th>
-                                <th class="price-col">Price</th>
-                                <th class="status-col">Stock Status</th>
-                                <th class="action-col">Actions</th>
+                                <th class="product-col" >PRODUCT</th>
+                                <th class="product-count">COUNT</th>
+                                <th class="color-col">COLOR</th>
+                                <th class="size-col">SIZE</th>
+                                <th class="action-col"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="product-row">
-                                <td valign="middle" style="text-align:center; vertical-align : middle;">
-                                    <figure class="product-image-container">
-                                        <a href="product.html" class="product-image">
-                                            <img src="/usr/images/products/product-4.jpg" alt="product" style="height : 80px; width : 80px; ">
-                                        </a>
-                                    </figure>
-                                </td>
-                                <td style="text-align:center; vertical-align : middle;">
-                                    <h5 class="product-title">
-                                        <a href="product.html">Men Watch</a>
-                                    </h5>
-                                </td>
-                                <td class="price-box" style="text-align:center; vertical-align : middle;">$17.90</td>
-                                <td style="text-align:center; vertical-align : middle;">
-                                    <span class="stock-status">In stock</span>
-                                </td>
-                                <td class="action" style="text-align:center; vertical-align : middle;">
-                                    <a href="ajax/product-quick-view.html" class="btn btn-quickview mt-1 mt-md-0"
-                                        title="Quick View">Quick
-                                        View</a>
-                                    <button class="btn btn-dark btn-add-cart product-type-simple btn-shop">
-                                        ADD TO CART
-                                    </button>
-                                    <button class="btn btn-wishlist-delete product-type-simple btn-shop col-2">
-                                        DELETE
-                                    </button>
-                                </td>
-                            </tr>
-
-                            <tr class="product-row">
+                            
+                            <tr class="product-row" th:each="wishlist:${wishlist}">
                                 <td style="text-align:center; vertical-align : middle;">
                                     <figure class="product-image-container">
                                         <a href="product.html" class="product-image">
@@ -362,53 +326,30 @@
                                         </a>
                                     </figure>
                                 </td>
-                                <td style="text-align:center; vertical-align : middle;">
-                                    <h5 class="product-title">
-                                        <a href="product.html">Men Cap</a>
-                                    </h5>
+                                <td style=" vertical-align : middle; max-width : 0px;">
+                                	<div class="product-info">
+	                                	<ul>
+	                                		<li><span th:text="${wishlist.ProductName}"></span></li>
+	                                		<li><span th:text="${wishlist.DiscountedPrice}"></span></li>
+	                                	</ul>
+                                	</div>
                                 </td>
-                                <td class="price-box" style="text-align:center; vertical-align : middle;">$17.90</td>
+                                <td style="text-align : center; vertical-align : middle;">
+                                <div class="product-single-qty">
+												<input class="horizontal-quantity form-control" type="text">
+											</div><!-- End .product-single-qty -->
+                                </td>
                                 <td style="text-align:center; vertical-align : middle;">
-                                    <span class="stock-status">In stock</span>
+                                    <span class="stock-status">Color</span>
+                                </td>
+                                <td style="text-align:center; vertical-align : middle;">
+                                    <span class="stock-status">Size</span>
                                 </td>
                                 <td class="action" style="text-align:center; vertical-align : middle;">
-                                    <a href="ajax/product-quick-view.html" class="btn btn-quickview mt-1 mt-md-0"
-                                        title="Quick View">Quick
-                                        View</a>
-                                    <button class="btn btn-dark btn-add-cart product-type-simple btn-shop">
-                                        ADD TO CART
-                                    </button>
-                                    <button class="btn btn-wishlist-delete product-type-simple btn-shop col-2">
-                                        DELETE
-                                    </button>
-                                </td>
-                            </tr>
-
-                            <tr class="product-row">
-                                <td style="text-align:center; vertical-align : middle;">
-                                    <figure class="product-image-container">
-                                        <a href="product.html" class="product-image">
-                                            <img src="/usr/images/products/product-6.jpg" alt="product" style="height : 80px; width : 80px;">
+                                    <a href="ajax/product-quick-view.html" class="btn btn-dark quickview mt-1 mt-md-0 col-3"
+                                        title="Quick View">3
                                         </a>
-                                    </figure>
-                                </td>
-                                <td style="text-align:center; vertical-align : middle;">
-                                    <h5 class="product-title">
-                                        <a href="product.html">Men Black Gentle Belt</a>
-                                    </h5>
-                                </td>
-                                <td class="price-box" style="text-align:center; vertical-align : middle;">$17.90</td>
-                                <td style="text-align:center; vertical-align : middle;">
-                                    <span class="stock-status">Out of Stock</span>
-                                </td>
-                                <td class="action" style="text-align:center; vertical-align : middle;">
-                                    <a href="ajax/product-quick-view.html" class="btn btn-quickview mt-1 mt-md-0"
-                                        title="Quick View">Quick
-                                        View</a>
-                                    <button class="btn btn-dark btn-add-cart product-type-simple btn-shop">
-                                        ADD TO CART
-                                    </button>
-                                    <button class="btn btn-wishlist-delete product-type-simple btn-shop col-2">
+                                    <button class="btn btn-wishlist-delete product-type-simple btn-shop col-3">
                                         DELETE
                                     </button>
                                 </td>

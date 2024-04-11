@@ -124,15 +124,19 @@
             <a th:href="@{/recorded/Shop?prodStockCD=9}">ReStock!</a>
         </li>
 
-        <li class="mypage">
-            <a  class="nolink">My Page</a>
-                <ul class="submenu">
-                    <li><a th:href="@{/MyPage/Dashboard}">Dashboard</a></li>
-                    <li><a th:href="@{/MyPage/Orders}">Orders</a></li>
-                    <li><a href="wishlist.html">Wishlist</a></li>
-                    <li><a th:href="@{/logoutUsr}">Logout</a></li>
-                </ul>
-        </li>
+        <!-- 로그인 값이 있을 경우에는 mypage와 관련된 헤더, 로그인 값이 없을 경우에는 로그인으로 반환. -->
+		<li class="mypage" th:if="${session.authenticatedMember != null and session.sessIdUsr != null}">
+		    <a th:href="@{/MyPage/Dashboard}">My Page</a>
+		    <ul class="submenu">
+		        <li><a th:href="@{/MyPage/Dashboard}">Dashboard</a></li>
+		        <li><a th:href="@{/MyPage/Orders}">Orders</a></li>
+		        <li><a href="wishlist.html">Wishlist</a></li>
+		        <li><a id="buttonUsrSignOut" th:href="@{/logoutUsr}">Logout</a></li>
+		    </ul>
+		</li>
+		<li th:unless="${session.authenticatedMember != null and session.sessIdUsr != null}">
+		    <a th:href="@{/recorded/Login}">Login</a>
+		</li>
     </ul>
 </nav>
                     </div><!-- End .header-left -->
@@ -148,8 +152,8 @@
                             </form>
                         </div>
 
-                        <a href="login.html" class="header-icon header-icon-user" title="Login"><i
-                                class="icon-user-2"></i></a>
+                       <a th:if="${session.authenticatedMember != null}" th:href="@{/MyPage/Dashboard}" class="header-icon header-icon-user" title="Dashboard"><i class="icon-user-2"></i></a>
+						<a th:unless="${session.authenticatedMember != null}" th:href="@{/recorded/Login}" class="header-icon header-icon-user" title="Login"><i class="icon-user-2"></i></a>
 
                         <a href="wishlist.html" class="header-icon header-icon-wishlist" title="Wishlist"><i
                                 class="icon-wishlist-2"></i></a>
@@ -425,10 +429,7 @@
 		                                    <div th:if="${product.prodStockCD == 8}" class="product-label label-sale">BEST</div>
 		                                    <div th:if="${product.prodStockCD == 9}" class="product-label label-restock" style="background-color: rgb(96, 133, 165);">RESTOCK</div>
 		                                </div>
-						                <div class="btn-icon-group">
-						                    <a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq})}"  class="btn-icon btn-add-cart product-type-simple"><i class="icon-shopping-cart"></i></a>
-						                </div>
-						                <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">View Details</a>
+						                <a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq}, ProudctName=${product.ProductName})}" class="btn-quickview" title="Quick View">View Details</a>
 						            </figure>
 						            <div class="product-details">
 						                <div class="category-wrap">
@@ -440,7 +441,7 @@
 						                    </div>
 						                </div>
 						                <h3 class="product-title">
-						                    <a href="demo3-product.html" th:text="${product.ProductName}"></a>
+						                    <a  th:text="${product.ProductName}"></a>
 						                </h3>
 						                <div class="ratings-container">
 						                    <div class="product-ratings">
@@ -503,7 +504,8 @@
 						        <div class="product-default inner-quickview inner-icon">
 						            <figure>
 						                <a href="demo3-product.html">
-						                <a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq}, ProudctName=${product.ProductName})}"  th:text="${list.name}">
+						                <a th:href="@{/recorded/Shop/Product(productSeq=${productSeq}, ProudctName=${product.ProductName})}" th:text="${list.name}">
+
 						                    <img src="/usr/images/demoes/demo3/products/product-15.jpg" width="273" height="273" alt="productr"/>
 						                </a>
 						                <div class="btn-icon-group">
@@ -605,75 +607,6 @@
 
 							</div><!-- End .collapse -->
 
-
-                            <div class="widget widget-price">
-                                <h3 class="widget-title">
-                                    <a data-toggle="collapse" href="#widget-body-3" role="button" aria-expanded="true"
-                                        aria-controls="widget-body-3">Price</a>
-                                </h3>
-
-                                <div class="collapse show" id="widget-body-3">
-                                    <div class="widget-body">
-                                        <form action="#">
-                                            <div class="price-slider-wrapper">
-                                                <div id="price-slider"></div><!-- End #price-slider -->
-                                            </div><!-- End .price-slider-wrapper -->
-
-                                            <div
-                                                class="filter-price-action d-flex align-items-center justify-content-between flex-wrap">
-                                                <div class="filter-price-text">
-                                                    Price:
-                                                    <span id="filter-price-range"></span>
-                                                </div><!-- End .filter-price-text -->
-
-                                                <button type="submit" class="btn btn-primary">Filter</button>
-                                            </div><!-- End .filter-price-action -->
-                                        </form>
-                                    </div><!-- End .widget-body -->
-                                </div><!-- End .collapse -->
-                            </div><!-- End .widget -->
-
-                            <div class="widget widget-color">
-								<h3 class="widget-title">
-									<a data-toggle="collapse" href="#widget-body-4" role="button" aria-expanded="true"
-										aria-controls="widget-body-4">Color</a>
-								</h3>
-
-								<div class="collapse show" id="widget-body-4">
-									<div class="widget-body pb-0">
-										<ul class="config-swatch-list">
-											<li class="active">
-												<a href="#" style="background-color: black;"></a>
-											</li>
-                                            <li>
-												<a href="#" style="background-color: navy;"></a>
-											</li>
-                                            <li>
-												<a href="#" style="background-color: silver;"></a>
-											</li>
-                                            <li>
-												<a href="#" style="background-color: ivory"></a>
-											</li>
-											<li>
-												<a href="#" style="background-color: #0188cc;"></a>
-											</li>
-											<li>
-												<a href="#" style="background-color: #81d742;"></a>
-											</li>
-											<li>
-												<a href="#" style="background-color: #6085a5;"></a>
-											</li>
-											<li>
-												<a href="#" style="background-color: #ab6e6e;"></a>
-											</li>
-										</ul>
-									</div>
-									<!-- End .widget-body -->
-								</div>
-								<!-- End .collapse -->
-							</div>
-							<!-- End .widget -->
-
                             <div class="widget widget-size">
                                 <h3 class="widget-title">
                                     <a data-toggle="collapse" href="#widget-body-5" role="button" aria-expanded="true"
@@ -683,10 +616,10 @@
                                 <div class="collapse show" id="widget-body-5">
                                     <div class="widget-body">
                                         <ul class="config-size-list">
-                                            <li class="active"><a href="#">XL</a></li>
-                                            <li><a href="#">L</a></li>
-                                            <li><a href="#">M</a></li>
+                                            <li class="active"><a href="#">One Size</a></li>
                                             <li><a href="#">S</a></li>
+                                            <li><a href="#">M</a></li>
+                                            <li><a href="#">L</a></li>
                                         </ul>
                                     </div><!-- End .widget-body -->
                                 </div><!-- End .collapse -->
@@ -742,6 +675,13 @@ document.addEventListener('DOMContentLoaded', function() {
     formatPriceElements();
 });
 
+//상품 이미지에 커서 올렸을 때 뜨는 quick View로 반환하는 버튼 비활성화
+//그냥 상품 페이지로 바로 연결됨-!
+//버튼 요소 선택
+var btn = document.querySelector('.btn-quickview');
+
+// 버튼 비활성화
+btn.disabled = true;
 </script>
 
 

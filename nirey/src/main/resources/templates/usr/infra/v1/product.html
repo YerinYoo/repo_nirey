@@ -58,11 +58,11 @@
                     <div class="row">
                         <div class="col-lg-5 col-md-6 product-single-gallery">
                             <div class="product-slider-container">
-								<div class="label-group">
+<!-- 								<div class="label-group">
 								    <div th:if="${product != null and (product.prodStockCD == 7)}" class="product-label label-hot">NEW</div>
 								    <div th:if="${product != null and (product.prodStockCD == 8)}" class="product-label label-sale">BEST</div>
 								    <div th:if="${product != null and (product.prodStockCD == 9)}" class="product-label " style="background-color: rgb(96, 133, 165);">RESTOCK</div>
-								</div>
+								</div> -->
                                 <div class="product-single-carousel owl-carousel owl-theme show-nav-hover">
                                     <div class="product-item">
                                         <img class="product-single-image" src="/usr/images/products/zoom/mj1.jpg" data-zoom-image="/usr/images/products/zoom/mj1.jpg" width="468" height="468" alt="product" />
@@ -184,76 +184,33 @@
                             </ul>
 
 							<hr class="divider mb-3 mt-0">
-                            <div class="product-filters-container">
-                                <div class="product-single-filter"><label>Color:</label>
-                                    <ul class="config-size-list config-color-list config-filter-list">
-                                        <li>
-                                        	<a href="javascript:;" class="color-select" style="background-color: rgb(1, 136, 204); border-radius: 50%; height : 33px;"></a>
-                                        </li>
-                                        <li class="">
-                                        	<a href="javascript:;" class="color-select" style="background-color: rgb(221, 181, 119); border-radius: 50%; height : 33px;"></a>
-                                        </li>
-                                        <li class="">
-                                            <a href="javascript:;" class="color-select" style="background-color: rgb(96, 133, 165); border-radius: 50%; height : 33px;"></a>
-                                        </li>
-                                    </ul>
-                                </div>
+                            <div class="selectedOptionsList">
+                                <div class="product-single-filter">
+								    <label>Size:</label>
+								    <ul class="config-size-list">
+								        <li class="size" th:each="size : ${prodSize}"><a href="javascript:;" class="d-flex align-items-center justify-content-center" th:text="${size.size}"></a></li>
+								    </ul>
+								</div>
+								
+								<div class="product-single-filter">
+								    <label>Color:</label>
+								    <ul class="config-size-list">
+								        <li class="color" th:each="color : ${prodColor}">
+								         <a href="javascript:;" class="d-flex align-items-center justify-content-center"
+								         th:style="'background-color: ' + ${color.color} + '; border-radius: 50%; height: 33px;'">
+            							</a></li>
+								    </ul>
+								</div>
 
-                                <div class="product-single-filter"><label>Size:</label>
-                                    <ul class="config-size-list">
-                                        <li class=""><a href="javascript:;" class="d-flex align-items-center justify-content-center">Large</a></li>
-                                        <li class=""><a href="javascript:;" class="d-flex align-items-center justify-content-center">Medium</a></li>
-                                        <li class=""><a href="javascript:;" class="d-flex align-items-center justify-content-center">Small</a></li>
-                                    </ul>
-                                </div>
 								
 								<!-- 사이즈, 색상 선택한 후 초기화 버튼 -->
                                 <div class="product-single-filter">
-                                    <label></label>
+                                    <h6>Selected Options</h6>
                                     <a class="font1 text-uppercase clear-btn" href="#">Clear</a>
                                 </div>
                                 <!---->
                             </div>
 
-                            <div class="sticky-header" data-sticky-options="{'mobile': false}">
-                                <div class="container">
-                                    <div class="sticky-img mr-4">
-                                        <img src="/usr/images/products/zoom/mj1.jpg" width="50" height="50" alt="product" />
-                                    </div>
-                                    <div class="sticky-detail">
-                                        <div class="sticky-product-name">
-                                            <h3 class="product-title w-100 ls-0" th:text="${product.ProductName}"></h3>
-                                            <div class="price-box">
-                                                <span class="old-price"  th:text="${product.OrgPrice}"></span>
-                                                <span class="product-price" th:text="${product.DiscountedPrice}"></span>
-                                            </div>
-                                            <!-- End .price-box -->
-                                        </div>
-                                        <div class="ratings-container">
-                                            <div class="product-ratings">
-                                                <span class="ratings" style="width:60%"></span>
-                                                <!-- End .ratings -->
-                                            </div>
-                                            <!-- End .product-ratings -->
-
-                                            
-                                        </div>
-                                        <!-- End .product-container -->
-                                    </div>
-                                    <!-- End .sticky-detail -->
-
-                                    <div class="product-action d-none">
-                                        <div class="product-single-qty">
-                                            <input class="horizontal-quantity form-control" type="text">
-                                        </div>
-                                        <!-- End .product-single-qty -->
-
-                                    </div>
-                                    <!-- End .product-action -->
-                                </div>
-                                <!-- end .container -->
-                            </div>
-                            <!-- end .sticky-header -->
 
                             <div class="product-action">
 
@@ -448,7 +405,7 @@
         // HTML 요소를 가져와서 가격 포맷팅 적용
         var oldPriceElements = document.querySelectorAll('.old-price');
         var productPriceElements = document.querySelectorAll('.new-price');
-
+        
         oldPriceElements.forEach(function(element) {
             var price = parseFloat(element.textContent);
             element.textContent = formatPrice(price);
@@ -473,7 +430,24 @@
         formatPriceElements();
     });
 
-    </script>
+    // 선택한 사이즈와 색상 값을 "Selected Options" 섹션의 <ul> 태그 내에 <li> 요소로 추가합니다.
+    document.querySelectorAll('.config-size-list a').forEach(function (el) {
+        el.addEventListener('click', function () {
+            var selectedSeq = el.getAttribute('data-sizeSeq') || el.getAttribute('data-colorSeq');
+            alert("사이즈, 색상 받아와");
+            var selectedOptionList = document.getElementById('selectedOptionsList');
+            console.log(selectedSeq);
+            var li = document.createElement('li');
+            li.textContent = selectedSeq;
+            selectedOptionList.appendChild(li);
+        });
+    });
+
+    // Clear 버튼을 클릭하면 선택한 옵션을 초기화합니다.
+    document.querySelector('.clear-btn').addEventListener('click', function () {
+        document.getElementById('selectedOptionsList').innerHTML = '';
+    });
+</script>
 </body>
 
 </html>

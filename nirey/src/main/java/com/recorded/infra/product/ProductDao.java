@@ -11,10 +11,14 @@ public interface ProductDao {
 	public List<ProductDto> selectList(); 
 	
 	public List<ProductDto> prodList(); 
+
+	public List<ProductDto> prodColor(ProductDto dto);
+	
+	public List<ProductDto> prodSize(ProductDto dto);
 	
 	public ProductDto selectOne(ProductDto dto);
 	
-	public ProductDto selectProd(ProductDto dto);
+	 public ProductDto selectProd(ProductDto dto); 
 	
 	public int insert(ProductDto dto);
 	public int insertRev(ProductDto dto);
@@ -30,4 +34,6 @@ public interface ProductDao {
     //개수 리턴
     public int getTotalProductCount(ProductVo vo);
 
+    //위시리스트
+    public List<ProductDto> wishlist();
 }

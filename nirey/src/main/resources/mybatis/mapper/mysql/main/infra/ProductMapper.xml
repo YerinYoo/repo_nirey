@@ -31,8 +31,6 @@
     </choose>
 </select>
 
-    
-	  
 	      <select id="selectOne" resultMap="resultMapObj">
     
     		select
@@ -98,10 +96,41 @@
     			
     			where a.productSeq = #{productSeq}
     			
-    			
-    			
-    			
     	</select>
+    	
+    <!-- 제품 상세 페이지에서 호출할 색상 테이블 -->
+    <select id="prodColor" resultMap="resultMapObj">
+    SELECT 
+        a.productSeq,
+        b.colorSeq,
+        b.color
+    FROM 
+        product a
+    INNER JOIN
+        color b ON a.productSeq = b.productSeq
+    WHERE 1=1
+     AND 
+        a.productSeq = #{productSeq}
+
+</select>
+
+<!-- 제품 상세 페이지에서 호출할 사이즈 테이블 -->
+<select id="prodSize" resultMap="resultMapObj" >
+    SELECT 
+        a.productSeq,
+       	b.sizeSeq,
+       	b.size
+    FROM 
+        product a
+   INNER JOIN
+   		size b
+   ON
+   		a.productSeq=b.productSeq
+   
+   where 1=1
+   AND
+    		a.productSeq=#{productSeq} 
+</select>
     
 	  <insert id="insert">
 			insert into product (
@@ -357,11 +386,11 @@
     from 
         product a
     inner join 
-        prodColor b
+        color b
     on
         a.productSeq=b.Product_productSeq
     inner join 
-        prodSize c
+        size c
     on 
         b.Product_productSeq=c.Product_productSeq
     where 1=1
@@ -375,6 +404,28 @@
         <when test="shOption==2">AND a.ProductName LIKE CONCAT('%',#{shValue},'%')</when>
     </choose>
     and a.productSeq is not null 
+</select>
+
+<select id="wishlist" resultMap="resultMapObj">
+select 
+	a.Member_memberSeq,
+    a.Product_productSeq,
+    b.memberSeq,
+    c.productSeq,
+    c.ProductName,
+    c.DiscountedPrice
+    
+from wishlist a
+inner join
+	member b
+on
+	a.Member_memberSeq=b.memberSeq
+inner join
+	product c
+on
+	a.Product_productSeq=c.productSeq
+
+where 1=1
 </select>
 
 <!-- ProductMapper.xml -->

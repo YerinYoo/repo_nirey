@@ -58,11 +58,11 @@
 						<div class="container">
 							<div class="mb-5">
 							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><a href="demo4.html">Home</a></li>
-								<li class="breadcrumb-item"><a href="category.html">Shop</a></li>
-								<li class="breadcrumb-item active" aria-current="page">
-									My Account
-								</li>
+								<li class="breadcrumb-item">Home</li>
+								<li class="breadcrumb-item">MyPage</li>
+								<li class="breadcrumb-item">Orders</li>
+								
+
 							</ol>
 						</div>
 					</div>
@@ -86,12 +86,11 @@
 										<label>Order Status</label>
 										<select name="orderby" class="form-control" style="height : 45px;">
 											<option value="" selected="selected">All of Status</option>
-											<option value="1">결제 대기 중</option>
-											<option value="2">결제 완료</option>
-											<option value="3">배송 준비 중</option>
-											<option value="4">배송 중</option>
-											<option value="5">배송 완료</option>
-											<option value="6">구매 확정</option>
+											<option value="1">Payment Pending</option>
+											<option value="3">Order Processing</option>
+											<option value="4">Shipping in Progress</option>
+											<option value="5">Shipped</option>
+											<option value="6">Purchase Confirmed</option>
 										</select>
 									</div>
 
@@ -114,7 +113,7 @@
 											<tr style="height : 50px;">
 												<th class="order-id" style="text-align:center; vertical-align : middle;">Order Number</th>
 												<th class="order-date" style="text-align:center; vertical-align : middle;">Order Date</th>
-												<th class="order-price" style="text-align:center; vertical-align : middle;">Order Price</th>
+												<th class="total-price" style="text-align:center; vertical-align : middle;">Order Price</th>
 												<th class="payment" style="text-align:center; vertical-align : middle;">Payment</th>
 												<th class="order-status"style="text-align:center; vertical-align : middle;">Order Status</th>
 												<th class="order-more" style="text-align:center; vertical-align : middle;"></th>
@@ -123,7 +122,7 @@
 										<tbody >
 											<tr style="height : 50px" th:each="order:${orderList}">
 												<td class="order-id"style="text-align:center; vertical-align : middle;" th:text="${order.orderSeq}"></td>
-												<td class="order-date"style="text-align:center; vertical-align : middle;" th:text="${order.OrderDate}"></td>
+												<td class="order-date" style="text-align:center; vertical-align : middle;" th:text="${#dates.format(order.OrderDate, 'yyyy-MM-dd')}"></td>
                                                 <td class="order-price"style="text-align:center; vertical-align : middle;" th:text="${order.TotalPrice}"></td>
                                                 <td class="payment"style="text-align:center; vertical-align : middle;" 
                                                 th:text="${@codeService.selectOneCachedCode(order.paymentCD)}"></td>
@@ -194,6 +193,41 @@
         });
     }
 </script>
+
+<script>
+
+//가격 관련 스크립트
+function formatPriceElements() {
+    // HTML 요소를 가져와서 가격 포맷팅 적용
+    var oldPriceElements = document.querySelectorAll('.order-price');
+
+    oldPriceElements.forEach(function(element) {
+        var price = parseFloat(element.textContent);
+        element.textContent = formatPrice(price);
+    });
+
+    productPriceElements.forEach(function(element) {
+        var price = parseFloat(element.textContent);
+        element.textContent = formatPrice(price);
+    });
+}
+
+// 가격 포맷팅 함수
+function formatPrice(price) {
+    // 세 자리마다 컴마 추가
+    var formattedPrice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    // '원'을 추가하여 반환
+    return "₩" + formattedPrice ;
+}
+
+// 문서 로드 후에 실행
+document.addEventListener('DOMContentLoaded', function() {
+    formatPriceElements();
+});
+
+</script>
+
+
 
 </body>
 

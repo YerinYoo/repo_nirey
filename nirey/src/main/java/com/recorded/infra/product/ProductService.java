@@ -17,15 +17,19 @@ public class ProductService {
 	
 	
 	public List<ProductDto> prodList() { return dao.prodList();}
+	
+	public List<ProductDto>prodColor(ProductDto dto) {return dao.prodColor(dto);}
+	
+	public List<ProductDto>prodSize(ProductDto dto) {return dao.prodSize(dto);}
 
 	public ProductDto selectOne(ProductDto dto) {
 		return dao.selectOne(dto);
 	}
 	
-	public ProductDto selectProd(ProductDto dto) {
-		return dao.selectProd(dto);
-	}
-
+	
+	
+	  public ProductDto selectProd(ProductDto dto) { return dao.selectProd(dto); }
+	 
 	public int insert(ProductDto dto) {
 		return dao.insert(dto);
 	}
@@ -66,6 +70,8 @@ public class ProductService {
     public List<ProductDto> searchProducts(ProductVo vo) throws Exception {
         return dao.selectList(vo);
     }
+    
+    public List<ProductDto> wishlist() { return dao.wishlist();}
 
     }
 

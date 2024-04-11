@@ -9,4 +9,5 @@ public interface MixDao {
 	public List<MixDto> memberInfo();
 	
 	public List<MixDto> memberAddr();
+	
 }

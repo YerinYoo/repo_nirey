@@ -271,6 +271,7 @@ public class MemberController extends BaseController {
 		
 	}
 
+
     //-----------------------------------------------------------eCommerce Controller E
     
 }

@@ -15,6 +15,7 @@ import com.recorded.common.constants.Constants;
 import com.recorded.common.util.UtilDateTime;
 import com.recorded.infra.code.CodeDto;
 import com.recorded.infra.member.MemberService;
+import com.recorded.infra.member.MemberVo;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -74,21 +75,21 @@ public class ProductController {
 		return "redirect:/Porders";
 	}
 
-	@RequestMapping(value = "/Porders")
-	public String Morders(@ModelAttribute("vo") ProductVo vo, Model model) throws Exception {
-
-		setSearch(vo);
-		int rowcount = service.getTotalProductCount(vo);
-		model.addAttribute("listCount", rowcount);
-
-		System.out.println(rowcount);
-
-		model.addAttribute("list", service.selectList(vo));
-
-//		 model.addAttribute("vo", vo);
-
-		return "adm/infra/v1/Porders";
-	}
+//	@RequestMapping(value = "/Porders")
+//	public String Morders(@ModelAttribute("vo") ProductVo vo, Model model) throws Exception {
+//
+//		setSearch(vo);
+//		int rowcount = service.getTotalProductCount(vo);
+//		model.addAttribute("listCount", rowcount);
+//
+//		System.out.println(rowcount);
+//
+//		model.addAttribute("list", service.selectList(vo));
+//
+////		 model.addAttribute("vo", vo);
+//
+//		return "adm/infra/v1/Porders";
+//	}
 
 	@RequestMapping(value = "/PordersView")
 	public String PordersView(ProductDto dto, Model model) throws Exception {
@@ -206,13 +207,18 @@ public class ProductController {
 	}
 
 
-	@RequestMapping(value = "/recorded/Shop/Product")
-	public String ProductView(ProductDto dto, Model model) throws Exception {
+	
+	  @RequestMapping(value = "/recorded/Shop/Product") 
+	  public String ProductView(ProductDto dto, Model model) throws Exception {
+		  
+		  model.addAttribute("product", service.selectProd(dto));
+		  model.addAttribute("prodColor", service.prodColor(dto));
+		  model.addAttribute("prodSize", service.prodSize(dto));
 
-		model.addAttribute("product", service.selectProd(dto));
+	  return "usr/infra/v1/product"; 
+	  }
+	 
 
-		return "usr/infra/v1/product";
-	}
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String searchProducts(@RequestParam(name = "shValue", required = false) String shValue, Model model) {
@@ -259,6 +265,20 @@ public class ProductController {
 		// 페이지로 이동
 		return "usr/infra/v1/shop";
 	}
+	
+	//위시리스트
+	   @RequestMapping("/MyPage/Wishlist")
+	    public String getWishlist(ProductDto dto, Model model) throws Exception{
+	        // 위시리스트 정보 가져오기
+	        List<ProductDto> wishlist = service.wishlist();
+
+	        // 모델에 위시리스트 추가
+	        model.addAttribute("wishlist", wishlist);
+
+	        // 위시리스트 페이지로 이동하는 뷰 이름 반환
+	        return "usr/infra/v1/wishlist";
+	    }
+
 
 }
 

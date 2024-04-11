@@ -31,7 +31,23 @@ private String memberSeq;
 private String name;
 private Date revRegDateTime;
 private Integer totalReviewCount;
+private String colorSeq;
+private String sizeSeq;
 
+
+
+public String getColorSeq() {
+	return colorSeq;
+}
+public void setColorSeq(String colorSeq) {
+	this.colorSeq = colorSeq;
+}
+public String getSizeSeq() {
+	return sizeSeq;
+}
+public void setSizeSeq(String sizeSeq) {
+	this.sizeSeq = sizeSeq;
+}
 public String getProductSeq() {
 	return productSeq;
 }

@@ -66,6 +66,7 @@
 	        ,b.recipient
 	        ,b.phoneNum
 	        ,b.shippingMsg
+	        ,b.defaultNY
 	    from 
 	        member a
 	    inner join 
@@ -77,37 +78,6 @@
 
 	    and a.memberSeq is not null 
 	</select>
-	<!-- 회원 정보 관련 매퍼 
-		<select id="memberInfo" resultMap="resultMapObj">
-	    select
-	        a.ID 
-	        ,a.pwd
-	        ,a.genderCD
-	        ,a.email
-	        ,a.birthday
-	        ,a.MobileNum
-	        ,a.
-	        ,a.name
-	        ,c.ProductName 
-	        ,c.DiscountedPrice
-	        ,b.addrTypeCD
-	        ,b.addr
-	        ,b.addrDetail
-	        ,b.zipcode
-	        ,b.recipient
-	        ,b.phoneNum
-	        ,b.shippingMsg
-	    from 
-	        member a
-		 inner join
-		    address b
-		 on 
-		 	a.memberSeq=b.Member_seq
-	    where 1=1
-
-	    and a.memberSeq is not null 
-	</select>
-	 -->
 	
 
 </mapper>
