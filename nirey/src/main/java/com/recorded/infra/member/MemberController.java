@@ -149,13 +149,14 @@ public class MemberController extends BaseController {
         return "adm/infra/v1/Morders";
     }
 
-    // 회원 상세 정보 조회
-    @GetMapping("/MordersView")
-    public String MordersView(Model model) {
-        MemberDto item = service.authenticate("ID", "pwd"); // 기존 데이터 가져오기
-        model.addAttribute("item", item); // 모델에 데이터 설정
-        return "adm/infra/v1/MordersView"; // 템플릿 이름 반환
-    }
+	@RequestMapping(value = "/MordersView")
+	public String MordersView(MemberDto dto, Model model) throws Exception {
+		
+		model.addAttribute("item", service.selectOne(dto)); 
+		
+		return "adm/infra/v1/MordersView"; 
+	}
+	
     // 회원 정보 수정 페이지로 이동
     @RequestMapping(value = "/MordersForm")
     public String MordersForm(MemberDto dto, Model model) throws Exception {

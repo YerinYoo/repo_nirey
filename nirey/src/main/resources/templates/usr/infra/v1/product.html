@@ -46,7 +46,8 @@
                 <nav aria-label="breadcrumb" class="breadcrumb-nav" style="padding-top : 100px">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="demo4.html"><i class="icon-home"></i></a></li>
-                        <li class="breadcrumb-item"><a href="#">Products</a></li>
+                        <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                        <li class="breadcrumb-item"><a th:text="${product.ProductName}"></a></li>
                     </ol>
                 </nav>
                 <div class="product-single-container product-single-default">
@@ -76,9 +77,7 @@
                                     <div class="product-item">
                                         <img class="product-single-image" src="/usr/images/products/zoom/mj4.jpg" data-zoom-image="/usr/images/products/zoom/mj4.jpg" width="468" height="468" alt="product" />
                                     </div>
-                                    <div class="product-item">
-                                        <img class="product-single-image" src="/usr/images/products/zoom/mj5.jpg" data-zoom-image="/usr/images/products/zoom/mj5.jpg" width="468" height="468" alt="product" />
-                                    </div>
+                                  
                                 </div>
                                 <!-- End .product-single-carousel -->
                                 <span class="prod-full-screen">
@@ -98,9 +97,6 @@
                                 </div>
                                 <div class="owl-dot">
                                     <img src="/usr/images/products/zoom/mj4.jpg" width="110" height="110" alt="product-thumbnail" />
-                                </div>
-                                <div class="owl-dot">
-                                    <img src="/usr/images/products/zoom/mj5.jpg" width="110" height="110" alt="product-thumbnail" />
                                 </div>
                             </div>
                         </div>
