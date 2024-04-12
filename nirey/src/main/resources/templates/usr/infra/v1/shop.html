@@ -77,7 +77,7 @@
                         </button>
 
                         <a th:href="@{/recorded}" class="logo">
-                            <img src="/usr/images/logo-dear.png" alt="Porto Logo">
+                            <img src="/usr/images/logo-tape.png" alt="Porto Logo">
                         </a>
 
                        <nav class="main-nav font2">
@@ -270,19 +270,15 @@
                 </div><!-- End .container -->
             </nav>
 
-            <div class="container mb-3">
+     <div class="container mb-3">
                 <div class="row">
                     <div class="col-lg-9 main-content">
                         <div class="category-banner pt-0 pb-2">
-                            <img class="slide-bg" src="/usr/images/demoes/demo3/slider/slide1.jpg" style="height : 300px" alt="banner"
+                            <img class="slide-bg" src="/usr/images/demoes/demo3/slider/illit.jpg" style="height : 400px" alt="banner"
                                 width="1500" height="320">
                             <div class="category-slide-content pt-1">
-                                <h2 class="m-b-3">Winter Fashion Trends</h2>
-                                <h3 class="text-uppercase ml-0">Up to 30% off on Jackets</h3>
-
-                                <h5 class="text-uppercase d-inline-block mb-1 pb-2">Starting at<span
-                                        class="coupon-sale-text font2"><sup>$</sup>199<sup>99</sup></span></h5>
-                                <a href="demo3-shop.html" class="btn btn-dark btn-xl ls-0" role="button">Shop Now</a>
+                                <h2 class="m-b-3" style="color : #FFA2AD">Winter Fashion Trends</h2>
+                                <h3 class="text-uppercase ml-0" style="color : #FF7A85">Up to 30% off on Jackets</h3>
                             </div><!-- End .category-slide-content -->
                         </div><!-- End .category-slide -->
                         
@@ -309,7 +305,7 @@
                                     <span>Filter</span>
                                 </a>
 
-                                <div class="toolbox-item toolbox-sort">
+                                <div class="toolbox-item toolbox-sort mb-3">
                                     <label>Sort By:</label>
 
                                     <div class="select-custom">
@@ -327,36 +323,7 @@
                                 </div><!-- End .toolbox-item -->
                             </div><!-- End .toolbox-left -->
 							<form id="formList" action="/recordedShop" method="GET">
-                            <div class="toolbox-right">
-                                <div class="toolbox-item toolbox-show">
-                                    <label>Show:</label>
 
-                                    <div class="select-custom">
-									     <!-- 히든 필드를 통해 페이지 번호를 전달할 폼 -->
-									   
-									    <!-- 기타 필요한 히든 필드 등 -->
-									    <!-- 페이지 사이즈 선택 -->
-									    
-									    <div class="select-custom">
-                                        <select name="count" class="form-control">
-                                            <option value="20">20</option>
-                                            <option value="30">30</option>
-                                            <option value="40">40</option>
-                                            <option value="50">50</option>
-                                        </select>
-                                    </div><!-- End .select-custom -->
-									</div><!-- End .select-custom -->
-                                </div><!-- End .toolbox-item -->
-
-                                <div class="toolbox-item layout-modes">
-                                    <a href="category.html" class="layout-btn btn-grid active" title="Grid">
-                                        <i class="icon-mode-grid"></i>
-                                    </a>
-                                    <a href="category-list.html" class="layout-btn btn-list" title="List">
-                                        <i class="icon-mode-list"></i>
-                                    </a>
-                                </div><!-- End .layout-modes -->
-                            </div><!-- End .toolbox-right -->
                         </nav>
 
                         <!-- <div class="row">
@@ -429,7 +396,7 @@
 		                                    <div th:if="${product.prodStockCD == 8}" class="product-label label-sale">BEST</div>
 		                                    <div th:if="${product.prodStockCD == 9}" class="product-label label-restock" style="background-color: rgb(96, 133, 165);">RESTOCK</div>
 		                                </div>
-						                <a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq}, ProudctName=${product.ProductName})}" class="btn-quickview" title="Quick View">View Details</a>
+						                <a class="btn-quickview" title="goProd" >View Details</a>
 						            </figure>
 						            <div class="product-details">
 						                <div class="category-wrap">

@@ -40,6 +40,9 @@ public class ProductController {
 
 	@RequestMapping(value = "/ReviewInsert")
 	public String ReviewtInsert(ProductDto dto) throws Exception {
+		
+		ProductDto productDto = new ProductDto();
+		productDto.setDelNY(0);
 
 		System.out.println(dto.toString());
 
@@ -65,6 +68,14 @@ public class ProductController {
 		service.uelete(dto);
 
 		return "redirect:/Porders";
+	}
+	
+	@RequestMapping(value="/ueleteW")
+	public String ueleteW(ProductDto dto) throws Exception {
+		
+		service.ueleteW(dto);
+		
+		return "redirect:/MyPage/Wishlist";
 	}
 
 	@RequestMapping(value = "/ProductDelete")

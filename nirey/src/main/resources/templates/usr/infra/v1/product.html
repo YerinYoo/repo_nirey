@@ -45,8 +45,8 @@
             <div class="container pt-120">
                 <nav aria-label="breadcrumb" class="breadcrumb-nav" style="padding-top : 100px">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="demo4.html"><i class="icon-home"></i></a></li>
-                        <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                        <li class="breadcrumb-item"><a><i class="icon-home"></i></a></li>
+                        <li class="breadcrumb-item"><a>Shop</a></li>
                         <li class="breadcrumb-item"><a th:text="${product.ProductName}"></a></li>
                     </ol>
                 </nav>
@@ -111,6 +111,7 @@
 						                        <a th:unless="${product.category2CD != null}" th:text="${product.category2CD}"></a>
 						            </strong>
                             <h1 class="product-title" th:text="${product.ProductName}"></h1>
+                            
 							<!-- 작게 전후 상품으로 이동할 수 있는 곳. 현재 상품 seq +1, -1인 상품의 정보를 넣으면 좋을듯 -->
                             <div class="product-nav">
                                 <div class="product-prev">
@@ -147,15 +148,8 @@
                             </div>
                             <!-- 요기까지 전후 상품 -->
 	
-                            <div class="ratings-container">
-                                <div class="product-ratings">
-                                    <span class="ratings" style="width:60%"></span>
-                                    <!-- End .ratings -->
-                                    <span class="tooltiptext tooltip-top"></span>
-                                </div>
-                                <!-- End .product-ratings -->
-
-                                <a href="#" class="rating-link" th:text="'(' + ${product.totalReviewCount} + ' Reviews)'"></a>
+                            <div class="ratings-container" >
+                                <a style="padding : 0; margin : 0;" href="#" class="rating-link" th:text="'(' + ${product.totalReviewCount} + ' Reviews)'" ></a>
                             </div>
                             <!-- End .ratings-container -->
 
@@ -210,16 +204,16 @@
 
                             <div class="product-action">
 
-
                                 <div class="product-single-qty">
                                     <input class="horizontal-quantity form-control" type="text">
                                 </div>
                                 <!-- End .product-single-qty -->
-                                 <a href="wishlist.html" class="btn-icon-wish add-wishlist" title="Add to Wishlist"><i
+                                 <a th:href="@{/MyPage/Wishlist}" class="btn-icon-wish add-wishlist" title="Add to Wishlist"><i
                                         class="icon-wishlist-2"></i><span>Add to
                                         Wishlist</span></a>
 
                             </div>
+
                             <!-- End .product-action -->
                             
                             <div class="product-single-tabs">
@@ -280,22 +274,12 @@
 						        <div class="comment-list" th:if="${product.totalReviewCount > 0}">
 						            <div class="comments">
 						                <figure class="img-thumbnail">
-						                    <img src="/usr/images/blog/review.jpg" alt="review" width="80" height="80" >
+						                    <img src="/usr/images/blog/reviewR.jpg" alt="review" width="80" height="80" >
 						                </figure>
 						
 						                <div class="comment-block">
 						                    <div class="comment-header">
 						                        <div class="comment-arrow"></div>
-						
-						                        <div class="ratings-container float-sm-right">
-						                            <div class="product-ratings">
-						                                <span class="ratings" style="width:60%"></span>
-						                                <!-- End .ratings -->
-						                                <span class="tooltiptext tooltip-top"></span>
-						                            </div>
-						                            <!-- End .product-ratings -->
-						                        </div>
-						
 						                        <span class="comment-by">
 						                            <a>♥<strong th:text="${product.name}"></strong> – <span th:text="${product.revRegDateTime}"></span>
 						                        </span>
@@ -313,46 +297,21 @@
 
                                 <div class="add-product-review">
                                     <h3 class="review-title">Add a review</h3>
-
+                                    
 							<form action="ReviewInsert" id="formInsert" name="formInsert" method="post" class="comment-form m-0">
 							    <!-- 현재 페이지의 상품 시퀀스와 리뷰 테이블의 상품 시퀀스 부분 매칭 -->
 							    <input type="hidden" name="productSeq" value="${productSeq}">
     
 							    <!-- form 내용 -->
-							    <div class="rating-form">
-							        <label for="rating">Your rating <span class="required">*</span></label>
-							        <span class="rating-stars">
-							            <a class="star-1" href="#" th:text="${1}">1</a>
-							            <a class="star-2" href="#" th:text="${2}">2</a>
-							            <a class="star-3" href="#" th:text="${3}">3</a>
-							            <a class="star-4" href="#" th:text="${4}">4</a>
-							            <a class="star-5" href="#" th:text="${5}">5</a>
-							            <div class="invalid-feedback" id="reviewScoreCDFeedback"></div>
-							        </span>
-							
-							        <select name="reviewScoreCD" id="reviewScoreCD" required style="display: none;">
-							            <option value="">Rate…</option>
-							            <option value="5">Perfect</option>
-							            <option value="4">Good</option>
-							            <option value="3">Average</option>
-							            <option value="2">Not that bad</option>
-							            <option value="1">Very poor</option>
-							        </select>
-							    </div>
-							
 							    <div class="form-group">
 							        <label>Your review <span class="required">*</span></label>
 							        <textarea name="ReviewContent" id="ReviewContent" cols="5" rows="6" class="form-control form-control-sm"></textarea>
 							        <div class="invalid-feedback" id="ReviewContentFeedback"></div>
 							    </div>
-							    <!-- End .form-group -->
-							
-<!-- 							    <div class="col-md-12 mb-3">
-							        <input type="submit" name="btnAdd" id="btnInsert"class="btn btn-primary" value="Submit" style="float : right;">
-							    </div> -->
+
 							    <div class="col-md-12 mb-3">
 							        <!-- 추가 버튼 -->
-							        <button type="button" id="btnAdd" class="btn btn-secondary" style="float: right;">ADD</button>
+							        <button type="submit" id="btnAdd" class="btn btn-secondary" style="float: right;">ADD</button>
 							    </div>
 							</form>
 
@@ -426,7 +385,7 @@
         formatPriceElements();
     });
 
-    // 선택한 사이즈와 색상 값을 "Selected Options" 섹션의 <ul> 태그 내에 <li> 요소로 추가합니다.
+    // 선택한 사이즈와 색상 값을 "Selected Options" 섹션의 <ul> 태그 내에 <li> 요소로 추가
     document.querySelectorAll('.config-size-list a').forEach(function (el) {
         el.addEventListener('click', function () {
             var selectedSeq = el.getAttribute('data-sizeSeq') || el.getAttribute('data-colorSeq');
@@ -439,10 +398,35 @@
         });
     });
 
-    // Clear 버튼을 클릭하면 선택한 옵션을 초기화합니다.
+    // Clear 버튼을 클릭하면 선택한 옵션을 초기화
     document.querySelector('.clear-btn').addEventListener('click', function () {
         document.getElementById('selectedOptionsList').innerHTML = '';
     });
+    
+    //Review Insert 메서드
+    document.getElementById('formInsert').addEventListener('submit', function(event) {
+        event.preventDefault(); // 폼 제출을 중지합니다.
+        
+        var formData = new FormData(this); // 폼 데이터를 가져옵니다.
+        var xhr = new XMLHttpRequest(); // AJAX 요청을 생성합니다.
+        xhr.open('POST', '/ReviewInsert', true); // POST 요청을 설정합니다.
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) { // 요청이 완료되면
+                if (xhr.status === 200) { // 성공적인 응답을 받으면
+                    // 응답에 대한 처리를 여기에 추가합니다.
+                    // 예: 폼을 초기화하거나 사용자에게 알림을 표시합니다.
+                    alert('리뷰가 성공적으로 제출되었습니다!');
+                    document.getElementById('ReviewContent').value = ''; // 리뷰 내용을 비웁니다.
+                } else {
+                    // 오류 처리를 여기에 추가합니다.
+                    alert('리뷰 제출 중 오류가 발생했습니다.');
+                }
+            }
+        };
+        xhr.send(formData); // 폼 데이터를 서버로 보냅니다.
+    });
+
+
 </script>
 </body>
 

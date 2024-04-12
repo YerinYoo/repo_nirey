@@ -318,7 +318,7 @@
                         </thead>
                         <tbody>
                             
-                            <tr class="product-row" th:each="wishlist:${wishlist}">
+                            <tr class="product-row" th:each="wishlist : ${wishlist}" th:if="${wishlist.delNY == 0}">
                                 <td style="text-align:center; vertical-align : middle;">
                                     <figure class="product-image-container">
                                         <a href="product.html" class="product-image">
@@ -346,16 +346,27 @@
                                     <span class="stock-status">Size</span>
                                 </td>
                                 <td class="action" style="text-align:center; vertical-align : middle;">
-                                    <a href="ajax/product-quick-view.html" class="btn btn-dark quickview mt-1 mt-md-0 col-3"
-                                        title="Quick View">3
-                                        </a>
-                                    <button class="btn btn-wishlist-delete product-type-simple btn-shop col-3">
-                                        DELETE
-                                    </button>
-                                </td>
+                                	<div class="row">
+                                		<div class="col-12 mt-2">
+	                                		<a th:href="@{/recorded/Shop/Product(productSeq=${wishlist.productSeq}, ProudctName=${wishlist.ProductName})}" class="btn btn-dark quickview mt-1 mt-md-0 col-3"
+	                                        title="Quick View">View More
+	                                        </a>
+                                		</div>
+                                		<div class="col-12 mt-1">
+                                			<form method="post" action="/ueleteW"> 
+												<input type="hidden" name="seq" th:value="${wishlist.wishlistSeq}">
+												<input type="hidden" name="delNY" th:value="${wishlist.delNY}">
+												<button type="submit" class="btn btn-wishlist-delete product-type-simple btn-shop col-3" >
+		                                        	DELETE
+		                                    	</button>
+										</form>
+                                		</div>
+                                	</div>
+								</td>
                             </tr>
                         </tbody>
                     </table>
+                    
                 </div><!-- End .cart-table-container -->
             </div><!-- End .container -->
         </main><!-- End .main -->

@@ -42,7 +42,7 @@
 
 
         <main class="main">
-            <div class="home-slider slide-animate owl-carousel owl-theme show-nav-hover nav-big">
+           <!--  <div class="home-slider slide-animate owl-carousel owl-theme show-nav-hover nav-big">
                 <div class="home-slide home-slide1 banner d-flex align-items-center">
                     <img class="slide-bg" src="/usr/images/demoes/demo3/slider/main2.jpg" alt="home banner">
                     <div class="banner-layer appear-animate" data-animation-name="fadeInUpShorter">
@@ -50,22 +50,22 @@
                         <h4 class="m-b-4" style="color : pink;">on Acc & Outer</h4>
 
                         <a th:href="@{/recorded/Shop}"  class="btn btn btn-xl" role="button" style="background-color : mistyrose;">Shop Now</a>
-                    </div><!-- End .banner-layer -->
-                </div><!-- End .home-slide -->
+                    </div>End .banner-layer
+                </div>End .home-slide -->
 
                 <div class="home-slide home-slide2 banner d-flex align-items-center">
                     <img class="slide-bg" src="/usr/images/demoes/demo3/slider/slide16.jpg"
                         style="background-color: seagreen;" alt="home banner">
                     <div class="banner-layer appear-animate" data-animation-name="fadeInUpShorter">
-                        <h2 style="color : seagreen;">New Season Tops </h2>
-                        <h3 class="text-uppercase rotated-upto-text mb-0" style="color: seagreen;">20% off</h3>
+                        
+                        <h3 class="text-uppercase rotated-upto-text mb-0" style="color: seagreen;">10% off</h3>
+                        <h2 style="color : seagreen;">ON ALL PRODUCTS </h2>
 
                         <hr class="short-thick-divider mb-sm-0 mb-1">
 
-                        <h5 class="text-uppercase d-inline-block mb-2 mb-sm-0" style="color : darkseagreen;">Starting at <span>$<em>19</em>99</span>
+                        <h5 class="text-uppercase d-inline-block mb-2 mb-sm-0" style="color : darkseagreen;">Starting at <span>₩<em>9,700</em></span>
                         </h5>
-                        <a href="@{/recorded/Shop}" class="btn btn btn-xl btn-icon-right" role="button" style="color : darkseagreen;">Shop Now <i
-                                class="fas fa-long-arrow-alt-right"></i></a>
+                        <a th:href="@{/recorded/Shop}" class="btn btn btn-xl " role="button" style="color : darkseagreen;">Shop Now </a>
                     </div><!-- End .banner-layer -->
                 </div><!-- End .home-slide -->
             </div><!-- End .home-slider -->
@@ -76,7 +76,7 @@
 
                 <div class="row py-4">
                     <div class="col-6 col-sm-4 col-md-3 col-xl-2 appear-animate" data-animation-name="fadeIn"
-                        data-animation-delay="300" data-animation-duration="1000" th:each="product : ${prodList}">
+                        data-animation-delay="300" data-animation-duration="1000" th:each="product : ${prodList}" th:if="${product.prodStockCD == 8}">
                         <div class="product-default inner-quickview inner-icon">
                             <figure>
                                  <a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq}, ProudctName=${product.ProductName}, prodStockCD=${product.prodStockCD})}" >
@@ -88,11 +88,8 @@
                                     <div th:if="${product.prodStockCD == 8}" class="product-label label-sale">BEST</div>
                                     <div th:if="${product.prodStockCD == 9}" class="product-label label-hot" style="background-color: rgb(96, 133, 165);">RESTOCK</div>
                                 </div>
-                                <div class="btn-icon-group">
-                                    <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
-                                            class="icon-shopping-cart"></i></a>
-                                </div>
-                                <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">View Details</a>
+                              
+                                <a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq}, ProudctName=${product.ProductName})}" class="btn-quickview" title="Quick View">View Details</a>
                             </figure>
                             <div class="product-details">
                                 <div class="category-wrap">
@@ -195,6 +192,13 @@
         document.addEventListener('DOMContentLoaded', function() {
             formatPriceElements();
         });
+      //상품 이미지에 커서 올렸을 때 뜨는 quick View로 반환하는 버튼 비활성화
+      //버튼 요소 선택
+      var btn = document.querySelector('.btn-quickview');
+
+      // 버튼 비활성화
+      btn.disabled = true;
+      
 	</script>
 
 </body>

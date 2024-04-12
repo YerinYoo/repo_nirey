@@ -18,5 +18,9 @@ public class EtcController {
         return "usr/infra/v1/dashboard"; 
     }
 
+   @RequestMapping(value="/recorded/Welcome")
+   public String welcome() throws Exception {
+	   return "usr/infra/v1/welcome";
+   }
     
 }

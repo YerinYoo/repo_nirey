@@ -51,6 +51,10 @@ public class ProductService {
 	public int delete(ProductDto dto) {
 		return dao.delete(dto);
 	}
+	
+	public int ueleteW(ProductDto dto) {
+		return dao.ueleteW(dto);
+	}
 
     public List<ProductDto> selectList(ProductVo vo) { 
     	return dao.selectList(vo); 

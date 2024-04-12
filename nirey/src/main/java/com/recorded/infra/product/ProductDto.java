@@ -33,9 +33,15 @@ private Date revRegDateTime;
 private Integer totalReviewCount;
 private String colorSeq;
 private String sizeSeq;
+private String wishlistSeq;
 
 
-
+public String getWishlistSeq() {
+	return wishlistSeq;
+}
+public void setWishlistSeq(String wishlistSeq) {
+	this.wishlistSeq = wishlistSeq;
+}
 public String getColorSeq() {
 	return colorSeq;
 }
