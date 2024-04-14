@@ -38,266 +38,69 @@
 
 <body class="full-screen-slider">
     <div class="page-wrapper">
-        <header class="header header-transparent">
-            <div class="header-middle sticky-header">
-                <div class="container">
-                    <div class="header-left">
-                        <button class="mobile-menu-toggler" type="button">
-                            <i class="fas fa-bars"></i>
-                        </button>
+      <div th:replace="~{/usr/infra/v1/include/Header :: Header}"></div>
 
-                        <a href="demo3.html" class="logo">
-                            <img src="/usr/images/logo-dear.png" alt="Porto Logo">
-                        </a>
-
-                        <nav class="main-nav font2">
-                            <ul class="menu">
-                                <li class="active">
-                                    <a href="demo3.html">Home</a>
-                                </li>
-                                <li>
-                                    <a href="demo3-shop.html">Shop</a>
-                                    <div class="megamenu megamenu-fixed-width megamenu-3cols">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <a href="#" class="nolink">Clothes</a>
-                                                <ul class="submenu">
-                                                    <li><a href="demo3-shop.html">Outer</a></li>
-                                                    <li><a href="demo3-shop.html">Top</a></li>
-                                                    <li><a href="demo3-shop.html">Bottom</a></li>
-                                                    <li><a href="demo3-shop.html">Dress</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <a href="#" class="nolink">Etc.</a>
-                                                <ul class="submenu">
-                                                    <li><a href="demo3-shop.html">Bag</a></li>
-                                                    <li><a href="demo3-shop.html">Shoes</a></li>
-                                                    <li><a href="demo3-shop.html">Acc</a></li>
-                                                    <li><a href="demo3-shop.html">etc.</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div><!-- End .megamenu -->
-                                </li>
-
-                                <!--new, best, restock : shop 페이지 참조하여 구현하기-->
-                                <li class="new">
-                                    <a href="demo3-shop.html">New</a>
-                                </li>
-
-                                <li class="best">
-                                    <a href="demo3-shop.html">Best</a>
-                                </li>
-
-                                <li class="restock">
-                                    <a href="demo3-shop.html">ReStock!</a>
-                                </li>
-
-                                <li class="mypage">
-                                    <a href="#" class="nolink">My Page</a>
-                                        <ul class="submenu">
-                                            <li><a href="dashboard.html">Dashboard</a></li>
-                                            <li><a href="order.html">Orders</a></li>
-                                            <li><a href="wishlist.html">Wishlist</a></li>
-                                            <li><a href="login.html">Logout</a></li>
-                                        </ul>
-                                </li>
-                            
-                                        
-                            </ul>
-                        </nav>
-                    </div><!-- End .header-left -->
-
-                    <div class="header-right">
-                        <div class="header-search header-search-popup header-search-category d-none d-sm-block">
-                            <a href="#" class="search-toggle" role="button"><i class="icon-magnifier"></i></a>
-                            <form action="#" method="get">
-                                <div class="header-search-wrapper">
-                                    <input type="search" class="form-control" name="q" id="q"
-                                        placeholder="Search..." required="">
-                                    <div class="select-custom">
-                                        <select id="cat" name="cat">
-                                            <option value="">All Categories</option>
-                                            <option value="4">Outer</option>
-                                            <option value="12">Top</option>
-                                            <option value="13">Bottom</option>
-                                            <option value="66">Dress</option>
-                                            <option value="67">Bag</option>
-                                            <option value="5">Shoes</option>
-                                            <option value="21">Acc</option>
-                                            <option value="22">Etc</option>
-                                        </select>
-                                    </div><!-- End .select-custom -->
-                                    <button class="btn text-dark icon-magnifier" type="submit"></button>
-                                </div><!-- End .header-search-wrapper -->
-                            </form>
-                        </div>
-
-                        <a href="login.html" class="header-icon header-icon-user" title="Login"><i
-                                class="icon-user-2"></i></a>
-
-                        <a href="wishlist.html" class="header-icon header-icon-wishlist" title="Wishlist"><i
-                                class="icon-wishlist-2"></i></a>
-
-                        <div class="dropdown cart-dropdown">
-                            <a href="#" class="dropdown-toggle dropdown-arrow cart-toggle" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
-                                <i class="icon-cart-thick"></i>
-                                <span class="cart-count badge-circle">3</span>
-                            </a>
-
-                            <div class="cart-overlay"></div>
-
-                            <div class="dropdown-menu mobile-cart">
-                                <a href="#" title="Close (Esc)" class="btn-close">×</a>
-
-                                <div class="dropdownmenu-wrapper custom-scrollbar">
-                                    <div class="dropdown-cart-header">Cart</div>
-                                    <!-- End .dropdown-cart-header -->
-
-                                    <div class="dropdown-cart-products">
-                                        <div class="product">
-                                            <div class="product-details">
-                                                <h4 class="product-title">
-                                                    <a href="demo3-product.html">Angora Beret Hat</a>
-                                                </h4>
-
-                                                <span class="cart-product-info">
-                                                    <span class="cart-product-qty">1</span>
-                                                    × 39,000원
-                                                </span>
-                                            </div><!-- End .product-details -->
-
-                                            <figure class="product-image-container">
-                                                <a href="demo3-product.html" class="product-image">
-                                                    <img src="/usr/images/products/minicart/product-1.jpg" alt="product"
-                                                        width="80" height="80">
-                                                </a>
-
-                                                <a href="#" class="btn-remove" title="Remove Product"><span>×</span></a>
-                                            </figure>
-                                        </div><!-- End .product -->
-
-                                        <div class="product">
-                                            <div class="product-details">
-                                                <h4 class="product-title">
-                                                    <a href="demo3-product.html">Tessel Pattern Knit</a>
-                                                </h4>
-
-                                                <span class="cart-product-info">
-                                                    <span class="cart-product-qty">1</span>
-                                                    × 63,000원
-                                                </span>
-                                            </div><!-- End .product-details -->
-
-                                            <figure class="product-image-container">
-                                                <a href="demo3-product.html" class="product-image">
-                                                    <img src="/usr/images/products/minicart/product-2.jpg" alt="product"
-                                                        width="80" height="80">
-                                                </a>
-
-                                                <a href="#" class="btn-remove" title="Remove Product"><span>×</span></a>
-                                            </figure>
-                                        </div><!-- End .product -->
-
-                                        <div class="product">
-                                            <div class="product-details">
-                                                <h4 class="product-title">
-                                                    <a href="demo3-product.html">Painted Angora Knit</a>
-                                                </h4>
-
-                                                <span class="cart-product-info">
-                                                    <span class="cart-product-qty">1</span>
-                                                    × 49,000원
-                                                </span>
-                                            </div><!-- End .product-details -->
-
-                                            <figure class="product-image-container">
-                                                <a href="demo3-product.html" class="product-image">
-                                                    <img src="/usr/images/products/minicart/product-3.jpg" alt="product"
-                                                        width="80" height="80">
-                                                </a>
-                                                <a href="#" class="btn-remove" title="Remove Product"><span>×</span></a>
-                                            </figure>
-                                        </div><!-- End .product -->
-                                    </div><!-- End .cart-product -->
-
-                                    <div class="dropdown-cart-total">
-                                        <span>총 금액 : </span>
-
-                                        <span class="cart-total-price float-right">151,000원</span>
-                                    </div><!-- End .dropdown-cart-total -->
-
-                                    <div class="dropdown-cart-action">
-                                        <a href="cart.html" class="btn btn-gray btn-block view-cart">장바구니</a>
-                                        <a href="checkout.html" class="btn btn-dark btn-block">구매</a>
-                                    </div><!-- End .dropdown-cart-total -->
-                                </div><!-- End .dropdownmenu-wrapper -->
-                            </div><!-- End .dropdown-menu -->
-                        </div><!-- End .dropdown -->
-                    </div><!-- End .header-right -->
-                </div><!-- End .container -->
-            </div><!-- End .header-middle -->
-        </header><!-- End .header -->
-
-        <main class="main main-test" style="padding-top : 10%;">
-        
+        <main class="main main-test" style="padding-top : 10%; height : 100%;">
+    <!--     
             <div class="container checkout-container">
-
-                <div class="login-form-container">
+				<div class="loginSessionYes" th:if="${session.authenticatedMember != null and session.sessIdUsr != null}">
+					<h4>CheckOut!</h4>
+				</div>
+                <div class="login-form-container" th:unless="${session.authenticatedMember != null and session.sessIdUsr != null}">
                     <h4>Returning customer?
                         <button data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="btn btn-link btn-toggle">Login</button>
                     </h4>
-
-                    <div id="collapseOne" class="collapse">
-                        <div class="login-section feature-box">
-                            <div class="feature-box-content">
-                                <form action="#" id="login-form">
-                                    <p>
-                                        If you have shopped with us before, please enter your details below. If you are a new customer, please proceed to the Billing & Shipping section.
-                                    </p>
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="mb-0 pb-1">Username or email <span
-                                                        class="required">*</span></label>
-                                                <input type="email" class="form-control" required />
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="mb-0 pb-1">Password <span
-                                                        class="required">*</span></label>
-                                                <input type="password" class="form-control" required />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <button type="submit" class="btn">LOGIN</button>
-
-                                    <div class="form-footer mb-1">
-                                        <div class="custom-control custom-checkbox mb-0 mt-0">
-                                            <input type="checkbox" class="custom-control-input" id="lost-password" />
-                                            <label class="custom-control-label mb-0" for="lost-password">Remember
-                                                me</label>
-                                        </div>
-
-                                        <a href="forgot-password.html" class="forget-password">Lost your password?</a>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-7">
+					<div class="loginGo">
+						<div id="collapseOne" class="collapse">
+	                        <div class="login-section feature-box">
+	                            <div class="feature-box-content">
+	                                <form action="#" id="login-form">
+	                                    <p>
+	                                        If you have shopped with us before, please enter your details below. If you are a new customer, please proceed to the Billing & Shipping section.
+	                                    </p>
+	
+	                                    <div class="row">
+	                                        <div class="col-md-4">
+	                                            <div class="form-group">
+	                                                <label class="mb-0 pb-1">Username or email <span
+	                                                        class="required">*</span></label>
+	                                                <input type="email" class="form-control" required />
+	                                            </div>
+	                                        </div>
+	
+	                                        <div class="col-md-4">
+	                                            <div class="form-group">
+	                                                <label class="mb-0 pb-1">Password <span
+	                                                        class="required">*</span></label>
+	                                                <input type="password" class="form-control" required />
+	                                            </div>
+	                                        </div>
+	                                    </div>
+	
+	                                    <button type="submit" class="btn">LOGIN</button>
+	
+	                                    <div class="form-footer mb-1">
+	                                        <div class="custom-control custom-checkbox mb-0 mt-0">
+	                                            <input type="checkbox" class="custom-control-input" id="lost-password" />
+	                                            <label class="custom-control-label mb-0" for="lost-password">Remember
+	                                                me</label>
+	                                        </div>
+	
+	                                        <a href="forgot-password.html" class="forget-password">Lost your password?</a>
+	                                    </div>
+	                                </form>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+				</div>
+                    
+ -->
+                <div class="row justify-content-center" style="padding-bottom : 5%;"> 	
+                    <div class="col-lg-4">
                         <ul class="checkout-steps">
                             <li>
-                                <h2 class="step-title">Shipping details</h2>
+                                <h4 class="step-title">Shipping details</h4>
 
                                 <form action="#" id="checkout-form">
                                     <div class="row">
@@ -343,33 +146,6 @@
                                         <input type="email" class="form-control" required />
                                     </div>
 
-                                    <div class="form-group mb-1">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="create-account" />
-                                            <label class="custom-control-label" data-toggle="collapse" data-target="#collapseThree" aria-controls="collapseThree" for="create-account">Create an
-                                                account?</label>
-                                        </div>
-                                    </div>
-
-                                    <div id="collapseThree" class="collapse">
-                                        <div class="form-group">
-                                            <label>Create account password
-                                                <abbr class="required" title="required">*</abbr></label>
-                                            <input type="password" placeholder="Password" class="form-control" required />
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="custom-control custom-checkbox mt-0">
-                                            <input type="checkbox" class="custom-control-input" id="different-shipping" />
-                                            <label class="custom-control-label" data-toggle="collapse" data-target="#collapseFour" aria-controls="collapseFour" for="different-shipping">Ship to a
-                                                different
-                                                address?</label>
-
-
-                                        </div>
-                                    </div>
-
                                     <div id="collapseFour" class="collapse">
                                         <div class="shipping-info">
                                             <div class="form-group mb-1 pb-2">
@@ -394,13 +170,12 @@
                                             </div>
         
                                             <div class="form-group">
-                                                <label>Phone <abbr class="required" title="required">*</abbr></label>
+                                                <label>Mobile <abbr class="required" title="required">*</abbr></label>
                                                 <input type="tel" class="form-control" required />
                                             </div>
         
                                             <div class="form-group">
-                                                <label>Email address
-                                                    <abbr class="required" title="required">*</abbr></label>
+                                                <label>Email<abbr class="required" title="required">*</abbr></label>
                                                 <input type="email" class="form-control" required />
                                             </div>
                                         </div>
@@ -414,15 +189,15 @@
 
                     
 
-                    <div class="col-lg-5">
+                    <div class="col-lg-4 ml-3" >
                         <div class="order-summary">
-                            <h3>YOUR ORDER</h3>
+                            <h4>YOUR ORDER</h4>
 
-                            <table class="table table-mini-cart">
+                            <table class="table table-mini-cart mt-4">
                                 <thead>
                                     <tr>
                                         <th colspan="2" style="vertical-align : middle;">
-                                            <h6>Product</h6</th>
+                                            <h6>Product</h6></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -568,13 +343,13 @@
                                 <div class="col-6">
                                     <div class="form-check">
                                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label ml-2" for="exampleCheck1">Have you confirmed that your order is correct?</label>
+                                        <label class="form-check-label " for="exampleCheck1">Have you confirmed that your order is correct?</label>
                                     </div>
                                 </div>
                                 
                                 <div class="col-6">
                                     <div class="ordergo">
-                                        <button type="submit" class="btn btn-dark btn-place-order mt-3 ml-5" form="checkout-form" style="float : right">
+                                        <button type="submit" class="btn btn-dark btn-place-order mt-3 ml-5" form="checkout-form" style="float : right" th:href="@{/recorded/OrderComplete}">
                                         Order
                                         </button>
                                     </div>

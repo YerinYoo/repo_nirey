@@ -79,5 +79,37 @@
 	    and a.memberSeq is not null 
 	</select>
 	
-
+	<select id="checkOut" resultMap="resultMapObj">
+	select
+		a.memberSeq
+		, a.ID
+		, a.name
+		, b.addrDetail
+		, b.addr
+		, b.zipcode
+		, b.recipient
+		, b.phoneNum
+		, b.shippingMsg
+	    , c.CardNo
+	    , c.CVV
+	    , c.CardDate
+	    , c.CardOwner
+	    , c.orderTrackingNo
+	    , c.paymentCD
+	    , c.cardCompCD
+	    , c.colorOption
+	    , c.sizeOption
+	from member a
+	inner join 
+		address b
+	on
+		a.memberSeq=b.Member_seq
+	inner join
+		orders c
+	on a.memberSeq=c.MemberSeq
+	
+where 1=1
+	    and a.memberSeq is not null 
+	
+	</select>
 </mapper>

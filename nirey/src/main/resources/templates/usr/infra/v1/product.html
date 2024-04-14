@@ -204,16 +204,6 @@
 
                             <div class="product-action">
 
-                                <div class="product-single-qty">
-                                    <input class="horizontal-quantity form-control" type="text">
-                                </div>
-                                <!-- End .product-single-qty -->
-                                 <a th:href="@{/MyPage/Wishlist}" class="btn-icon-wish add-wishlist" title="Add to Wishlist"><i
-                                        class="icon-wishlist-2"></i><span>Add to
-                                        Wishlist</span></a>
-
-                            </div>
-
                             <!-- End .product-action -->
                             
                             <div class="product-single-tabs">
@@ -267,26 +257,27 @@
                         </div>
                         <!-- End .tab-pane -->
 
-                        <div class="tab-pane fade" id="product-reviews-content" role="tabpanel" aria-labelledby="product-tab-reviews">
+                        <div class="tab-pane fade" id="product-reviews-content" role="tabpanel" aria-labelledby="product-tab-reviews"  >
 						    <div class="product-reviews-content">
 						        <h3 class="reviews-title" th:text=" ${product.totalReviewCount == 0 ? 'There is no REVIEW of this product yet' : product.totalReviewCount + ' review for ' + product.ProductName}"></h3>
 						        
 						        <div class="comment-list" th:if="${product.totalReviewCount > 0}">
-						            <div class="comments">
+						            <div class="comments" th:each="review : ${prodReview}">
 						                <figure class="img-thumbnail">
 						                    <img src="/usr/images/blog/reviewR.jpg" alt="review" width="80" height="80" >
 						                </figure>
 						
-						                <div class="comment-block">
+						                <div class="comment-block mb-1" >
 						                    <div class="comment-header">
 						                        <div class="comment-arrow"></div>
 						                        <span class="comment-by">
-						                            <a>♥<strong th:text="${product.name}"></strong> – <span th:text="${product.revRegDateTime}"></span>
+						                           <a>♥ <strong th:text="${review.revName}"></strong> – <span th:text="${review.revRegDateTime}"></span></a>
+
 						                        </span>
 						                    </div>
 						
 						                    <div class="comment-content">
-						                        <a th:text="${product.ReviewContent}"></a>
+						                        <a th:text="${review.ReviewContent}"></a>
 						                    </div>
 						                </div>
 						            </div>
@@ -299,10 +290,8 @@
                                     <h3 class="review-title">Add a review</h3>
                                     
 							<form action="ReviewInsert" id="formInsert" name="formInsert" method="post" class="comment-form m-0">
-							    <!-- 현재 페이지의 상품 시퀀스와 리뷰 테이블의 상품 시퀀스 부분 매칭 -->
 							    <input type="hidden" name="productSeq" value="${productSeq}">
     
-							    <!-- form 내용 -->
 							    <div class="form-group">
 							        <label>Your review <span class="required">*</span></label>
 							        <textarea name="ReviewContent" id="ReviewContent" cols="5" rows="6" class="form-control form-control-sm"></textarea>
@@ -310,7 +299,6 @@
 							    </div>
 
 							    <div class="col-md-12 mb-3">
-							        <!-- 추가 버튼 -->
 							        <button type="submit" id="btnAdd" class="btn btn-secondary" style="float: right;">ADD</button>
 							    </div>
 							</form>
@@ -403,27 +391,45 @@
         document.getElementById('selectedOptionsList').innerHTML = '';
     });
     
-    //Review Insert 메서드
+ // 리뷰 제출
     document.getElementById('formInsert').addEventListener('submit', function(event) {
-        event.preventDefault(); // 폼 제출을 중지합니다.
-        
-        var formData = new FormData(this); // 폼 데이터를 가져옵니다.
-        var xhr = new XMLHttpRequest(); // AJAX 요청을 생성합니다.
-        xhr.open('POST', '/ReviewInsert', true); // POST 요청을 설정합니다.
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) { // 요청이 완료되면
-                if (xhr.status === 200) { // 성공적인 응답을 받으면
-                    // 응답에 대한 처리를 여기에 추가합니다.
-                    // 예: 폼을 초기화하거나 사용자에게 알림을 표시합니다.
-                    alert('리뷰가 성공적으로 제출되었습니다!');
-                    document.getElementById('ReviewContent').value = ''; // 리뷰 내용을 비웁니다.
-                } else {
-                    // 오류 처리를 여기에 추가합니다.
-                    alert('리뷰 제출 중 오류가 발생했습니다.');
+        event.preventDefault(); 
+
+        // 세션에 저장된 회원 시퀀스 가져오기
+        var memberSeq = sessionStorage.getItem('sessSeqUsr');
+
+        // 세션에 저장된 회원 시퀀스 출력
+        console.log('세션에 저장된 회원 시퀀스:', memberSeq);
+
+        // 회원 시퀀스가 null 또는 undefined인 경우에 대한 처리
+        if (!memberSeq) {
+            // 로그인하지 않은 경우 알림을 띄우고 로그인 페이지로 이동
+            alert('리뷰를 작성하려면 로그인이 필요합니다.');
+            window.location.href = '/recorded/Login'; // 로그인 페이지로 이동
+        } else {
+            // 세션에 저장된 회원 시퀀스가 있는 경우
+            var formData = new FormData(this); // 폼 데이터 가져옴
+            
+            // 폼 데이터에 회원 시퀀스를 추가
+            formData.append('memberSeq', memberSeq);
+            
+            // 폼 데이터에 디폴트 값 줌
+            formData.append('delNY', '0');
+
+            var xhr = new XMLHttpRequest(); // AJAX 요청을 생성
+            xhr.open('POST', '/ReviewInsert', true); 
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) { // 요청이 완료되면
+                    if (xhr.status === 200) { // 성공적인 응답을 받으면
+                        alert('리뷰가 성공적으로 제출되었습니다!');
+                        document.getElementById('ReviewContent').value = ''; // 리뷰 input 초기화
+                    } else {
+                        alert('리뷰 제출 중 오류가 발생했습니다.');
+                    }
                 }
-            }
-        };
-        xhr.send(formData); // 폼 데이터를 서버로 보냅니다.
+            };
+            xhr.send(formData); // 폼 데이터 서버 전송
+        }
     });
 
 

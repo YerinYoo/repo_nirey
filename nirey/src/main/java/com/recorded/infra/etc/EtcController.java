@@ -22,5 +22,7 @@ public class EtcController {
    public String welcome() throws Exception {
 	   return "usr/infra/v1/welcome";
    }
+   
+
     
 }

@@ -10,4 +10,6 @@ public interface MixDao {
 	
 	public List<MixDto> memberAddr();
 	
+	public List<MixDto> checkOut();
+	
 }

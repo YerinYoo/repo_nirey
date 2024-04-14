@@ -68,196 +68,7 @@
 
 <body>
     <div class="page-wrapper">
-            <header class="header">
-            <div class="header-middle sticky-header">
-                <div class="container">
-                    <div class="header-left">
-                        <button class="mobile-menu-toggler" type="button">
-                            <i class="fas fa-bars"></i>
-                        </button>
-
-                        <a th:href="@{/recorded}" class="logo">
-                            <img src="/usr/images/logo-tape.png" alt="Porto Logo">
-                        </a>
-
-                       <nav class="main-nav font2">
-    <ul class="menu">
-        <li class="active">
-            <a th:href="@{/recorded}">Home</a>
-        </li>
-        <li>
-            <a th:href="@{/recorded/Shop}">Shop</a>
-            <div class="megamenu megamenu-fixed-width megamenu-3cols">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <a href="#" class="nolink">Clothes</a>
-                        <ul class="submenu">
-                            <li><a th:href="@{/recorded/Shop?category1=11}">Outer</a></li>
-                            <li><a th:href="@{/recorded/Shop?category1=12}">Top</a></li>
-                            <li><a th:href="@{/recorded/Shop?category1=13}">Bottom</a></li>
-                            <li><a th:href="@{/recorded/Shop?category1=14}">Dress</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-4">
-                        <a href="#" class="nolink">Etc.</a>
-                        <ul class="submenu">
-                            <li><a th:href="@{/recorded/Shop?category2=15}">Bag</a></li>
-                            <li><a th:href="@{/recorded/Shop?category2=16}">Shoes</a></li>
-                            <li><a th:href="@{/recorded/Shop?category2=17}">Acc</a></li>
-                            <li><a th:href="@{/recorded/Shop?category2=18}">etc.</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div><!-- End .megamenu -->
-        </li>
-
-        <!--new, best, restock : shop 페이지 참조하여 구현하기-->
-        <li class="new">
-            <a th:href="@{/recorded/Shop?prodStockCD=7}">New</a>
-        </li>
-
-        <li class="best">
-            <a th:href="@{/recorded/Shop?prodStockCD=8}">Best</a>
-        </li>
-
-        <li class="restock">
-            <a th:href="@{/recorded/Shop?prodStockCD=9}">ReStock!</a>
-        </li>
-
-        <!-- 로그인 값이 있을 경우에는 mypage와 관련된 헤더, 로그인 값이 없을 경우에는 로그인으로 반환. -->
-		<li class="mypage" th:if="${session.authenticatedMember != null and session.sessIdUsr != null}">
-		    <a th:href="@{/MyPage/Dashboard}">My Page</a>
-		    <ul class="submenu">
-		        <li><a th:href="@{/MyPage/Dashboard}">Dashboard</a></li>
-		        <li><a th:href="@{/MyPage/Orders}">Orders</a></li>
-		        <li><a href="wishlist.html">Wishlist</a></li>
-		        <li><a id="buttonUsrSignOut" th:href="@{/logoutUsr}">Logout</a></li>
-		    </ul>
-		</li>
-		<li th:unless="${session.authenticatedMember != null and session.sessIdUsr != null}">
-		    <a th:href="@{/recorded/Login}">Login</a>
-		</li>
-    </ul>
-</nav>
-                    </div><!-- End .header-left -->
-
-                    <div class="header-right">
-                        <div class="header-search header-search-popup header-search-category d-none d-sm-block">
-                            <a href="#" class="search-toggle" role="button"><i class="icon-magnifier"></i></a>
-                            <form action="/search" method="get">
-                                <div class="header-search-wrapper">
-                                        <input type="text" id="shValue" name="shValue" th:value="${vo != null ? vo.shValue : ''}" onkeyup="enterkey()" placeholder="Search..." class="form-control form-control-sm" required="">
-                                    <button type="submit" id="btnSearch" class="btn text-dark icon-magnifier" ></button>
-                                </div><!-- End .header-search-wrapper -->
-                            </form>
-                        </div>
-
-                       <a th:if="${session.authenticatedMember != null}" th:href="@{/MyPage/Dashboard}" class="header-icon header-icon-user" title="Dashboard"><i class="icon-user-2"></i></a>
-						<a th:unless="${session.authenticatedMember != null}" th:href="@{/recorded/Login}" class="header-icon header-icon-user" title="Login"><i class="icon-user-2"></i></a>
-
-                        <a href="wishlist.html" class="header-icon header-icon-wishlist" title="Wishlist"><i
-                                class="icon-wishlist-2"></i></a>
-
-                        <div class="dropdown cart-dropdown">
-                            <a href="#" class="dropdown-toggle dropdown-arrow cart-toggle" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
-                                <i class="icon-cart-thick"></i>
-                                <span class="cart-count badge-circle">3</span>
-                            </a>
-
-                            <div class="cart-overlay"></div>
-
-                            <div class="dropdown-menu mobile-cart">
-                                <a href="#" title="Close (Esc)" class="btn-close">×</a>
-
-                                <div class="dropdownmenu-wrapper custom-scrollbar">
-                                    <div class="dropdown-cart-header">Cart</div>
-                                    <!-- End .dropdown-cart-header -->
-
-                                    <div class="dropdown-cart-products">
-                                        <div class="product">
-                                            <div class="product-details">
-                                                <h4 class="product-title">
-                                                    <a href="demo3-product.html">Angora Beret Hat</a>
-                                                </h4>
-
-                                                <span class="cart-product-info">
-                                                    <span class="cart-product-qty">1</span>
-                                                    × 39,000원
-                                                </span>
-                                            </div><!-- End .product-details -->
-
-                                            <figure class="product-image-container">
-                                                <a href="demo3-product.html" class="product-image">
-                                                    <img src="/usr/images/products/minicart/product-1.jpg" alt="product"
-                                                        width="80" height="80">
-                                                </a>
-
-                                                <a href="#" class="btn-remove" title="Remove Product"><span>×</span></a>
-                                            </figure>
-                                        </div><!-- End .product -->
-
-                                        <div class="product">
-                                            <div class="product-details">
-                                                <h4 class="product-title">
-                                                    <a href="demo3-product.html">Tessel Pattern Knit</a>
-                                                </h4>
-
-                                                <span class="cart-product-info">
-                                                    <span class="cart-product-qty">1</span>
-                                                    × 63,000원
-                                                </span>
-                                            </div><!-- End .product-details -->
-
-                                            <figure class="product-image-container">
-                                                <a href="demo3-product.html" class="product-image">
-                                                    <img src="/usr/images/products/minicart/product-2.jpg" alt="product"
-                                                        width="80" height="80">
-                                                </a>
-
-                                                <a href="#" class="btn-remove" title="Remove Product"><span>×</span></a>
-                                            </figure>
-                                        </div><!-- End .product -->
-
-                                        <div class="product">
-                                            <div class="product-details">
-                                                <h4 class="product-title">
-                                                    <a href="demo3-product.html">Painted Angora Knit</a>
-                                                </h4>
-
-                                                <span class="cart-product-info">
-                                                    <span class="cart-product-qty">1</span>
-                                                    × 49,000원
-                                                </span>
-                                            </div><!-- End .product-details -->
-
-                                            <figure class="product-image-container">
-                                                <a href="demo3-product.html" class="product-image">
-                                                    <img src="/usr/images/products/minicart/product-3.jpg" alt="product"
-                                                        width="80" height="80">
-                                                </a>
-                                                <a href="#" class="btn-remove" title="Remove Product"><span>×</span></a>
-                                            </figure>
-                                        </div><!-- End .product -->
-                                    </div><!-- End .cart-product -->
-
-                                    <div class="dropdown-cart-total">
-                                        <span>총 금액 : </span>
-
-                                        <span class="cart-total-price float-right">151,000원</span>
-                                    </div><!-- End .dropdown-cart-total -->
-
-                                    <div class="dropdown-cart-action">
-                                        <a href="cart.html" class="btn btn-gray btn-block view-cart">장바구니</a>
-                                        <a href="checkout.html" class="btn btn-dark btn-block">구매</a>
-                                    </div><!-- End .dropdown-cart-total -->
-                                </div><!-- End .dropdownmenu-wrapper -->
-                            </div><!-- End .dropdown-menu -->
-                        </div><!-- End .dropdown -->
-                    </div><!-- End .header-right -->
-                </div><!-- End .container -->
-            </div><!-- End .header-middle -->
-        </header><!-- End .header -->
+            <div th:replace="~{/usr/infra/v1/include/Header-Sticker :: Header-Sticker}"></div>
 
         <main class="main">
             <nav aria-label="breadcrumb" class="breadcrumb-nav">
@@ -326,45 +137,6 @@
 
                         </nav>
 
-                        <!-- <div class="row">
-							<div class="col-6 col-sm-4 col-md-3 col-xl-5col" th:each="product : ${prodList}">
-							    <div class="product-default inner-quickview inner-icon" >
-							        <figure>
-							            <a href="demo3-product.html">
-							                <img src="/usr/images/demoes/demo3/products/product-1.jpg" width="273" height="273" alt="productr" />
-							            </a>
-							            <div class="btn-icon-group">
-							                <a href="#" class="btn-icon btn-add-cart product-type-simple"><i class="icon-shopping-cart"></i></a>
-							            </div>
-							            <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick View</a>
-							        </figure>
-							        <div class="product-details">
-							            <div class="category-wrap">
-							                <div class="category-list">
-							                    <a th:text="${product.category1CD}"></a>
-												<a th:if="${product.category1CD != null}" th:text="${@codeService.selectOneCachedCode(product.category1CD)}"></a>
-												<a th:unless="${product.category1CD != null}" th:text="${product.category1CD}" ></a>
-												<a th:if="${product.category2CD != null}" th:text="${@codeService.selectOneCachedCode(product.category2CD)}"></a>
-												<a th:unless="${product.category2CD != null}" th:text="${product.category2CD}" ></a>
-							                </div>
-							            </div>
-							            <h3 class="product-title">
-							                <a href="demo3-product.html" th:text="${product.ProductName}"></a>
-							            </h3>
-							            <div class="ratings-container">
-							                <div class="product-ratings">
-							                    <span class="ratings" style="width:100%"></span>
-							                    <span class="tooltiptext tooltip-top"></span>
-							                </div>
-							            </div>
-							            <div class="price-box">
-							                <span class="old-price" th:text="${product.OrgPrice}"></span>
-							                <span class="product-price" th:text="${product.DiscountedPrice}"></span>
-							            </div>
-							        </div>
-							    </div>
-							</div>
-                        </div> -->
                         <!-- 검색 결과가 없거나, 검색을 이용하지 않고 페이지에 접속 했을 때HTML 코드 -->
 						<!-- 검색 결과가 없을 경우 띄워줄 모달 코드 -->
 						<div class="modal" id="showModal" tabindex="-1" aria-labelledby="showModalLabel" aria-hidden="true" th:if="${showModal}" style="width:25%; position : fix; left : 35%;">
@@ -465,71 +237,28 @@
 						        </div>
 						    </div>
 						</div>
-						<!-- 필터링된 제품 목록을 표시하는 코드 -->
-						<div class="row" th:unless="${#lists.isEmpty(filteredProducts)}">
-						    <div class="col-6 col-sm-4 col-md-3 col-xl-5col" th:each="product : ${filteredProducts}">
-						        <div class="product-default inner-quickview inner-icon">
-						            <figure>
-						                <a href="demo3-product.html">
-						                <a th:href="@{/recorded/Shop/Product(productSeq=${productSeq}, ProudctName=${product.ProductName})}" th:text="${list.name}">
 
-						                    <img src="/usr/images/demoes/demo3/products/product-15.jpg" width="273" height="273" alt="productr"/>
-						                </a>
-						                <div class="btn-icon-group">
-						                    <a href="#" class="btn-icon btn-add-cart product-type-simple"><i class="icon-shopping-cart"></i></a>
-						                </div>
-						                <a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq}, ProudctName=${product.ProductName})}"  class="btn-quickview" title="Quick View">Quick View</a>
-						            </figure>
-						            <div class="product-details">
-						                <div class="category-wrap">
-		                					<div class="category-list">
-												<a th:if="${product.category1CD != null}" th:text="${@codeService.selectOneCachedCode(product.category1CD)}"></a>
-												<a th:unless="${product.category1CD != null}" th:text="${product.category1CD}" ></a>
-												<a th:if="${product.category2CD != null}" th:text="${@codeService.selectOneCachedCode(product.category2CD)}"></a>
-												<a th:unless="${product.category2CD != null}" th:text="${product.category2CD}" ></a>
-							                </div>
-
-						                </div>
-						                <h3 class="product-title">
-						                    <a href="demo3-product.html" th:text="${product.ProductName}"></a>
-						                </h3>
-						                <div class="ratings-container">
-						                    <div class="product-ratings">
-						                        <span class="ratings" style="width:100%"></span>
-						                        <span class="tooltiptext tooltip-top"></span>
-						                    </div>
-						                </div>
-						                <div class="price-box">
-						                    <span class="old-price" th:text="${product.OrgPrice}"></span>
-						                    <span class="product-price" th:text="${product.DiscountedPrice}"></span>
-						                </div>
+					<!-- paging s  -->		
+						<form name="formList" id="formList" method="post" autocomplete="off">		
+						    <div class="container-fluid px-0 mt-2 mb-2">
+						        <div class="row">
+						            <div class="col">
+						                <ul class="pagination justify-content-center mb-0">
+						                    <!-- 수정 시작 -->
+						                    <li th:if="${vo.startPage gt vo.pageNumToShow}" class="page-item" style="cursor: pointer;">
+						                        <a class="page-link" href="javascript:goList(${vo.startPage - 1})" th:attr="onclick=|goList('${vo.startPage - 1}')|"><i class="fa-solid fa-angle-left"></i></a>
+						                    </li>
+						                    <li th:each="num: ${#numbers.sequence(vo.startPage != null ? vo.startPage : 1, vo.endPage != null ? vo.endPage : 1)}" th:classappend="${num eq vo.thisPage} ? 'active' : ''" class="page-item" style="cursor: pointer;">
+						                        <a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"></a>
+						                    </li>
+						                    <li th:if="${vo.endPage ne vo.totalPages}" class="page-item" style="cursor: pointer;">
+						                        <a class="page-link" th:attr="onclick=|goList('${vo.endPage + 1}')|"><i class="fa-solid fa-angle-right"></i></a>
+						                    </li>
+						                    <!-- 수정 끝 -->
+						                </ul>
 						            </div>
 						        </div>
 						    </div>
-						</div>
-
-					
-					<!-- paging s  -->		
-<form name="formList" id="formList" method="post" autocomplete="off">		
-    <div class="container-fluid px-0 mt-2 mb-2">
-        <div class="row">
-            <div class="col">
-                <ul class="pagination justify-content-center mb-0">
-                    <!-- 수정 시작 -->
-                    <li th:if="${vo.startPage gt vo.pageNumToShow}" class="page-item" style="cursor: pointer;">
-                        <a class="page-link" href="javascript:goList(${vo.startPage - 1})" th:attr="onclick=|goList('${vo.startPage - 1}')|"><i class="fa-solid fa-angle-left"></i></a>
-                    </li>
-                    <li th:each="num: ${#numbers.sequence(vo.startPage != null ? vo.startPage : 1, vo.endPage != null ? vo.endPage : 1)}" th:classappend="${num eq vo.thisPage} ? 'active' : ''" class="page-item" style="cursor: pointer;">
-                        <a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"></a>
-                    </li>
-                    <li th:if="${vo.endPage ne vo.totalPages}" class="page-item" style="cursor: pointer;">
-                        <a class="page-link" th:attr="onclick=|goList('${vo.endPage + 1}')|"><i class="fa-solid fa-angle-right"></i></a>
-                    </li>
-                    <!-- 수정 끝 -->
-                </ul>
-            </div>
-        </div>
-    </div>
 
 
 
@@ -557,18 +286,22 @@
 							<div class="collapse show" id="widget-body-2">
 							    <div class="widget-body">
 								    <div class="clothes">
-								        <ul>Clothes</ul>
-								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop(category1=11)}">Outer</a></li>
-								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop(category1=12)}">Top</a></li>
-								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop(category1=13)}">Bottom</a></li>
-								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop(category1=14)}">Dress</a></li>
+								        <ul>
+								        <a>Clothes</a>
+								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop?category1CD=11}">Outer</a></li>
+								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop?category1CD=12}">Top</a></li>
+								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop?category1CD=13}">Bottom</a></li>
+								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop?category1CD=14}">Dress</a></li>
+								        </ul>
 								    </div>
 								    <div class="non-clothes">
-								        <ul>Non-Clothes</ul>
-								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop(category2=15)}">Bag</a></li>
-								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop(category2=16)}">Shoes</a></li>
-								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop(category2=17)}">Acc.</a></li>
-								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop(category2=18)}">Etc.</a></li>
+								        <ul>
+								        <a>Non-Clothes</a>
+								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop?category2CD=15}">Bag</a></li>
+								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop?category2CD=16}">Shoes</a></li>
+								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop?category2CD=17}">Acc.</a></li>
+								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop?category2CD=18}">Etc.</a></li>
+								       	</ul>
 								    </div>
 								</div><!-- End .widget-body -->
 

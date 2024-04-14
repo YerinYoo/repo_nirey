@@ -197,11 +197,7 @@ public class ProductController {
 
 	    // 검색 기능 관련 설정
 	    setSearch(vo, vo.getShValue(), null); // 사용자 아이디를 null로 설정
-	    
-	    // 카테고리에 따른 제품 검색 설정
-	    dto.setCategory1CD(dto.getCategory1CD());
-	    dto.setCategory2CD(dto.getCategory2CD());
-	    dto.setProdStockCD(dto.getProdStockCD());
+
 	    
 	    // 페이징 기능 관련 설정
 	    vo.setParamsPaging(service.getTotalProductCount(vo)); // 총 상품 수 설정
@@ -216,8 +212,6 @@ public class ProductController {
 	    // recordedShop 페이지로 이동
 	    return "usr/infra/v1/shop";
 	}
-
-
 	
 	  @RequestMapping(value = "/recorded/Shop/Product") 
 	  public String ProductView(ProductDto dto, Model model) throws Exception {
@@ -225,11 +219,10 @@ public class ProductController {
 		  model.addAttribute("product", service.selectProd(dto));
 		  model.addAttribute("prodColor", service.prodColor(dto));
 		  model.addAttribute("prodSize", service.prodSize(dto));
+		  model.addAttribute("prodReview", service.prodReview(dto));
 
 	  return "usr/infra/v1/product"; 
 	  }
-	 
-
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String searchProducts(@RequestParam(name = "shValue", required = false) String shValue, Model model) {

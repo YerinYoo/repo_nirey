@@ -24,4 +24,8 @@ public class MixService {
 		return dao.memberAddr();
 	}
 	
+	public List<MixDto> checkOut(){
+		return dao.checkOut();
+	}
+	
 }

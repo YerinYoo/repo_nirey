@@ -34,8 +34,15 @@ private Integer totalReviewCount;
 private String colorSeq;
 private String sizeSeq;
 private String wishlistSeq;
+private String revName;
 
 
+public String getRevName() {
+	return revName;
+}
+public void setRevName(String revName) {
+	this.revName = revName;
+}
 public String getWishlistSeq() {
 	return wishlistSeq;
 }

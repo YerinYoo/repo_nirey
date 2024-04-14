@@ -56,7 +56,7 @@
     			
     </select>
     
-    	      <select id="selectProd" resultMap="resultMapObj">
+   	<select id="selectProd" resultMap="resultMapObj">
     
     		select
     		
@@ -73,17 +73,27 @@
 	        a.DetailDescription,
 	        a.fabric,
 	        a.detailSize,
-	        b.ReviewContent,
-	        b.regDateTime as revRegDateTime,
-	        b.Member_seq,
-	        b.Product_seq,
-	        c.memberSeq,
-	      	c.name,
-	      	(select count(*) from review where Product_seq = a.productSeq) as totalReviewCount
-    		
+	        (select count(*) from review where Product_seq = a.productSeq) as totalReviewCount
+	       
     		from product  a
     		
-    		 left join 
+    			where a.productSeq = #{productSeq}
+    			
+    </select>
+    	
+    <select id="prodReview" resultMap="resultMapObj">
+    select
+    	a. productSeq,
+    	 b.ReviewContent,
+	     b.regDateTime as revRegDateTime,
+	     b.Member_seq,
+	     b.Product_seq,
+	     c.memberSeq,
+	     c.name as revName
+    		
+	    from product a
+    	
+    	  left join 
         			review b
     on 
         b.Product_seq=a.productSeq
@@ -94,9 +104,8 @@
      		b.Member_seq=c.memberSeq
     			
     			where a.productSeq = #{productSeq}
-    			
-    	</select>
-    	
+    </select>
+    
     <!-- 제품 상세 페이지에서 호출할 색상 테이블 -->
     <select id="prodColor" resultMap="resultMapObj">
     SELECT 
@@ -156,19 +165,21 @@
 			)
 	  </insert>
 	  
-	  	  <insert id="insertRev">
-			insert into review (
-				delNY
-				, ReviewContent
-				, Member_seq
-				, Product_seq
-			) values (
-			#{delNY}
-			,#{ReviewContent}
-			,#{Member_seq}
-			,#{Product_seq}
-		)
-	  </insert>
+<insert id="insertRev">
+    insert into review (
+        delNY,
+        ReviewContent,
+        Member_seq,
+        Product_seq
+    ) values (
+        #{delNY},
+        #{ReviewContent},
+        #{Member_seq},
+        #{Product_seq}
+    )
+</insert>
+
+
 	  
 	   
     <update id="update">
@@ -404,29 +415,28 @@
 </select>
 
 <select id="wishlist" resultMap="resultMapObj">
-    select 
-        a.wishlistSeq,
-        a.Member_memberSeq,
-        a.Product_productSeq,
-        a.delNY,
-        b.memberSeq,
-        c.productSeq,
-        c.ProductName,
-        c.DiscountedPrice
-        
-    from wishlist a
-    inner join
-        member b
-    on
-        a.Member_memberSeq=b.memberSeq
-    inner join
-        product c
-    on
-        a.Product_productSeq=c.productSeq
+select 
+	a.wishlistSeq,
+	a.Member_memberSeq,
+    a.Product_productSeq,
+    a.delNY,
+    b.memberSeq,
+    c.productSeq,
+    c.ProductName,
+    c.DiscountedPrice
+    
+from wishlist a
+inner join
+	member b
+on
+	a.Member_memberSeq=b.memberSeq
+inner join
+	product c
+on
+	a.Product_productSeq=c.productSeq
 
-    where 1=1
+where 1=1
 </select>
-
 
 <!-- 위시리스트 삭제 처리 -->
   	<update id="ueleteW">

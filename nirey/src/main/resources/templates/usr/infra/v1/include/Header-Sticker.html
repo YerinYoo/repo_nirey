@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="Header-Sticker">
+      <header class="header">
+            <div class="header-middle sticky-header">
+                <div class="container">
+                    <div class="header-left">
+                        <button class="mobile-menu-toggler" type="button">
+                            <i class="fas fa-bars"></i>
+                        </button>
+
+                        <a th:href="@{/recorded}" class="logo">
+                            <img src="/usr/images/logo-tape.png" alt="Porto Logo">
+                        </a>
+
+                       <nav class="main-nav font2">
+    <ul class="menu">
+        <li class="active">
+            <a th:href="@{/recorded}">Home</a>
+        </li>
+        <li>
+            <a th:href="@{/recorded/Shop}">Shop</a>
+            <div class="megamenu megamenu-fixed-width megamenu-3cols">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <a href="#" class="nolink">Clothes</a>
+                        <ul class="submenu">
+                            <li><a th:href="@{/recorded/Shop}">Outer</a></li>
+                            <li><a th:href="@{/recorded/Shop}">Top</a></li>
+                            <li><a th:href="@{/recorded/Shop}">Bottom</a></li>
+                            <li><a th:href="@{/recorded/Shop}">Dress</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4">
+                        <a href="#" class="nolink">Etc.</a>
+                        <ul class="submenu">
+                            <li><a th:href="@{/recorded/Shop}">Bag</a></li>
+                            <li><a th:href="@{/recorded/Shop}">Shoes</a></li>
+                            <li><a th:href="@{/recorded/Shop}">Acc</a></li>
+                            <li><a th:href="@{/recorded/Shop}">etc.</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div><!-- End .megamenu -->
+        </li>
+
+        <!--new, best, restock : shop 페이지 참조하여 구현하기-->
+        <li class="new">
+            <a th:href="@{/recorded/Shop}">New</a>
+        </li>
+
+        <li class="best">
+            <a th:href="@{/recorded/Shop}">Best</a>
+        </li>
+
+        <li class="restock">
+            <a th:href="@{/recorded/Shop}">ReStock!</a>
+        </li>
+
+        <!-- 로그인 값이 있을 경우에는 mypage와 관련된 헤더, 로그인 값이 없을 경우에는 로그인으로 반환. -->
+		<li class="mypage" th:if="${session.authenticatedMember != null and session.sessIdUsr != null}">
+		    <a th:href="@{/MyPage/Dashboard}">My Page</a>
+		    <ul class="submenu">
+		        <li><a th:href="@{/MyPage/Dashboard}">Dashboard</a></li>
+		        <li><a th:href="@{/MyPage/Orders}">Orders</a></li>
+		        <li><a href="wishlist.html">Wishlist</a></li>
+		        <li><a id="buttonUsrSignOut" th:href="@{/logoutUsr}">Logout</a></li>
+		    </ul>
+		</li>
+		<li th:unless="${session.authenticatedMember != null and session.sessIdUsr != null}">
+		    <a th:href="@{/recorded/Login}">Login</a>
+		</li>
+    </ul>
+</nav>
+                    </div><!-- End .header-left -->
+
+                    <div class="header-right">
+                        <div class="header-search header-search-popup header-search-category d-none d-sm-block">
+                            <a href="#" class="search-toggle" role="button"><i class="icon-magnifier"></i></a>
+                            <form action="/search" method="get">
+                                <div class="header-search-wrapper">
+                                        <input type="text" id="shValue" name="shValue" th:value="${vo != null ? vo.shValue : ''}" onkeyup="enterkey()" placeholder="Search..." class="form-control form-control-sm" required="">
+                                    <button type="submit" id="btnSearch" class="btn text-dark icon-magnifier" ></button>
+                                </div><!-- End .header-search-wrapper -->
+                            </form>
+                        </div>
+
+                       <a th:if="${session.authenticatedMember != null}" th:href="@{/MyPage/Dashboard}" class="header-icon header-icon-user" title="Dashboard"><i class="icon-user-2"></i></a>
+						<a th:unless="${session.authenticatedMember != null}" th:href="@{/recorded/Login}" class="header-icon header-icon-user" title="Login"><i class="icon-user-2"></i></a>
+
+                        <a href="wishlist.html" class="header-icon header-icon-wishlist" title="Wishlist"><i
+                                class="icon-wishlist-2"></i></a>
+
+                        <div class="dropdown cart-dropdown">
+                            <a href="#" class="dropdown-toggle dropdown-arrow cart-toggle" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+                                <i class="icon-cart-thick"></i>
+                                <span class="cart-count badge-circle">3</span>
+                            </a>
+
+                            <div class="cart-overlay"></div>
+
+                            <div class="dropdown-menu mobile-cart">
+                                <a href="#" title="Close (Esc)" class="btn-close">×</a>
+
+                                <div class="dropdownmenu-wrapper custom-scrollbar">
+                                    <div class="dropdown-cart-header">Cart</div>
+                                    <!-- End .dropdown-cart-header -->
+
+                                    <div class="dropdown-cart-products">
+                                        <div class="product">
+                                            <div class="product-details">
+                                                <h4 class="product-title">
+                                                    <a href="demo3-product.html">Angora Beret Hat</a>
+                                                </h4>
+
+                                                <span class="cart-product-info">
+                                                    <span class="cart-product-qty">1</span>
+                                                    × 39,000원
+                                                </span>
+                                            </div><!-- End .product-details -->
+
+                                            <figure class="product-image-container">
+                                                <a href="demo3-product.html" class="product-image">
+                                                    <img src="/usr/images/products/minicart/product-1.jpg" alt="product"
+                                                        width="80" height="80">
+                                                </a>
+
+                                                <a href="#" class="btn-remove" title="Remove Product"><span>×</span></a>
+                                            </figure>
+                                        </div><!-- End .product -->
+
+                                        <div class="product">
+                                            <div class="product-details">
+                                                <h4 class="product-title">
+                                                    <a href="demo3-product.html">Tessel Pattern Knit</a>
+                                                </h4>
+
+                                                <span class="cart-product-info">
+                                                    <span class="cart-product-qty">1</span>
+                                                    × 63,000원
+                                                </span>
+                                            </div><!-- End .product-details -->
+
+                                            <figure class="product-image-container">
+                                                <a href="demo3-product.html" class="product-image">
+                                                    <img src="/usr/images/products/minicart/product-2.jpg" alt="product"
+                                                        width="80" height="80">
+                                                </a>
+
+                                                <a href="#" class="btn-remove" title="Remove Product"><span>×</span></a>
+                                            </figure>
+                                        </div><!-- End .product -->
+
+                                        <div class="product">
+                                            <div class="product-details">
+                                                <h4 class="product-title">
+                                                    <a href="demo3-product.html">Painted Angora Knit</a>
+                                                </h4>
+
+                                                <span class="cart-product-info">
+                                                    <span class="cart-product-qty">1</span>
+                                                    × 49,000원
+                                                </span>
+                                            </div><!-- End .product-details -->
+
+                                            <figure class="product-image-container">
+                                                <a href="demo3-product.html" class="product-image">
+                                                    <img src="/usr/images/products/minicart/product-3.jpg" alt="product"
+                                                        width="80" height="80">
+                                                </a>
+                                                <a href="#" class="btn-remove" title="Remove Product"><span>×</span></a>
+                                            </figure>
+                                        </div><!-- End .product -->
+                                    </div><!-- End .cart-product -->
+
+                                    <div class="dropdown-cart-total">
+                                        <span>총 금액 : </span>
+
+                                        <span class="cart-total-price float-right">151,000원</span>
+                                    </div><!-- End .dropdown-cart-total -->
+
+                                    <div class="dropdown-cart-action">
+                                        <a href="cart.html" class="btn btn-gray btn-block view-cart">장바구니</a>
+                                        <a href="checkout.html" class="btn btn-dark btn-block">구매</a>
+                                    </div><!-- End .dropdown-cart-total -->
+                                </div><!-- End .dropdownmenu-wrapper -->
+                            </div><!-- End .dropdown-menu -->
+                        </div><!-- End .dropdown -->
+                    </div><!-- End .header-right -->
+                </div><!-- End .container -->
+            </div><!-- End .header-middle -->
+        </header><!-- End .header -->
+        
+        <script>
+        //로그아웃 구문
+        if(document.getElementById("buttonUsrSignOut")){
+		document.getElementById("buttonUsrSignOut").onclick = function () {
+			
+			$.ajax({
+				async: true 
+				,cache: false
+				,type: "post"
+				/* ,dataType:"json" */
+				,url: "/logoutUsr"
+				
+				,success: function(response) {
+					if(response.rt == "success") {
+						location.href = "/recorded";
+						
+					} else {
+						alert("logOut Fail");
+					}
+				}
+				,error : function(jqXHR, textStatus, errorThrown){
+					alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+				}
+			});
+		}
+	}
+        </script>
+        
+</th:block>
+
+
+</html>

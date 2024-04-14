@@ -3,11 +3,9 @@ package com.recorded.infra.mix;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
-import jakarta.servlet.http.HttpServletRequest;
+import com.recorded.infra.product.ProductDto;
 
 @Controller
 public class MixController {
@@ -36,6 +34,23 @@ public class MixController {
     	model.addAttribute("memberAddr", service.memberAddr());
     	return "usr/infra/v1/address";
     }
+    
+	  @RequestMapping(value="/MyPage/CheckOut")
+	  public String checkOut(ProductDto dto, Model model) throws Exception {
+		  
+		  model.addAttribute("memberAddr", service.memberAddr());
+		  model.addAttribute("checkOut", service.checkOut());
+		  
+		  return "usr/infra/v1/checkout";
+	  }
+	 
+	   @RequestMapping(value="/recorded/OrderComplete")
+	   public String orderComplate(Model model)throws Exception {
+		   
+		   model.addAttribute("checkOut", service.checkOut());
+		   
+		   return "usr/infra/v1/order-complete";
+	   }
     
     
 }
