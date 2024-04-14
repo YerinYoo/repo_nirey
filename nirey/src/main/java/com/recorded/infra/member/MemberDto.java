@@ -18,12 +18,58 @@ public class MemberDto {
 	private String MobileNum;
 	private Date joinDate;
 	private Date modDateTime;
+	private String addrDetail;
+	private String addr;
+	private String zipcode;
+	private String recipient;
+	private String phoneNum;
+	private String ShippingMsg;
 
 	
 	
 	
+	
 
 
+	public String getAddrDetail() {
+		return addrDetail;
+	}
+	public void setAddrDetail(String addrDetail) {
+		this.addrDetail = addrDetail;
+	}
+	public String getAddr() {
+		return addr;
+	}
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
+	public String getZipcode() {
+		return zipcode;
+	}
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+	public String getRecipient() {
+		return recipient;
+	}
+	public void setRecipient(String recipient) {
+		this.recipient = recipient;
+	}
+	public String getPhoneNum() {
+		return phoneNum;
+	}
+	public void setPhoneNum(String phoneNum) {
+		this.phoneNum = phoneNum;
+	}
+	public String getShippingMsg() {
+		return ShippingMsg;
+	}
+	public void setShippingMsg(String shippingMsg) {
+		ShippingMsg = shippingMsg;
+	}
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
 	public String getName() {
 		return name;
 	}

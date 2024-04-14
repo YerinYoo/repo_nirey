@@ -178,7 +178,7 @@
                                 <div class="product-single-filter">
 								    <label>Size:</label>
 								    <ul class="config-size-list">
-								        <li class="size" th:each="size : ${prodSize}"><a href="javascript:;" class="d-flex align-items-center justify-content-center" th:text="${size.size}"></a></li>
+								        <li class="size" th:each="size : ${prodSize}"><a class="d-flex align-items-center justify-content-center" th:text="${size.size}"></a></li>
 								    </ul>
 								</div>
 								
@@ -186,7 +186,7 @@
 								    <label>Color:</label>
 								    <ul class="config-size-list">
 								        <li class="color" th:each="color : ${prodColor}">
-								         <a href="javascript:;" class="d-flex align-items-center justify-content-center"
+								         <a class="d-flex align-items-center justify-content-center"
 								         th:style="'background-color: ' + ${color.color} + '; border-radius: 50%; height: 33px;'">
             							</a></li>
 								    </ul>
@@ -195,14 +195,27 @@
 								
 								<!-- 사이즈, 색상 선택한 후 초기화 버튼 -->
                                 <div class="product-single-filter">
-                                    <h6>Selected Options</h6>
+                                    <h5>Selected Options</h5>
                                     <a class="font1 text-uppercase clear-btn" href="#">Clear</a>
                                 </div>
                                 <!---->
                             </div>
 
 
-                            <div class="product-action">
+                            <div class="product" data-product-id="${product.productSeq}">
+							    <div class="product-action">
+							        <div class="product-single-qty">
+							            <input class="horizontal-quantity form-control" type="text">
+							        </div>
+							        <!-- End .product-single-qty -->
+							        <a id="addToWishlistButton" class="btn-icon-wish add-wishlist" title="Add to Wishlist" th:href="@{/MyPage/Wishlist}">
+							            <i class="icon-wishlist-2"></i>
+							            <span>Add to Wishlist</span>
+							        </a>
+							    </div>
+							</div>
+
+                            <!-- End .product-action -->
 
                             <!-- End .product-action -->
                             
@@ -373,19 +386,6 @@
         formatPriceElements();
     });
 
-    // 선택한 사이즈와 색상 값을 "Selected Options" 섹션의 <ul> 태그 내에 <li> 요소로 추가
-    document.querySelectorAll('.config-size-list a').forEach(function (el) {
-        el.addEventListener('click', function () {
-            var selectedSeq = el.getAttribute('data-sizeSeq') || el.getAttribute('data-colorSeq');
-            alert("사이즈, 색상 받아와");
-            var selectedOptionList = document.getElementById('selectedOptionsList');
-            console.log(selectedSeq);
-            var li = document.createElement('li');
-            li.textContent = selectedSeq;
-            selectedOptionList.appendChild(li);
-        });
-    });
-
     // Clear 버튼을 클릭하면 선택한 옵션을 초기화
     document.querySelector('.clear-btn').addEventListener('click', function () {
         document.getElementById('selectedOptionsList').innerHTML = '';
@@ -432,6 +432,15 @@
         }
     });
 
+    $(document).ready(function() {
+        $('.add-wishlist').click(function() {
+            // 클릭된 버튼이 속한 상품 요소에서 상품 ID를 가져옴
+            var productId = $(this).closest('.product').data('productSeq');
+            
+            // 가져온 상품 ID를 사용하여 위시리스트에 추가하는 작업 수행
+            addToWishlist(productSeq);
+        });
+    });
 
 </script>
 </body>

@@ -35,8 +35,16 @@ private String colorSeq;
 private String sizeSeq;
 private String wishlistSeq;
 private String revName;
+private String memo;
 
 
+
+public String getMemo() {
+	return memo;
+}
+public void setMemo(String memo) {
+	this.memo = memo;
+}
 public String getRevName() {
 	return revName;
 }

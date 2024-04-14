@@ -215,20 +215,32 @@
 	<!-- 로그인 관련 매퍼 쿼리 -->
 <select id="selectOneById" resultMap="resultMapObj">
     SELECT
-        memberSeq,
-        name,
-        quitNY,
-        dormantNY,
-        ID,
-        pwd,
-        genderCD,
-        email,
-        birthday,
-        MobileNum,
-        joinDate,
-        modDateTime
+        a.memberSeq,
+        a.name,
+        a.quitNY,
+        a.dormantNY,
+        a.ID,
+        a.pwd,
+        a.genderCD,
+        a.email,
+        a.birthday,
+        a.MobileNum,
+        a.joinDate,
+        a.modDateTime
+	        ,b.addrDetail
+	        ,b.addr
+	        ,b.zipcode
+	        ,b.recipient
+	        ,b.phoneNum
+	        ,b.shippingMsg
     FROM
-        member
+        member a
+        
+    inner join 
+	        address b
+	    on
+	        a.memberSeq=b.Member_seq
+	        
     WHERE
         ID = #{ID}
 </select>

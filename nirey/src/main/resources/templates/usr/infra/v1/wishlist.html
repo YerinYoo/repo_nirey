@@ -120,13 +120,16 @@
 	                                        </a>
                                 		</div>
                                 		<div class="col-12 mt-1">
-											<form method="post" action="/MyPage/CheckOut">
+<!-- 											<form method="post"  th:href="@{/MyPage/CheckOut(productSeq=${wishlist.productSeq}, ProudctName=${wishlist.ProductName})}" >
 											    <input type="hidden" name="productSeq" th:value="${wishlist.productSeq}" style="visibility: hidden;">
 												<input type="hidden" name="productName" th:value="${wishlist.ProductName}" style="visibility: hidden;">
-
-											    <!-- 필요한 다른 제품 정보도 여기에 추가할 수 있습니다 -->
+											
+											    필요한 다른 제품 정보도 여기에 추가할 수 있습니다
 											    <button type="submit" class="btn btn-wishlist-purchase product-type-simple btn-shop col-3" >PURCHASE</button>
-											</form>
+											</form> -->
+											
+											<a th:href="@{/MyPage/CheckOut(productSeq=${wishlist.productSeq}, ProudctName=${wishlist.ProductName})}" class="btn btn-wishlist mt-1 mt-md-0 col-3"
+	                                        title="Quick View">Purchase</a>
                                 		</div>
 <!--                                 		<div class="col-12 mt-1"> -->
 <!--                                 			<form method="post" action="/wishlistUelete">  -->

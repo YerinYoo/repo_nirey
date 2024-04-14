@@ -26,7 +26,10 @@
             s.parentNode.insertBefore( wf, s );
         } )( document );
     </script>
+    <!-- 토스 페이먼트 스크립트 -->
+    <script src="https://js.tosspayments.com/v1/payment-widget"></script>
 
+	
     <!-- Plugins CSS File -->
     <link rel="stylesheet" href="/usr/css/bootstrap.min.css">
 
@@ -109,7 +112,7 @@
                                             <div class="form-group">
                                                 <label>Name
                                                     <abbr class="required" title="required">*</abbr></label>
-                                                <input type="text" class="form-control" required />
+                                                <input type="text" class="form-control"  th:value="${session.sessNameUsr}" required />
                                             </div>
                                         </div>
                                     </div>
@@ -117,33 +120,33 @@
                                     <div class="form-group mb-1 pb-2">
                                         <label>Street address
                                             <abbr class="required" title="required">*</abbr></label>
-                                        <input type="text" class="form-control" placeholder="House number and street name" required />
+                                        <input type="text" class="form-control" placeholder="House number and street name"  th:value="${session.sessAddrUsr}"  required />
                                     </div>
 
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Apartment, suite, unite, etc. (optional)" required />
+                                        <input type="text" class="form-control" placeholder="Apartment, suite, unite, etc. (optional)" th:value="${session.sessAddrDetailUsr}"   required />
                                     </div>
 
                                     <div class="form-group">
                                         <label>Postcode / Zip
                                             <abbr class="required" title="required">*</abbr></label>
-                                        <input type="text" class="form-control" required />
+                                        <input type="text" class="form-control" th:value="${session.sessZipcodeUsr}"  required />
                                     </div>
                                     
                                     <div class="form-group">
                                         <label class="order-comments">Order notes (optional)</label>
-                                        <textarea class="form-control" placeholder="Notes about your order, e.g. special notes for delivery." required></textarea>
+                                        <textarea class="form-control" placeholder="Notes about your order, e.g. special notes for delivery."  th:value="${session.sessShippingMsgUsr}"  required></textarea>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Phone <abbr class="required" title="required">*</abbr></label>
-                                        <input type="tel" class="form-control" required />
+                                        <input type="tel" class="form-control" th:value="${session.sessPhoneNumUsr}" required />
                                     </div>
 
                                     <div class="form-group">
                                         <label>Email address
                                             <abbr class="required" title="required">*</abbr></label>
-                                        <input type="email" class="form-control" required />
+                                        <input type="email" class="form-control" th:value="${session.sessEmailUsr}"required />
                                     </div>
 
                                     <div id="collapseFour" class="collapse">
@@ -166,7 +169,7 @@
                                             
                                             <div class="form-group">
                                                 <label class="order-comments">Order notes (optional)</label>
-                                                <textarea class="form-control" placeholder="Notes about your order, e.g. special notes for delivery." required></textarea>
+                                                <textarea class="form-control" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
                                             </div>
         
                                             <div class="form-group">
@@ -193,64 +196,44 @@
                         <div class="order-summary">
                             <h4>YOUR ORDER</h4>
 
-                            <table class="table table-mini-cart mt-4">
-                                <thead>
-                                    <tr>
-                                        <th colspan="2" style="vertical-align : middle;">
-                                            <h6>Product</h6></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="product-col" style="vertical-align : middle;">
-                                            <p class="product-title">
-                                                Circled Ultimate 3D Speaker ×
-                                                <span class="product-qty">4</span>
-                                            </p>
-                                        </td>
+						    <table class="table table-mini-cart mt-4">
+						        <thead>
+						            <tr>
+						                <th colspan="2" style="vertical-align: middle;">
+						                    <h6>Product</h6>
+						                </th>
+						            </tr>
+						        </thead>
+						        <tbody>
+						            <tr th:each="item : ${wishlist}">
+						                <td class="product-col" style="vertical-align: middle;" th:text="${item.ProductName}">
+						                </td>
+						                <td class="price-col" style="vertical-align: middle;">
+						                    <span th:text="${item.DiscountedPrice}"></span>
+						                </td>
+						            </tr>
+						        </tbody>
+						        <tfoot>
+						            <tr class="order-total">
+						                <td style="vertical-align: middle;">
+						                    <h4>Total</h4>
+						                </td>
+						                <td style="vertical-align: middle;">
+						                    <b class="total-price"><span></span></b>
+						                </td>
+						            </tr>
+						        </tfoot>
+						    </table>
 
-                                        <td class="price-col" style="vertical-align : middle;">
-                                            <span>$1,040.00</span>
-                                        </td>
-                                    </tr>
 
-                                    <tr>
-                                        <td class="product-col" style="vertical-align : middle;">
-                                            <p class="product-title">
-                                                Fashion Computer Bag ×
-                                                <span class="product-qty">2</span>
-                                            </p>
-                                        </td>
 
-                                        <td class="price-col" style="vertical-align : middle;">
-                                            <span>$418.00</span>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr class="cart-subtotal">
-                                        <td style="vertical-align : middle;">
-                                            <h6>Subtotal</h6>
-                                        </td>
-
-                                        <td class="price-col" style="vertical-align : middle;">
-                                            <span>$1,458.00</span>
-                                        </td>
-                                    </tr>
-
-                                    <tr class="order-total" >
-                                        <td style="vertical-align : middle;">
-                                            <h4>Total</h4>
-                                        </td>
-                                        <td style="vertical-align : middle;">
-                                            <b class="total-price"><span>$1,603.80</span></b>
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-
+    
                             <div class="payment-methods">
                                 <h4 class="">Payment methods</h4>
+                                
+                                    <!-- 결제 UI, 이용약관 UI 영역 -->
+
+    
                                 <div class="info-box with-icon p-0">
                                     <div class="form-group form-group-custom-control">
                                         <div class="radio col-xs-12">
@@ -261,67 +244,73 @@
                                         </div>
                             
                                         <div class="col-xs-12 panel-collapse collapse in" id="pictureTarifa">
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <div>
-                                                        <label for="card-comp">
-                                                            Card Company
-                                                            <span class="required">*</span>
-                                                        </label>
-                                                        <select name="cardcomp" class="form-control" style="height : 42px;">
-                                                            <option value="" selected="selected"></option>
-                                                            <option value="1"></option>
-                                                            <option value="2">국민카드</option>
-                                                            <option value="3">현대카드</option>
-                                                            <option value="4">BC카드</option>
-                                                            <option value="5">삼성카드</option>
-                                                            <option value="6">하나카드</option>
-                                                            <option value="7">신한카드</option>
-                                                            <option value="8">롯데카드</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <div>
-                                                        <label for="card-no">
-                                                            Card No.
-                                                            <span class="required">*</span>
-                                                        </label>
-                                                        <input type="email" class="form-input form-wide" id="register-email" required />
-                                                    </div>
-                                                </div>
 
-                                                <div class="col-6">
+    
+                                            <div class="row">
+                                                <div class="col-12" style="width : 500px;">
                                                     <div>
-                                                        <label for="card-no">
-                                                            Card Holder Name
-                                                            <span class="required">*</span>
-                                                        </label>
-                                                        <input type="email" class="form-input form-wide" id="register-email" required />
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                         <div id="payment-method"></div>
+															    <div id="agreement"></div>
+															    <!-- 결제하기 버튼 -->
+<!-- 															    <button id="payment-button">결제하기</button> -->
+<!--                                                         <label for="card-comp"> -->
+<!--                                                             Card Company -->
+<!--                                                             <span class="required">*</span> -->
+<!--                                                         </label> -->
+<!--                                                         <select name="cardcomp" class="form-control" style="height : 42px;"> -->
+<!--                                                             <option value="" selected="selected"></option> -->
+<!--                                                             <option value="1"></option> -->
+<!--                                                             <option value="2">국민카드</option> -->
+<!--                                                             <option value="3">현대카드</option> -->
+<!--                                                             <option value="4">BC카드</option> -->
+<!--                                                             <option value="5">삼성카드</option> -->
+<!--                                                             <option value="6">하나카드</option> -->
+<!--                                                             <option value="7">신한카드</option> -->
+<!--                                                             <option value="8">롯데카드</option> -->
+<!--                                                         </select> -->
+<!--                                                     </div> -->
+<!--                                                 </div> -->
+<!--                                             </div> -->
+<!--                                             <div class="row"> -->
+<!--                                                 <div class="col-6"> -->
+<!--                                                     <div> -->
+<!--                                                         <label for="card-no"> -->
+<!--                                                             Card No. -->
+<!--                                                             <span class="required">*</span> -->
+<!--                                                         </label> -->
+<!--                                                         <input type="email" class="form-input form-wide" id="register-email" required /> -->
+<!--                                                     </div> -->
+<!--                                                 </div> -->
+
+<!--                                                 <div class="col-6"> -->
+<!--                                                     <div> -->
+<!--                                                         <label for="card-no"> -->
+<!--                                                             Card Holder Name -->
+<!--                                                             <span class="required">*</span> -->
+<!--                                                         </label> -->
+<!--                                                         <input type="email" class="form-input form-wide" id="register-email" required /> -->
+<!--                                                     </div> -->
+<!--                                                 </div> -->
+<!--                                             </div> -->
                                             
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <div>
-                                                        <label for="card-no">
-                                                            MM/YY
-                                                            <span class="required">*</span>
-                                                        </label>
-                                                        <input type="email" class="form-input form-wide" id="register-email" required />
-                                                    </div>
-                                                </div>
+<!--                                             <div class="row"> -->
+<!--                                                 <div class="col-6"> -->
+<!--                                                     <div> -->
+<!--                                                         <label for="card-no"> -->
+<!--                                                             MM/YY -->
+<!--                                                             <span class="required">*</span> -->
+<!--                                                         </label> -->
+<!--                                                         <input type="email" class="form-input form-wide" id="register-email" required /> -->
+<!--                                                     </div> -->
+<!--                                                 </div> -->
 
-                                                <div class="col-6">
-                                                    <div>
-                                                        <label for="card-no">
-                                                            CVV / CVC
-                                                            <span class="required">*</span>
-                                                        </label>
-                                                        <input type="email" class="form-input form-wide" id="register-email" required />
+<!--                                                 <div class="col-6"> -->
+<!--                                                     <div> -->
+<!--                                                         <label for="card-no"> -->
+<!--                                                             CVV / CVC -->
+<!--                                                             <span class="required">*</span> -->
+<!--                                                         </label> -->
+<!--                                                         <input type="email" class="form-input form-wide" id="register-email" required /> -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -348,12 +337,13 @@
                                 </div>
                                 
                                 <div class="col-6">
-                                    <div class="ordergo">
-                                        <button type="submit" class="btn btn-dark btn-place-order mt-3 ml-5" form="checkout-form" style="float : right" th:href="@{/recorded/OrderComplete}">
-                                        Order
-                                        </button>
-                                    </div>
-                                </div>
+								    <div class="ordergo">
+								        <a href="/recorded/OrderComplete" class="btn btn-dark btn-place-order mt-3 ml-5"  id="payment-button" style="float : right">
+								            Order
+								        </a>
+								    </div>
+								</div>
+
 
                             </div>
 
@@ -711,6 +701,80 @@
         $('#tarifaHorarios').collapse('hide');
     }
 });
+        
+     // 문서 로드 후에 실행
+        document.addEventListener('DOMContentLoaded', function() {
+            calculateTotalPrice();
+        });
+
+        // 가격 포맷팅 및 총 가격 계산 함수
+        function calculateTotalPrice() {
+            var totalPrice = 0;
+            var priceElements = document.querySelectorAll('.price-col span');
+
+            priceElements.forEach(function(element) {
+                // 원본 텍스트를 유지하기 위해 가격을 먼저 계산한 후 포맷팅합니다.
+                var price = parseFloat(element.textContent.replace('$', '').replace(',', ''));
+                totalPrice += price;
+                element.textContent = formatPrice(price);
+            });
+
+            var formattedTotalPrice = formatPrice(totalPrice);
+            var totalPriceElement = document.querySelector('.total-price span');
+            totalPriceElement.textContent = formattedTotalPrice;
+        }
+
+        // 가격 포맷팅 함수
+        function formatPrice(price) {
+            // 세 자리마다 컴마 추가
+            var formattedPrice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            // '₩'을 추가하여 반환
+            return "₩" + formattedPrice;
+        }
+
+
+    </script>
+    
+
+<!-- 토스페이먼츠 -->    
+    
+    
+<script>
+      const coupon = document.getElementById("coupon-box");
+      const button = document.getElementById("payment-button");
+      const amount = 50000;
+      
+      // 구매자의 고유 아이디를 불러와서 customerKey로 설정하세요.
+      // 이메일・전화번호와 같이 유추가 가능한 값은 안전하지 않습니다.
+      const widgetClientKey = "test_ck_jExPeJWYVQ40jypbomvo349R5gvN";
+      const customerKey = "SFvV2ESjKh2PnQn2Ne6Xd";
+      const paymentWidget = PaymentWidget(widgetClientKey, customerKey); // 회원 결제
+      // const paymentWidget = PaymentWidget(widgetClientKey, PaymentWidget.ANONYMOUS) // 비회원 결제
+
+      const paymentMethodWidget = paymentWidget.renderPaymentMethods(
+        "#payment-method",
+        { value: amount },
+        { variantKey: "DEFAULT" }
+      );
+
+      paymentWidget.renderAgreement(
+        "#agreement", 
+        { variantKey: "AGREEMENT" }
+      );
+
+      button.addEventListener("click", function () {
+        // 결제를 요청하기 전에 orderId, amount를 서버에 저장하세요. 
+        // 결제 과정에서 악의적으로 결제 금액이 바뀌는 것을 확인하는 용도입니다.  
+        paymentWidget.requestPayment({
+          orderId: "1W_pCfO4rzG9szJEcThKe",
+          orderName: "Me O My",
+          successUrl: window.location.origin + "/recorded/OrderComplete",
+          failUrl: window.location.origin + "/fail",
+//           customerEmail: "customer123@gmail.com",
+//           customerName: "김토스",
+//           customerMobilePhone: "01012341234",
+        });
+      });
     </script>
     
 </body>

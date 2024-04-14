@@ -20,12 +20,10 @@ public class MixService {
 		return dao.memberInfo();
 	}
 	
-	public List<MixDto> memberAddr(){
-		return dao.memberAddr();
-	}
-	
 	public List<MixDto> checkOut(){
+		
 		return dao.checkOut();
 	}
+
 	
 }

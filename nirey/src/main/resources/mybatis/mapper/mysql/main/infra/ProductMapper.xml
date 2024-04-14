@@ -111,7 +111,8 @@
     SELECT 
         a.productSeq,
         b.colorSeq,
-        b.color
+        b.color,
+        b.memo
     FROM 
         product a
     INNER JOIN
