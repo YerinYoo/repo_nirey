@@ -23,7 +23,7 @@ private String size;
 private String DetailDescription;
 private String detailSize;
 private String fabric;
-private Integer reviewScoreCD;
+private Integer reviewRate;
 private String ReviewContent;
 private String Member_seq;
 private String Product_seq;
@@ -36,9 +36,24 @@ private String sizeSeq;
 private String wishlistSeq;
 private String revName;
 private String memo;
+private Integer reviewRateAvg;
+private Integer ea;
 
 
 
+
+public Integer getEa() {
+	return ea;
+}
+public void setEa(Integer ea) {
+	this.ea = ea;
+}
+public Integer getReviewRateAvg() {
+	return reviewRateAvg;
+}
+public void setReviewRateAvg(Integer reviewRateAvg) {
+	this.reviewRateAvg = reviewRateAvg;
+}
 public String getMemo() {
 	return memo;
 }
@@ -160,11 +175,11 @@ public String getFabric() {
 public void setFabric(String fabric) {
 	this.fabric = fabric;
 }
-public Integer getReviewScoreCD() {
-	return reviewScoreCD;
+public Integer getReviewRate() {
+	return reviewRate;
 }
-public void setReviewScoreCD(Integer reviewScoreCD) {
-	this.reviewScoreCD = reviewScoreCD;
+public void setReviewRate(Integer reviewRate) {
+	this.reviewRate = reviewRate;
 }
 public String getReviewContent() {
 	return ReviewContent;
@@ -214,7 +229,7 @@ public String toString() {
 			+ OrgPrice + ", DiscountedPrice=" + DiscountedPrice 	+ ", prodStockCD=" + prodStockCD + ", category1CD=" + category1CD + ", category2CD=" + category2CD
 			+ ", regDateTime=" + regDateTime + ", modDateTime=" + modDateTime + ", color=" + color + ", size=" + size
 			+ ", DetailDescription=" + DetailDescription + ", detailSize=" + detailSize + ", fabric=" + fabric
-			+ ", reviewScoreCD=" + reviewScoreCD + ", ReviewContent=" + ReviewContent + ", Member_seq=" + Member_seq
+			+ ", reviewRate=" + reviewRate + ", ReviewContent=" + ReviewContent + ", Member_seq=" + Member_seq
 			+ ", Product_seq=" + Product_seq + ", memberSeq=" + memberSeq + ", name=" + name + ", revRegDateTime="
 			+ revRegDateTime + "]";
 }

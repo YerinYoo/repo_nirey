@@ -78,8 +78,8 @@
                                 <th class="thumbnail-col"></th>
                                 <th class="product-col" >PRODUCT</th>
                                 <th class="product-count">COUNT</th>
-                                <th class="color-col">COLOR</th>
-                                <th class="size-col">SIZE</th>
+<!--                                 <th class="color-col">COLOR</th> -->
+<!--                                 <th class="size-col">SIZE</th> -->
                                 <th class="action-col"></th>
                             </tr>
                         </thead>
@@ -89,7 +89,7 @@
                                 <td style="text-align:center; vertical-align : middle;">
                                     <figure class="product-image-container">
                                         <a href="product.html" class="product-image">
-                                            <img src="/usr/images/products/product-5.jpg" alt="product" style="height : 200px; width : auto;">
+                                            <img src="/usr/images/products/product-5.jpg" alt="product" style="height : 150px; width : auto;">
                                         </a>
                                     </figure>
                                 </td>
@@ -97,33 +97,34 @@
                                 	<div class="product-info">
 	                                	<ul>
 	                                		<li><span th:text="${wishlist.ProductName}"></span></li>
-	                                		
+	                                		<li><span th:text="${wishlist.color}"></span></li>
+											<li><span th:text="${wishlist.size}"></span></li>	     
 	                                		<li><div class="price mt-2"><span th:text="${wishlist.DiscountedPrice}"></span></div></li>
-	                                		
+                          		
 	                                	</ul>
                                 	</div>
                                 </td>
                                 <td style="text-align : center; vertical-align : middle;">
                                 <div class="product-single-qty">
-												<input class="horizontal-quantity form-control" type="text">
-											</div><!-- End .product-single-qty -->
-                                </td>
-                                <td style="text-align:center; vertical-align : middle;">
-                                    <span class="stock-status">Color</span>
-                                </td>
-                                <td style="text-align:center; vertical-align : middle;">
-                                    <span class="stock-status">Size</span>
+									<input class="horizontal-quantity form-control" type="text" th:value="${wishlist.ea}">
+								</div><!-- End .product-single-qty -->
                                 </td>
                                 <td class="action" style="text-align:center; vertical-align : middle; padding: 0; margin: 0;">
                                 	<div class="row">
-                                		<div class="col-12 mt-1">
+                                		<div class="col-12 mt-3">
 	                                		<a th:href="@{/recorded/Shop/Product(productSeq=${wishlist.productSeq}, ProudctName=${wishlist.ProductName})}" class="btn btn-dark quickview mt-1 mt-md-0 col-3"
 	                                        title="Quick View">View More
 	                                        </a>
+	                                        
                                 		</div>
                                 		<div class="col-12 mt-1">
-											<a th:href="@{/MyPage/CheckOut(productSeq=${wishlist.productSeq}, ProudctName=${wishlist.ProductName})}" class="btn btn-dark wishlist mt-1 mt-md-0 col-3"
-	                                        title="Purchase">Purchase</a>
+											<form method="post" action="ueleteW"> 
+												<input type="hidden" name="seq" th:value="${wishlist.productSeq}">
+												<input type="hidden" name="delNY" th:value="${wishlist.delNY}">
+																		
+												<button type="submit" class="btn btn"th:href="@{/MyPage/Wishlist}" th:text="Delete" style="width : 25%;"></button>
+																	
+											</form>
                                 		</div>
 <!--                                 		<div class="col-12 mt-1"> -->
 <!--                                 			<form method="post" action="/wishlistUelete">  -->
@@ -139,7 +140,12 @@
                             </tr>
                         </tbody>
                     </table>
+                   
+                    
                 </div><!-- End .cart-table-container -->
+	                 <div class="text-center mb-3 mr-3" style="float : right; ">
+					    <a th:href="@{/MyPage/CheckOut}" class="btn btn-primary btn-lg mr-5">purchase</a>
+					</div>
             </div><!-- End .container -->
         </main><!-- End .main -->
 

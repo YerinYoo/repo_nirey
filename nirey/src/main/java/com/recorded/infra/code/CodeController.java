@@ -26,7 +26,7 @@ public class CodeController {
 		
 		service.insert(dto);
 		
-		return "redirect:/Corders";
+		return "redirect:/CodeList";
 	}
 	
 	@RequestMapping(value="/codeUpdate")
@@ -36,7 +36,7 @@ public class CodeController {
 		
 		service.update(dto);
 		
-		return "redirect:/Corders";
+		return "redirect:/CodeList";
 	}
 	
 	
@@ -45,7 +45,7 @@ public class CodeController {
 		
 		service.uelete(dto);
 		
-		return "redirect:/Corders";
+		return "redirect:/CodeList";
 	}
 	
 	@RequestMapping(value="/codeDelete")
@@ -53,7 +53,7 @@ public class CodeController {
 		
 		service.delete(dto);
 		
-		return "redirect:/Corders";
+		return "redirect:/CodeList";
 	}
 	
 	/*

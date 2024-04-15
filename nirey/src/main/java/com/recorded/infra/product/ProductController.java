@@ -39,7 +39,7 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/ReviewInsert")
-	public String ReviewtInsert(ProductDto dto) throws Exception {
+	public String ReviewInsert(ProductDto dto) throws Exception {
 		
 		ProductDto productDto = new ProductDto();
 		productDto.setDelNY(0);

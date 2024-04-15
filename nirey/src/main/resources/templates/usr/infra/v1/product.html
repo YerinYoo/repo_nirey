@@ -149,6 +149,21 @@
                             <!-- 요기까지 전후 상품 -->
 	
                             <div class="ratings-container" >
+                            	<div class="product-ratings">
+                                     <span class="ratings" th:if="${product.reviewRateAvg==5}" style="width:100%"></span>
+                                     <span class="ratings" th:if="${product.reviewRateAvg==4.5}" style="width:90%"></span>
+								     <span class="ratings" th:if="${product.reviewRateAvg==4}" style="width:80%"></span>
+								     <span class="ratings" th:if="${product.reviewRateAvg==3.5}" style="width:70%"></span>
+								     <span class="ratings" th:if="${product.reviewRateAvg==3}" style="width:60%"></span>
+								     <span class="ratings" th:if="${product.reviewRateAvg==2.5}" style="width:50%"></span>
+								     <span class="ratings" th:if="${product.reviewRateAvg==2}" style="width:40%"></span>
+								     <span class="ratings" th:if="${product.reviewRateAvg==1.5}" style="width:30%"></span>
+								     <span class="ratings" th:if="${product.reviewRateAvg==1}" style="width:20%"></span>
+								     <span class="ratings" th:if="${product.reviewRateAvg==0.5}" style="width:10%"></span>
+									 <span class="ratings" th:if="${product.reviewRateAvg==null}" style="width:0%"></span>
+                                    <span class="tooltiptext tooltip-top"></span>
+                                </div>
+		                           
                                 <a style="padding : 0; margin : 0;" href="#" class="rating-link" th:text="'(' + ${product.totalReviewCount} + ' Reviews)'" ></a>
                             </div>
                             <!-- End .ratings-container -->
@@ -283,6 +298,20 @@
 						                <div class="comment-block mb-1" >
 						                    <div class="comment-header">
 						                        <div class="comment-arrow"></div>
+						                        <!-- 리뷰 별점 s -->
+						                        <div class="ratings-container float-sm-right">
+						                            <div class="product-ratings">
+						                                <span class="ratings" th:if="${review.reviewRate==5}" style="width:100%"></span>
+						                                <span class="ratings" th:if="${review.reviewRate==4}" style="width:70%"></span>
+						                                <span class="ratings" th:if="${review.reviewRate==3}" style="width:50%"></span>
+						                                <span class="ratings" th:if="${review.reviewRate==2}" style="width:35%"></span>
+						                                <span class="ratings" th:if="${review.reviewRate==1}" style="width:18%"></span>
+						                                <!-- 리뷰 별점 e -->
+						                                <span class="tooltiptext tooltip-top"></span>
+						                            </div>
+						                            <!-- End .product-ratings -->
+						                        </div>
+						                        
 						                        <span class="comment-by">
 						                           <a>♥ <strong th:text="${review.revName}"></strong> – <span th:text="${review.revRegDateTime}"></span></a>
 
@@ -305,6 +334,27 @@
 							<form action="ReviewInsert" id="formInsert" name="formInsert" method="post" class="comment-form m-0">
 							    <input type="hidden" name="productSeq" value="${productSeq}">
     
+    							    <!-- form 내용 -->
+							    <div class="rating-form">
+							        <label for="rating">Your rating <span class="required">*</span></label>
+							        <span class="rating-stars">
+							            <a class="star-1" href="#" th:text="${1}">1</a>
+							            <a class="star-2" href="#" th:text="${2}">2</a>
+							            <a class="star-3" href="#" th:text="${3}">3</a>
+							            <a class="star-4" href="#" th:text="${4}">4</a>
+							            <a class="star-5" href="#" th:text="${5}">5</a>
+							        </span>
+							
+							        <select name="reviewScoreCD" id="reviewScoreCD" required style="display: none;">
+							            <option value="">Rate…</option>
+							            <option value="5">Perfect</option>
+							            <option value="4">Good</option>
+							            <option value="3">Average</option>
+							            <option value="2">Not that bad</option>
+							            <option value="1">Very poor</option>
+							        </select>
+							    </div>
+							    
 							    <div class="form-group">
 							        <label>Your review <span class="required">*</span></label>
 							        <textarea name="ReviewContent" id="ReviewContent" cols="5" rows="6" class="form-control form-control-sm"></textarea>
@@ -404,7 +454,7 @@
         // 회원 시퀀스가 null인 경우에 대한 처리
         if (!memberSeq) {
             // 로그인하지 않은 경우 알림을 띄우고 로그인 페이지로 이동
-            alert('리뷰를 작성하려면 로그인 해야혀');
+            alert('리뷰 작성하려면 로그인 해야혀');
             window.location.href = '/recorded/Login'; // 로그인 페이지로 이동
         } else {
             // 세션에 저장된 회원 시퀀스가 있는 경우

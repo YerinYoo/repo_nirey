@@ -199,16 +199,27 @@
 						    <table class="table table-mini-cart mt-4">
 						        <thead>
 						            <tr>
-						                <th colspan="2" style="vertical-align: middle;">
-						                    <h6>Product</h6>
+						                <th colspan="2" style="vertical-align: middle; padding-top : 4%;">
+						                    <h5>Product</h5>
 						                </th>
+						                <th></th>
+						                <th></th>
+						                <th></th>
 						            </tr>
 						        </thead>
-						        <tbody>
+						        <tbody style="height : 100px;">
 						            <tr th:each="item : ${wishlist}">
-						                <td class="product-col" style="vertical-align: middle;" th:text="${item.ProductName}">
+						                <td class="product-col" style="vertical-align: middle; height : 10%;" th:text="${item.ProductName}">
 						                </td>
-						                <td class="price-col" style="vertical-align: middle;">
+						                <td class="color-col" style="vertical-align: middle;">
+						                    <span th:text="${item.color}"></span>
+						                    <span> / </span>
+						                    <span th:text="${item.size}"></span>
+						                </td>
+						                <td class="ea-col" style="vertical-align : middle;">
+						                	<span th:text="${item.ea}"></span><span>ea</span>
+						                </td>
+						                 <td class="price-col" style="vertical-align: middle;">
 						                    <span th:text="${item.DiscountedPrice}"></span>
 						                </td>
 						            </tr>
@@ -218,6 +229,8 @@
 						                <td style="vertical-align: middle;">
 						                    <h4>Total</h4>
 						                </td>
+						                <td></td>
+						                <td></td>
 						                <td style="vertical-align: middle;">
 						                    <b class="total-price"><span></span></b>
 						                </td>
@@ -324,19 +337,14 @@
                                             </label>
                                         </div>
                                         <!-- End .custom-checkbox -->
+                                           
                                     </div>
                                     <!-- End .form-group -->
                                     <!-- End .form-group -->
                                 </div>
                             <div class="row">
-                                <div class="col-6">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label " for="exampleCheck1">Have you confirmed that your order is correct?</label>
-                                    </div>
-                                </div>
                                 
-                                <div class="col-6">
+                                <div class="col-12">
 								    <div class="ordergo">
 								        <a href="/recorded/OrderComplete" class="btn btn-dark btn-place-order mt-3 ml-5"  id="payment-button" style="float : right">
 								            Order

@@ -73,7 +73,10 @@
 	        a.DetailDescription,
 	        a.fabric,
 	        a.detailSize,
-	        (select count(*) from review where Product_seq = a.productSeq) as totalReviewCount
+	        (select count(*) from review where Product_seq = a.productSeq) as totalReviewCount,
+	 		(select ROUND(avg(reviewRate) * 2) / 2
+	         from review
+	         where Product_seq = a.productSeq) as reviewRateAvg
 	       
     		from product  a
     		
@@ -83,27 +86,19 @@
     	
     <select id="prodReview" resultMap="resultMapObj">
     select
-    	a. productSeq,
-    	 b.ReviewContent,
-	     b.regDateTime as revRegDateTime,
-	     b.Member_seq,
-	     b.Product_seq,
-	     c.memberSeq,
-	     c.name as revName
-    		
-	    from product a
-    	
-    	  left join 
-        			review b
-    on 
-        b.Product_seq=a.productSeq
-        
-        	left join
-        			member c
-     on
-     		b.Member_seq=c.memberSeq
-    			
-    			where a.productSeq = #{productSeq}
+    a.productSeq,
+    b.ReviewContent,
+    b.regDateTime as revRegDateTime,
+    b.reviewRate,
+    b.Member_seq,
+    b.Product_seq,
+    c.memberSeq,
+    c.name as revName     
+from product a
+left join review b on b.Product_seq=a.productSeq
+left join member c on b.Member_seq=c.memberSeq
+where a.productSeq = #{productSeq}
+
     </select>
     
     <!-- 제품 상세 페이지에서 호출할 색상 테이블 -->
@@ -199,7 +194,6 @@
   			where 1=1
   			and productSeq = #{productSeq}
   	</update>
-  	
   	
   	<delete id="delete">
   	
@@ -421,6 +415,9 @@ select
 	a.Member_memberSeq,
     a.Product_productSeq,
     a.delNY,
+    a.ea,
+    a.color,
+    a.size,
     b.memberSeq,
     c.productSeq,
     c.ProductName,
