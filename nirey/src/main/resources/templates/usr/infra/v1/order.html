@@ -130,7 +130,7 @@
 												th:text="${@codeService.selectOneCachedCode(order.orderStatus)}"></td>
 												<td class="order-more" style="text-align:center; vertical-align : middle;">
 													<button class="btn btn-view-order product-type-simple btn-shop" >
-													<a th:href="@{/MyPage/OrderDetails}">View Details</a>
+													<a th:href="@{/MyPage/OrderDetails(orderSeq=${order.orderSeq})}">View Details</a>
 													</button>
 												</td>
 											</tr>

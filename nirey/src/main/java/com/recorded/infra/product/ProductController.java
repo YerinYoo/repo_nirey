@@ -86,7 +86,7 @@ public class ProductController {
 		return "redirect:/Porders";
 	}
 
-	@RequestMapping(value = "/Porders")
+	@RequestMapping(value = "/ProductList")
 	public String Morders(@ModelAttribute("vo") ProductVo vo, Model model) throws Exception {
 		
 		setSearch(vo, null, null);
@@ -103,7 +103,7 @@ public class ProductController {
 	}
 	
 
-	@RequestMapping(value = "/PordersView")
+	@RequestMapping(value = "/ProductView")
 	public String PordersView(ProductDto dto, Model model) throws Exception {
 
 		model.addAttribute("item", service.selectOne(dto));
@@ -111,15 +111,8 @@ public class ProductController {
 		return "adm/infra/v1/PordersView";
 	}
 
-	@RequestMapping(value = "/PordersForm")
-	public String PordersForm(ProductDto dto, Model model) throws Exception {
 
-		model.addAttribute("item", service.selectOne(dto));
-
-		return "adm/infra/v1/PordersForm";
-	}
-
-	@RequestMapping(value = "/PordersAdd")
+	@RequestMapping(value = "/AddProduct")
 	public String PordersAdd() throws Exception {
 
 		return "adm/infra/v1/PordersAdd";

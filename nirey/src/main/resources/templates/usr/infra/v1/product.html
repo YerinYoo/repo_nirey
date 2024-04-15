@@ -401,10 +401,10 @@
         // 세션에 저장된 회원 시퀀스 출력
         console.log('세션에 저장된 회원 시퀀스:', memberSeq);
 
-        // 회원 시퀀스가 null 또는 undefined인 경우에 대한 처리
+        // 회원 시퀀스가 null인 경우에 대한 처리
         if (!memberSeq) {
             // 로그인하지 않은 경우 알림을 띄우고 로그인 페이지로 이동
-            alert('리뷰를 작성하려면 로그인이 필요합니다.');
+            alert('리뷰를 작성하려면 로그인 해야혀');
             window.location.href = '/recorded/Login'; // 로그인 페이지로 이동
         } else {
             // 세션에 저장된 회원 시퀀스가 있는 경우
@@ -421,10 +421,10 @@
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === XMLHttpRequest.DONE) { // 요청이 완료되면
                     if (xhr.status === 200) { // 성공적인 응답을 받으면
-                        alert('리뷰가 성공적으로 제출되었습니다!');
+                        alert('제출 완');
                         document.getElementById('ReviewContent').value = ''; // 리뷰 input 초기화
                     } else {
-                        alert('리뷰 제출 중 오류가 발생했습니다.');
+                        alert('리뷰 제출은.. 어림이 없어요');
                     }
                 }
             };

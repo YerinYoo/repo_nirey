@@ -95,7 +95,10 @@
 	  
 	   
     <update id="update">
-   	update member
+   	update member a
+   	
+   	inner join address b
+   	on b.Member_seq = a.memberSeq
    	set
    		name = #{name}
    	WHERE 1=1

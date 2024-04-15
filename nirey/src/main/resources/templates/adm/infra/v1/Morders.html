@@ -248,7 +248,7 @@
 									    		<td></td>
 									    		<td th:text="${list.MemberSeq}"></td>
 									    		<td>
-									    			<a th:href="@{/MordersView(memberSeq=${list.memberSeq}, name=${list.name}, quitNY=${list.quitNY})}"  th:text="${list.name}"></a>
+									    			<a th:href="@{/MemberView(memberSeq=${list.memberSeq}, name=${list.name}, quitNY=${list.quitNY})}"  th:text="${list.name}"></a>
 									    		</td>
 									     		
 									     		<td th:if="${list.quitNY eq 0}">N</td>

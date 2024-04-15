@@ -39,6 +39,7 @@ public class MixController {
 	  public String checkOut(ProductDto dto, Model model, HttpSession session) throws Exception {
 		  
 		  List<ProductDto> wishlist = serviceP.wishlist();
+		  model.addAttribute("wishlist", wishlist);
 		  
 	        // 세션에서 로그인한 회원 정보 가져오기
 	        MemberDto authenticatedMember = (MemberDto) session.getAttribute("authenticatedMember");

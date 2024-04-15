@@ -11,7 +11,7 @@ public class MixDto {
 	private Integer TotalDiscPrice;
 	private Integer TotalPrice;
 	private Date OrderDate;
-	private Integer CardNo;
+	private String CardNo;
 	private Integer CVV;
 	private Date CardDate;
 	private String CardOwner;

@@ -256,7 +256,7 @@
 										     		<td th:if="${list.delNY eq 0}">N</td>
 										     		<td th:unless="${list.delNY eq 0}">Y</td>
 										    		<td th:text="${list.seq}"></td>
-										       		 <td><a th:href="@{/ordersView(seq=${list.seq}, name=${list.name}, delNY=${list.delNY})}"  th:text="${list.name}"></a></td>
+										       		 <td><a th:href="@{/CodeGroupView(seq=${list.seq}, name=${list.name}, delNY=${list.delNY})}"  th:text="${list.name}"></a></td>
 			       									<td th:text="${list.cdSeqCount}"></td>
 			       									<td th:text="${#dates.format(list.modDatetime,  'yyyy-MM-dd HH:mm:ss')}"></td>
 										     		<td th:text="${#dates.format(list.regDatetime, 'yyyy-MM-dd HH:mm:ss')}"></td>

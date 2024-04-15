@@ -321,7 +321,7 @@
 									    		<td th:if="${list.delNY eq 0}">N</td>
 									     		<td th:unless="${list.delNY eq 0}">Y</td>
 									    		<td>
-									    			<a th:href="@{/PordersView(productSeq=${list.productSeq}, ProductName=${list.ProductName}, delNY=${list.delNY})}"  th:text="${list.ProductName}"></a>
+									    			<a th:href="@{/ProductView(productSeq=${list.productSeq}, ProductName=${list.ProductName}, delNY=${list.delNY})}"  th:text="${list.ProductName}"></a>
 									    		</td>
 									     		
 									    		<td th:text="${list.OrgPrice} " ></td>

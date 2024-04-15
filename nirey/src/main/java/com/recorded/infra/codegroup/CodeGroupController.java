@@ -16,7 +16,7 @@ public class CodeGroupController {
 	@Autowired
 	private CodeGroupService service; //CodeGroupService를 service라는 이름으로 종속 받을 것
     
-    @RequestMapping(value = "/orders")
+    @RequestMapping(value = "/CodeGroupList")
     //코드 그룹 Vo와 모델 값을 가지고 orders라는 페이지 호출
     public String orders(@ModelAttribute("vo") CodeGroupVo vo, Model model) throws Exception {
         // 페이징 관련 정보 설정
@@ -78,7 +78,7 @@ public class CodeGroupController {
 		return "redirect:/orders";
 	}
 
-	@RequestMapping(value = "/ordersView")
+	@RequestMapping(value = "/CodeGroupView")
 	//코드 그룹 Dto, 모델 내용 받아옴
 	public String ordersView(CodeGroupDto dto, Model model) throws Exception {
 		//해당하는 Dto 내용 모델에 추가하고, item이름으로 호출할 수 있도록
@@ -94,7 +94,7 @@ public class CodeGroupController {
 	}
 	
 	//코드그룹 데이터 추가 페이지 호출
-	@RequestMapping(value = "/ordersAdd")
+	@RequestMapping(value = "/AddCodeGroup")
 	public String ordersAdd(CodeGroupDto dto) throws Exception {
 		//Dto를 이용해서 데이터 추가할 것 - Dto 호출
 		return "adm/infra/v1/ordersAdd";

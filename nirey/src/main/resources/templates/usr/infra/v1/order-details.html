@@ -170,7 +170,7 @@
 													</tr>
 													<tr>
 														<td class="total-payprice">Total Price</td>
-														<td class="total=payprice" style="text-align : right;" th:text="${order.TotalPrice}"></td>
+														<td class="total-payprice" style="text-align : right;" th:text="${order.TotalPrice}"></td>
 													</tr>
 												</table>
 													<div id="accordion5">
@@ -188,7 +188,7 @@
 																	</tr>
 																	<tr>
 																		<td class="order-payment-details">Shipping Price</td>
-																		<td class="order-payment-detailsid" style="text-align : right;">0원</td>
+																		<td class="order-payment-detailsid" style="text-align : right;">₩0</td>
 																	</tr>
 																</table>
 															</div>
@@ -282,6 +282,39 @@
 		color: 'red'
 		});
 	   </script>
+	   
+	  <script>
+	//가격 관련 스크립트
+	  function formatPriceElements() {
+	      // HTML 요소를 가져와서 가격 포맷팅 적용
+	      var totalPriceElements = document.querySelectorAll('.total-payprice');
+	      var orderTotalPriceElements = document.querySelectorAll('.order-total-price');
+	      var orderTotalPayPriceElements = document.querySelectorAll('.order-totalpayprice');
+	      
+	      totalPriceElements.forEach(function(element) {
+	          var totalPriceElements = parseFloat(element.textContent);
+	          element.textContent = formatPrice(price);
+	      });
+
+	      productPriceElements.forEach(function(element) {
+	          var price = parseFloat(element.textContent);
+	          element.textContent = formatPrice(price);
+	      });
+	  }
+
+	  // 가격 포맷팅 함수
+	  function formatPrice(price) {
+	      // 세 자리마다 컴마 추가
+	      var formattedPrice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	      // '원'을 추가하여 반환
+	      return "₩" + formattedPrice ;
+	  }
+
+	  // 문서 로드 후에 실행
+	  document.addEventListener('DOMContentLoaded', function() {
+	      formatPriceElements();
+	  });
+	  </script>
 
 </body>
 

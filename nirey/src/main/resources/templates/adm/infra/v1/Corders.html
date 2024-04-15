@@ -241,7 +241,7 @@
 									     		<td th:if="${list.delNY eq 0}">N</td>
 									     		<td th:unless="${list.delNY eq 0}">Y</td>
 									    		<td th:text="${list.seq} " ></td>
-									    		<td><a th:href="@{/CordersView(seq=${list.seq}, name=${list.name}, delNY=${list.delNY})}"  th:text="${list.name}"></a></td>
+									    		<td><a th:href="@{/CodeView(seq=${list.seq}, name=${list.name}, delNY=${list.delNY})}"  th:text="${list.name}"></a></td>
 									       		<!-- <td th:text="${list.name}"></td>-->
 									       		<td th:text="${#dates.format(list.regDatetime,  'yyyy-MM-dd HH:mm:ss')}"></td>
 									     		<td th:text="${#dates.format(list.modDatetime,  'yyyy-MM-dd HH:mm:ss')}"></td>

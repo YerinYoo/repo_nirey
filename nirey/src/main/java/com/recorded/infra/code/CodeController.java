@@ -91,7 +91,7 @@ public class CodeController {
 	 * return "adm/infra/v1/Corders"; }
 	 */
 	
-	@RequestMapping(value = "/Corders")
+	@RequestMapping(value = "/CodeList")
 	public String Corders(@ModelAttribute("vo") CodeVo vo, Model model) throws Exception{
 
 		setSearch(vo);
@@ -104,23 +104,15 @@ public class CodeController {
 		return "adm/infra/v1/Corders"; 
   	}
 	
-	@RequestMapping(value = "/CordersView")
+	@RequestMapping(value = "/CodeView")
 	public String CordersView(CodeDto dto, Model model) throws Exception {
 		
 		model.addAttribute("item", service.selectOne(dto)); 
 		
 		return "adm/infra/v1/CordersView"; 
 	}
-	
-	@RequestMapping(value = "/CordersForm")
-	public String CordersForm(CodeDto dto, Model model) throws Exception {
-		
-		model.addAttribute("item", service.selectOne(dto)); 
-		
-		return "adm/infra/v1/CordersForm"; 
-	}
-	
-	@RequestMapping(value="/CordersAdd")
+
+	@RequestMapping(value="/AddCode")
 	public String CordersAdd(CodeDto dto, Model model) throws Exception {
 		//code add 페이지에서 codeGroup 셀렉트 박스로 값 받아오기
 		model.addAttribute("listCodeGroup", codeGroupService.selectListWithoutPaging());

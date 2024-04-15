@@ -139,7 +139,7 @@ public class MemberController extends BaseController {
     }
 
     // 회원 목록 조회
-    @RequestMapping(value = "/Morders")
+    @RequestMapping(value = "/MemberList")
     public String Morders(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
         setSearch(vo);
         int rowcount = service.getTotalMemberCount(vo);
@@ -149,23 +149,16 @@ public class MemberController extends BaseController {
         return "adm/infra/v1/Morders";
     }
 
-	@RequestMapping(value = "/MordersView")
+	@RequestMapping(value = "/MemberView")
 	public String MordersView(MemberDto dto, Model model) throws Exception {
 		
 		model.addAttribute("item", service.selectOne(dto)); 
 		
 		return "adm/infra/v1/MordersView"; 
 	}
-	
-    // 회원 정보 수정 페이지로 이동
-    @RequestMapping(value = "/MordersForm")
-    public String MordersForm(MemberDto dto, Model model) throws Exception {
-        model.addAttribute("item", service.selectOne(dto)); 
-        return "adm/infra/v1/MordersForm"; 
-    }
 
     // 회원 추가 페이지로 이동
-    @RequestMapping(value="/MordersAdd")
+    @RequestMapping(value="/AddMember")
     public String MordersAdd() throws Exception {
         return "adm/infra/v1/MordersAdd";
     }
