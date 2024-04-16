@@ -361,7 +361,8 @@ where a.productSeq = #{productSeq}
         a.DiscountedPrice,
         a.category1CD,
         a.category2CD,
-        a.prodStockCD
+        a.prodStockCD,
+        (SELECT ROUND(AVG(reviewRate) * 2) / 2 FROM review WHERE Product_seq = a.productSeq) AS reviewRateAvg
     FROM 
         product a
     WHERE 1=1
