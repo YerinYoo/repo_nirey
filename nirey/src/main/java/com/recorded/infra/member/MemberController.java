@@ -215,6 +215,7 @@ public class MemberController extends BaseController {
          
 			System.out.println("---------------------");
 			System.out.println("httpSession.getAttribute(\"sessNameUsr\"): " + httpSession.getAttribute("sessNameUsr"));
+			System.out.println("httpSession.getAttribute(\"sessSeqUsr\"): " + httpSession.getAttribute("sessSeqUsr"));
 			System.out.println("---------------------");
 
             returnMap.put("rt", "success");

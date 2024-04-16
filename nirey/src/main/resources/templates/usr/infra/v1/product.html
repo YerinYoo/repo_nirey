@@ -328,24 +328,26 @@
 						    
                                 <div class="divider"></div>
 
-                                <div class="add-product-review">
+                                <div class="add-product-review" th:if="${session.authenticatedMember != null and session.sessSeqUsr != null}">
                                     <h3 class="review-title">Add a review</h3>
                                     
 							<form action="ReviewInsert" id="formInsert" name="formInsert" method="post" class="comment-form m-0">
-							    <input type="hidden" name="productSeq" value="${productSeq}">
+							   
     
     							    <!-- form 내용 -->
 							    <div class="rating-form">
 							        <label for="rating">Your rating <span class="required">*</span></label>
+							         <input type="text" name="Product_seq" id="Product_seq" th:value="${product.productSeq}">
+							    	<input type="text" name="Member_seq" id="Member_seq"th:value="${session.sessSeqUsr}">
 							        <span class="rating-stars">
-							            <a class="star-1" href="#" th:text="${1}">1</a>
-							            <a class="star-2" href="#" th:text="${2}">2</a>
-							            <a class="star-3" href="#" th:text="${3}">3</a>
-							            <a class="star-4" href="#" th:text="${4}">4</a>
-							            <a class="star-5" href="#" th:text="${5}">5</a>
-							        </span>
-							
-							        <select name="reviewScoreCD" id="reviewScoreCD" required style="display: none;">
+									    <a class="star-1" href="#" th:text="${1}" >1</a>
+									    <a class="star-2" href="#" th:text="${2}">2</a>
+									    <a class="star-3" href="#" th:text="${3}">3</a>
+									    <a class="star-4" href="#" th:text="${4}">4</a>
+									    <a class="star-5" href="#" th:text="${5}">5</a>
+									</span>
+																
+							        <select name="reviewRate" id="reviewRate" required style="display: none;">
 							            <option value="">Rate…</option>
 							            <option value="5">Perfect</option>
 							            <option value="4">Good</option>
@@ -445,42 +447,31 @@
     document.getElementById('formInsert').addEventListener('submit', function(event) {
         event.preventDefault(); 
 
-        // 세션에 저장된 회원 시퀀스 가져오기
+     // 세션에 저장된 회원 시퀀스 가져오기
         var memberSeq = sessionStorage.getItem('sessSeqUsr');
 
         // 세션에 저장된 회원 시퀀스 출력
         console.log('세션에 저장된 회원 시퀀스:', memberSeq);
 
-        // 회원 시퀀스가 null인 경우에 대한 처리
-        if (!memberSeq) {
-            // 로그인하지 않은 경우 알림을 띄우고 로그인 페이지로 이동
-            alert('리뷰 작성하려면 로그인 해야혀');
-            window.location.href = '/recorded/Login'; // 로그인 페이지로 이동
-        } else {
-            // 세션에 저장된 회원 시퀀스가 있는 경우
-            var formData = new FormData(this); // 폼 데이터 가져옴
-            
-            // 폼 데이터에 회원 시퀀스를 추가
-            formData.append('memberSeq', memberSeq);
-            
-            // 폼 데이터에 디폴트 값 줌
-            formData.append('delNY', '0');
+        var formData = new FormData(this); // 폼 데이터 가져옴
 
-            var xhr = new XMLHttpRequest(); // AJAX 요청을 생성
-            xhr.open('POST', '/ReviewInsert', true); 
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE) { // 요청이 완료되면
-                    if (xhr.status === 200) { // 성공적인 응답을 받으면
-                        alert('제출 완');
-                        document.getElementById('ReviewContent').value = ''; // 리뷰 input 초기화
-                    } else {
-                        alert('리뷰 제출은.. 어림이 없어요');
-                    }
+        // 폼 데이터에 디폴트 값 줌
+        formData.append('delNY', '0');
+
+        var xhr = new XMLHttpRequest(); // AJAX 요청을 생성
+        xhr.open('POST', '/ReviewInsert', true); 
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) { // 요청이 완료되면
+                if (xhr.status === 200) { // 성공적인 응답을 받으면
+                    alert('제출 완료');
+                    document.getElementById('ReviewContent').value = ''; // 리뷰 input 초기화
+                } else {
+                    alert('리뷰 제출은.. 어려워요');
                 }
-            };
-            xhr.send(formData); // 폼 데이터 서버 전송
-        }
-    });
+            }
+        };
+        xhr.send(formData); // 폼 데이터 서버 전송
+
 
     $(document).ready(function() {
         $('.add-wishlist').click(function() {
@@ -490,6 +481,11 @@
             // 가져온 상품 ID를 사용하여 위시리스트에 추가하는 작업 수행
             addToWishlist(productSeq);
         });
+    });
+    
+    function setReviewRate(rate) {
+        review.reviewRate = rate; // 예시 코드입니다. 실제로는 리뷰의 점수 칼럼에 값을 설정하는 방법에 따라 코드가 달라질 수 있습니다.
+    }
     });
 
 </script>

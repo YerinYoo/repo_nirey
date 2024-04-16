@@ -6,18 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.recorded.common.constants.Constants;
 import com.recorded.common.util.UtilDateTime;
-import com.recorded.infra.code.CodeDto;
 import com.recorded.infra.member.MemberService;
-import com.recorded.infra.member.MemberVo;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -38,6 +35,7 @@ public class ProductController {
 		return "redirect:/Porders";
 	}
 
+	@ResponseBody
 	@RequestMapping(value = "/ReviewInsert")
 	public String ReviewInsert(ProductDto dto) throws Exception {
 		
