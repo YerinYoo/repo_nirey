@@ -74,9 +74,9 @@
 	        a.fabric,
 	        a.detailSize,
 	        (select count(*) from review where Product_seq = a.productSeq) as totalReviewCount,
-	 		(select ROUND(avg(reviewRate) * 2) / 2
-	         from review
-	         where Product_seq = a.productSeq) as reviewRateAvg
+			(SELECT ROUND(AVG(reviewRate) * 2) / 2 FROM review WHERE Product_seq = a.productSeq) AS reviewRateAvg
+
+
 	       
     		from product  a
     		
@@ -165,13 +165,19 @@ where a.productSeq = #{productSeq}
     insert into review (
         delNY,
         ReviewContent,
+        regDateTime,
+        modDateTime,
         Member_seq,
-        Product_seq
+        Product_seq,
+        reviewRate
     ) values (
         #{delNY},
         #{ReviewContent},
+        now(),
+        now(),
         #{Member_seq},
-        #{Product_seq}
+        #{Product_seq},
+        #{reviewRate}
     )
 </insert>
 

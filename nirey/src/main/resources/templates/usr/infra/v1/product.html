@@ -304,7 +304,7 @@
 						                                <span class="ratings" th:if="${review.reviewRate==5}" style="width:100%"></span>
 						                                <span class="ratings" th:if="${review.reviewRate==4}" style="width:70%"></span>
 						                                <span class="ratings" th:if="${review.reviewRate==3}" style="width:50%"></span>
-						                                <span class="ratings" th:if="${review.reviewRate==2}" style="width:35%"></span>
+						                                <span class="ratings" th:if="${review.reviewRate==2}" style="width:39%"></span>
 						                                <span class="ratings" th:if="${review.reviewRate==1}" style="width:18%"></span>
 						                                <!-- 리뷰 별점 e -->
 						                                <span class="tooltiptext tooltip-top"></span>
@@ -327,49 +327,52 @@
 						    </div>
 						    
                                 <div class="divider"></div>
-
+								
                                 <div class="add-product-review" th:if="${session.authenticatedMember != null and session.sessSeqUsr != null}">
+                                
                                     <h3 class="review-title">Add a review</h3>
                                     
-							<form action="ReviewInsert" id="formInsert" name="formInsert" method="post" class="comment-form m-0">
-							   
-    
-    							    <!-- form 내용 -->
-							    <div class="rating-form">
-							        <label for="rating">Your rating <span class="required">*</span></label>
-							         <input type="text" name="Product_seq" id="Product_seq" th:value="${product.productSeq}">
-							    	<input type="text" name="Member_seq" id="Member_seq"th:value="${session.sessSeqUsr}">
-							        <span class="rating-stars">
-									    <a class="star-1" href="#" th:text="${1}" >1</a>
-									    <a class="star-2" href="#" th:text="${2}">2</a>
-									    <a class="star-3" href="#" th:text="${3}">3</a>
-									    <a class="star-4" href="#" th:text="${4}">4</a>
-									    <a class="star-5" href="#" th:text="${5}">5</a>
-									</span>
-																
-							        <select name="reviewRate" id="reviewRate" required style="display: none;">
-							            <option value="">Rate…</option>
-							            <option value="5">Perfect</option>
-							            <option value="4">Good</option>
-							            <option value="3">Average</option>
-							            <option value="2">Not that bad</option>
-							            <option value="1">Very poor</option>
-							        </select>
-							    </div>
-							    
-							    <div class="form-group">
-							        <label>Your review <span class="required">*</span></label>
-							        <textarea name="ReviewContent" id="ReviewContent" cols="5" rows="6" class="form-control form-control-sm"></textarea>
-							        <div class="invalid-feedback" id="ReviewContentFeedback"></div>
-							    </div>
-
-							    <div class="col-md-12 mb-3">
-							        <button type="submit" id="btnAdd" class="btn btn-secondary" style="float: right;">ADD</button>
-							    </div>
-							</form>
+										<form action="ReviewInsert" id="formInsert" name="formInsert" method="post" class="comment-form m-0">
+			    
+			    							    <!-- form 내용 -->
+										    <div class="rating-form">
+										        <label for="rating">Your rating <span class="required">*</span></label>
+										        <!-- 밑에 input 두 개는 hidden으로 변경 예정 -->
+										        <input type="hidden" name="Product_seq" id="productSeq" th:value="${product.productSeq}">
+												<input type="hidden" name="Member_seq" id="memberSeq" th:value="${session.sessSeqUsr}">
+			
+											        <span class="rating-stars">
+													    <a class="star-1" href="#" th:text="${1}" >1</a>
+													    <a class="star-2" href="#" th:text="${2}">2</a>
+													    <a class="star-3" href="#" th:text="${3}">3</a>
+													    <a class="star-4" href="#" th:text="${4}">4</a>
+													    <a class="star-5" href="#" th:text="${5}">5</a>
+													</span>
+																			
+										        <select name="reviewRate" id="reviewRate" required style="display: none;">
+										            <option value="">Rate…</option>
+										            <option value="5">Perfect</option>
+										            <option value="4">Good</option>
+										            <option value="3">Average</option>
+										            <option value="2">Not that bad</option>
+										            <option value="1">Very poor</option>
+										        </select>
+										    </div>
+										    
+										    <div class="form-group">
+										        <label>Your review <span class="required">*</span></label>
+										        <textarea name="ReviewContent" id="ReviewContent" cols="5" rows="6" class="form-control form-control-sm"></textarea>
+										        <div class="invalid-feedback" id="ReviewContentFeedback"></div>
+										    </div>
+			
+										    <div class="col-md-12 mb-3">
+										        <button type="submit" id="btnAdd" class="btn btn-secondary" style="float: right;">ADD</button>
+										    </div>
+										</form>
 
                                 </div>
                                 <!-- End .add-product-review -->
+                                <span th:unless="${session.authenticatedMember != null and session.sessSeqUsr != null}" style="padding-top : 10%;">( <a th:href="@{/recorded/Login}">Login</a> to Add Review)</span>
 						</div>
 
                             </div>
@@ -443,9 +446,34 @@
         document.getElementById('selectedOptionsList').innerHTML = '';
     });
     
+    $(document).ready(function() {
+        $('#btnAdd').click(function(event) {
+            // 입력 폼 유효성 검사
+            var reviewContent = $('#ReviewContent').val();
+            if (reviewContent.trim() === '') {
+                $('#ReviewContent').addClass('is-invalid'); // 빨간색 테두리 추가
+                $('#ReviewContentFeedback').text('Please select your score and enter the content'); // 오류 메시지 표시
+                event.preventDefault(); // 폼 제출 방지
+            } else {
+                $('#ReviewContent').removeClass('is-invalid'); // 오류가 없는 경우 테두리 제거
+                $('#ReviewContentFeedback').text(''); // 오류 메시지 지우기
+            }
+
+            // 평점 선택 상자 유효성 검사
+            var reviewRate = $('#reviewRate').val();
+            if (reviewRate === '') {
+                $('#reviewRate').addClass('is-invalid'); // 빨간색 테두리 추가
+                event.preventDefault(); // 폼 제출 방지
+            } else {
+                $('#reviewRate').removeClass('is-invalid'); // 오류가 없는 경우 테두리 제거
+            }
+        });
+    });
+
  // 리뷰 제출
     document.getElementById('formInsert').addEventListener('submit', function(event) {
         event.preventDefault(); 
+        
 
      // 세션에 저장된 회원 시퀀스 가져오기
         var memberSeq = sessionStorage.getItem('sessSeqUsr');
@@ -454,6 +482,10 @@
         console.log('세션에 저장된 회원 시퀀스:', memberSeq);
 
         var formData = new FormData(this); // 폼 데이터 가져옴
+        
+        var productSeq = document.getElementById('productSeq').value;
+        var memberSeq = document.getElementById('memberSeq').value;
+
 
         // 폼 데이터에 디폴트 값 줌
         formData.append('delNY', '0');
@@ -463,15 +495,12 @@
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) { // 요청이 완료되면
                 if (xhr.status === 200) { // 성공적인 응답을 받으면
-                    alert('제출 완료');
                     document.getElementById('ReviewContent').value = ''; // 리뷰 input 초기화
-                } else {
-                    alert('리뷰 제출은.. 어려워요');
+                    location.reload(); // 페이지 새로고침
                 }
             }
         };
         xhr.send(formData); // 폼 데이터 서버 전송
-
 
     $(document).ready(function() {
         $('.add-wishlist').click(function() {
@@ -484,9 +513,9 @@
     });
     
     function setReviewRate(rate) {
-        review.reviewRate = rate; // 예시 코드입니다. 실제로는 리뷰의 점수 칼럼에 값을 설정하는 방법에 따라 코드가 달라질 수 있습니다.
+        review.reviewRate = rate; 
     }
-    });
+});
 
 </script>
 </body>
