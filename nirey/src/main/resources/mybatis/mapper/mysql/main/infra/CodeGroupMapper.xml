@@ -8,92 +8,92 @@
     <!-- 공통구문 -->
     <sql id="selectCommon">
         from
-        codeGroup a
+        codegroup a
         WHERE 1=1
 
-        <if test="shDelNy != null and shDelNy.equals('')">AND a.delNY = #{shDelNy}</if>
+     <if test="shDelNy != null and shDelNy.equals('')">AND a.codeGroupdelNy = #{shDelNy}</if>
 
         <choose>
-            <when test="shOption == 1">AND a.seq = #{shValue}</when>
-            <when test="shOption == 2">AND a.name LIKE CONCAT('%',#{shValue},'%')</when>
+            <when test="shOption == 1">AND a.codeGroupSeq = #{shValue}</when>
+            <when test="shOption == 2">AND a.codeGroupName LIKE CONCAT('%',#{shValue},'%')</when>
         </choose>
     </sql>
 
     <!-- 페이징을 고려한 리스트 조회 -->
     <select id="selectList" resultMap="resultMapObj">
         select
-            a.seq
-            ,a.name
+            codeGroupSeq
+            ,codeGroupName
             ,(select count(*)
-              from code aa
-              where 1=1
-                and aa.CodeGroupSeq = a.seq) as cdSeqCount
-            ,a.delNy
-            ,a.regDatetime
-            ,a.modDatetime
+        from code aa
+        where 1=1
+        	and aa.codeGroupSeq = a.seq) as cdSeqCount
+            ,codeGroupDelNy
+            ,codeGroupRegDate
+            ,codeGroupModDate
         <include refid="selectCommon"/>
-        order by a.seq
-        LIMIT #{startRnumForMysql}, #{rowNumToShow}
+        order by codeGroupSeq
+        limit #{startRnumForMysql}, #{rowNumToShow}
     </select>
 
     <!-- total count -->
     <select id="getTotalCodeGroupCount" resultType="java.lang.Integer">
         SELECT COUNT(*)
-        <include refid="selectCommon"/>
+    <include refid="selectCommon"/>
     </select>
 
     <!-- 코드 그룹 조회 -->
     <select id="selectOne" resultMap="resultMapObj">
         select
-            delNY
-            ,seq
-            ,name
-            ,modDateTime
-        from CodeGroup
+            codeGroupDelNy
+            ,codeGroupSeq
+            ,codeGroupName
+            ,codeGroupModDate
+        from codegroup
         where 1=1
-            and seq=#{seq}
+            and codeGroupSeq=#{codeGroupSeq}
     </select>
 
     <!-- 코드 그룹 추가 -->
     <insert id="insert">
-        insert into CodeGroup (delNY, name, regDatetime, modDatetime)
-        values (#{delNY}, #{name}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+        insert into codegroup (codeGroupDelNy, codeGroupName, codeGroupRegDate, codeGroupModDate)
+        values (#{codeGroupDelNy}, #{codeGroupName}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
     </insert>
 
     <!-- 코드 그룹 수정 -->
     <update id="update">
-        update codeGroup
+        update codegroup
         set
-            memo=#{memo}
-            ,name = #{name}
+            codeGroupMemo=#{codeGroupMemo}
+            ,codeGroupName = #{codeGroupName}
         WHERE 1=1
-            and seq = #{seq}
+            and codeGroupSeq = #{codeGroupSeq}
     </update>
 
     <!-- 코드 그룹 삭제 -->
     <update id="updtDel">
-        update CodeGroup
+        update codegroup
         set
-            delNY=1
+            codeGroupDelNy=1
         where 1=1
-            and seq = #{seq}
+            and codeGroupSeq = #{codeGroupSeq}
     </update>
 
     <!-- 코드 그룹 삭제 -->
     <delete id="delete">
-        delete from CodeGroup
-        where seq=#{seq}
+        delete from codegroup
+        where codeGroupSeq=#{codeGroupSeq}
     </delete>
 
     <!-- 코드에서 코드 그룹 불러오기 -->
     <select id="selectListWithoutPaging" resultMap="resultMapObj">
         SELECT
-            a.seq
-            ,a.name
-        FROM codeGroup a
+            codeGroupSeq
+            ,codeGroupName
+        FROM codegroup
         WHERE 1=1
-            AND delNy = 0
-        ORDER BY a.seq DESC
+            AND codeGroupDelNy = 0
+        ORDER BY codeGroupSeq DESC
     </select>
 
 </mapper>
