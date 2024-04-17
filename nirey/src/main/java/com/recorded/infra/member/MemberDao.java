@@ -10,6 +10,7 @@ public interface MemberDao {
 	
 	public int insert(MemberDto dto);
 	public int update(MemberDto dto);
+	public int updateUser(MemberDto dto);
 	public int uelete(MemberDto dto);
 	public int delete(MemberDto dto);
 	

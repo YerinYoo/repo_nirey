@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class MemberDto {
 	
 	private String memberSeq;
@@ -14,6 +16,7 @@ public class MemberDto {
 	private Integer genderCD;
 	private String name;
 	private String email;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birthday;
 	private String MobileNum;
 	private Date joinDate;

@@ -189,10 +189,10 @@
 							            <input class="horizontal-quantity form-control" type="text">
 							        </div>
 							        <!-- End .product-single-qty -->
-							        <a id="addToWishlistButton" class="btn-icon-wish add-wishlist" title="Add to Wishlist" th:href="@{/MyPage/Wishlist}">
-							            <i class="icon-wishlist-2"></i>
-							            <span>Add to Wishlist</span>
-							        </a>
+									<a id="addToWishlistButton" class="btn-icon-wish add-wishlist" title="Add to Wishlist" th:href="${session.authenticatedMember != null} ? @{/MyPage/Wishlist} : @{/recorded/Login}">
+									    <i class="icon-wishlist-2"></i>
+									    <span>Add to Wishlist</span>
+									</a>
 							    </div>
 							</div>
 
@@ -254,9 +254,9 @@
                         <div class="tab-pane fade" id="product-reviews-content" role="tabpanel" aria-labelledby="product-tab-reviews"  >
 						    <div class="product-reviews-content">
 						        <h3 class="reviews-title" th:text=" ${product.totalReviewCount == 0 ? 'There is no REVIEW of this product yet' : product.totalReviewCount + ' review for ' + product.ProductName}"></h3>
-						            <span th:unless="${session.authenticatedMember != null and session.sessSeqUsr != null}" style="padding-left : 12%; ">( <a th:href="@{/recorded/Login}">Login</a> to Add Review)</span>
+						            <span th:unless="${session.authenticatedMember != null and session.sessSeqUsr != null}" style="padding-left : 12%; padding-bottom : 10%; ">( <a th:href="@{/recorded/Login}">Login</a> to Add Review)</span>
 						        <div class="comment-list" th:if="${product.totalReviewCount > 0}">
-						            <div class="comments" th:each="review : ${prodReview}">
+						            <div class="comments mt-1" th:each="review : ${prodReview}">
 						                <figure class="img-thumbnail">
 						                    <img src="/usr/images/blog/reviewR.jpg" alt="review" width="80" height="80" >
 						                </figure>

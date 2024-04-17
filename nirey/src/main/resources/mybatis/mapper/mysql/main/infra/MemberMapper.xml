@@ -84,7 +84,7 @@
         , #{pwd}
         , #{genderCD}
         , #{email}
-        , #{birthday}
+        , now()
         , #{MobileNum}
         , NOW()  <!-- MySQL에서 현재 시간을 가져오는 함수 -->
         , NOW()
@@ -247,5 +247,28 @@
     WHERE
         ID = #{ID}
 </select>
+
+<update id="updateUser">
+    UPDATE member a
+    INNER JOIN address b ON a.memberSeq = b.Member_seq
+    SET
+        a.name = #{name},
+        a.quitNY = IFNULL(#{quitNY}, 0),
+        a.dormantNY = IFNULL(#{dormantNY}, 0),
+        a.genderCD = #{genderCD},
+        a.email = #{email},
+        a.birthday = #{birthday},
+        a.MobileNum = #{MobileNum},
+        a.joinDate = NOW(),
+        a.modDateTime = NOW(),
+        b.addrDetail = #{addrDetail},
+        b.addr = #{addr},
+        b.zipcode = #{zipcode},
+        b.recipient = #{recipient},
+        b.phoneNum = #{phoneNum},
+        b.shippingMsg = #{shippingMsg}
+    WHERE
+        a.ID = #{ID}
+</update>
 
 </mapper>

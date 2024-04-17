@@ -123,6 +123,13 @@ public class MemberController extends BaseController {
      return "redirect:/MordersView"; // 수정된 정보가 표시된 상세 페이지로 이동
  }
 
+ @ResponseBody
+ @RequestMapping("/updateUser")
+ public String updateUser(@ModelAttribute MemberDto dto) throws Exception {
+	 service.updateUser(dto);
+	 System.out.println("업데이트 해!!");
+	 return "redirect:/MyPage/AccountSettings";
+ }
 
     // 회원 탈퇴 처리
     @RequestMapping(value = "/MemberUelete")
@@ -260,8 +267,8 @@ public class MemberController extends BaseController {
     // 회원 정보 수정 처리
     @PostMapping("/UserUpdate")
     public String UserUpdate(@ModelAttribute MemberDto dto) throws Exception {
-        service.update(dto); // 서비스 계층으로 수정된 값 전달
-        return "redirect:/MyAccount"; // 수정된 정보가 표시된 상세 페이지로 이동
+        service.updateUser(dto); // 서비스 계층으로 수정된 값 전달
+        return "redirect:/MyPage/MyAccount"; // 수정된 정보가 표시된 상세 페이지로 이동
     }
 
 

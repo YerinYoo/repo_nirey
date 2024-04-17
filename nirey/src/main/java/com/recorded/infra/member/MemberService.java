@@ -33,6 +33,10 @@ public class MemberService {
         return dao.update(dto);
     }
     
+    public int updateUser(MemberDto dto) {
+    	return dao.updateUser(dto);
+    }
+    
     public int uelete(MemberDto dto) {
     	return dao.uelete(dto);
     }

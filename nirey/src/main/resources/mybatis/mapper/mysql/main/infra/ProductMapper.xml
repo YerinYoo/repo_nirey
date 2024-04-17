@@ -422,12 +422,10 @@ select
 	a.Member_memberSeq,
     a.Product_productSeq,
     a.delNY,
-    a.ea,
-    a.color,
-    a.size,
     b.memberSeq,
     c.productSeq,
     c.ProductName,
+    c.OrgPrice,
     c.DiscountedPrice
     
 from wishlist a
