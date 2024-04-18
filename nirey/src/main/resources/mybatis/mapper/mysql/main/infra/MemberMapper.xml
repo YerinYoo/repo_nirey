@@ -5,6 +5,29 @@
 
 	<resultMap id="resultMapObj" type="com.recorded.infra.member.MemberDto"></resultMap>
 
+<!--  Member Mapper 공통 구문 --> 
+<!-- select 공통 구문 SQL --> 
+<!-- 	<sql id ="selectCommon"> -->
+<!-- 		from -->
+<!-- 			member  -->
+<!-- 		where 1=1 -->
+<!-- 			and a.memberDelNy = 0 -->
+<!-- 			<if test="shDelNy != null and !shDelNy.equals('')">AND memberDelNy = #{shDelNy}</if> -->
+			
+<!--  			<choose> -->
+<!-- 				<when test="shOptionDate == 1">AND memberRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when> -->
+<!-- 				<when test="shOptionDate == 2">AND memberModDate BETWEEN #{shDateStart} AND #{shDateEnd}</when> -->
+<!-- 			</choose> -->
+			
+<!--  			<choose>  -->
+<!-- 	            <when test="shOption == 1">AND memberSeq = #{shValue}</when> -->
+<!-- 	            <when test="shOption == 2">AND memberName LIKE CONCAT('%',#{shValue},'%')</when> -->
+<!-- 	            <when test="shOption == 3">AND memberID LIKE CONCAT('%',#{shValue},'%')</when> -->
+<!-- 	            <when test="shOption == 4">AND memberTypeCd LIKE CONCAT('%',#{shValue},'%')</when> -->
+<!-- 	            <when test="shOption == 5">AND memberGenderCd = #{shValue}</when> -->
+<!--        		</choose> -->
+<!-- 	</sql> -->
+	
     <select id="selectList" resultMap="resultMapObj">
 
 			select
