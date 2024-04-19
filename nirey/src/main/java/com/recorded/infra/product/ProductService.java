@@ -22,6 +22,10 @@ public class ProductService {
 	
 	public List<ProductDto>prodSize(ProductDto dto) {return dao.prodSize(dto);}
 	
+	public List<ProductDto> colorOption(ProductDto dto) {return dao.colorOption(dto);}
+	
+	public List<ProductDto> sizeOption(ProductDto dto) {return dao.sizeOption(dto);}
+	
 	public List<ProductDto> prodReview(ProductDto dto) {return dao.prodReview(dto);}
 
 	public ProductDto selectOne(ProductDto dto) {

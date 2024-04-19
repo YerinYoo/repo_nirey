@@ -38,10 +38,31 @@ private String revName;
 private String memo;
 private Integer reviewRateAvg;
 private Integer ea;
+private String wishlistColor;
+private String wishlistSize;
+private String Product_productSeq;
 
 
 
 
+public String getProduct_productSeq() {
+	return Product_productSeq;
+}
+public void setProduct_productSeq(String product_productSeq) {
+	Product_productSeq = product_productSeq;
+}
+public String getWishlistColor() {
+	return wishlistColor;
+}
+public void setWishlistColor(String wishlistColor) {
+	this.wishlistColor = wishlistColor;
+}
+public String getWishlistSize() {
+	return wishlistSize;
+}
+public void setWishlistSize(String wishlistSize) {
+	this.wishlistSize = wishlistSize;
+}
 public Integer getEa() {
 	return ea;
 }

@@ -417,28 +417,60 @@ where a.productSeq = #{productSeq}
 </select>
 
 <select id="wishlist" resultMap="resultMapObj">
-select 
-	a.wishlistSeq,
-	a.Member_memberSeq,
+select
+    a.wishlistSeq,
+    a.Member_memberSeq,
     a.Product_productSeq,
+    a.size as wishlistSize,
+    a.color as wishlistColor,
     a.delNY,
     b.memberSeq,
     c.productSeq,
     c.ProductName,
     c.OrgPrice,
     c.DiscountedPrice
-    
 from wishlist a
-inner join
-	member b
-on
-	a.Member_memberSeq=b.memberSeq
-inner join
-	product c
-on
-	a.Product_productSeq=c.productSeq
-
+inner join member b on a.Member_memberSeq=b.memberSeq
+inner join product c on a.Product_productSeq=c.productSeq
 where 1=1
+
+</select>
+
+<!-- 위시리스트 페이지에서 호출할 색상 테이블 -->
+    <select id="colorOption" resultMap="resultMapObj">
+    SELECT 
+        a.Product_productSeq,
+        b.colorSeq,
+        b.color,
+        b.productSeq
+        
+    FROM 
+       wishlist a
+    INNER JOIN
+        color b ON a.product_productSeq = b.productSeq
+    WHERE 1=1
+     AND 
+        a.Product_productSeq = #{Product_productSeq}
+
+</select>
+
+<!-- 위시리스트 페이지에서 호출할 사이즈 테이블 -->
+<select id="sizeOption" resultMap="resultMapObj" >
+    SELECT 
+        a.Product_productSeq,
+       	b.sizeSeq,
+       	b.size,
+       	b.productSeq
+    FROM 
+        wishlist a
+   INNER JOIN
+   		size b
+   ON
+   		a.Product_productSeq=b.productSeq
+   
+   where 1=1
+   AND
+    		a.Product_productSeq=#{Product_productSeq} 
 </select>
 
 <!-- 위시리스트 삭제 처리 -->

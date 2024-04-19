@@ -67,114 +67,84 @@
 						<div class="tab-pane fade show active" id="dashboard" role="tabpanel">
                         
 
-            <div class="container ">
-                <div class="wishlist-title">
-                    <i class="bi bi-cart3"></i><h2 class="p-2 mt-3">My wishlist</h2>
-                </div>
-                <div class="wishlist-table-container col-12 justify-content-center">
-                	
-                			<div class="card" style="width: 40%;" th:each="wishlist : ${wishlist}" th:if="${wishlist.delNY == 0}">
-								  <div class="card-body">
-								    	<div class="row" >
-								    		<div class="col-3">
-									    		 <a th:href="@{/recorded/Shop/Product(productSeq=${wishlist.productSeq}, ProductName=${wishlist.ProductName})}"  class="product-image">
-	                                            <img src="/usr/images/products/product-5.jpg" alt="product" style="height : 100px; width : auto;"></a>
-	                                        </div>
-								    		<div class="col-9">
-								    		 	<a th:href="@{/recorded/Shop/Product(productSeq=${wishlist.productSeq}, ProductName=${wishlist.ProductName})}" th:text="${wishlist.ProductName}"  style="text-decoration: none; color: inherit;"></a>
-												<div class="price-box mt-2"> 
-										          	<span class="old-price" th:text="${wishlist.OrgPrice}"></span>
-										          	<span class="product-price" th:text="${wishlist.DiscountedPrice}"></span>
-							          			</div>
-												<div class="text-center mr-1 mt-3" style="float : right; ">
-												    <a th:href="@{/MyPage/CheckOut}" class="btn btn-primary btn-lg ">purchase</a>
-												</div>
-												<div class="mt-3 mr-2" style="float : right;">
-													<form method="post" action="/ueleteW"> 
-														<input type="hidden" name="seq" th:value="${wishlist.productSeq}">
-														<input type="hidden" name="delNY" th:value="${wishlist.delNY}">
-																				
-														<button type="submit" class="btn btn"th:href="@{/MyPage/Wishlist}" th:text="Delete" ></button>
-																			
-													</form>
-												</div>
-								    		</div>
-								  </div>
-								</div>
-<!--                     <table class="table table-wishlist mb-5" style="margin-left : auto; margin-right : auto;"> -->
-<!--                         <thead> -->
-<!--                             <tr class="table-th" style="text-align:center;"> -->
-<!--                                 <th class="thumbnail-col"></th> -->
-<!--                                 <th class="product-col" >PRODUCT</th> -->
-<!--                                 <th class="product-count">PRICE</th> -->
-<!-- <!--                                 <th class="color-col">COLOR</th> -->
-<!-- <!--                                 <th class="size-col">SIZE</th> --> 
-<!--                                 <th class="action-col"></th> -->
-<!--                             </tr> -->
-<!--                         </thead> -->
-<!--                         <tbody> -->
+            <div class="container" style="height : 650px;">
+				<div class="wishlist-table-container col-12 align-center mt-5" th:if="${wishlist == null or #lists.isEmpty(wishlist)}">
+				    <h4>Your Cart</h4>
+				    <p>Your cart is currently empty.</p>
+				    <p>Continue browsing <a th:href="@{/recorded/Shop}">here</a>.</p>
+				</div>
+                <div class="wishlist-table-container col-12 align-center" th:each="wishlist : ${wishlist}" th:if="${wishlist.delNY == 0}">
+					<div class="wishlist-title">
+					  <h2 class="p-2 mt-3">My wishlist</h2>
+					 </div>
+                    <table class="table table-wishlist mb-5" style="margin-left : auto; margin-right : auto;">
+                        <thead>
+                            <tr class="table-th" style="text-align:center;">
+                                <th class="thumbnail-col"></th>
+                                <th class="product-col" >PRODUCT</th>
+                                <th class="product-count">COUNT</th>
+                                <th class="color-col">COLOR</th>
+                                <th class="size-col">SIZE</th>
+                                <th class="action-col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             
-<!--                             <tr class="product-row" th:each="wishlist : ${wishlist}" th:if="${wishlist.delNY == 0}"> -->
-<!--                                 <td style="text-align:center; vertical-align : middle;"> -->
-<!--                                     <figure class="product-image-container"> -->
-<!--                                         <a href="product.html" class="product-image"> -->
-<!--                                             <img src="/usr/images/products/product-5.jpg" alt="product" style="height : 150px; width : auto;"> -->
-<!--                                         </a> -->
-<!--                                     </figure> -->
-<!--                                 </td> -->
-<!--                                 <td style=" vertical-align : middle; max-width : 0px;"> -->
-<!--                                 	<div class="product-info"> -->
-<!-- 	                                	<span> -->
-<!-- 										    <a th:href="@{/recorded/Shop/Product(productSeq=${wishlist.productSeq}, ProductName=${wishlist.ProductName})}" -->
-<!-- 										       th:text="${wishlist.ProductName}"></a> -->
-<!-- 										</span> -->
-
-                          		
-<!--                                 	</div> -->
-<!--                                 </td> -->
-<!--                                 <td style="text-align : center; vertical-align : middle;"> -->
-<!--                                   <div class="price-box mt-2"> -->
-<!-- 						          	<span class="old-price" th:text="${wishlist.OrgPrice}"></span> -->
-<!-- 						          	<span class="product-price" th:text="${wishlist.DiscountedPrice}"></span> -->
-<!-- 						          </div> -->
-<!--                                 </td> -->
-<!--                                 <td class="action" style="text-align:center; vertical-align : middle; padding: 0; margin: 0;"> -->
-<!--                                 	<div class="row"> -->
-<!--                                 		<div class="col-12 mt-3"> -->
-<!-- 	                                		<a th:href="@{/recorded/Shop/Product(productSeq=${wishlist.productSeq}, ProudctName=${wishlist.ProductName})}" class="btn btn-dark quickview mt-1 mt-md-0 col-3" -->
-<!-- 	                                        title="Quick View">View More -->
-<!-- 	                                        </a> -->
-	                                        
-<!--                                 		</div> -->
+                            <tr class="product-row">
+                                <td style="text-align:center; vertical-align : middle;">
+                                    <figure class="product-image-container">
+                                        <a href="product.html" class="product-image">
+                                            <img src="/usr/images/products/product-5.jpg" alt="product" style="height : 200px; width : auto;">
+                                        </a>
+                                    </figure>
+                                </td>
+                                <td style=" vertical-align : middle; max-width : 0px;">
+                                	<div class="product-info">
+	                                	<ul>
+	                                		<li><span th:text="${wishlist.ProductName}"></span></li>
+	                                		
+	                                		<li><div class="price mt-2"><span th:text="${wishlist.DiscountedPrice}"></span></div></li>
+	                                		
+	                                	</ul>
+                                	</div>
+                                </td>
+                                <td style="text-align : center; vertical-align : middle;">
+                                <div class="product-single-qty">
+												<input class="horizontal-quantity form-control" type="text">
+											</div><!-- End .product-single-qty -->
+                                </td>
+                                <td style="text-align:center; vertical-align : middle;">
+                                    <span class="stock-status" th:text="${wishlist.wishlistColor}"></span>
+                                </td>
+                                <td style="text-align:center; vertical-align : middle;">
+                                    <span class="stock-status" th:text="${wishlist.wishlistSize}"></span>
+                                </td>
+                                <td class="action" style="text-align:center; vertical-align : middle; padding: 0; margin: 0;">
+                                	<div class="row">
+                                		<div class="col-12 mt-1">
+	                                		<a th:href="@{/recorded/Shop/Product(productSeq=${wishlist.productSeq}, ProudctName=${wishlist.ProductName})}" class="btn btn-dark quickview mt-1 mt-md-0 col-3"
+	                                        title="Quick View">View More
+	                                        </a>
+                                		</div>
+                                		<div class="col-12 mt-1">
+											<a th:href="@{/MyPage/CheckOut(productSeq=${wishlist.productSeq}, ProudctName=${wishlist.ProductName})}" class="btn btn-dark wishlist mt-1 mt-md-0 col-3"
+	                                        title="Purchase">Purchase</a>
+                                		</div>
 <!--                                 		<div class="col-12 mt-1"> -->
-<!-- 											<form method="post" action="ueleteW">  -->
-<!-- 												<input type="hidden" name="seq" th:value="${wishlist.productSeq}"> -->
-<!-- 												<input type="hidden" name="delNY" th:value="${wishlist.delNY}"> -->
-																		
-<!-- 												<button type="submit" class="btn btn"th:href="@{/MyPage/Wishlist}" th:text="Delete" style="width : 25%;"></button> -->
-																	
-<!-- 											</form> -->
+<!--                                 			<form method="post" action="/wishlistUelete">  -->
+<!-- 												<input type="hidden" name="seq" th:value="${wishlist.wishlistSeq}" style="display : none"> -->
+<!-- 												<input type="hidden" name="delNY" th:value="${wishlist.delNY}" style="display : none"> -->
+<!-- 												<button type="submit" class="btn btn-wishlist-delete product-type-simple btn-shop col-3" > -->
+<!-- 		                                        	DELETE -->
+<!-- 		                                    	</button> -->
+<!-- 										</form> -->
 <!--                                 		</div> -->
-<!-- <!--                                 		<div class="col-12 mt-1"> --> 
-<!-- <!--                                 			<form method="post" action="/wishlistUelete">  --> 
-<!-- <!-- 												<input type="hidden" name="seq" th:value="${wishlist.wishlistSeq}" style="display : none"> --> 
-<!-- <!-- 												<input type="hidden" name="delNY" th:value="${wishlist.delNY}" style="display : none"> --> 
-<!-- <!-- 												<button type="submit" class="btn btn-wishlist-delete product-type-simple btn-shop col-3" > --> 
-<!-- <!-- 		                                        	DELETE --> 
-<!-- <!-- 		                                    	</button> --> 
-<!-- <!-- 										</form> --> 
-<!-- <!--                                 		</div> --> 
-<!--                                 	</div> -->
-<!-- 								</td> -->
-<!--                             </tr> -->
-<!--                         </tbody> -->
-<!--                     </table> -->
-                   
-                    
+                                	</div>
+								</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div><!-- End .cart-table-container -->
-<!-- 	                 <div class="text-center mb-3 mr-3" style="float : right; "> -->
-<!-- 					    <a th:href="@{/MyPage/CheckOut}" class="btn btn-primary btn-lg mr-5">purchase</a> -->
-<!-- 					</div> -->
             </div><!-- End .container -->
         </main><!-- End .main -->
 
@@ -196,16 +166,10 @@
         });
     };
     
- // 문서 로드 후에 실행
-    document.addEventListener('DOMContentLoaded', function() {
-        formatPriceElements();
-    });
-
-    // 가격 관련 스크립트
+	  //가격 관련 스크립트
     function formatPriceElements() {
         // HTML 요소를 가져와서 가격 포맷팅 적용
-        var oldPriceElements = document.querySelectorAll('.old-price');
-        var productPriceElements = document.querySelectorAll('.product-price');
+        var oldPriceElements = document.querySelectorAll('.price');
         
         oldPriceElements.forEach(function(element) {
             var price = parseFloat(element.textContent);
@@ -222,10 +186,14 @@
     function formatPrice(price) {
         // 세 자리마다 컴마 추가
         var formattedPrice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        // '₩'를 추가하여 반환
+        // '원'을 추가하여 반환
         return "₩" + formattedPrice ;
     }
 
+    // 문서 로드 후에 실행
+    document.addEventListener('DOMContentLoaded', function() {
+        formatPriceElements();
+    });
 </script>
 
 </body>

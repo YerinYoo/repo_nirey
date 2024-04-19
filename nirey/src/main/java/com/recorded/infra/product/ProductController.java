@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.recorded.common.constants.Constants;
 import com.recorded.common.util.UtilDateTime;
+import com.recorded.infra.member.MemberDto;
 import com.recorded.infra.member.MemberService;
 
 import jakarta.servlet.http.HttpSession;
@@ -251,18 +253,27 @@ public class ProductController {
 	
 	//위시리스트
 	   @RequestMapping("/MyPage/Wishlist")
-	    public String getWishlist(ProductDto dto, Model model) throws Exception{
+	    public String getWishlist(HttpSession session,ProductDto dto, Model model) throws Exception{
+		   
+		   // 세션에서 로그인한 회원 정보 가져오기
+	        MemberDto authenticatedMember = (MemberDto) session.getAttribute("authenticatedMember");
+
+	        // 세션에 로그인한 정보가 없으면 로그인 페이지로 리다이렉트
+	        if (authenticatedMember == null) {
+	            return "redirect:/recorded/Login";
+	        }
 	        // 위시리스트 정보 가져오기
 	        List<ProductDto> wishlist = service.wishlist();
 
 	        // 모델에 위시리스트 추가
 	        model.addAttribute("wishlist", wishlist);
+	        model.addAttribute("colorOption", service.colorOption(dto));
+			model.addAttribute("sizeOption", service.sizeOption(dto));
 
 	        // 위시리스트 페이지로 이동하는 뷰 이름 반환
 	        return "usr/infra/v1/wishlist";
 	    }
-
-
+	  
 }
 
 // 사용자 페이지 관련 e
