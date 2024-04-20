@@ -126,7 +126,7 @@
 				<div class="row row-cols-2 row-cols-sm-6 g-2 px-2">
 					<div class="col">
 						<select id="shDelNy" name="shDelNy" class="form-select form-select-sm">
-							<option value="" th:selected="${vo.shDelNy == null}">삭제여부</option>
+							<option value="" th:selected="${vo.shDelNy == null}">delNY</option>
 							<option value="1" th:selected="${vo.shDelNy == 1}">Y</option>
 							<option value="0" th:selected="${vo.shDelNy == 0}">N</option>            
 						</select>
@@ -134,9 +134,9 @@
 			
 					<div class="col">
 						<select id="shOptionDate" name="shOptionDate" class="form-select form-select-sm">
-							<option value="" th:selected="${vo.shOptionDate == null}">날짜</option>
-							<option value="1" th:selected="${vo.shOptionDate == 1}">등록일</option>
-							<option value="2" th:selected="${vo.shOptionDate == 2}">수정일</option>
+							<option value="" th:selected="${vo.shOptionDate == null}">date</option>
+							<option value="1" th:selected="${vo.shOptionDate == 1}">regDate</option>
+							<option value="2" th:selected="${vo.shOptionDate == 2}">modDate</option>
 						</select>
 					</div>  
 					<!-- 
@@ -175,9 +175,9 @@
 				<div class="row row-cols-2 row-cols-sm-6 g-2 mt-1 px-2">
 					<div class="col">
 						<select id="shOption" name="shOption" class="form-select form-select-sm">
-							<option value="" th:selected="${vo.shOption == null}">검색구분</option>
-							<option value="1" th:selected="${vo.shOption == 1}">코드그룹 코드</option>
-							<option value="2" th:selected="${vo.shOption == 2}">코드그룹 이름</option>
+							<option value="" th:selected="${vo.shOption == null}">search Option</option>
+							<option value="1" th:selected="${vo.shOption == 1}">codeGroupSeq</option>
+							<option value="2" th:selected="${vo.shOption == 2}">codeGroupName</option>
 						</select>
 					</div>                    
 					<div class="col">
