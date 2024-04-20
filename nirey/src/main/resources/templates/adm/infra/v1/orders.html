@@ -18,7 +18,7 @@
 		<link rel="shortcut icon" href="/adm/images/favicon.svg">
 
 		<!-- Title -->
-		<title>Member List</title>
+		<title>Admin</title>
 
 
 		<!-- *************
@@ -100,11 +100,10 @@
 					<div th:replace="~{/adm/infra/v1/include/Header :: Header}"></div>
 
 				<!-- Content wrapper scroll start -->
-				<!-- Content wrapper scroll start -->
 				<div class="content-wrapper-scroll">
 
 					<!-- Content wrapper start -->
-					<div class="content-wrapper">
+					<div class="content-wrapper" style="height : 800px;">
 
 						<!-- Row start -->
 						<div class="row">
@@ -112,13 +111,13 @@
 
 								<!-- Card start -->
 								<div class="card">
-									<div class="card-body">
+									<div class="card-body" style="height : 700px;">
 									
 						<div class="row">
 							<div class="col-sm-12 col-12">
-								<div class="card" style="background-color : snow">
+								<div class="card" style="height : 660px;">
 									<div class="card-header">
-										<div class="card-title">코드 그룹 관리</div>
+										<div class="card-title mb-3">CodeGroupList</div>
 									</div>
 									
 			<form name="formList" id="formList" method="post" autocomplete="off">			
@@ -196,17 +195,17 @@
 											
 											
 										<div class="row mt-1 mb-3">
-										<div class="col">
+										<div class="col" style="padding-left : 50px;">
 											<div>Total Count: <span th:text="${listCount}"></span></div>
 										</div>
 									</div>
 									 <div class="row mb-3">
-									 	<div class="col">
+									 	<div class="col" style="padding-left : 50px;">
 									 		<a th:href="@{/ordersAdd}" >
 									 		<button type="button" class="btn btn-outline-primary">Add</button>
 									 		</a>
 									 	</div>
-										   <div class="col-1">
+										   <div class="col-1" style="padding-right : 50px;">
 								        <select id="pageSizeSelect" class="select-single js-states form-control" title="Select Product Category" data-live-search="true">
 								            <option value="5">5</option>
 								            <option value="10">10</option>
@@ -224,7 +223,7 @@
 				<div class="content-wrapper-scroll">
 
 					<!-- Content wrapper start -->
-					<div class="content-wrapper" >
+					<div class="content-wrapper" style="height : 500px;">
 																
 						<!-- Row start -->
 						<div class="row">

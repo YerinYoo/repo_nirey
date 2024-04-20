@@ -225,7 +225,6 @@
 									    		<td>quitNY</td>
 									    		<td>dormantNY</td>
 									    		<td>ID</td>
-									    		<td>pwd</td>
 									    		<td>email</td>
 									    		<td>gender</td>
 									    		<td>birthday</td>
@@ -235,9 +234,6 @@
 									    		
 									    	</tr>
 									    	
-									    	<tr th:if="${!#lists.isEmpty(list)}" >
-									    		<td colspan="14"></td>
-									    	</tr>
 										
 									    	<tr th:if="${!#lists.isEmpty(list)}" th:each="list:${list}"> 
 									    	    <td>
@@ -258,7 +254,6 @@
 									     		<td th:unless="${list.dormantNY eq 0}">Y</td>
 									    		
 									    		<td th:text="${list.ID} " ></td>
-									    		<td th:text="${list.pwd}"></td>
 									    		<td th:text="${list.email}" ></td>
 									    		
 									    		<td th:if="${list.genderCD != null}" th:text="${@codeService.selectOneCachedCode(list.genderCD)}" class="genderCD align-middle"></td>
@@ -285,46 +280,27 @@
 									</div>
 								</div>
 											
-											<nav aria-label="Page Navigation">
-											<div class="row">
-                                                <ul class="pagination justify-content-center mt-5">
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#" aria-label="Previous">
-                                                            <span aria-hidden="true">
-                                                                <i class="bi bi-arrow-left"></i>
-                                                            </span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="page-item active">
-                                                        <a class="page-link" href="#">1</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#">2</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#">3</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#">4</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#">5</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#">6</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#">7</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#" aria-label="Next">
-                                                            <span aria-hidden="true">
-                                                                <i class="bi bi-arrow-right"></i>
-                                                            </span>
-                                                        </a>
-                                                    </li>
-												</ul>
-											</div>
+<!--								<nav aria-label="Page Navigation" class="mt-3">-->
+<!--									<ul class="pagination justify-content-center">-->
+<!--										<li th:if="${vo.startPage > vo.pageNumToShow}" class="page-item">-->
+<!--											<a class="page-link" href="#" th:onclick="'javascript:goList(' + (${vo.startPage - 1}) + ')'" aria-label="Previous">-->
+<!--												<span aria-hidden="true"><i class="bi bi-arrow-left"></i></span>-->
+<!--											</a>-->
+<!--										</li>-->
+										
+<!--										<li th:each="num : ${#numbers.sequence(vo.startPage, vo.endPage)}"-->
+<!--											th:classappend="${num eq vo.thisPage} ? 'active' : ''" class="page-item">-->
+<!--											<a class="page-link" th:onclick="'javascript:goList(' + ${num} + ')'" th:text="${num}" href="#">nums</a>-->
+<!--										</li>-->
+										
+<!--										<li th:if="${vo.endPage != vo.totalPages}" class="page-item">-->
+<!--											<a class="page-link" th:onclick="'javascript:goList(' + (${vo.endPage + 1}) + ')'" aria-label="Next">-->
+<!--												<span aria-hidden="true"><i class="bi bi-arrow-right"></i></span>-->
+<!--											</a>-->
+<!--										</li>-->
+<!--									</ul>-->
+<!--								</nav>-->
+
 
 												<div class="row">
 
@@ -347,7 +323,6 @@
                                                             </div>
                                                     </div>
 												</div>
-											</nav>
 											
 
 								<!-- Card end -->

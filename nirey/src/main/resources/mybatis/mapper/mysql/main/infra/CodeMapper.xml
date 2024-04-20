@@ -25,11 +25,10 @@
         </choose>
         <!-- Options -->
         <choose> 
-            <when test="shOption == 1">AND b.codeGroupSeq = #{shValue}</when>
-            <when test="shOption == 2">AND b.codeGroupName LIKE CONCAT('%',#{shValue},'%')</when>
-            <when test="shOption == 3">AND a.codeSeq = #{shValue}</when>
-            <when test="shOption == 4">AND a.codeName LIKE CONCAT('%',#{shValue},'%')</when>
-            <when test="shOption == 5">AND a.codeMemo LIKE CONCAT('%',#{shValue},'%')</when>
+            <when test="shOption == 1">AND b.seq = #{shValue}</when>
+            <when test="shOption == 2">AND b.name LIKE CONCAT('%',#{shValue},'%')</when>
+            <when test="shOption == 3">AND a.seq = #{shValue}</when>
+            <when test="shOption == 4">AND a.name LIKE CONCAT('%',#{shValue},'%')</when>
         </choose>
         <!-- Pagination -->
         LIMIT #{rowNumToShow} OFFSET #{startRnumForMysql}
