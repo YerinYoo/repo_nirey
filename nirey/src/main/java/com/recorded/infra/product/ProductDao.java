@@ -12,6 +12,8 @@ public interface ProductDao {
 	
 	public List<ProductDto> prodList(); 
 
+    public List<ProductDto> getProductListByCategoryAndStock(ProductDto dto);
+    
 	public List<ProductDto> prodColor(ProductDto dto);
 	
 	public List<ProductDto> prodSize(ProductDto dto);

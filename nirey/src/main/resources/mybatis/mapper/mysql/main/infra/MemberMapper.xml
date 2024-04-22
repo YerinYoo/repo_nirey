@@ -114,9 +114,6 @@
     )
 </insert>
 
-
-	  
-	   
     <update id="update">
    	update member a
    	

@@ -184,10 +184,10 @@ public class ProductController {
 	    // 페이징 처리된 상품 리스트 조회
 	    List<ProductDto> productListFiltered = service.selectPagedProductList(vo);
 	    
-	    model.addAttribute("prodList", productListFiltered);
+	    model.addAttribute("prodListFilt", productListFiltered);
 
 	    // 전체 상품 리스트를 가져와서 모델에 추가
-	    model.addAttribute("allProducts", service.prodList());
+	    model.addAttribute("prodList", service.prodList());
 
 	    // recordedShop 페이지로 이동
 	    return "usr/infra/v1/shop";

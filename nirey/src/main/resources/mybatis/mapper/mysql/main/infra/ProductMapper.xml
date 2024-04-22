@@ -323,36 +323,6 @@ where a.productSeq = #{productSeq}
 	
 	</sql>
 
-	<!-- 페이지네이션 관련 base mapper 쿼리 -->
-<!-- <sql id="selectListUpperForMysql">
-		select aa.* from (
-	</sql> -->
-	
-	<!-- 	
-	<sql id="selectListLowerForMysql">	
-		) aa
-		limit #{rowNumToShow} offset #{startRnumForMysql}
-	</sql>
-	 -->
-	
-	
-<!-- 제품 리스트 페이지 관련 쿼리 - color, size는 상세 화면에서만 조인할 거임-->
-<!-- <select id="prodList" resultMap="resultMapObj">
-    select
-        a.productSeq
-        , a.ProductName
-        , a.OrgPrice
-        , a.DiscountedPrice
-        , a.category1CD
-        , a.category2CD
-        , a.prodStockCD
-    from 
-        product a
-    where 1=1
-    검색에서 쓰일 쿼리
-  	<if test="shValue != null and !shValue.equals('')">AND a.ProductName LIKE CONCAT('%',#{shValue},'%')</if>
-    and a.productSeq is not null 
-</select> -->
 <select id="prodList" resultMap="resultMapObj">
     SELECT
         a.productSeq,
@@ -362,10 +332,12 @@ where a.productSeq = #{productSeq}
         a.category1CD,
         a.category2CD,
         a.prodStockCD,
-        (SELECT ROUND(AVG(reviewRate) * 2) / 2 FROM review WHERE Product_seq = a.productSeq) AS reviewRateAvg
+        (select round(avg(reviewRate)) from review where Product_seq = a.productSeq) as reviewRateAvg,
+        (select count(*) from review where Product_seq = a.productSeq) as totalReviewCount
     FROM 
         product a
     WHERE 1=1
+    
     <!-- 검색에서 쓰일 쿼리 -->
     <if test="shValue != null and !shValue.equals('')">AND a.ProductName LIKE CONCAT('%',#{shValue},'%')</if>
     <if test="prodStockCD != null">AND a.prodStockCD = #{prodStockCD}</if>
@@ -377,6 +349,7 @@ where a.productSeq = #{productSeq}
     </if>
     AND a.productSeq IS NOT NULL 
 </select>
+
 
 <!-- 제품 상세 관련 매퍼 -->
 <select id="prodDetailList" resultMap="resultMapObj">
