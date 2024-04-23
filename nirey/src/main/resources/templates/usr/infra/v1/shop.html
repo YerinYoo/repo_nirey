@@ -182,7 +182,7 @@
 						                <h3 class="product-title">
 						                    <a  th:text="${product.ProductName}"></a>
 						                </h3>
-										<div class="ratings-container" th:unless="${product.reviewRateAvg == null || product.totalReviewCount == 0}">
+										<div class="ratings-container">
 										    <div class="product-ratings">
 										        <span class="ratings" th:if="${product.reviewRateAvg == 5}" style="width:100%"></span>
 										        <span class="ratings" th:if="${product.reviewRateAvg == 4}" style="width:80%"></span>
@@ -192,7 +192,6 @@
 										        <span class="ratings" th:if="${product.reviewRateAvg == null}" style="width:0%"></span>
 										        <span class="tooltiptext tooltip-top"></span>
 										    </div>
-										    <a style="padding: 0; margin: 0;" href="#" class="rating-link" th:text="'(' + ${product.totalReviewCount} + ' Reviews)'"></a>
 										</div>
 						                <div class="price-box">
 						                    <span class="old-price" th:text="${product.OrgPrice}"></span>
@@ -229,7 +228,7 @@
 						                <h3 class="product-title">
 						                    <a href="demo3-product.html" th:text="${product.ProductName}"></a>
 						                </h3>
-										<div class="ratings-container" th:unless="${product.reviewRateAvg == null || product.totalReviewCount == 0}">
+										<div class="ratings-container">
 										    <div class="product-ratings">
 										        <span class="ratings" th:if="${product.reviewRateAvg == 5}" style="width:100%"></span>
 										        <span class="ratings" th:if="${product.reviewRateAvg == 4}" style="width:80%"></span>
@@ -239,7 +238,7 @@
 										        <span class="ratings" th:if="${product.reviewRateAvg == null}" style="width:0%"></span>
 										        <span class="tooltiptext tooltip-top"></span>
 										    </div>
-										    <a style="padding: 0; margin: 0;" href="#" class="rating-link" th:text="'(' + ${product.totalReviewCount} + ' Reviews)'"></a>
+										    <a style="padding: 0; margin: 0;" href="#" class="rating-link" th:text="'(' + ${product.totalReviewCount} + ')'"></a>
 										</div>
 
 						                <div class="price-box">

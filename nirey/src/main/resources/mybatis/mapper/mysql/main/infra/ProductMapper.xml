@@ -16,7 +16,9 @@
         a.category1CD,
         a.category2CD,
         a.regDateTime,
-        a.modDateTime
+        a.modDateTime,
+         (select count(*) from review where Product_seq = a.productSeq) as totalReviewCount,
+		 (SELECT ROUND(AVG(reviewRate) * 2) / 2 FROM review WHERE Product_seq = a.productSeq) AS reviewRateAvg
     FROM 
         product a
     <where>
@@ -181,6 +183,29 @@ where a.productSeq = #{productSeq}
     )
 </insert>
 
+<insert id="insertWishlist">
+	insert into wishlist (
+		Member_memberSeq,
+		Product_productSeq,
+		delNY,
+		regDateTime,
+		modDateTime,
+		ea,
+		size,
+		color
+	) values (
+		#{Member_memberSeq},
+		#{Product_productSeq},
+		#{delNY},
+		now(),
+		now(),
+		#{ea},
+		#{size},
+		#{color}
+	);
+	
+</insert>
+
 
 	  
 	   
@@ -274,27 +299,27 @@ where a.productSeq = #{productSeq}
 	        </when>
 	        
 	    </choose> -->
-	    	<select id="selectPagedProductList" resultMap="resultMapObj">
-			    select
-			        a.productSeq
-			        , a.delNY
-			        , a.ProductName
-			        , a.OrgPrice
-			        , a.DiscountedPrice
-			        , a.prodStockCD
-			        , a.category1CD
-			        , a.category2CD
-			        , a.regDateTime
-			        , a.modDateTime
-			    from 
-			        product a
-			    <where>
-			        <if test="shValue != null and !shValue.isEmpty()">
-			            and a.ProductName LIKE CONCAT('%',#{shValue},'%')
-			        </if>
-			    </where>
-				   limit #{rowNumToShow} offset #{startRnumForMysql}
-				</select>
+		<select id="selectPagedProductList" resultMap="resultMapObj">
+		    select
+		        a.productSeq
+		        , a.delNY
+		        , a.ProductName
+		        , a.OrgPrice
+		        , a.DiscountedPrice
+		        , a.prodStockCD
+		        , a.category1CD
+		        , a.category2CD
+		        , a.regDateTime
+		        , a.modDateTime
+		    from 
+		        product a
+		    <where>
+		        <if test="shValue != null and !shValue.isEmpty()">
+		            and a.ProductName LIKE CONCAT('%',#{shValue},'%')
+		        </if>
+		    </where>
+			limit #{rowNumToShow} offset #{startRnumForMysql}
+		</select>
 
 	
 	<!-- select 공통 구문 SQL -->
@@ -447,13 +472,13 @@ where 1=1
 </select>
 
 <!-- 위시리스트 삭제 처리 -->
-  	<update id="ueleteW">
-  			update wishlist
-  			set
-  			delNY=1
-  			where 1=1
-  			and wishlistSeq = #{wishlistSeq}
-  	</update>
+<update id="ueleteW">
+	update wishlist
+	set
+	delNY=1
+	where 1=1
+	and wishlistSeq = #{wishlistSeq}
+</update>
 
 <!-- ProductMapper.xml -->
 </mapper>

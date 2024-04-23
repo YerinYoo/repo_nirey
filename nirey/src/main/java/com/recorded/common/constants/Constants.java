@@ -17,7 +17,11 @@ public final class Constants {
 	
 	public static final Integer SESSION_MINUTE_XDM = 60;
 	
-	public static final String URL_LOGINFORM = "/member/loginForm";
+	//유저 로그인 페이지 
+	public static final String URL_LOGINUSRFORM = "/recorded/Login";
+	
+	//어드민 로그인 페이지 
+	public static final String URL_LOGINADMFORM = "/loginAdm";
 	
 	public static final String DATETIME_FORMAT_BASIC = "yyyy-MM-dd HH:mm:ss";
 
@@ -29,13 +33,13 @@ public final class Constants {
 	
 	public static final long PASSWOPRD_CHANGE_INTERVAL = 90;
 	
-	public static final String UPLOADED_PATH_PREFIX_LOCAL = "D:/factory/ws_sts4_4180/repo_camila_uploaded";
+	public static final String UPLOADED_PATH_PREFIX_LOCAL = "D:/factory/sts4_4210/repo_nirey_uploaded";
 	public static final String UPLOADED_PATH_PREFIX_FOR_VIEW_LOCAL = "/uploaded";
 	
 	public static final String UPLOADED_RESSOURCE_HANDLER = "/uploaded/**";
-	public static final String UPLOADED_RESSOURCE_LOCATIONS = "file:///D:/factory/ws_sts4_4180/repo_camila_uploaded/";
+	public static final String UPLOADED_RESSOURCE_LOCATIONS = "file:///D:/factory/sts4_4210/repo_nirey_uploaded/";
 	
-	public static final String UPLOADED_PATH_PREFIX_S3 = "D:/factory/ws_sts4_4180/repo_camila_uploaded";
+	public static final String UPLOADED_PATH_PREFIX_S3 = "D:/factory/sts4_4210/repo_nirey_uploaded";
 	public static final String UPLOADED_PATH_PREFIX_FOR_VIEW_S3 = "/uploaded";
 	
 	public static final Integer COOKIE_MAXAGE_XDM = 60 * 60 * 24 * 30;	//초 * 분 * 시간 * 일 : 30day

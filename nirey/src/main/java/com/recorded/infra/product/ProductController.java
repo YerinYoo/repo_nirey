@@ -50,6 +50,21 @@ public class ProductController {
 		System.out.println("나 컨트롤러 불려왔다? 리뷰 데이터 넣는다?");
 		return "redirect:/recorded/Shop/Product";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/insertWishlist")
+	public String insertWishlist(ProductDto dto) throws Exception {
+		
+		ProductDto productDto = new ProductDto();
+		productDto.setDelNY(0);
+		
+		System.out.println(dto.toString());
+		
+		service.insertWishlist(productDto);
+		
+		System.out.println("나 컨트롤러 불려옴.위시리스트에 추가할게?");
+		return "redirect:/recorded/Shop/Product";
+	}
 
 	@RequestMapping(value = "/ProductUpdate")
 	public String ProductUpdate(ProductDto dto) throws Exception {
@@ -196,6 +211,7 @@ public class ProductController {
 	  public String ProductView(ProductDto dto, Model model) throws Exception {
 		  
 		  model.addAttribute("product", service.selectProd(dto));
+		  model.addAttribute("wishlist", service.wishlist());
 		  model.addAttribute("prodColor", service.prodColor(dto));
 		  model.addAttribute("prodSize", service.prodSize(dto));
 		  model.addAttribute("prodReview", service.prodReview(dto));

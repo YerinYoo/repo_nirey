@@ -140,14 +140,7 @@
                                 <span th:text="${product.ProductDescription}"></span>
                             </div> -->
                             <!-- End .product-desc -->
-
-                            <ul class="single-info-list">
-                                <!---->
-
-
-
-                            </ul>
-
+							<form action="insertWishlist" id="formInsertWish" name="formInsertWish" method="post">
 							<hr class="divider mb-3 mt-0">
                             <div class="selectedOptionsList">
                                 <div class="product-single-filter">
@@ -173,12 +166,12 @@
                                     <h5>Selected Options</h5>
                                     <a class="font1 text-uppercase clear-btn" href="#">Clear</a>
                                 </div>
-                                <!---->
                             </div>
 
 
                             <div class="product" data-product-id="${product.productSeq}">
 							    <div class="product-action">
+									<!-- 제품 수량 선택 -->
 							        <div class="product-single-qty">
 							            <input class="horizontal-quantity form-control" type="text">
 							        </div>
@@ -197,6 +190,7 @@
 										</div>
 							    </div>
 							</div>
+							</form>
 							<hr class="divider mb-3 mt-2">
 
                             <!-- End .product-action -->
@@ -257,7 +251,7 @@
                         <div class="tab-pane fade" id="product-reviews-content" role="tabpanel" aria-labelledby="product-tab-reviews"  >
 						    <div class="product-reviews-content">
 						        <h3 class="reviews-title" th:text=" ${product.totalReviewCount == 0 ? 'There is no REVIEW of this product yet' : product.totalReviewCount + ' review for ' + product.ProductName}"></h3>
-						            <span th:unless="${session.authenticatedMember != null and session.sessSeqUsr != null}" style="padding-left : 12%; padding-bottom : 10%; ">( <a th:href="@{/recorded/Login}">Login</a> to Add Review)</span>
+						            <span th:unless="${session.authenticatedMember != null and session.sessSeqUsr != null}" style="padding-bottom : 10%; ">( <a th:href="@{/recorded/Login}">Login</a> to Add Review)</span>
 						        <div class="comment-list" th:if="${product.totalReviewCount > 0}">
 						            <div class="comments mt-1" th:each="review : ${prodReview}">
 						                <figure class="img-thumbnail">

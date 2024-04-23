@@ -82,9 +82,9 @@
                             <tr class="table-th" style="text-align:center;">
 								
                                 <th class="thumbnail-col" style="width : 20%"></th>
-                                <th class="product-col" style="width : 30%">PRODUCT</th>
-                                <th class="product-count" style="width : 10%">COUNT</th>
-								<th class="product-price" style="width : 10%">Price</th>
+                                <th class="product-col" style="width : 30%; text-align :left; padding-left : 50px;">PRODUCT</th>
+                                <th class="product-col" style="width : 10%">COUNT</th>
+								<th class="product-col" style="width : 10%">PRICE</th>
                                 <th class="action-col" style="width : 20%"></th>
                             </tr>
                         </thead>
@@ -102,12 +102,12 @@
                                 <td style=" vertical-align : middle; max-width : 0px; width : 30%">
                                 	<div class="product-info">
 	                                	<ul>
-	                                		<li style="padding-bottom: 10px;"><span th:text="${wishlist.ProductName}" style="font-weight: bold;"></span></li>
+	                                		<li style="padding-bottom: 20px;"><span th:text="${wishlist.ProductName}" style="font-weight: bold;"></span></li>
 											<li style="border-top: 1px solid #ccc;"></li>
-											<li style="padding-top : 10px;">Option</li>
+											<li style="padding-top : 20px; padding-bottom : 5px;"><span style="font-weight: bold;">Selected Option</span></li>
 											<li>Color : <span th:text="${wishlist.wishlistColor}"></span></li>
 											<li style="padding-bottom: 10px;">Size : <span th:text="${wishlist.wishlistSize}"></span></li>
-	                                		
+											
 	                                	</ul>
                                 	</div>
                                 </td>
@@ -117,19 +117,29 @@
 											</div><!-- End .product-single-qty -->
                                 </td>
 								
-								<td style="text-align : center; vertical-align : middle; width : 10%" th:text="${wishlist.DiscountedPrice}"></td>
+<!--							<td class="price" style="text-align : center; vertical-align : middle; width : 10%" th:text="${wishlist.DiscountedPrice}"></td>-->
+								<td style="text-align : center; vertical-align : middle; width : 10%">
+									<div class="price-box">
+		                                <span class="old-price" th:text="${wishlist.OrgPrice}"></span>
+										<br>
+		                                <span class="new-price" th:text="${wishlist.DiscountedPrice}" style="font-size: medium;"></span>
+		                            </div>
+									
+								</td>
                                 
                                 <td class="action" style="text-align:center; vertical-align : middle; padding: 0; margin: 0; width : 20%">
-                                	<div class="row">
-                                		<div class="col-12 mt-1">
-	                                		<a th:href="@{/recorded/Shop/Product(productSeq=${wishlist.productSeq}, ProudctName=${wishlist.ProductName})}" class="btn btn-dark quickview mt-1 mt-md-0 col-6"
-	                                        title="Quick View">View More
-	                                        </a>
-                                		</div>
-                                		<div class="col-12 mt-1">
-											<a th:href="@{/MyPage/CheckOut(productSeq=${wishlist.productSeq}, ProudctName=${wishlist.ProductName})}" class="btn btn-dark wishlist mt-1 mt-md-0 col-6"
-	                                        title="Purchase">Purchase</a>
-                                		</div>
+
+									<button class="btn btn-delete product-type-simple btn-shop col-6 mb-1">
+										DELETE
+									</button>
+									<form method="post" action="/ueleteW">
+										<input type="hidden" name="seq" th:value="${wishlist.wishlistSeq}" style="display : none"> 
+										<input type="hidden" name="delNY" th:value="${wishlist.delNY}" style="display : none">
+									<a th:href="@{/MyPage/CheckOut(productSeq=${wishlist.productSeq}, ProudctName=${wishlist.ProductName})}" 
+									   class="btn btn-dark wishlist mt-1 mt-md-0 col-6"
+									   
+                                       title="Purchase">Purchase</a>
+									</form>
 <!--                                 		<div class="col-12 mt-1"> -->
 <!--                                 			<form method="post" action="/wishlistUelete">  -->
 <!-- 												<input type="hidden" name="seq" th:value="${wishlist.wishlistSeq}" style="display : none"> -->
@@ -167,28 +177,29 @@
     };
     
 	  //가격 관련 스크립트
-    function formatPriceElements() {
-        // HTML 요소를 가져와서 가격 포맷팅 적용
-        var oldPriceElements = document.querySelectorAll('.price');
-        
-        oldPriceElements.forEach(function(element) {
-            var price = parseFloat(element.textContent);
-            element.textContent = formatPrice(price);
-        });
-
-        productPriceElements.forEach(function(element) {
-            var price = parseFloat(element.textContent);
-            element.textContent = formatPrice(price);
-        });
-    }
-
-    // 가격 포맷팅 함수
-    function formatPrice(price) {
-        // 세 자리마다 컴마 추가
-        var formattedPrice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        // '원'을 추가하여 반환
-        return "₩" + formattedPrice ;
-    }
+	function formatPriceElements() {
+	    // HTML 요소를 가져와서 가격 포맷팅 적용
+	    var oldPriceElements = document.querySelectorAll('.old-price');
+	    var productPriceElements = document.querySelectorAll('.new-price');
+	    
+	    oldPriceElements.forEach(function(element) {
+	        var price = parseFloat(element.textContent);
+	        element.textContent = formatPrice(price);
+	    });
+	
+	    productPriceElements.forEach(function(element) {
+	        var price = parseFloat(element.textContent);
+	        element.textContent = formatPrice(price);
+	    });
+	}
+	
+	// 가격 포맷팅 함수
+	function formatPrice(price) {
+	    // 세 자리마다 컴마 추가
+	    var formattedPrice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	    // '원'을 추가하여 반환
+	    return "₩" + formattedPrice ;
+	}
 
     // 문서 로드 후에 실행
     document.addEventListener('DOMContentLoaded', function() {
