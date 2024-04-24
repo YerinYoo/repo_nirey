@@ -1,20 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%d{yyyyMMdd HH:mm:ss.SSS} [%thread] %-3level %logger{5} - %msg %n</pattern>
-        </encoder>
-    </appender>
-    <logger name="jdbc" level="OFF"/>
-    <logger name="jdbc.sqlonly" level="OFF"/>
-    <logger name="jdbc.sqltiming" level="DEBUG"/>
-    <logger name="jdbc.audit" level="OFF"/>
-    <logger name="jdbc.resultset" level="OFF"/>
-    <logger name="jdbc.resultsettable" level="DEBUG"/>
-    <logger name="jdbc.connection" level="OFF"/>
 
-    <root level="INFO">
-        <appender-ref ref="STDOUT" />
-    </root>
+<!-- 1) ERROR : 요청을 처리하는 중 오류가 발생한 경우 표시한다. -->
+<!-- 2) WARN  : 처리 가능한 문제, 향후 시스템 에러의 원인이 될 수 있는 경고성 메시지를 나타낸다. -->
+<!-- 3) INFO  : 상태변경과 같은 정보성 로그를 표시한다.  -->
+<!-- 4) DEBUG : 프로그램을 디버깅하기 위한 정보를 표시한다.  -->
+<!-- 5) TRACE : 추적 레벨은 Debug보다 훨씬 상세한 정보를  -->
+
+<!-- additive 란 상위 logger로부터 상속 여부를 의미합니다(기본 값 true).  -->
+<!-- true로 설정되며 상위 logger의 설정 값을 상속 받아 자신의 logger에 설정된 값을 재적용 시키며,  -->
+<!-- false일 경우 상속을 받지 않고 자신의 설정 값을 사용합니다. -->
+
+<!-- level - 설정한 ERROR 레벨에 대해서 -->
+<!-- onMatch - 로그 이벤트 중 ERROR 레벨과 일치한다면 해당 appender를 적용하고 -->
+<!-- onMismatch - 일치하지 않다면 해당 appender를 적용하지 않습니다. -->
+
+	<property name="CONSOLE_PATTERN" value="%d{yyyy-MM-dd'T'HH:mm:ss.SSS} [%thread] %highlight([%-3level]) %logger{5} - %msg %n" />
+	
+	<property name="LOG_FILE_PATTERN_APPLICATION" value="%d{yyyy-MM-dd'T'HH:mm:ss.SSS} [%thread] %-3level %logger{5} - %msg %n" />
+	<property name="LOG_FILE_NAME_APPLICATION" value="./logs/application.%d{yyyy-MM-dd'T'HH}.%i.log" />
+	
+	<property name="LOG_FILE_PATTERN_ERROR" value="%d{yyyy-MM-dd'T'HH:mm:ss.SSS} [%thread] %-3level %logger{5} - %msg %n" />
+	<property name="LOG_FILE_NAME_ERROR" value="./logs/error.%d{yyyy-MM-dd}.%i.log" />
+	
+	<property name="MAX_FILE_SIZE" value="1MB" />
+
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${CONSOLE_PATTERN}</pattern>
+		</encoder>
+	</appender>
+
+
+	<appender name="LOG_FILE_APPLICATION" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder>
+			<pattern>${LOG_FILE_PATTERN_APPLICATION}</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_FILE_NAME_APPLICATION}</fileNamePattern>
+			<maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+		</rollingPolicy>
+	</appender>
+
+
+	<appender name="LOG_FILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder>
+			<pattern>${LOG_FILE_PATTERN_ERROR}</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_FILE_NAME_ERROR}</fileNamePattern>
+				<maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+		</rollingPolicy>
+	</appender>
+
+
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="LOG_FILE_APPLICATION"/>		
+		<appender-ref ref="LOG_FILE_ERROR"/>		
+	</root>
+
+	<!-- log4jdbc 옵션 설정 -->
+	<logger name="jdbc" level="OFF"/>
+	<!-- sql문만 로깅할지 여부 -->
+	<logger name="jdbc.sqlonly" level="OFF"/>
+	<!-- 쿼리문 수행시간 로깅 여부 -->
+	<logger name="jdbc.sqltiming" level="DEBUG"/>
+	<!-- ResultSet외 모든 JDBC 호출 정보 로깅할지 여부 -->
+	<logger name="jdbc.audit" level="OFF"/>
+	<!-- ResultSet 포함 모든 JDBC 호출 정보를 로깅 -->
+	<logger name="jdbc.resultset" level="OFF"/>
+	<logger name="jdbc.resultsettable" level="OFF"/>
+	<!-- connection open close 로깅 여부 -->
+	<logger name="jdbc.connection" level="OFF"/>
 
 </configuration>
