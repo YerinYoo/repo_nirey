@@ -206,9 +206,6 @@ where a.productSeq = #{productSeq}
 	
 </insert>
 
-
-	  
-	   
     <update id="update">
    	update product
    	set
