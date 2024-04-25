@@ -57,7 +57,7 @@
     <!-- 코드 그룹 추가 -->
     <insert id="insert">
         insert into CodeGroup (delNY, name, regDatetime, modDatetime)
-        values (#{delNY}, #{name}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+        values (#{delNY}, #{name}, now(), now())
     </insert>
 
     <!-- 코드 그룹 수정 -->

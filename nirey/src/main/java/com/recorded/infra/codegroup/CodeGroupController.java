@@ -52,7 +52,7 @@ public class CodeGroupController {
 		//서비스 파일에 insert라는 이름으로 정의된 함수 호출
 		service.insert(dto);
 		//함수 내용 실행한 후 orders라는 컨트롤러 주소로 URL 요청
-		return "redirect:/orders";
+		return "redirect:/CodeGroupList";
 	}
 
 	@RequestMapping(value = "/codeGroupUpdt")
