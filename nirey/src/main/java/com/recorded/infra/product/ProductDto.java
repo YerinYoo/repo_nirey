@@ -41,10 +41,16 @@ private Integer ea;
 private String wishlistColor;
 private String wishlistSize;
 private String Product_productSeq;
+private String Member_memberSeq;
 
 
 
-
+public String getMember_memberSeq() {
+	return Member_memberSeq;
+}
+public void setMember_memberSeq(String member_memberSeq) {
+	Member_memberSeq = member_memberSeq;
+}
 public String getProduct_productSeq() {
 	return Product_productSeq;
 }

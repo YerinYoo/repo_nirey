@@ -55,7 +55,7 @@
                         <strong class="single-cart-notice">“Men Black Sports Shoes”</strong>
                         <span>has been added to your cart.</span>
                     </div>
-					<form action="insertWishlist" id="formInsertWish" name="formInsertWish" method="post">
+
                     <div class="row">
                         <div class="col-lg-5 col-md-6 product-single-gallery">
                             <div class="product-slider-container">
@@ -103,15 +103,18 @@
                         <!-- End .product-single-gallery -->
 
                         <div class="col-lg-7 col-md-6 product-single-details">
-                                <strong>
-                                  			<a th:if="${product.category1CD != null}" th:text="${@codeService.selectOneCachedCode(product.category1CD)}"></a>
-					                        <a th:unless="${product.category1CD != null}" th:text="${product.category1CD}"></a>
-					                        <a th:if="${product.category2CD != null}" th:text="${@codeService.selectOneCachedCode(product.category2CD)}"></a>
-					                        <a th:unless="${product.category2CD != null}" th:text="${product.category2CD}"></a>
-					            </strong>
-                            <h1 class="product-title" th:text="${product.ProductName}"></h1>
 
-							<div class="ratings-container" th:unless="${product.reviewRateAvg == null || product.totalReviewCount == 0}">
+                                    <strong>
+                                      			<a th:if="${product.category1CD != null}" th:text="${@codeService.selectOneCachedCode(product.category1CD)}"></a>
+						                        <a th:unless="${product.category1CD != null}" th:text="${product.category1CD}"></a>
+						                        <a th:if="${product.category2CD != null}" th:text="${@codeService.selectOneCachedCode(product.category2CD)}"></a>
+						                        <a th:unless="${product.category2CD != null}" th:text="${product.category2CD}"></a>
+						            </strong>
+                            <h1 class="product-title" th:text="${product.ProductName}"></h1>
+                            
+						
+	
+                            <div class="ratings-container" >
                             	<div class="product-ratings">
                                      <span class="ratings" th:if="${product.reviewRateAvg==5}" style="width:100%"></span>
 								     <span class="ratings" th:if="${product.reviewRateAvg==4}" style="width:80%"></span>
@@ -121,6 +124,7 @@
 									 <span class="ratings" th:if="${product.reviewRateAvg==null}" style="width:0%"></span>
                                     <span class="tooltiptext tooltip-top"></span>
                                 </div>
+		                           
                                 <a style="padding : 0; margin : 0;" href="#" class="rating-link" th:text="'(' + ${product.totalReviewCount} + ' Reviews)'" ></a>
                             </div>
                             <!-- End .ratings-container -->
@@ -137,7 +141,14 @@
                                 <span th:text="${product.ProductDescription}"></span>
                             </div> -->
                             <!-- End .product-desc -->
-							
+
+                            <ul class="single-info-list">
+                                <!---->
+
+
+
+                            </ul>
+
 							<hr class="divider mb-3 mt-0">
                             <div class="selectedOptionsList">
                                 <div class="product-single-filter">
@@ -162,18 +173,18 @@
                                 <div class="product-single-filter">
                                     <a class="font1 text-uppercase clear-btn" href="#">Clear</a>
                                 </div>
+                                <!---->
                             </div>
 
 
                             <div class="product" data-product-id="${product.productSeq}">
 							    <div class="product-action">
-									<!-- 제품 수량 선택 -->
 							        <div class="product-single-qty">
 							            <input class="horizontal-quantity form-control" type="text">
 							        </div>
 							        <!-- End .product-single-qty -->
 										<div class="action mt-3">
-										<a id="addToWishlist" th:href="@{${session.authenticatedMember == null} ? @{/recorded/Login} : @{/MyPage/Wishlist}}">
+										<a id="addToWishlist"th:href="${session.authenticatedMember != null} ? @{/MyPage/Wishlist} : @{/recorded/Login}">
 										    <i class="icon-wishlist-2"></i>
 										    <span>Add to Wishlist</span>
 										</a>
@@ -186,7 +197,6 @@
 										</div>
 							    </div>
 							</div>
-							</form>
 							<hr class="divider mb-3 mt-2">
 
                             <!-- End .product-action -->
@@ -247,7 +257,7 @@
                         <div class="tab-pane fade" id="product-reviews-content" role="tabpanel" aria-labelledby="product-tab-reviews"  >
 						    <div class="product-reviews-content">
 						        <h3 class="reviews-title" th:text=" ${product.totalReviewCount == 0 ? 'There is no REVIEW of this product yet' : product.totalReviewCount + ' review for ' + product.ProductName}"></h3>
-						            <span th:unless="${session.authenticatedMember != null and session.sessSeqUsr != null}" style="padding-bottom : 10%; ">( <a th:href="@{/recorded/Login}">Login</a> to Add Review)</span>
+						            <span th:unless="${session.authenticatedMember != null and session.sessSeqUsr != null}" style="padding-left : 12%; padding-bottom : 10%; ">( <a th:href="@{/recorded/Login}">Login</a> to Add Review)</span>
 						        <div class="comment-list" th:if="${product.totalReviewCount > 0}">
 						            <div class="comments mt-1" th:each="review : ${prodReview}">
 						                <figure class="img-thumbnail">
@@ -356,29 +366,6 @@
             <!-- End .container -->
         </main>
         <!-- End .main -->
-		
-		
-		<!-- 상품 옵션을 선택하지 않았을 경우 표출할 모달 -->
-		<!-- 모달 -->
-		<div class="modal" id="optionModal" tabindex="-1" role="dialog">
-		  <div class="modal-dialog" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title">알림</h5>
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
-		        </button>
-		      </div>
-		      <div class="modal-body">
-		        <p>옵션 정보를 모두 선택하세요.</p>
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-		      </div>
-		    </div>
-		  </div>
-		</div>
-
 		<div th:replace="~{/usr/infra/v1/include/Footer :: Footer}"></div>
 
 
@@ -489,57 +476,53 @@
     }
 });
 
-	//상품 정보 위시리스트에 넘겨주기
-	$(document).ready(function() {
-	    $('.add-wishlist').click(function(event) {
-	        event.preventDefault(); // 기본 동작(링크 이동) 방지
-	        
-	        // 선택한 상품의 ID 가져오기
-	        var productId = $(this).closest('.product').data('product-id');
-	        
-	        // 선택한 사이즈와 색상 가져오기
-	        var size = $('.config-size-list .size.selected').text().trim(); // 선택한 사이즈
-	        var color = $('.config-size-list .color.selected').css('background-color'); // 선택한 색상
-	        
-	        // 옵션을 선택하지 않았을 경우 모달 표시
-	        if (!size || !color) {
-	            $('#optionModal').modal('show');
-	            return; // 옵션을 선택하지 않았으므로 추가 작업 중지
-	        }
-	                
-	        // 위시리스트에 추가할 때 필요한 데이터
-	        var formData = {
-	            productSeq: productSeq,
-	            size: size,
-	            color: color
-	        };
-	        
-	        // 위시리스트에 상품 추가하기
-	        addToWishlist(formData);
-	    });
-	});
-	
-	function addToWishlist(formData) {
-	    $.ajax({
-	        type: 'POST',
-	        url: '/insertWishlist',
-	        data: formData,
-	        success: function(response) {
-	            // 성공적으로 위시리스트에 추가되면 적절한 액션을 취함
-	            console.log('위시리스트에 상품이 추가되었습니다.');
-	            // 여기에 추가적인 로직을 추가할 수 있습니다.
-	        },
-	        error: function(xhr, status, error) {
-	            // 실패한 경우 적절한 처리를 수행
-	            console.error('위시리스트 추가 중 오류가 발생했습니다:', error);
-	            // 여기에 오류 처리 로직을 추가할 수 있습니다.
-	        }
-	    });
-	}
+$(document).ready(function() {
+    // Add to wishlist 버튼 클릭 시 이벤트 처리
+    $("#addToWishlist").click(function(e) {
+        e.preventDefault(); // 기본 이벤트 동작 방지
+
+        // 선택된 제품의 정보
+        var productId = $(".product").data("product-id");
+        var quantity = $(".horizontal-quantity").val(); // 선택된 수량
+
+        // 선택된 사이즈와 색상
+        var selectedSize = $(".config-size-list .size.selected").text();
+        var selectedColor = $(".config-color-list .color.selected").css("background-color");
+
+        // 세션에 저장된 회원 시퀀스 가져오기
+        var memberSeq = sessionStorage.getItem('sessSeqUsr');
+
+        // wishlist에 인서트할 데이터
+        var wishlistData = {
+            Member_memberSeq: memberSeq, // 세션에 저장된 회원 시퀀스
+            Product_productSeq: productId,
+            delNY: "N", // 삭제 여부
+            ea: quantity,
+            size: selectedSize,
+            color: selectedColor
+        };
+
+        // 위시리스트에 데이터를 인서트하는 Ajax 호출
+        $.ajax({
+            type: "POST",
+            url: "/insertWishlist",
+            contentType: "application/json",
+            data: JSON.stringify(wishlistData),
+            success: function(response) {
+                // 인서트 성공 시 처리할 작업
+                console.log("Wishlist에 추가되었습니다.");
+            },
+            error: function(error) {
+                // 인서트 실패 시 처리할 작업
+                console.error("Wishlist 추가 중 오류가 발생했습니다.");
+            }
+        });
+    });
+});
 
 
 
 </script>
 </body>
 
-</html>
+</html> 

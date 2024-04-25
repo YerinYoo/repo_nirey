@@ -419,6 +419,9 @@ select
     a.size as wishlistSize,
     a.color as wishlistColor,
     a.delNY,
+    a.ea,
+    a.color,
+    a.size,
     b.memberSeq,
     c.productSeq,
     c.ProductName,
@@ -437,6 +440,7 @@ where 1=1
         a.Product_productSeq,
         b.colorSeq,
         b.color,
+        b.memo,
         b.productSeq
         
     FROM 
