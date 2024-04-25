@@ -16,6 +16,8 @@ public class CodeGroupController {
 	@Autowired
 	private CodeGroupService service; //CodeGroupService를 service라는 이름으로 종속 받을 것
     
+	//어드민 페이지 관련 컨트롤러 
+	
     @RequestMapping(value = "/CodeGroupList")
     //코드 그룹 Vo와 모델 값을 가지고 orders라는 페이지 호출
     public String orders(@ModelAttribute("vo") CodeGroupVo vo, Model model) throws Exception {

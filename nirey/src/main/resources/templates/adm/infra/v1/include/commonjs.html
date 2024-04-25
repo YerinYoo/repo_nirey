@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="commonXdmJs">
+	<!-- Required jQuery first, then Bootstrap Bundle JS -->
+	<script src="/xdm/assets/js/jquery.min.js"></script>
+	<script src="/xdm/assets/js/bootstrap.bundle.min.js"></script>
+
+	<!-- *************
+			************ Vendor Js Files *************
+		************* -->
+
+	<!-- Overlay Scroll JS -->
+	<script src="/xdm/assets/vendor/overlay-scroll/jquery.overlayScrollbars.min.js"></script>
+	<script src="/xdm/assets/vendor/overlay-scroll/custom-scrollbar.js"></script>
+
+	<!-- Custom JS files -->
+	<script src="/xdm/assets/js/custom.js"></script>
+	<script src="/xdm/assets/js/validations.js"></script>
+
+		<script>
+	// 로그아웃 버튼 - xdm
+	document.getElementById("btnXdmLogout").onclick = function () {
+			alert('111----xdm--------ㄴㄴㄴㄴㄴㄴㄴㄴ-----');
+			$.ajax({
+				async: true
+				, cache: false
+				, type: "post"
+				/* ,dataType:"json" */
+				, url: "/memberLogout"
+				/* ,data : $("#formLogin").serialize() */
+				// , data: { "memberID": $("#memberID").val(), "memberPwd": $("#memberPwd").val() }
+				, success: function (response) {
+					alert(response.rt);
+					if (response.rt == "success") {
+						alert('로그아웃 성공');
+							location.href = "/XdmLogin";
+					} else {
+						alert('로그아웃 안됨');
+						// document.getElementById("modalAlertTitle").innerText = "확 인";
+						// document.getElementById("modalAlertBody").innerText = "일치하는 회원이 존재 하지 않습니다!";
+						// $("#modalAlert").modal("show");
+					}
+				}
+				, error: function (jqXHR, textStatus, errorThrown) {
+					alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+				}
+			});
+			
+
+		}
+
+		</script>
+
+</th:block>
+
+<th:block th:fragment="commonUsrJs">
+	<script type="text/javascript" src="/usr/assets/scripts/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript" src="/usr/assets/scripts/jquery-migrate-3.3.2.min.js"></script>
+	<script type="text/javascript" src="/usr/assets/scripts/chosen.min.js"></script>
+	<script type="text/javascript" src="/usr/assets/scripts/magnific-popup.min.js"></script>
+	<script type="text/javascript" src="/usr/assets/scripts/owl.carousel.min.js"></script>
+	<script type="text/javascript" src="/usr/assets/scripts/rangeSlider.js"></script>
+	<script type="text/javascript" src="/usr/assets/scripts/sticky-kit.min.js"></script>
+	<script type="text/javascript" src="/usr/assets/scripts/slick.min.js"></script>
+	<script type="text/javascript" src="/usr/assets/scripts/masonry.min.js"></script>
+	<script type="text/javascript" src="/usr/assets/scripts/mmenu.min.js"></script>
+	<script type="text/javascript" src="/usr/assets/scripts/tooltips.min.js"></script>
+	<script type="text/javascript" src="/usr/assets/scripts/custom.js"></script>
+	<script src="/xdm/assets/js/bootstrap.bundle.min.js"></script>
+
+
+	<script src="/xdm/assets/js/validations.js"></script>
+
+	
+	<script>
+		let formTop = document.querySelector("form[name=formTop]");
+		let goUrlCharacterDetail = "/characterDetail";
+		let searchInput = document.getElementById("XtopBarSearchInputValue").value;
+
+		document.getElementById("searchTopBtn").onclick = function () {
+			alert("버튼클릭됨");
+			alert("값 들어옴")
+			goFormTop(searchInput);
+		}
+
+		goFormTop = function () {
+			alert("goformTop 시작");
+			formTop.action = goUrlCharacterDetail;
+			formTop.submit();
+		}
+
+		function enterkeyTop(event) {
+			if (event.key === 'Enter') {
+				goFormTop(searchInput);
+			}
+		}
+
+		// 로그아웃 버튼 - usr
+		document.getElementById("btnLogout").onclick = function () {
+				alert('111-------usr------ㄴㄴㄴㄴㄴㄴㄴㄴ-----');
+				$.ajax({
+					async: true
+					, cache: false
+					, type: "post"
+					/* ,dataType:"json" */
+					, url: "/memberLogout"
+					/* ,data : $("#formLogin").serialize() */
+					// , data: { "memberID": $("#memberID").val(), "memberPwd": $("#memberPwd").val() }
+					, success: function (response) {
+						alert(response.rt);
+						if (response.rt == "success") {
+							alert('로그아웃 성공');
+								location.href = "/userIndex";
+						} else {
+							alert('로그아웃 안됨');
+							// document.getElementById("modalAlertTitle").innerText = "확 인";
+							// document.getElementById("modalAlertBody").innerText = "일치하는 회원이 존재 하지 않습니다!";
+							// $("#modalAlert").modal("show");
+						}
+					}
+					, error: function (jqXHR, textStatus, errorThrown) {
+						alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+					}
+				});
+				
+
+			}
+
+		
+
+
+	</script>
+
+</th:block>
