@@ -194,7 +194,7 @@
 
                     <div class="col-lg-4 ml-3" >
                         <div class="order-summary">
-                            <h4>Products to Orded</h4>
+                            <h4>YOUR ORDER</h4>
 
 						    <table class="table table-mini-cart mt-4">
 						        <thead>
@@ -252,58 +252,26 @@
                                         <div class="radio col-xs-12">
                                             <label>
                                                 <input type="radio" name="radios" class="track-order-change" id="pictureTar" value="">
-                                                Credit Card
+                                                Etc.
                                             </label>
                                         </div>
                             
                                         <div class="col-xs-12 panel-collapse collapse in" id="pictureTarifa">
 
     
-                                            
                                             <div class="row">
-                                                <div class="col-6">
+                                                <div class="col-12" style="width : 500px;">
                                                     <div>
-                                                        <label for="card-no">
-                                                            Card No.
-                                                            <span class="required">*</span>
-                                                        </label>
-                                                        <input type="email" class="form-input form-wide" id="register-email" required />
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-6">
-                                                    <div>
-                                                        <label for="card-no">
-                                                            Card Holder Name
-                                                            <span class="required">*</span>
-                                                        </label>
-                                                        <input type="email" class="form-input form-wide" id="register-email" required />
+                                                         <div id="payment-method"></div>
+															    <div id="agreement"></div>
+															    
+ 															    <button id="payment-button" class="btn btn-dark mb-5" style="float : right;">Order</button>
+                                                        
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
-                                            
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <div>
-                                                        <label for="card-no">
-                                                            MM/YY
-                                                            <span class="required">*</span>
-                                                        </label>
-                                                        <input type="email" class="form-input form-wide" id="register-email" required />
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-6">
-                                                    <div>
-                                                        <label for="card-no">
-                                                            CVV / CVC
-                                                            <span class="required">*</span>
-                                                        </label>
-                                                        <input type="email" class="form-input form-wide" id="register-email" required />
-                                                    </div>
-                                                </div>
-                                            </div>
-
+                                           
                                         </div>
 
                                         <div class="radio col-xs-12">
@@ -318,19 +286,6 @@
                                     <!-- End .form-group -->
                                     <!-- End .form-group -->
                                 </div>
-                            <div class="row">
-                                
-                                <div class="col-12">
-								    <div class="ordergo">
-								        <a href="/recorded/OrderComplete" class="btn btn-dark btn-place-order mt-3 ml-5"  id="payment-button" style="float : right">
-								            Order
-								        </a>
-								    </div>
-								</div>
-
-
-                            </div>
-
                         </div>
                         <!-- End .cart-summary -->
                     </div>
@@ -341,10 +296,8 @@
             <!-- End .container -->
         </main>
         <!-- End .main -->
-		
+
 		<div th:replace="~{/usr/infra/v1/include/Footer :: Footer}"></div>
-
-
     <!-- Plugins JS File -->
     <script src="/usr/js/jquery.min.js"></script>
     <script src="/usr/js/bootstrap.bundle.min.js"></script>
@@ -385,7 +338,7 @@
 
             priceElements.forEach(function(element) {
                 // 원본 텍스트를 유지하기 위해 가격을 먼저 계산한 후 포맷팅합니다.
-                var price = parseFloat(element.textContent.replace('$', '').replace(',', ''));
+                var price = parseFloat(element.textContent.replace('₩', '').replace(',', ''));
                 totalPrice += price;
                 element.textContent = formatPrice(price);
             });
