@@ -1,0 +1,37 @@
+name: cicd_prdt
+
+#on:
+#  push:
+#    branches: [ "main" ]
+#  pull_request:
+#    branches: [ "main" ]
+
+on: [workflow_dispatch]
+
+env:
+  PROJECT_NAME: recorded
+  AWS_REGION: ap-northeast-2
+  S3_BUCKET: nirey-cicd
+  CODE_DEPLOY_APPLICATION_NAME: nirey-meomy
+  CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: recorded-prdt-01
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+    # (1) 기본 체크아웃
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    # (2) JDK 17 세팅
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
