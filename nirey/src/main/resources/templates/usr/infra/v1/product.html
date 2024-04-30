@@ -51,10 +51,7 @@
                     </ol>
                 </nav>
                 <div class="product-single-container product-single-default">
-                    <div class="cart-message d-none">
-                        <strong class="single-cart-notice">“Men Black Sports Shoes”</strong>
-                        <span>has been added to your cart.</span>
-                    </div>
+                    
 
                     <div class="row">
                         <div class="col-lg-5 col-md-6 product-single-gallery">
@@ -103,16 +100,13 @@
                         <!-- End .product-single-gallery -->
 
                         <div class="col-lg-7 col-md-6 product-single-details">
-
-                                    <strong>
-                                      			<a th:if="${product.category1CD != null}" th:text="${@codeService.selectOneCachedCode(product.category1CD)}"></a>
-						                        <a th:unless="${product.category1CD != null}" th:text="${product.category1CD}"></a>
-						                        <a th:if="${product.category2CD != null}" th:text="${@codeService.selectOneCachedCode(product.category2CD)}"></a>
-						                        <a th:unless="${product.category2CD != null}" th:text="${product.category2CD}"></a>
-						            </strong>
+                            <strong>
+	                  			<a th:if="${product.category1CD != null}" th:text="${@codeService.selectOneCachedCode(product.category1CD)}"></a>
+		                        <a th:unless="${product.category1CD != null}" th:text="${product.category1CD}"></a>
+		                        <a th:if="${product.category2CD != null}" th:text="${@codeService.selectOneCachedCode(product.category2CD)}"></a>
+		                        <a th:unless="${product.category2CD != null}" th:text="${product.category2CD}"></a>
+				            </strong>
                             <h1 class="product-title" th:text="${product.ProductName}"></h1>
-                            
-						
 	
                             <div class="ratings-container" >
                             	<div class="product-ratings">
@@ -124,7 +118,6 @@
 									 <span class="ratings" th:if="${product.reviewRateAvg==null}" style="width:0%"></span>
                                     <span class="tooltiptext tooltip-top"></span>
                                 </div>
-		                           
                                 <a style="padding : 0; margin : 0;" href="#" class="rating-link" th:text="'(' + ${product.totalReviewCount} + ' Reviews)'" ></a>
                             </div>
                             <!-- End .ratings-container -->
@@ -404,7 +397,7 @@
 
     <!-- Main JS File -->
     <script src="/usr/js/main.min.js"></script>
-    
+	
     <script>
 	  //가격 관련 스크립트
     function formatPriceElements() {

@@ -116,22 +116,19 @@
                                     <span>Filter</span>
                                 </a>
 
-                                <div class="toolbox-item toolbox-sort mb-3">
-                                    <label>Sort By:</label>
-
-                                    <div class="select-custom">
-                                        <select name="orderby" class="form-control">
-                                            <option value="menu_order" selected="selected">Default sorting</option>
-                                            <option value="popularity">Sort by popularity</option>
-                                            <option value="rating">Sort by average rating</option>
-                                            <option value="date">Sort by newness</option>
-                                            <option value="price">Sort by price: low to high</option>
-                                            <option value="price-desc">Sort by price: high to low</option>
-                                        </select>
-                                    </div><!-- End .select-custom -->
-
-
-                                </div><!-- End .toolbox-item -->
+								<div class="toolbox-item toolbox-sort mb-3">
+								    <label>Sort By:</label>
+								    <div class="select-custom">
+								        <select id="orderby" name="orderby" class="form-control">
+								            <option value="menu_order" selected="selected">Default sorting</option>
+								            <option value="popularity">Sort by popularity</option>
+								            <option value="rating">Sort by average rating</option>
+								            <option value="date">Sort by newness</option>
+								            <option value="price">Sort by price: low to high</option>
+								            <option value="price-desc">Sort by price: high to low</option>
+								        </select>
+								    </div><!-- End .select-custom -->
+								</div><!-- End .toolbox-item -->
                             </div><!-- End .toolbox-left -->
 							<form id="formList" action="/recordedShop" method="GET">
 
@@ -156,8 +153,10 @@
 						</div>
 						
 						<!-- 페이지 단에 띄워줄 전체 상품 표출 코드 -->
-						<div class="row">
-						    <div class="col-6 col-sm-4 col-md-3 col-xl-5col" th:each="product : ${prodList}">
+						<div class="row" id="product-list">
+<!--					<div class="col-6 col-sm-4 col-md-3 col-xl-5col" id="product-${product.productSeq}" data-total-review-count="${product.totalReviewCount}" data-review-rate-avg="${product.reviewRateAvg}" data-reg-date-time="${product.regDateTime}" data-org-price="${product.orgPrice}">-->
+
+						    <div class="col-6 col-sm-4 col-md-3 col-xl-5col" th:each="product : ${prodList}" th:id="'product-' + ${product.productSeq}">
 						        <div class="product-default inner-quickview inner-icon">
 						            <figure>
 						                <a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq}, ProudctName=${product.ProductName})}" >
@@ -396,9 +395,71 @@ var btn = document.querySelector('.btn-quickview');
 btn.disabled = true;
 </script>
 
+<script>
+        // Sort by 관련
+        document.querySelector('#orderby').addEventListener('change', function() {
+            console.log('정렬 함 해보겠심더');
+            let orderBy = this.value;
+            sortProducts(orderBy);
+        });
 
+        function sortProducts(orderBy) {
+            console.log('정렬한다!!');
+            let productList = document.getElementById('product-list');
+            let products = Array.from(productList.children);
+            console.log('제품 리스트를 함 불러와보께');
 
+            products.sort(function(a, b) {
+                console.log('비교대상 찾아보이소');
+                let aValue, bValue;
 
+                switch(orderBy) {
+                    case 'popularity':
+                        console.log('인기도순');
+                        aValue = parseInt(a.dataset.totalReviewCount);
+                        bValue = parseInt(b.dataset.totalReviewCount);
+                        break;
+                    case 'rating':
+                        console.log('평점순');
+                        aValue = parseFloat(a.dataset.reviewRateAvg);
+                        bValue = parseFloat(b.dataset.reviewRateAvg);
+                        break;
+                    case 'date':
+                        console.log('최신순');
+                        aValue = new Date(a.dataset.regDateTime);
+                        bValue = new Date(b.dataset.regDateTime);
+                        break;
+                    case 'price':
+                        console.log('가격순');
+                        aValue = parseFloat(a.dataset.OrgPrice);
+                        bValue = parseFloat(b.dataset.OrgPrice);
+                        break;
+                    case 'price-desc':
+                        console.log('높은 가격순');
+                        aValue = parseFloat(a.dataset.OrgPrice);
+                        bValue = parseFloat(b.dataset.OrgPrice);
+                        break;
+                    default:
+                        return 0;
+                }
+                console.log('정렬된 제품 목록:', products);
+
+                if (orderBy === 'price-desc') {
+                    return bValue - aValue;
+                } else {
+                    return aValue - bValue;
+                }
+            });
+
+            while (productList.firstChild) {
+                productList.removeChild(productList.firstChild);
+            }
+
+            products.forEach(function(product) {
+                productList.appendChild(product);
+            });
+        }
+    </script>
    
 </body>
 
