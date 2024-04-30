@@ -557,6 +557,7 @@ $(document).ready(function() {
             success: function(response) {
                 // 위시리스트에 성공적으로 추가되면 알림창 또는 다른 동작 수행
                 alert('위시리스트 추가 성공');
+				window.location.reload();
             },
             error: function(xhr, status, error) {
                 // 오류 발생 시 처리

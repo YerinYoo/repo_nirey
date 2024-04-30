@@ -69,6 +69,17 @@ public class ProductController {
 
 	    return "redirect:/recorded/Shop/Product"; // 상품 페이지로 리다이렉트
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/insertOrders")
+	public String insertOrders(ProductDto dto, HttpSession httpSession) throws Exception {
+
+		
+		service.insertOrders(dto);
+		service.insertOrderedProd(dto);
+		
+		return "redirect:/recorded/OrderComplete";
+	}
 
 
 

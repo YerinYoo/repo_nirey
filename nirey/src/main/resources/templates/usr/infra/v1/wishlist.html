@@ -59,7 +59,7 @@
 					</div>
 					</nav>
 
-					<h3>My Cart</he>
+					<h3>My Cart</h3>
 				</div>
 			</div>
 				<div th:replace="~{/usr/infra/v1/include/MyPage :: SideBar}"></div>
@@ -68,12 +68,14 @@
                         
 
             <div class="container">
-				<div class="wishlist-table-container col-12 align-center mt-5" th:if="${wishlist == null or #lists.isEmpty(wishlist)}">
-				    <h4>Your Cart</h4>
-				    <p>Your cart is currently empty.</p>
-				    <p>Continue browsing <a th:href="@{/recorded/Shop}">here</a>.</p>
+				<div th:if="${wishlist == null or #lists.isEmpty(wishlist)}">
+				    <div class="wishlist-table-container col-12 align-center mt-5">
+				        <h4>Your Cart</h4>
+				        <p>Your cart is currently empty.</p>
+				        <p>Continue browsing <a th:href="@{/recorded/Shop}">here</a>.</p>
+				    </div>
 				</div>
-                <div class="wishlist-table-container col-12 align-center" >
+                <div class="wishlist-table-container col-12 align-center" th:if="${wishlist != null and not #lists.isEmpty(wishlist)}">
 
                     <table class="table table-wishlist mb-5 mt-5" style="margin-left : auto; margin-right : auto;">
                         <thead>
@@ -106,8 +108,8 @@
 											<li>Color : <span th:text="${wishlist.wishlistColor}"></span></li>
 											<li style="padding-bottom: 10px;">Size : <span th:text="${wishlist.wishlistSize}"></span></li>
 											<li style="padding-top : 20px; padding-bottom : 5px;"><span style="font-weight: bold;">Price (Single Quantity)</span></li>
-											<li class="old-price">Org Price : <span th:text="${wishlist.OrgPrice}"></span></li>
-											<li class="new-price">Discounted Price : <span th:text="${wishlist.DiscountedPrice}"></span></li>
+											<li>Org Price : <span class="old-price" th:text="${wishlist.OrgPrice}"></span></li>
+											<li>Final Price : <span class="new-price" th:text="${wishlist.DiscountedPrice}"></span></li>
 	                                	</ul>
                                 	</div>
                                 </td>
@@ -125,34 +127,43 @@
 								</td>
                                 
                                 <td class="action" style="text-align:center; vertical-align : middle; padding: 0; margin: 0; width : 20%">
-
-									<button class="btn btn-delete product-type-simple btn-shop col-6 mb-1 mt-4">
-									    DELETE
-									</button>
-
-
-
+									<a th:href="@{/MyPage/CheckOut(productSeq=${wishlist.productSeq}, ProudctName=${wishlist.ProductName})}" 
+									   class="btn btn-dark wishlist mt-5 mt-md-0 col-6"
+									   
+                                       title="Purchase" id="purchase-btn-1">Purchase</a>
+									<!-- 위시리스트 단일 uelete 폼 -->
 									<form method="post" action="/ueleteW">
+										<button class="btn btn-delete product-type-simple btn-shop col-6 mb-1 mt-2">
+										    DELETE
+										</button>
 										<input type="hidden" name="seq" th:value="${wishlist.wishlistSeq}" style="display : none"> 
 										<input type="hidden" name="delNY" th:value="${wishlist.delNY}" style="display : none">
-									<a th:href="@{/MyPage/CheckOut(productSeq=${wishlist.productSeq}, ProudctName=${wishlist.ProductName})}" 
-									   class="btn btn-dark wishlist mt-1 mt-md-0 col-6"
-									   
-                                       title="Purchase">Purchase</a>
+									
 									</form>
+									
+									
                                 	</div>
 								</td>
                             </tr>
                         </tbody>
                     </table>
-					<div class="row" style="float : right; padding-right : 70px;">
+					<!-- 전체 삭제 / 전체 구매 버튼 -->
+					<div class="row" style="float : right; padding-right : 70px;" th:if="${wishlist != null and not #lists.isEmpty(wishlist)}">
 					    <div class="col-md-6 text-md-right mb-3">
 					        <button class="btn btn-danger" id="deleteAllButton" style="width : 150px">Delete All</button>
 					    </div>
-					    <div class="col-md-6 text-md-left">
-					        <button class="btn btn-dark" id="purchaseAllButton">Purchase All</button>
-					    </div>
+						<div class="col-md-6 text-md-right mb-3">
+						    <form th:action="@{/MyPage/CheckOut}" method="post">
+						        <input type="hidden" th:each="item : ${wishlist}" th:name="'wishlist[' + ${item.productSeq} + '].productSeq'" th:value="${item.productSeq}" />
+						        <input type="hidden" th:each="item : ${wishlist}" th:name="'wishlist[' + ${item.productSeq} + '].productName'" th:value="${item.productName}" />
+						        <input type="hidden" th:each="item : ${wishlist}" th:name="'wishlist[' + ${item.productSeq} + '].orgPrice'" th:value="${item.orgPrice}" />
+						        <input type="hidden" th:each="item : ${wishlist}" th:name="'wishlist[' + ${item.productSeq} + '].discountedPrice'" th:value="${item.discountedPrice}" />
+						        <button class="btn btn-dark" type="submit" style="width: 150px">Purchase All</button>
+						    </form>
+						</div>
+
 					</div>
+
                 </div><!-- End .cart-table-container -->
             </div><!-- End .container -->
         </main><!-- End .main -->
@@ -231,6 +242,27 @@
             });
         }
     }
+</script>
+
+<!-- 단일 상품 구매 스크립트 -->
+<script>
+	$(document).ready(function() {
+	    // Purchase 버튼 클릭 시 이벤트 핸들러 추가
+	    $('#purchase-btn-1').click(function() {
+	        // 해당 상품의 정보 가져오기
+	        var productRow = $(this).closest('.product-row');
+	        var productName = productRow.find('.product-info li:first-child span').text();
+	        var productPrice = productRow.find('.new-price').text();
+	        var productQuantity = productRow.find('td:nth-child(3)').text();
+	
+	        // checkout 페이지로 이동하는 URL 생성
+	        var checkoutURL = '/checkout?productName=' + encodeURIComponent(productName) + '&productPrice=' + encodeURIComponent(productPrice) + '&productQuantity=' + encodeURIComponent(productQuantity);
+	        
+	        // 생성된 URL로 페이지 이동
+	        window.location.href = checkoutURL;
+	    });
+	});
+
 </script>
 
 

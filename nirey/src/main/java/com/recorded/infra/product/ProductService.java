@@ -51,6 +51,14 @@ public class ProductService {
 		return dao.insertWishlist(dto);
 	}
 	
+	public int insertOrders(ProductDto dto) {
+		return dao.insertOrders(dto);
+	}
+	
+	public int insertOrderedProd (ProductDto dto) {
+		return dao.insertOrderedProd(dto);
+	}
+	
 	public int update(ProductDto dto ) {
 		return dao.update(dto);
 	}
