@@ -52,14 +52,14 @@
 								<li class="breadcrumb-item"><a href="demo4.html">Home</a></li>
 								<li class="breadcrumb-item"><a href="category.html">MyPage</a></li>
 								<li class="breadcrumb-item active" aria-current="page">
-									Wishlist
+									Cart
 								</li>
 							</ol>
 						</div>
 					</div>
 					</nav>
 
-					<h3>My Wishlist</he>
+					<h3>My Cart</he>
 				</div>
 			</div>
 				<div th:replace="~{/usr/infra/v1/include/MyPage :: SideBar}"></div>
@@ -67,17 +67,15 @@
 						<div class="tab-pane fade show active" id="dashboard" role="tabpanel">
                         
 
-            <div class="container" style="height : 650px;">
+            <div class="container">
 				<div class="wishlist-table-container col-12 align-center mt-5" th:if="${wishlist == null or #lists.isEmpty(wishlist)}">
 				    <h4>Your Cart</h4>
 				    <p>Your cart is currently empty.</p>
 				    <p>Continue browsing <a th:href="@{/recorded/Shop}">here</a>.</p>
 				</div>
-                <div class="wishlist-table-container col-12 align-center" th:each="wishlist : ${wishlist}" th:if="${wishlist.delNY == 0}">
-					<div class="wishlist-title">
-					  <h2 class="p-2 mt-3">My wishlist</h2>
-					 </div>
-                    <table class="table table-wishlist mb-5" style="margin-left : auto; margin-right : auto;">
+                <div class="wishlist-table-container col-12 align-center" >
+
+                    <table class="table table-wishlist mb-5 mt-5" style="margin-left : auto; margin-right : auto;">
                         <thead>
                             <tr class="table-th" style="text-align:center;">
 								
@@ -90,7 +88,7 @@
                         </thead>
                         <tbody>
                             
-                            <tr class="product-row">
+                            <tr class="product-row" th:each="wishlist : ${wishlist}" th:if="${wishlist.delNY == 0}">
 								
                                 <td style="text-align:center; vertical-align : middle; width : 20%">
                                     <figure class="product-image-container">
@@ -102,36 +100,38 @@
                                 <td style=" vertical-align : middle; max-width : 0px; width : 30%">
                                 	<div class="product-info">
 	                                	<ul>
-	                                		<li style="padding-bottom: 20px;"><span th:text="${wishlist.ProductName}" style="font-weight: bold;"></span></li>
+	                                		<li style="padding-bottom: 20px; padding-top : 20px"><span th:text="${wishlist.ProductName}" style="font-weight: bold;"></span></li>
 											<li style="border-top: 1px solid #ccc;"></li>
 											<li style="padding-top : 20px; padding-bottom : 5px;"><span style="font-weight: bold;">Selected Option</span></li>
 											<li>Color : <span th:text="${wishlist.wishlistColor}"></span></li>
 											<li style="padding-bottom: 10px;">Size : <span th:text="${wishlist.wishlistSize}"></span></li>
-											
+											<li style="padding-top : 20px; padding-bottom : 5px;"><span style="font-weight: bold;">Price (Single Quantity)</span></li>
+											<li class="old-price">Org Price : <span th:text="${wishlist.OrgPrice}"></span></li>
+											<li class="new-price">Discounted Price : <span th:text="${wishlist.DiscountedPrice}"></span></li>
 	                                	</ul>
                                 	</div>
                                 </td>
-                                <td style="text-align : center; vertical-align : middle; width : 10%">
-                                <div class="product-single-qty">
-												<input class="horizontal-quantity form-control" type="text">
-											</div><!-- End .product-single-qty -->
-                                </td>
+                                <td style="text-align : center; vertical-align : middle; width : 10%;" th:text="${wishlist.ea}"></td>
 								
 <!--							<td class="price" style="text-align : center; vertical-align : middle; width : 10%" th:text="${wishlist.DiscountedPrice}"></td>-->
 								<td style="text-align : center; vertical-align : middle; width : 10%">
 									<div class="price-box">
-		                                <span class="old-price" th:text="${wishlist.OrgPrice}"></span>
-										<br>
-		                                <span class="new-price" th:text="${wishlist.DiscountedPrice}" style="font-size: medium;"></span>
-		                            </div>
+									    <span class="old-price" th:text="${wishlist.OrgPrice * wishlist.ea}"></span>
+									    <br>
+									    <span class="new-price" th:text="${wishlist.DiscountedPrice * wishlist.ea}" style="font-size: medium;"></span>
+									</div>
+
 									
 								</td>
                                 
                                 <td class="action" style="text-align:center; vertical-align : middle; padding: 0; margin: 0; width : 20%">
 
-									<button class="btn btn-delete product-type-simple btn-shop col-6 mb-1">
-										DELETE
+									<button class="btn btn-delete product-type-simple btn-shop col-6 mb-1 mt-4">
+									    DELETE
 									</button>
+
+
+
 									<form method="post" action="/ueleteW">
 										<input type="hidden" name="seq" th:value="${wishlist.wishlistSeq}" style="display : none"> 
 										<input type="hidden" name="delNY" th:value="${wishlist.delNY}" style="display : none">
@@ -140,20 +140,19 @@
 									   
                                        title="Purchase">Purchase</a>
 									</form>
-<!--                                 		<div class="col-12 mt-1"> -->
-<!--                                 			<form method="post" action="/wishlistUelete">  -->
-<!-- 												<input type="hidden" name="seq" th:value="${wishlist.wishlistSeq}" style="display : none"> -->
-<!-- 												<input type="hidden" name="delNY" th:value="${wishlist.delNY}" style="display : none"> -->
-<!-- 												<button type="submit" class="btn btn-wishlist-delete product-type-simple btn-shop col-3" > -->
-<!-- 		                                        	DELETE -->
-<!-- 		                                    	</button> -->
-<!-- 										</form> -->
-<!--                                 		</div> -->
                                 	</div>
 								</td>
                             </tr>
                         </tbody>
                     </table>
+					<div class="row" style="float : right; padding-right : 70px;">
+					    <div class="col-md-6 text-md-right mb-3">
+					        <button class="btn btn-danger" id="deleteAllButton" style="width : 150px">Delete All</button>
+					    </div>
+					    <div class="col-md-6 text-md-left">
+					        <button class="btn btn-dark" id="purchaseAllButton">Purchase All</button>
+					    </div>
+					</div>
                 </div><!-- End .cart-table-container -->
             </div><!-- End .container -->
         </main><!-- End .main -->
@@ -164,6 +163,7 @@
     <script src="/usr/js/jquery.min.js"></script>
     <script src="/usr/js/bootstrap.bundle.min.js"></script>
     <script src="/usr/js/plugins.min.js"></script>
+	
 
     <!-- Main JS File -->
     <script src="/usr/js/main.min.js"></script>
@@ -206,6 +206,35 @@
         formatPriceElements();
     });
 </script>
+
+<!-- 삭제 관련 스크립트 (단일 삭제 건) -->
+<script>
+    function deleteWishlist(wishlistSeq) {
+        alert('버튼 눌렸당');
+        // AJAX 요청을 보내기 전에 확인 메시지를 표시할 수 있습니다.
+        if (confirm("정말로 삭제하시겠습니까?")) {
+            // AJAX 요청을 보내는 부분입니다.
+            $.ajax({
+                type: "POST",
+                url: "/ueleteW", // 요청을 처리할 URL을 입력하세요.
+                data: { wishlistSeq: wishlistSeq }, // 요청에 필요한 데이터를 입력하세요.
+                success: function(response) {
+                    // 성공적으로 요청이 완료되었을 때 실행되는 코드입니다.
+                    // 페이지를 새로고침하거나, 필요한 작업을 수행하세요.
+                    window.location.reload();
+                },
+                error: function(xhr, status, error) {
+                    // 요청이 실패했을 때 실행되는 코드입니다.
+                    // 실패한 이유에 대한 메시지를 표시하거나, 필요한 작업을 수행하세요.
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+    }
+</script>
+
+
+
 
 </body>
 

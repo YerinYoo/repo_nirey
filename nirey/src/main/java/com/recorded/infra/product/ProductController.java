@@ -53,18 +53,24 @@ public class ProductController {
 	
 	@ResponseBody
 	@RequestMapping(value="/insertWishlist")
-	public String insertWishlist(ProductDto dto) throws Exception {
-		
-		ProductDto productDto = new ProductDto();
-		productDto.setDelNY(0);
-		
-		System.out.println(dto.toString());
-		
-		service.insertWishlist(productDto);
-		
-		System.out.println("나 컨트롤러 불려옴.위시리스트에 추가할게?");
-		return "redirect:/recorded/Shop/Product";
+	public String insertWishlist(ProductDto dto, HttpSession httpSession) throws Exception {
+	    // 세션에서 사용자의 시퀀스 값을 가져옴
+	    String memberSeq = (String) httpSession.getAttribute("sessSeqUsr");
+
+	    // 위시리스트에 추가할 때 사용자의 시퀀스 값 설정
+	    dto.setMember_memberSeq(memberSeq);
+
+	    // 나머지 필요한 로직 수행
+	    dto.setDelNY(0); // 삭제 여부 설정
+	    service.insertWishlist(dto); // 서비스 호출
+	    
+	    System.out.println("dto.getProduct_productSeq()" +dto.getProduct_productSeq());
+	    System.out.println("위시리스트에 상품 추가됨: " + dto.toString());
+
+	    return "redirect:/recorded/Shop/Product"; // 상품 페이지로 리다이렉트
 	}
+
+
 
 	@RequestMapping(value = "/ProductUpdate")
 	public String ProductUpdate(ProductDto dto) throws Exception {

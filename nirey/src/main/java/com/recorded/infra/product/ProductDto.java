@@ -8,7 +8,7 @@ import java.util.List;
 public class ProductDto {
 
 
-private String productSeq;
+private Integer productSeq;
 private Integer delNY;
 private String ProductName;
 private Integer OrgPrice;
@@ -40,7 +40,7 @@ private Integer reviewRateAvg;
 private Integer ea;
 private String wishlistColor;
 private String wishlistSize;
-private String Product_productSeq;
+private Integer Product_productSeq;
 private String Member_memberSeq;
 
 
@@ -51,10 +51,10 @@ public String getMember_memberSeq() {
 public void setMember_memberSeq(String member_memberSeq) {
 	Member_memberSeq = member_memberSeq;
 }
-public String getProduct_productSeq() {
+public Integer getProduct_productSeq() {
 	return Product_productSeq;
 }
-public void setProduct_productSeq(String product_productSeq) {
+public void setProduct_productSeq(Integer product_productSeq) {
 	Product_productSeq = product_productSeq;
 }
 public String getWishlistColor() {
@@ -111,10 +111,10 @@ public String getSizeSeq() {
 public void setSizeSeq(String sizeSeq) {
 	this.sizeSeq = sizeSeq;
 }
-public String getProductSeq() {
+public Integer getProductSeq() {
 	return productSeq;
 }
-public void setProductSeq(String productSeq) {
+public void setProductSeq(Integer productSeq) {
 	this.productSeq = productSeq;
 }
 public Integer getDelNY() {

@@ -184,27 +184,27 @@ where a.productSeq = #{productSeq}
 </insert>
 
 <insert id="insertWishlist">
-	insert into wishlist (
-		Member_memberSeq,
-		Product_productSeq,
-		delNY,
-		regDateTime,
-		modDateTime,
-		ea,
-		size,
-		color
-	) values (
-		#{Member_memberSeq},
-		#{Product_productSeq},
-		#{delNY},
-		now(),
-		now(),
-		#{ea},
-		#{size},
-		#{color}
-	);
-	
+    insert into wishlist (
+        Member_memberSeq,
+        Product_productSeq,
+        delNY,
+        regDateTime,
+        modDateTime,
+        ea,
+        size,
+       	color
+    ) values (
+        #{member_memberSeq},
+        #{product_productSeq},
+        #{delNY},
+        now(),
+        now(),
+        #{ea},
+        #{size},
+        #{color}
+    )
 </insert>
+
 
     <update id="update">
    	update product
@@ -481,5 +481,12 @@ where 1=1
 	and wishlistSeq = #{wishlistSeq}
 </update>
 
+<!-- 위시리스트 전체 삭제 처리 -->
+<update id="deleteAll">
+	update wishlist
+	set delNY = 1
+	where Member_memberSeq = #{memberSeq}
+
+</update>
 <!-- ProductMapper.xml -->
 </mapper>
