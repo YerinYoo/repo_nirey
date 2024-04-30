@@ -108,11 +108,8 @@ public class MemberController extends BaseController {
         // 나머지 로직은 그대로 유지
         System.out.println(dto.toString());
         service.insert(dto);
-        return "redirect:/recorded";
+        return "redirect:/loginAdm";
     }
-
-    
- // MemberController.java
 
  // 회원 정보 수정 처리
  @PostMapping("/MemberUpdate")
@@ -123,11 +120,24 @@ public class MemberController extends BaseController {
 
  @ResponseBody
  @RequestMapping("/updateUser")
- public String updateUser(@ModelAttribute MemberDto dto) throws Exception {
-	 service.updateUser(dto);
-	 System.out.println("업데이트 해!!");
-	 return "redirect:/MyPage/AccountSettings";
+ public String updateUser(@ModelAttribute MemberDto dto, HttpSession session) throws Exception {
+     service.updateUser(dto);
+     System.out.println("업데이트 완료!!");
+     
+     // 세션에서 로그인한 회원 정보 가져오기
+     MemberDto authenticatedMember = (MemberDto) session.getAttribute("authenticatedMember");
+
+     // 세션에 로그인한 정보가 없으면 리다이렉트하지 않고 에러 처리 또는 다른 방식으로 처리
+     if (authenticatedMember == null) {
+         return "error"; 
+     }
+
+     // 리다이렉트 전에 세션에 저장된 회원 정보를 다시 모델에 추가
+     session.setAttribute("authenticatedMember", authenticatedMember);
+
+     return "redirect:/MyPage/AccountSettings"; //리턴 경로 에러? 왜 그러는건지 확인하기 
  }
+
 
     // 회원 탈퇴 처리
     @RequestMapping(value = "/MemberUelete")
@@ -276,6 +286,38 @@ public class MemberController extends BaseController {
 		return "usr/infra/v1/register";
 		
 	}
+	
+	 // 회원 가입 처리
+    @PostMapping("/register")
+    public String register(MemberDto dto) throws Exception {
+        String originalPwd = dto.getPwd(); // 사용자가 입력한 비밀번호 저장
+
+        // 사용자가 입력한 비밀번호를 암호화하여 DTO 객체에 설정
+        dto.setPwd(encodeBcrypt(dto.getPwd(), 9));
+
+        // 입력 값이 없으면 0으로 설정
+        if (dto.getDormantNY() == null) {
+            dto.setDormantNY(0);
+        }
+        if (dto.getQuitNY() == null) {
+            dto.setQuitNY(0);
+        }
+
+        // 데이터베이스에 삽입하기 전에 암호화된 비밀번호를 확인하고 출력
+        System.out.println("Encrypted Password: " + dto.getPwd());
+
+        // 사용자가 입력한 비밀번호와 암호화된 비밀번호를 비교하여 출력
+        if (matchesBcrypt(originalPwd, dto.getPwd(), 10)) {
+            System.out.println("Password Matches!");
+        } else {
+            System.out.println("Password Does Not Match!");
+        }
+
+        // 나머지 로직은 그대로 유지
+        System.out.println(dto.toString());
+        service.insert(dto);
+        return "redirect:/recorded/Welcome";
+    }
 
 
     //-----------------------------------------------------------eCommerce Controller E

@@ -105,20 +105,20 @@
 													
 											<div class="mt-3">
 											    <label for="register-gender">Gender</label>
-												<input id="register-gender-male" name="register-gender" th:value="1" type="radio" autocomplete="off" th:checked="${session.sessGenderUsr eq 1}">
+												<input id="register-gender-male" name="genderCD" th:value="1" type="radio" autocomplete="off" th:checked="${session.sessGenderUsr eq 1}">
 												<label for="register-gender-male">Male</label>
 												
-												<input id="register-gender-female" name="register-gender" th:value="2" type="radio" autocomplete="off" th:checked="${session.sessGenderUsr eq 2}">
+												<input id="register-gender-female" name="genderCD" th:value="2" type="radio" autocomplete="off" th:checked="${session.sessGenderUsr eq 2}">
 												<label for="register-gender-female">Female</label>
 												
-												<input id="register-gender-etc" name="register-gender" th:value="3" type="radio" autocomplete="off" th:checked="${session.sessGenderUsr eq 3}">
+												<input id="register-gender-etc" name="genderCD" th:value="3" type="radio" autocomplete="off" th:checked="${session.sessGenderUsr eq 3}">
 												<label for="register-gender-etc">etc.</label>
 											</div>
 											
 										<div class="mt-1">
 											<label for="register-mobile">
 												Mobile</label>
-											<input type="text" class="form-input form-wide" id="mobile" name="mobile" th:value="${session.sessMobileNumUsr}"/>
+											<input type="tel" pattern="[0-9]*" class="form-input form-wide" id="mobile" name="mobile" th:value="${session.sessMobileNumUsr}"/>
 										</div>
 							  </div>
 							</div>

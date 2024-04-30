@@ -149,60 +149,189 @@
 	
 	 <!--  Validation JS -->
     <script src="/usr/js/validationXdm.js"></script>
-    
-    <script>
-		//비밀번호 입력 값과 비밀번호 확인 입력 값 일치 여부 판단
-		function pwdConfirm() {
-		    var pwd = document.getElementById('pwd').value; // 비밀번호 
-		    var confirmPwd = document.getElementById('confirmPwd').value; // 비밀번호 확인 값
-		    var confirmMsg = document.getElementById('confirmMsg'); // 확인 메세지
-		    var correctColor = "#00ff00"; // 맞았을 때 출력되는 색깔
-		    var wrongColor = "#ff0000"; // 틀렸을 때 출력되는 색깔
-		
-		    if (pwd === confirmPwd) {
-		        confirmMsg.style.color = correctColor;
-		        confirmMsg.innerHTML = "비밀번호 일치";
-		    } else {
-		        confirmMsg.style.color = wrongColor;
-		        confirmMsg.innerHTML = "비밀번호 불일치";
-		    }
-		}
-		
-		$(function () {
-		    // 등록버튼 클릭 이벤트
-		    $("#btnInsert").click(function (event) {
-		        event.preventDefault(); // 기본 제출 동작을 막음
-		        if (validationUpdt() === false) {
-		            alert('얌마 가입 실패임');
-		            return false;
-		        } else {
-		            $("#formInsert").attr("action", "/memberInsert"); // 폼의 action 속성을 변경
-		            alert('회원가입합시다');
-		            $("#formInsert").submit(); // 폼 제출
-		        }
-		    });
-		
-		    function validationInst() {
-		        if (validationUpdt() === false) {
-		            return false;
-		        }
-		    }
-		
-		    // 전체 유효성 검사 함수
-		    function validationUpdt() {
-		        // 각 요소의 유효성 검사를 수행하고, 하나라도 실패하면 false를 반환
-		        if (!checkOnlyKoreanEnglishNumber('name', 2, 0, "이름은 한글, 영어로만 입력 가능합니다.")) return false;
-		        if (!checkOnlyEnglishNumber('ID', 2, 1, "ID는 영대소문자, 숫자만 입력 가능합니다.")) return false;
-		        if (!checkOnlyEnglishNumber('pwd', 2, 0, "제품 이름은 영문대소문자, 숫자만 입력 가능합니다.")) return false;
-		        if (!checkOnlyEnglishNumber('email', 2, 1, "이메일은 영대소문자, 숫자만 입력 가능합니다.")) return false;
-		        if (!checkRadio('genderCD', 2, "성별을 선택해 주세요.")) return false;
-		        if (!checkOnlyNumber('MobileNum', 2, 0, 1, 0, 9, "순서는 숫자(0~9)만 입력 가능합니다.")) return false;
-		        return true; // 모든 유효성 검사를 통과하면 true 반환
-		    }
-		});
-
-    </script>
 	
+	<script>
+	    $(document).ready(function () {
+			$(document).ready(function () {
+			    // 생일 입력 필드에서 포커스를 잃으면 형식을 변환
+			    $("#register-birthday").blur(function () {
+			        var value = $(this).val().trim();
+			        if (value.length === 8 && /^\d+$/.test(value)) {
+			            var year = value.substring(0, 4);
+			            var month = value.substring(4, 6);
+			            var day = value.substring(6, 8);
+			            var formattedDate = year + "-" + month + "-" + day;
+			            $(this).val(formattedDate);
+			        }
+			        checkInputLength($(this), 10); // 생일 입력 길이 체크
+			    });
+			
+			    // 전화번호 입력 필드에서 포커스를 잃으면 형식을 변환
+			    $("#MobileNum").blur(function () {
+			        var value = $(this).val().trim();
+			        if (value.length === 11 && /^\d+$/.test(value)) {
+			            var firstPart = value.substring(0, 3);
+			            var secondPart = value.substring(3, 7);
+			            var thirdPart = value.substring(7, 11);
+			            var formattedNumber = firstPart + "-" + secondPart + "-" + thirdPart;
+			            $(this).val(formattedNumber);
+			        }
+			        checkInputLength($(this), 13); // 전화번호 입력 길이 체크
+			    });
+			});
+
+	
+	        $("#btnInsert").click(function (event) {
+	            event.preventDefault(); // 폼 제출 방지
+	
+	            // 모든 필드에 대한 유효성 검사
+	            var isValid = validateForm();
+	            if (isValid) {
+	                // 회원가입 처리를 위해 AJAX 요청을 보냅니다.
+	                $.ajax({
+	                    type: "POST",
+	                    url: "/register", // 회원가입 처리를 담당하는 컨트롤러 경로
+	                    data: $("#formInsert").serialize(), // 폼 데이터를 직렬화하여 전송
+	                    success: function (response) {
+	                        // 회원가입 성공 시 리다이렉트 또는 알맞은 처리
+	                       console.log("회원가입이 완료되었습니다.");
+	                        window.location.href = "/recorded/Welcome"; // 로그인 페이지로 이동
+	                    },
+	                    error: function (xhr, status, error) {
+	                        // 회원가입 실패 시 알맞은 처리
+	                        console.log("회원가입 ");
+	                    }
+	                });
+	            }
+	        });
+	
+			// 모든 필드에 대한 유효성 검사
+			function validateForm() {
+			    var isValid = true;
+			
+			    // ID 필드 유효성 검사 (영문, 숫자만 가능)
+			    var id = $("#ID").val().trim();
+			    if (id === "") {
+			        $("#ID").addClass("is-invalid");
+			        $("#IDFeedback").text("ID를 입력하세요.").show();
+			        isValid = false;
+			    } else if (!/^[a-zA-Z0-9]+$/.test(id)) {
+			        $("#ID").addClass("is-invalid");
+			        $("#IDFeedback").text("영문자와 숫자로만 이루어진 ID를 입력하세요.").show();
+			        isValid = false;
+			    } else {
+			        $("#ID").removeClass("is-invalid");
+			        $("#IDFeedback").hide();
+			    }
+			
+			    // 비밀번호 필드 유효성 검사 (제한 없음)
+			    var pwd = $("#pwd").val().trim();
+			    if (pwd === "") {
+			        $("#pwd").addClass("is-invalid");
+			        $("#pwdFeedback").text("비밀번호를 입력하세요.").show();
+			        isValid = false;
+			    } else {
+			        $("#pwd").removeClass("is-invalid");
+			        $("#pwdFeedback").hide();
+			    }
+			
+			    // 비밀번호 확인 필드 유효성 검사 (앞서 입력한 비밀번호와 일치해야 함)
+			    var confirmPwd = $("#confirmPwd").val().trim();
+			    if (confirmPwd === "") {
+			        $("#confirmPwd").addClass("is-invalid");
+			        $("#confirmPwdFeedback").text("비밀번호 확인을 입력하세요.").show();
+			        isValid = false;
+			    } else if (confirmPwd !== pwd) {
+			        $("#confirmPwd").addClass("is-invalid");
+			        $("#confirmPwdFeedback").text("비밀번호가 일치하지 않습니다.").show();
+			        isValid = false;
+			    } else {
+			        $("#confirmPwd").removeClass("is-invalid");
+			        $("#confirmPwdFeedback").hide();
+			    }
+			
+			    // Email 필드 유효성 검사 (영문, 숫자, 특수문자 + @ 및 .com과 같은 내용 필수)
+			    var email = $("#email").val().trim();
+			    if (email === "") {
+			        $("#email").addClass("is-invalid");
+			        $("#emailFeedback").text("이메일을 입력하세요.").show();
+			        isValid = false;
+			    } else if (!/^[\w.-]+@[a-zA-Z\d]+\.[a-zA-Z]{2,}$/.test(email)) {
+			        $("#email").addClass("is-invalid");
+			        $("#emailFeedback").text("올바른 이메일 형식이 아닙니다.").show();
+			        isValid = false;
+			    } else {
+			        $("#email").removeClass("is-invalid");
+			        $("#emailFeedback").hide();
+			    }
+			
+			    // 이름 필드 유효성 검사 (영문, 한국어만 가능)
+			    var name = $("#name").val().trim();
+			    if (name === "") {
+			        $("#name").addClass("is-invalid");
+			        $("#nameFeedback").text("이름을 입력하세요.").show();
+			        isValid = false;
+			    } else if (!/^[가-힣a-zA-Z\s]+$/.test(name)) {
+			        $("#name").addClass("is-invalid");
+			        $("#nameFeedback").text("한글과 영문자로만 이루어진 이름을 입력하세요.").show();
+			        isValid = false;
+			    } else {
+			        $("#name").removeClass("is-invalid");
+			        $("#nameFeedback").hide();
+			    }
+			
+			    // 생일 필드 유효성 검사 (숫자만 입력 가능)
+			    var birthday = $("#register-birthday").val().trim();
+			    if (birthday === "") {
+			        $("#register-birthday").addClass("is-invalid");
+			        $("#birthdayFeedback").text("생일을 입력하세요.").show();
+			        isValid = false;
+			    } else {
+			        $("#register-birthday").removeClass("is-invalid");
+			        $("#birthdayFeedback").hide();
+			    }
+			
+			    // 전화번호 필드 유효성 검사 (숫자만 입력 가능)
+			    var mobileNum = $("#MobileNum").val().trim();
+			    if (mobileNum === "") {
+			        $("#MobileNum").addClass("is-invalid");
+			        $("#MobileNumFeedback").text("전화번호를 입력하세요.").show();
+			        isValid = false;
+			    } else {
+			        $("#MobileNum").removeClass("is-invalid");
+			        $("#MobileNumFeedback").hide();
+			    }
+			
+			    // 성별 필드 유효성 검사 (라디오 버튼 그룹)
+			    var selectedGender = $("input[name='register-gender']:checked").val();
+			    if (!selectedGender) {
+			        $("#genderCDFeedback").text("성별을 선택하세요.").show();
+			        isValid = false;
+			    } else {
+			        $("#genderCDFeedback").hide();
+			    }
+			
+			    // 기타 필드에 대한 유효성 검사를 추가하세요.
+			
+			    return isValid; // 모든 필드가 유효하면 true 반환
+			}
+
+	
+	        // 입력 필드의 글자 수를 체크하여 지정된 길이를 넘으면 입력을 막습니다.
+	        function checkInputLength(inputField, maxLength) {
+	            var value = inputField.val().trim();
+	            if (value.length >= maxLength) {
+	                inputField.val(value.substring(0, maxLength)); // 입력 필드의 값이 최대 길이에 도달하면 잘라냅니다.
+	                inputField.attr("maxlength", maxLength); // 최대 길이를 설정하여 추가 입력을 막습니다.
+	            } else {
+	                inputField.removeAttr("maxlength"); // 최대 길이 설정을 제거하여 추가 입력을 허용합니다.
+	            }
+	        }
+	    });
+	</script>
+
+
+
 </body>
 
 </html>
