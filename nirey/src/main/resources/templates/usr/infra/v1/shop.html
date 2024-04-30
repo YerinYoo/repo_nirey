@@ -116,6 +116,7 @@
                                     <span>Filter</span>
                                 </a>
 
+								<!-- 정렬 옵션을 선택할 수 있는 셀렉트 박스 추가 -->
 								<div class="toolbox-item toolbox-sort mb-3">
 								    <label>Sort By:</label>
 								    <div class="select-custom">
@@ -126,9 +127,11 @@
 								            <option value="date">Sort by newness</option>
 								            <option value="price">Sort by price: low to high</option>
 								            <option value="price-desc">Sort by price: high to low</option>
+								            <option value="newest">Sort by newest</option>
 								        </select>
 								    </div><!-- End .select-custom -->
 								</div><!-- End .toolbox-item -->
+
                             </div><!-- End .toolbox-left -->
 							<form id="formList" action="/recordedShop" method="GET">
 
@@ -156,7 +159,7 @@
 						<div class="row" id="product-list">
 <!--					<div class="col-6 col-sm-4 col-md-3 col-xl-5col" id="product-${product.productSeq}" data-total-review-count="${product.totalReviewCount}" data-review-rate-avg="${product.reviewRateAvg}" data-reg-date-time="${product.regDateTime}" data-org-price="${product.orgPrice}">-->
 
-						    <div class="col-6 col-sm-4 col-md-3 col-xl-5col" th:each="product : ${prodList}" th:id="'product-' + ${product.productSeq}">
+						    <div class="col-6 col-sm-4 col-md-3 col-xl-5col sortBy" th:each="product : ${prodList}" th:id="'product-' + ${product.productSeq}" th:data-reg-date-time="${product.regDateTime}">
 						        <div class="product-default inner-quickview inner-icon">
 						            <figure>
 						                <a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq}, ProudctName=${product.ProductName})}" >
@@ -395,72 +398,61 @@ var btn = document.querySelector('.btn-quickview');
 btn.disabled = true;
 </script>
 
-<script>
-        // Sort by 관련
-        document.querySelector('#orderby').addEventListener('change', function() {
-            console.log('정렬 함 해보겠심더');
-            let orderBy = this.value;
-            sortProducts(orderBy);
-        });
 
-        function sortProducts(orderBy) {
-            console.log('정렬한다!!');
-            let productList = document.getElementById('product-list');
-            let products = Array.from(productList.children);
-            console.log('제품 리스트를 함 불러와보께');
+	<script>
+	    // 가격 관련 스크립트와 함께 정렬 함수 추가
+	    function sortProducts(orderBy) {
+	        let productList = $('#product-list');
+	        let products = productList.find('.col-6').get();
+	
+	        products.sort(function(a, b) {
+	            let valueA, valueB;
+	
+	            switch (orderBy) {
+	                case 'price-low-to-high':
+	                case 'price-high-to-low':
+	                    valueA = parseFloat($(a).find('.product-price').text().replace('₩', '').replace(',', ''));
+	                    valueB = parseFloat($(b).find('.product-price').text().replace('₩', '').replace(',', ''));
+	                    break;
+	                case 'popularity-high-to-low':
+	                case 'popularity-low-to-high':
+	                    valueA = parseInt($(a).data('total-review-count'));
+	                    valueB = parseInt($(b).data('total-review-count'));
+	                    break;
+	                case 'rating-high-to-low':
+	                case 'rating-low-to-high':
+	                    valueA = parseFloat($(a).data('review-rate-avg'));
+	                    valueB = parseFloat($(b).data('review-rate-avg'));
+	                    break;
+	                case 'newest':
+	                    valueA = parseInt($(a).data('reg-date-time'));
+	                    valueB = parseInt($(b).data('reg-date-time'));
+	                    break;
+	                default:
+	                    break;
+	            }
+	
+	            if (orderBy === 'price-low-to-high' || orderBy === 'popularity-high-to-low' || orderBy === 'rating-low-to-high' || orderBy === 'newest') {
+	                return valueA < valueB ? -1 : (valueA > valueB ? 1 : 0);
+	            } else {
+	                return valueA > valueB ? -1 : (valueA < valueB ? 1 : 0);
+	            }
+	        });
+	
+	        productList.empty();
+	
+	        products.forEach(function(product) {
+	            productList.append(product);
+	        });
+	
+	        // 정렬된 후의 상품 배열 출력
+	        console.log(products);
+	    }
+	</script>
 
-            products.sort(function(a, b) {
-                console.log('비교대상 찾아보이소');
-                let aValue, bValue;
 
-                switch(orderBy) {
-                    case 'popularity':
-                        console.log('인기도순');
-                        aValue = parseInt(a.dataset.totalReviewCount);
-                        bValue = parseInt(b.dataset.totalReviewCount);
-                        break;
-                    case 'rating':
-                        console.log('평점순');
-                        aValue = parseFloat(a.dataset.reviewRateAvg);
-                        bValue = parseFloat(b.dataset.reviewRateAvg);
-                        break;
-                    case 'date':
-                        console.log('최신순');
-                        aValue = new Date(a.dataset.regDateTime);
-                        bValue = new Date(b.dataset.regDateTime);
-                        break;
-                    case 'price':
-                        console.log('가격순');
-                        aValue = parseFloat(a.dataset.OrgPrice);
-                        bValue = parseFloat(b.dataset.OrgPrice);
-                        break;
-                    case 'price-desc':
-                        console.log('높은 가격순');
-                        aValue = parseFloat(a.dataset.OrgPrice);
-                        bValue = parseFloat(b.dataset.OrgPrice);
-                        break;
-                    default:
-                        return 0;
-                }
-                console.log('정렬된 제품 목록:', products);
 
-                if (orderBy === 'price-desc') {
-                    return bValue - aValue;
-                } else {
-                    return aValue - bValue;
-                }
-            });
-
-            while (productList.firstChild) {
-                productList.removeChild(productList.firstChild);
-            }
-
-            products.forEach(function(product) {
-                productList.appendChild(product);
-            });
-        }
-    </script>
-   
+	
 </body>
 
 </html> 
