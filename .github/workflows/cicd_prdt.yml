@@ -42,3 +42,54 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew clean build --exclude-task test
       working-directory: ./${{ env.PROJECT_NAME }}    
+
+    # (4) S3로 전송할 파일을 담을 디렉토리 생성
+    - name: Make Directory for deliver
+      run: mkdir deploy
+
+    # (5) Jar 파일 Copy
+    - name: Copy Jar
+      run: cp ./${{ env.PROJECT_NAME }}/build/libs/*.jar ./deploy/
+
+    # (6) appspec.yml Copy
+    - name: Copy appspec
+      run: cp ./appspec.yml ./deploy/
+
+    # (7) script files Copy
+    - name: Copy shell
+      run: cp ./scripts/* ./deploy/
+
+    # (8) 압축파일 생성
+    - name: Set NOW_DATETIME as env variable
+      run: 
+        echo "NOW_DATETIME=$(date "+%Y-%m-%d-%aT%H.%M.%S" -d 9hours)" >> $GITHUB_ENV
+    - name: Set ZIP_FILE as env variable
+      run:
+        echo "ZIP_FILE=${PROJECT_NAME}_${NOW_DATETIME}" >> $GITHUB_ENV
+    - name: Make zip file      
+      run: zip -r -qq -j ./${{ env.ZIP_FILE }}.zip ./deploy/*  
+      
+    # (9) AWS 인증 (IAM 사용자 Access Key, Secret Key 활용)
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.AWS_REGION }}   
+
+    # (10) 압축파일을 S3 버킷에 업로드              
+    - name: Upload to AWS S3
+      run: |
+        aws s3 cp \
+        --region ${{ env.AWS_REGION }} \
+        --acl private \
+        ./${{ env.ZIP_FILE }}.zip s3://${{ env.S3_BUCKET }}  
+
+    # (11) S3 버킷에 있는 파일을 대상으로 CodeDeploy application 실행
+    - name: Deploy to AWS EC2 from S3
+      run: |
+        aws deploy create-deployment \
+          --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \
+          --deployment-config-name CodeDeployDefault.AllAtOnce \
+          --deployment-group-name ${{ env.CODE_DEPLOY_DEPLOYMENT_GROUP_NAME }} \
+          --s3-location bucket=${{env.S3_BUCKET}},key=${{env.ZIP_FILE}}.zip,bundleType=zip
