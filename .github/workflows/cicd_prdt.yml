@@ -9,7 +9,7 @@ name: cicd_prdt
 on: [workflow_dispatch]
 
 env:
-  PROJECT_NAME: recorded
+  PROJECT_NAME: nirey
   AWS_REGION: ap-northeast-2
   S3_BUCKET: nirey-cicd
   CODE_DEPLOY_APPLICATION_NAME: nirey-meomy
@@ -40,5 +40,5 @@ jobs:
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
     - name: Build with Gradle
-      run: .//gradlew clean build --exclude-task test
+      run: ./gradlew clean build --exclude-task test
       working-directory: ./${{ env.PROJECT_NAME }}    
