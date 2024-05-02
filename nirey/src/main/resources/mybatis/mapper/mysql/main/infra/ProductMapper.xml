@@ -564,7 +564,7 @@ where 1=1
 	update wishlist
 	set delNY = 1
 	where Member_memberSeq = #{memberSeq}
-
 </update>
+
 <!-- ProductMapper.xml -->
 </mapper>

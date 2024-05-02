@@ -12,7 +12,6 @@
 	        , a.orderStatus
 	        , a.RefundNY
 	        , a.TotalOrgPrice
-	        , a.TotalDiscPrice
 	        , a.TotalPrice
 	        , a.OrderDate
 	        , a.CardNo
