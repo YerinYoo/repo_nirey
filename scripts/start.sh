@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # start.sh
 
-PROJECT="nirey-0.0.1"
+PROJECT="nirey-0.0.1"
 PROJECT_FULL_PATH_01="/home/ec2-user/service/recorded-prdt"
 JAR_FILE="$PROJECT_FULL_PATH_01/$PROJECT.jar"
 LOG_PATH="$PROJECT_FULL_PATH_01/logs"
