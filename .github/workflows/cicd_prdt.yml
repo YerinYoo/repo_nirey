@@ -12,8 +12,8 @@ env:
   PROJECT_NAME: nirey
   AWS_REGION: ap-northeast-2
   S3_BUCKET: nirey-cicd
-  CODE_DEPLOY_APPLICATION_NAME: nirey-meomy
-  CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: nirey-meomy-prdt
+  CODE_DEPLOY_APPLICATION_NAME: nirey-recorded
+  CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: nirey-recorded-prdt
 
 permissions:
   contents: read
