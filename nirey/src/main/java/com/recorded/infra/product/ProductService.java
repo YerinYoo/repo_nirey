@@ -15,7 +15,6 @@ public class ProductService {
 	
 	public List<ProductDto> selectList() { return dao.selectList();}
 	
-	
 	public List<ProductDto> prodList() { return dao.prodList();}
 	
 	public List<ProductDto>prodColor(ProductDto dto) {return dao.prodColor(dto);}
@@ -96,9 +95,15 @@ public class ProductService {
         return dao.selectList(vo);
     }
     
+    //위시리스트 목록 조회 
     public List<ProductDto> wishlist() { return dao.wishlist();}
 
-    }
+	//위시리스트 일부 제품 선택
+	public ProductDto selectWishlist(ProductDto dto) {
+		return dao.selectWishlist(dto);
+	}
+	
+}
 
 
 

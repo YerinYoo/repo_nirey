@@ -26,7 +26,9 @@ public interface ProductDao {
 	
 	public ProductDto selectOne(ProductDto dto);
 	
-	 public ProductDto selectProd(ProductDto dto); 
+	public ProductDto selectProd(ProductDto dto); 
+	 
+	public ProductDto selectWishlist(ProductDto dto);
 	
 	public int insert(ProductDto dto);
 	public int insertRev(ProductDto dto);

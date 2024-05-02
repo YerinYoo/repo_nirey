@@ -57,22 +57,21 @@ public class MixController {
 	  @RequestMapping(value="/MyPage/CheckOut")
 	  public String checkOut(ProductDto dto, Model model, HttpSession session) throws Exception {
 		  
-		  List<ProductDto> wishlist = serviceP.wishlist();
-		  model.addAttribute("wishlist", wishlist);
-		  
-	        // 세션에서 로그인한 회원 정보 가져오기
-	        MemberDto authenticatedMember = (MemberDto) session.getAttribute("authenticatedMember");
-
-	        // 세션에 로그인한 정보가 없으면 로그인 페이지로 리다이렉트
-	        if (authenticatedMember == null) {
-	            return "redirect:/recorded/Login";
-	        }
-
-	        // 모델에 세션에 저장된 회원 정보 추가
-	       model.addAttribute("account", authenticatedMember);
-	        
-		  model.addAttribute("checkOut", service.checkOut());
+	      // 세션에서 로그인한 회원 정보 가져오기
+	      MemberDto authenticatedMember = (MemberDto) session.getAttribute("authenticatedMember");
+	
+	      // 세션에 로그인한 정보가 없으면 로그인 페이지로 리다이렉트
+	      if (authenticatedMember == null) {
+	    	  return "redirect:/recorded/Login";
+	      }
+	
+	      // 모델에 세션에 저장된 회원 정보 추가
+	      model.addAttribute("account", authenticatedMember);
+	      
+		  //전체 상품 조회 
 		  model.addAttribute("wishlist",serviceP.wishlist());
+		  //일부 상품 조회 
+		  model.addAttribute("selectWishlist", serviceP.selectWishlist(dto));
 		  
 		  
 		  return "usr/infra/v1/checkout";

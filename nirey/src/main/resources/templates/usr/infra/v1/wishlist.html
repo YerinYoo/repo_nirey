@@ -88,64 +88,50 @@
                                 <th class="action-col" style="width : 20%"></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            
-                            <tr class="product-row" th:each="wishlist : ${wishlist}" th:if="${wishlist.delNY == 0}">
-								
-                                <td style="text-align:center; vertical-align : middle; width : 20%">
-                                    <figure class="product-image-container">
-                                        <a th:href="@{/recorded/Shop/Product(productSeq=${wishlist.productSeq}, ProudctName=${wishlist.ProductName})}" class="product-image">
-                                            <img src="/usr/images/products/product-5.jpg" alt="product" style="height : 200px; width : auto;">
-                                        </a>
-                                    </figure>
-                                </td>
-                                <td style=" vertical-align : middle; max-width : 0px; width : 30%">
-                                	<div class="product-info">
-	                                	<ul>
-	                                		<li style="padding-bottom: 20px; padding-top : 20px"><span th:text="${wishlist.ProductName}" style="font-weight: bold;"></span></li>
-											<li style="border-top: 1px solid #ccc;"></li>
-											<li style="padding-top : 20px; padding-bottom : 5px;"><span style="font-weight: bold;">Selected Option</span></li>
-											<li>Color : <span th:text="${wishlist.wishlistColor}"></span></li>
-											<li style="padding-bottom: 10px;">Size : <span th:text="${wishlist.wishlistSize}"></span></li>
-											<li style="padding-top : 20px; padding-bottom : 5px;"><span style="font-weight: bold;">Price (Single Quantity)</span></li>
-											<li>Org Price : <span class="old-price" th:text="${wishlist.OrgPrice}"></span></li>
-											<li>Final Price : <span class="new-price" th:text="${wishlist.DiscountedPrice}"></span></li>
-	                                	</ul>
-                                	</div>
-                                </td>
-                                <td style="text-align : center; vertical-align : middle; width : 10%;" th:text="${wishlist.ea}"></td>
-								
-<!--							<td class="price" style="text-align : center; vertical-align : middle; width : 10%" th:text="${wishlist.DiscountedPrice}"></td>-->
-								<td style="text-align : center; vertical-align : middle; width : 10%">
-									<div class="price-box">
-									    <span class="old-price" th:text="${wishlist.OrgPrice * wishlist.ea}"></span>
-									    <br>
-									    <span class="new-price" th:text="${wishlist.DiscountedPrice * wishlist.ea}" style="font-size: medium;"></span>
-									</div>
+						<tbody>
+						    <tr class="product-row" th:each="wishlist : ${wishlist}" th:if="${wishlist.delNY == 0}">
+						        <td style="text-align:center; vertical-align : middle; width : 20%">
+						            <figure class="product-image-container">
+						                <a th:href="@{/recorded/Shop/Product(productSeq=${wishlist.productSeq}, ProductName=${wishlist.ProductName})}" class="product-image">
+						                    <img src="/usr/images/products/product-5.jpg" alt="product" style="height : 200px; width : auto;">
+						                </a>
+						            </figure>
+						        </td>
+						        <td style=" vertical-align : middle; max-width : 0px; width : 30%">
+						            <div class="product-info">
+						                <ul>
+						                    <li style="padding-bottom: 20px; padding-top : 20px"><span th:text="${wishlist.ProductName}" style="font-weight: bold;"></span></li>
+						                    <li style="border-top: 1px solid #ccc;"></li>
+						                    <li style="padding-top : 20px; padding-bottom : 5px;"><span style="font-weight: bold;">Selected Option</span></li>
+						                    <li>Color : <span th:text="${wishlist.wishlistColor}"></span></li>
+						                    <li style="padding-bottom: 10px;">Size : <span th:text="${wishlist.wishlistSize}"></span></li>
+						                    <li style="padding-top : 20px; padding-bottom : 5px;"><span style="font-weight: bold;">Price (Single Quantity)</span></li>
+						                    <li><span class="old-price" th:text="${wishlist.OrgPrice}"></span><span class="new-price" th:text="${wishlist.DiscountedPrice}"></span></li>
+						                </ul>
+						            </div>
+						        </td>
+						        <td style="text-align : center; vertical-align : middle; width : 10%;" th:text="${wishlist.ea}"></td>
+						        <td style="text-align : center; vertical-align : middle; width : 10%">
+						            <div class="price-box">
+						                <span class="old-price" th:text="${wishlist.OrgPrice * wishlist.ea}"></span>
+						                <br>
+						                <span class="new-price" th:text="${wishlist.DiscountedPrice * wishlist.ea}" style="font-size: medium;"></span>
+						            </div>
+						        </td>
+						        <td class="action" style="text-align:center; vertical-align : middle; padding: 0; padding-top : 50px; margin: 0; width : 20%">
+						            <a th:href="@{/MyPage/CheckOut(productSeq=${wishlist.wishlistSeq}, ProductName=${wishlist.ProductName})}" class="btn btn-dark wishlist mt-5 mt-md-0 col-6" title="Purchase" id="purchase-btn-1">Purchase</a>
+						            <!-- 위시리스트 단일 uelete 폼 -->
+						            <form method="post" action="/ueleteW">
+						                <button class="btn btn-delete product-type-simple btn-shop col-6 mb-1 mt-2">
+						                    DELETE
+						                </button>
+						                <input type="hidden" name="seq" th:value="${wishlist.wishlistSeq}" style="display : none"> 
+						                <input type="hidden" name="delNY" th:value="${wishlist.delNY}" style="display : none">
+						            </form>
+						        </td>
+						    </tr>
+						</tbody>
 
-									
-								</td>
-                                
-                                <td class="action" style="text-align:center; vertical-align : middle; padding: 0; margin: 0; width : 20%">
-									<a th:href="@{/MyPage/CheckOut(productSeq=${wishlist.productSeq}, ProudctName=${wishlist.ProductName})}" 
-									   class="btn btn-dark wishlist mt-5 mt-md-0 col-6"
-									   
-                                       title="Purchase" id="purchase-btn-1">Purchase</a>
-									<!-- 위시리스트 단일 uelete 폼 -->
-									<form method="post" action="/ueleteW">
-										<button class="btn btn-delete product-type-simple btn-shop col-6 mb-1 mt-2">
-										    DELETE
-										</button>
-										<input type="hidden" name="seq" th:value="${wishlist.wishlistSeq}" style="display : none"> 
-										<input type="hidden" name="delNY" th:value="${wishlist.delNY}" style="display : none">
-									
-									</form>
-									
-									
-                                	</div>
-								</td>
-                            </tr>
-                        </tbody>
                     </table>
 					<!-- 전체 삭제 / 전체 구매 버튼 -->
 					<div class="row" style="float : right; padding-right : 70px;" th:if="${wishlist != null and not #lists.isEmpty(wishlist)}">
