@@ -3,7 +3,7 @@ os: linux
 
 files:
   - source:  /
-    destination: /home/ec2-user/service/recorded-prdt
+    destination: /home/ec2-user/service/adsrun-recorded-prdt-01
     overwrite: yes
 
 permissions:
