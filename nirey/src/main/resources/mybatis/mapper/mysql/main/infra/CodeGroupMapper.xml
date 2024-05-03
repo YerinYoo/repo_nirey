@@ -8,7 +8,7 @@
     <!-- 공통구문 -->
     <sql id="selectCommon">
         from
-        codeGroup a
+        codegroup a
         WHERE 1=1
 
         <if test="shDelNy != null and shDelNy.equals('')">AND a.delNY = #{shDelNy}</if>
