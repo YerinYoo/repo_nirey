@@ -49,20 +49,20 @@
             ,seq
             ,name
             ,modDateTime
-        from CodeGroup
+        from codegroup
         where 1=1
             and seq=#{seq}
     </select>
 
     <!-- 코드 그룹 추가 -->
     <insert id="insert">
-        insert into CodeGroup (delNY, name, regDatetime, modDatetime)
+        insert into codegroup (delNY, name, regDatetime, modDatetime)
         values (#{delNY}, #{name}, now(), now())
     </insert>
 
     <!-- 코드 그룹 수정 -->
     <update id="update">
-        update codeGroup
+        update codegroup
         set
             memo=#{memo}
             ,name = #{name}
@@ -72,7 +72,7 @@
 
     <!-- 코드 그룹 삭제 -->
     <update id="updtDel">
-        update CodeGroup
+        update codegroup
         set
             delNY=1
         where 1=1
@@ -81,7 +81,7 @@
 
     <!-- 코드 그룹 삭제 -->
     <delete id="delete">
-        delete from CodeGroup
+        delete from codegroup
         where seq=#{seq}
     </delete>
 
@@ -90,7 +90,7 @@
         SELECT
             a.seq
             ,a.name
-        FROM codeGroup a
+        FROM codegroup a
         WHERE 1=1
             AND delNy = 0
         ORDER BY a.seq DESC

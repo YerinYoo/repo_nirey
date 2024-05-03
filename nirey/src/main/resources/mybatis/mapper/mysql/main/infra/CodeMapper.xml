@@ -13,7 +13,7 @@
         , b.seq as CodeGroupSeq
         , b.name as CodeGroupName 
         FROM code a
-        LEFT JOIN codeGroup b 
+        LEFT JOIN codegroup b 
             ON b.seq = a.CodeGroupSeq 
                 AND a.DelNy = 0
         WHERE 1=1
@@ -90,7 +90,7 @@
     <!-- Get Total Code Count -->
     <select id="getTotalCodeCount" resultType="int">
         SELECT COUNT(*) 
-        FROM codeGroup b 
+        FROM codegroup b 
         LEFT JOIN code a ON b.seq = a.CodeGroupSeq
         <if test="shDelNy != null and shDelNy != ''">
             WHERE a.delNY = #{shDelNy}
