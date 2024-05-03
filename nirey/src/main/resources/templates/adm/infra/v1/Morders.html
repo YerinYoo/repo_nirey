@@ -111,10 +111,6 @@
 						<div class="row">
 							<div class="col-sm-12 col-12">
 
-								<!-- Card start -->
-								<div class="card">
-									<div class="card-body">
-									
 						<div class="row">
 							<div class="col-sm-12 col-12">
 								<div class="card">
@@ -480,6 +476,18 @@
                 });
             });
         </script>
+
+		<!-- jQuery CDN 추가 -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- 페이지 로드 시 실행될 스크립트 -->
+		<script>
+		    // 페이지가 로드될 때 실행되는 함수
+		    $(document).ready(function() {
+		        // 페이지 로드가 완료되면 테이블을 표시
+		        $('.table-responsive').css('visibility', 'visible');
+		    });
+		</script>
 
 
 	<!-- Date Range JS -->

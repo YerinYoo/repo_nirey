@@ -109,9 +109,7 @@
 						<div class="row">
 							<div class="col-sm-12 col-12">
 
-								<!-- Card start -->
-								<div class="card">
-									<div class="card-body">
+				
 									
 						<div class="row">
 							<div class="col-sm-12 col-12">
@@ -212,22 +210,22 @@
 							<div class="col-sm-12 col-12">
 								
 										<div class="table-responsive">
-										<table class="table v-middle" style="table-layout:fixed;" >
-									    	<tr>
-									    		<td>
+										<table class="table v-middle" style="table-layout:fixed;">
+									    	<tr style="font-weight: bold; font-style: italic;">
+									    		<td style="width :50px;">
 									    			<div class="form-check form-check-inline">
 														<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
 													</div>
 									    		</td>
-									    		<td>#</td>
-									    		<td>productSeq</td>
-									    		<td>delNY</td>
+									    		<td style="width : 50px;">#</td>
+									    		<td style="width : 100px;">productSeq</td>
+									    		<td style="width : 80px;">delNY</td>
 									    		<td>ProductName</td>
-									    		<td>OrgPrice</td>
+									    		<td style="width :100px">OrgPrice</td>
 									    		<td>DiscountedPrice</td>
 									    		<td>prodStockCD</td>
 									    		<td>category1CD</td>
-									    		<td>category2CD</td>
+									    		<td style="width : 110px;">category2CD</td>
 									    		<td>regDateTime</td>
 									    		<td>modDateTime</td>
 									    		
@@ -452,6 +450,17 @@
                 });
             });
         </script>
+		<!-- jQuery CDN 추가 -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- 페이지 로드 시 실행될 스크립트 -->
+		<script>
+		    // 페이지가 로드될 때 실행되는 함수
+		    $(document).ready(function() {
+		        // 페이지 로드가 완료되면 테이블을 표시
+		        $('.table-responsive').css('visibility', 'visible');
+		    });
+		</script>
 
 
 	<!-- Date Range JS -->

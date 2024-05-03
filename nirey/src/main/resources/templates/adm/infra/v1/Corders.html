@@ -18,7 +18,7 @@
 		<link rel="shortcut icon" href="/adm/images/favicon.svg">
 
 		<!-- Title -->
-		<title>Admin</title>
+		<title>Product List</title>
 
 
 		<!-- *************
@@ -73,12 +73,12 @@
 		<!-- Page wrapper start -->
 		<div class="page-wrapper">
 
-			<!-- SideBar th:block 구문 -->
+	<!-- SideBar th:block 구문 -->
 		<div th:replace="~{adm/infra/v1/include/SideBar :: SideBar}"></div>
 			<!-- *************
 				************ Main container start *************
 			************* -->
-			<div class="main-container mr-3">
+			<div class="main-container">
 
 				<!-- Page header starts -->
 				<div class="page-header">
@@ -96,9 +96,10 @@
 					</ol>
 					<!-- Breadcrumb end -->
 
-					<!-- Header th:block 구문 -->
 					<div th:replace="~{adm/infra/v1/include/Header :: Header}"></div>
-
+				<!-- Content wrapper scroll start -->
+				
+				
 				<div class="content-wrapper-scroll">
 
 					<!-- Content wrapper start -->
@@ -108,15 +109,13 @@
 						<div class="row">
 							<div class="col-sm-12 col-12">
 
-								<!-- Card start -->
-								<div class="card">
-									<div class="card-body">
+				
 									
 						<div class="row">
 							<div class="col-sm-12 col-12">
-								<div class="card">
+								<div class="card" >
 									<div class="card-header">
-										<div class="card-title">코드  관리</div>
+										<div class="card-title mb-3	">Codes</div>
 									</div>
 									
 									
@@ -149,6 +148,7 @@
 													</div>  
 													<div class="col">
 														<input type="text" id="shDateStart" name="shDateStart" th:value="${#strings.substring(vo.shDateStart, 0, 10)}" placeholder="시작일" class="form-control form-control-sm" autocomplete="off">
+														
 													</div>              
 													<div class="col">
 														<input type="text" id="shDateEnd" name="shDateEnd" th:value="${#strings.substring(vo.shDateEnd, 0, 10)}" placeholder="종료일" class="form-control form-control-sm" autocomplete="off">
@@ -157,9 +157,9 @@
 												<div class="row row-cols-2 row-cols-sm-6 g-2 mt-1 px-2">
 													<div class="col">
 														<select id="shOption" name="shOption" class="form-select form-select-sm">
-															<option value="" th:selected="${vo.shOption == null}">검색구분</option>
-															<option value="1" th:selected="${vo.shOption == 1}">코드 시퀀스</option>
-															<option value="2" th:selected="${vo.shOption == 2}">코드 이름</option>
+															<option value=""   th:selected="${vo.shOption == null}">검색구분</option>
+															<option value="1" th:selected="${vo.shOption == 1}">제품 시퀀스</option>
+															<option value="2" th:selected="${vo.shOption == 2}">제품 이름</option>
 														</select>
 													</div>                    
 													<div class="col">
@@ -175,15 +175,16 @@
 											<!-- search e -->	
 										
 										</form>
-									</div>
+
+								
 										<div class="row mt-1 mb-3">
 										<div class="col">
-											<div>Total Count: <span th:text="${getTotalCodeCount}"></span></div>
+											<div>Total Count: <span th:text="${listCount}"></span></div>
 										</div>
 									</div>
 									 <div class="row mb-3">
 									 	<div class="col">
-									 		<a th:href="@{/CodeAdd}" >
+									 		<a th:href="@{/AddProduct}" >
 									 		<button type="button" class="btn btn-outline-primary">등록</button>
 									 		</a>
 									 	</div>
@@ -197,10 +198,8 @@
 										    </select>
 									 	</div>
 									 </div>
-
-	
 												    
-<!-- Content wrapper scroll start -->
+				<!-- Content wrapper scroll start -->
 				<div class="content-wrapper-scroll">
 
 					<!-- Content wrapper start -->
@@ -210,84 +209,90 @@
 						<div class="row">
 							<div class="col-sm-12 col-12">
 								
-										<div class="table-responsive mt-2">
-										<table class="table v-middle" style="table-layout:fixed;" >
-									    	<tr>
-									    		<td>
-									    			<div class="form-check form-check-inline">
-														<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-													</div>
-									    		</td>
-									    		<td>##</td>
-									    		<td>CodeGroupSeq</td>
-									    		<td>CodeGroup Name</td>
-									    		<td>DelNY</td>
-									    		<td>CodeSeq</td>
-									    		<td>Code Name</td>
-									    		<td>regDatetime</td>
-									    		<td>modDatetime</td>
-									    		
-									    	</tr>
-										
-									    	<tr th:if="${!#lists.isEmpty(list)}" th:each="list:${list}"> 
-									    	    <td>
-									    	    	<div class="form-check form-check-inline">
-														<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-													</div>
-									    	    </td>
-									    		<td></td>
-									    		<td th:text="${list.CodeGroupSeq}"></td>
-									    		<td th:text="${list.CodeGroupName}"></td>
-									     		<td th:if="${list.delNY eq 0}">N</td>
-									     		<td th:unless="${list.delNY eq 0}">Y</td>
-									    		<td th:text="${list.seq} " ></td>
-									    		<td><a th:href="@{/CodeView(seq=${list.seq}, name=${list.name}, delNY=${list.delNY})}"  th:text="${list.name}"></a></td>
-									       		<!-- <td th:text="${list.name}"></td>-->
-									       		<td th:text="${#dates.format(list.regDatetime,  'yyyy-MM-dd HH:mm:ss')}"></td>
-									     		<td th:text="${#dates.format(list.modDatetime,  'yyyy-MM-dd HH:mm:ss')}"></td>
-									    	</tr>
-									    </table>
+										<div class="table-responsive">
+											<table class="table v-middle" style="table-layout:fixed;" >
+											    	<tr>
+											    		<td>
+											    			<div class="form-check form-check-inline">
+																<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+															</div>
+											    		</td>
+											    		<td>##</td>
+											    		<td>CodeGroupSeq</td>
+											    		<td>CodeGroup Name</td>
+											    		<td>DelNY</td>
+											    		<td>CodeSeq</td>
+											    		<td>Code Name</td>
+											    		<td>regDatetime</td>
+											    		<td>modDatetime</td>
+											    		
+											    	</tr>
+												
+											    	<tr th:if="${!#lists.isEmpty(list)}" th:each="list:${list}"> 
+											    	    <td>
+											    	    	<div class="form-check form-check-inline">
+																<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+															</div>
+											    	    </td>
+											    		<td></td>
+											    		<td th:text="${list.CodeGroupSeq}"></td>
+											    		<td th:text="${list.CodeGroupName}"></td>
+											     		<td th:if="${list.delNY eq 0}">N</td>
+											     		<td th:unless="${list.delNY eq 0}">Y</td>
+											    		<td th:text="${list.seq} " ></td>
+											    		<td><a th:href="@{/CodeView(seq=${list.seq}, name=${list.name}, delNY=${list.delNY})}"  th:text="${list.name}"></a></td>
+											       		<!-- <td th:text="${list.name}"></td>-->
+											       		<td th:text="${#dates.format(list.regDatetime,  'yyyy-MM-dd HH:mm:ss')}"></td>
+											     		<td th:text="${#dates.format(list.modDatetime,  'yyyy-MM-dd HH:mm:ss')}"></td>
+											    	</tr>
+											    </table>
 										</div>
 									</div>
 								</div>
 
-								<nav aria-label="Page Navigation" class="mt-3">
-									<ul class="pagination justify-content-center">
-										<li th:if="${vo.startPage > vo.pageNumToShow}" class="page-item">
-											<a class="page-link" href="#" th:onclick="'javascript:goList(' + (${vo.startPage - 1}) + ')'" aria-label="Previous">
-												<span aria-hidden="true"><i class="bi bi-arrow-left"></i></span>
-											</a>
-										</li>
+<!--								<nav aria-label="Page Navigation" class="mt-3">-->
+<!--									<ul class="pagination justify-content-center">-->
+<!--										<li th:if="${vo.startPage > vo.pageNumToShow}" class="page-item">-->
+<!--											<a class="page-link" href="#" th:onclick="'javascript:goList(' + (${vo.startPage - 1}) + ')'" aria-label="Previous">-->
+<!--												<span aria-hidden="true"><i class="bi bi-arrow-left"></i></span>-->
+<!--											</a>-->
+<!--										</li>-->
 										
-										<li th:each="num : ${#numbers.sequence(vo.startPage, vo.endPage)}"
-											th:classappend="${num eq vo.thisPage} ? 'active' : ''" class="page-item">
-											<a class="page-link" th:onclick="'javascript:goList(' + ${num} + ')'" th:text="${num}" href="#">nums</a>
-										</li>
+<!--										<li th:each="num : ${#numbers.sequence(vo.startPage, vo.endPage)}"-->
+<!--											th:classappend="${num eq vo.thisPage} ? 'active' : ''" class="page-item">-->
+<!--											<a class="page-link" th:onclick="'javascript:goList(' + ${num} + ')'" th:text="${num}" href="#">nums</a>-->
+<!--										</li>-->
 										
-										<li th:if="${vo.endPage != vo.totalPages}" class="page-item">
-											<a class="page-link" th:onclick="'javascript:goList(' + (${vo.endPage + 1}) + ')'" aria-label="Next">
-												<span aria-hidden="true"><i class="bi bi-arrow-right"></i></span>
-											</a>
-										</li>
-									</ul>
-								</nav>
+<!--										<li th:if="${vo.endPage != vo.totalPages}" class="page-item">-->
+<!--											<a class="page-link" th:onclick="'javascript:goList(' + (${vo.endPage + 1}) + ')'" aria-label="Next">-->
+<!--												<span aria-hidden="true"><i class="bi bi-arrow-right"></i></span>-->
+<!--											</a>-->
+<!--										</li>-->
+<!--									</ul>-->
+<!--								</nav>-->
 
-    <div class="row">
-        <div class="col-1" style="float: left;">
-            <span class="me-2">
-                <a class="btn btn-primary btn-m" href="#" th:href="@{/CodeAdd}">
-                    <i class="bi bi-pencil"></i>
-                </a>
-            </span>
-        </div>
-        <div class="col-1" style="float: right; padding-left: 1270px;">
-            <span>
-                <a class="btn btn-danger btn-icon btn-m mb-1" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <i class="bi bi-trash"></i>
-                </a>
-            </span>
-        </div>
-    </div>
+												<div class="row">
+
+													<div class="col-1" style="float : left;">
+                                                            <span class="me-2">
+                                                                <a class="btn btn-primary btn-m" href="#" th:href="@{/CordersAdd}">
+                                                                    <i class="bi bi-pencil"></i>
+                                                                </a>
+                                                            </span>
+                                                           </div>
+                                                           
+                                                           <div class="col-1" style="float : right; padding-left : 1270px;">
+                                                           
+                                                            <span>
+                                                            
+                                                                <a class="btn btn-danger btn-icon btn-m mb-1" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                                    <i class="bi bi-trash"></i>
+                                                                </a>
+                                                            </span>
+                                                            </div>
+                                                    </div>
+												</div>
+											
 
 								<!-- Card end -->
 
@@ -376,8 +381,8 @@
 			$("#shDateStart, #shDateEnd").datetimepicker();
 	}); 
 	
-	let goUrlXdmList = "/CodeList";								/* ### */
-	let goUrlXdmForm = "/v1/infra/code/CordersForm";								/* ### */
+	let goUrlXdmList = "/Porders";								/* ### */
+	let goUrlXdmForm = "/v1/infra/code/PordersForm";								/* ### */
 	let goUrlXdmMultiUele = "/v1/infra/codegroup/codeGroupXdmMultiUele";			/* ### */
 	let goUrlXdmMultiDele = "/v1/infra/codegroup/codeGroupXdmMultiDele";			/* ### */
 	let goUrlXdmView = "/v1/infra/codegroup/codeGroupXdmView";								/* ### */
@@ -418,6 +423,18 @@
                 });
             });
         </script>
+		<!-- jQuery CDN 추가 -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- 페이지 로드 시 실행될 스크립트 -->
+		<script>
+		    // 페이지가 로드될 때 실행되는 함수
+		    $(document).ready(function() {
+		        // 페이지 로드가 완료되면 테이블을 표시
+		        $('.table-responsive').css('visibility', 'visible');
+		    });
+		</script>
+
 
 	<!-- Date Range JS -->
 	<!-- 

@@ -97,8 +97,11 @@ public class CodeController {
 		setSearch(vo);
 		vo.setParamsPaging(service.getTotalCodeCount(vo));
 		
+		int rowcount = service.getTotalCodeCount(vo);
+		model.addAttribute("listCount", rowcount);
+		
 		if (vo.getTotalRows() > 0) {
-			model.addAttribute("list", service.selectPagedCodeList(null, vo));
+			model.addAttribute("list", service.selectPagedCodeList(vo));
 		}
 
 		return "adm/infra/v1/Corders"; 

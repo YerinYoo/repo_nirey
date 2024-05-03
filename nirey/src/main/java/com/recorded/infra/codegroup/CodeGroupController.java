@@ -21,6 +21,10 @@ public class CodeGroupController {
     @RequestMapping(value = "/CodeGroupList")
     //코드 그룹 Vo와 모델 값을 가지고 orders라는 페이지 호출
     public String orders(@ModelAttribute("vo") CodeGroupVo vo, Model model) throws Exception {
+    	
+		int rowcount = service.getTotalCodeGroupCount(vo);
+		model.addAttribute("listCount", rowcount);
+		
         // 페이징 관련 정보 설정
         vo.setParamsPaging(service.getTotalCodeGroupCount(vo)); //service에 getTotal 어쩌구로 정의된 객체 사용 >>CodeGroupVo를 이용해 코드 그룹의 총 개수 구하는 메서드 호출
         

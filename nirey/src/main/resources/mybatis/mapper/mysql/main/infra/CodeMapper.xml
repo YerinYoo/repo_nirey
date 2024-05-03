@@ -9,7 +9,11 @@
     <select id="selectPagedCodeList" resultMap="resultMapObj">
         <!-- Common SQL -->
         SELECT 
-        a.*
+        a.seq
+        ,a.name
+        ,a.delNY
+        ,a.regDateTime
+        ,a.modDateTime
         , b.seq as CodeGroupSeq
         , b.name as CodeGroupName 
         FROM code a

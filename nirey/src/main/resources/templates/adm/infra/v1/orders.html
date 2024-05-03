@@ -18,7 +18,7 @@
 		<link rel="shortcut icon" href="/adm/images/favicon.svg">
 
 		<!-- Title -->
-		<title>Admin</title>
+		<title>Product List</title>
 
 
 		<!-- *************
@@ -73,12 +73,12 @@
 		<!-- Page wrapper start -->
 		<div class="page-wrapper">
 
-			<!-- SideBar th:block 구문 -->
+	<!-- SideBar th:block 구문 -->
 		<div th:replace="~{adm/infra/v1/include/SideBar :: SideBar}"></div>
 			<!-- *************
 				************ Main container start *************
 			************* -->
-			<div class="main-container mr-3">
+			<div class="main-container">
 
 				<!-- Page header starts -->
 				<div class="page-header">
@@ -91,204 +91,200 @@
 							<i class="bi bi-house"></i>
 							<a href="index.html">Home</a>
 						</li>
-						<li class="breadcrumb-item">CodeGroup</li>
-						<li class="breadcrumb-item breadcrumb-active" aria-current="page">CodeGroup List</li>
+						<li class="breadcrumb-item">Products</li>
+						<li class="breadcrumb-item breadcrumb-active" aria-current="page">Product List</li>
 					</ol>
 					<!-- Breadcrumb end -->
 
-					<!-- Header th:block 구문 -->
 					<div th:replace="~{adm/infra/v1/include/Header :: Header}"></div>
-
 				<!-- Content wrapper scroll start -->
+				
+				
 				<div class="content-wrapper-scroll">
 
 					<!-- Content wrapper start -->
-					<div class="content-wrapper" style="height : 800px;">
+					<div class="content-wrapper">
 
 						<!-- Row start -->
 						<div class="row">
 							<div class="col-sm-12 col-12">
 
-								<!-- Card start -->
-								<div class="card">
-									<div class="card-body" style="height : 700px;">
+				
 									
 						<div class="row">
 							<div class="col-sm-12 col-12">
-								<div class="card" style="height : 660px;">
+								<div class="card" >
 									<div class="card-header">
 										<div class="card-title mb-3">CodeGroupList</div>
 									</div>
-									
-			<form name="formList" id="formList" method="post" autocomplete="off">			
-			<!-- search s -->
-			<div id="divSearch" class="container-fluid px-0 pb-3">
-				<div class="row row-cols-2 row-cols-sm-6 g-2 px-2">
-					<div class="col">
-						<select id="shDelNy" name="shDelNy" class="form-select form-select-sm">
-							<option value="" th:selected="${vo.shDelNy == null}">delNY</option>
-							<option value="1" th:selected="${vo.shDelNy == 1}">Y</option>
-							<option value="0" th:selected="${vo.shDelNy == 0}">N</option>            
-						</select>
-					</div>
-			
-					<div class="col">
-						<select id="shOptionDate" name="shOptionDate" class="form-select form-select-sm">
-							<option value="" th:selected="${vo.shOptionDate == null}">date</option>
-							<option value="1" th:selected="${vo.shOptionDate == 1}">regDate</option>
-							<option value="2" th:selected="${vo.shOptionDate == 2}">modDate</option>
-						</select>
-					</div>  
-					<!-- 
-					<div class="col">
-						<div class="input-group">
-							<span class="input-group-text">
-								<i class="bi bi-calendar4"></i>
-							</span>
-							<input type="text" id="shDateStart" name="shDateStart" th:value="${#strings.substring(vo.shDateStart, 0, 10)}" placeholder="시작일" class="form-control datepicker" autocomplete="off">
-						</div>
-					</div>
-					
-					<div class="col">
-						<div class="input-group">
-							<span class="input-group-text">
-								<i class="bi bi-calendar4"></i>
-							</span>
-							<input type="text" id="shDateEnd" name="shDateEnd" th:value="${#strings.substring(vo.shDateEnd, 0, 10)}" placeholder="종료일" class="form-control datepicker" autocomplete="off">
-						</div>
-					</div>
-					 -->
-
-
+																		
+				<form name="formList" id="formList" method="post" autocomplete="off">			
+				<!-- search s -->
+				<div id="divSearch" class="container-fluid px-0 pb-3">
+					<div class="row row-cols-2 row-cols-sm-6 g-2 px-2">
 						<div class="col">
-                                    <input type="text" id="shDateStart" name="shDateStart"
-                                        th:value="${#strings.substring(vo.shDateStart, 0, 10)}" placeholder="시작일"
-                                        class="form-control form-control datetimepicker"   autocomplete="off">
-
-					</div>              
-					<div class="col">
-						<input type="text" id="shDateEnd" name="shDateEnd"
-						th:value="${#strings.substring(vo.shDateEnd, 0, 10)}" placeholder="종료일" class="form-control form-control-sm" autocomplete="off">
-					</div>  
-					
-				</div>
-				<div class="row row-cols-2 row-cols-sm-6 g-2 mt-1 px-2">
-					<div class="col">
-						<select id="shOption" name="shOption" class="form-select form-select-sm">
-							<option value="" th:selected="${vo.shOption == null}">search Option</option>
-							<option value="1" th:selected="${vo.shOption == 1}">codeGroupSeq</option>
-							<option value="2" th:selected="${vo.shOption == 2}">codeGroupName</option>
-						</select>
-					</div>                    
-					<div class="col">
-						<input type="text" id="shValue" name="shValue" th:value="${vo.shValue}" onkeyup="enterkey()" placeholder="검색어" class="form-control form-control-sm">
-						<div class="invalid-feedback" id="shValueFeedback"></div>
-					</div> 
-					<div class="col">
-						<button type="button" id="btnSearch" class="btn btn-outline-secondary btn-sm btn_custom"><i class="fa-solid fa-magnifying-glass fa-lg"></i></button>
-						<button type="button" id="btnReset" class="btn btn-outline-secondary btn-sm btn_custom"><i class="fa-solid fa-rotate-right fa-lg"></i></button>
-					</div>    
-				</div>
-			</div>
-			<!-- search e -->
-			</form>
-											
-											
-										<div class="row mt-1 mb-3">
-										<div class="col" style="padding-left : 50px;">
-											<div>Total Count: <span th:text="${listCount}"></span></div>
-										</div>
-									</div>
-									 <div class="row mb-3">
-									 	<div class="col" style="padding-left : 50px;">
-									 		<a th:href="@{/AddCodeGroup}" >
-									 		<button type="button" class="btn btn-outline-primary">Add</button>
-									 		</a>
-									 	</div>
-										   <div class="col-1" style="padding-right : 50px;">
-								        <select id="pageSizeSelect" class="select-single js-states form-control" title="Select Product Category" data-live-search="true">
-								            <option value="5">5</option>
-								            <option value="10">10</option>
-								            <option value="25">25</option>
-								            <option value="50">50</option>
-								            <option value="100">100</option>
-								        </select>
-								    </div>
-
-
-									 </div>
+							<select id="shDelNy" name="shDelNy" class="form-select form-select-sm">
+								<option value="" th:selected="${vo.shDelNy == null}">delNY</option>
+								<option value="1" th:selected="${vo.shDelNy == 1}">Y</option>
+								<option value="0" th:selected="${vo.shDelNy == 0}">N</option>            
+							</select>
+						</div>
+				
+						<div class="col">
+							<select id="shOptionDate" name="shOptionDate" class="form-select form-select-sm">
+								<option value="" th:selected="${vo.shOptionDate == null}">date</option>
+								<option value="1" th:selected="${vo.shOptionDate == 1}">regDate</option>
+								<option value="2" th:selected="${vo.shOptionDate == 2}">modDate</option>
+							</select>
+						</div>  
+						<!-- 
+						<div class="col">
+							<div class="input-group">
+								<span class="input-group-text">
+									<i class="bi bi-calendar4"></i>
+								</span>
+								<input type="text" id="shDateStart" name="shDateStart" th:value="${#strings.substring(vo.shDateStart, 0, 10)}" placeholder="시작일" class="form-control datepicker" autocomplete="off">
+							</div>
+						</div>
+						
+						<div class="col">
+							<div class="input-group">
+								<span class="input-group-text">
+									<i class="bi bi-calendar4"></i>
+								</span>
+								<input type="text" id="shDateEnd" name="shDateEnd" th:value="${#strings.substring(vo.shDateEnd, 0, 10)}" placeholder="종료일" class="form-control datepicker" autocomplete="off">
+							</div>
+						</div>
+						 -->
 	
-												    
-				<!-- Content wrapper scroll start -->
-				<div class="content-wrapper-scroll">
-
-					<!-- Content wrapper start -->
-					<div class="content-wrapper" style="height : 500px;">
-																
-						<!-- Row start -->
-						<div class="row">
-							<div class="col-sm-12 col-12">
-								
-										<div class="table-responsive">
-											<table class="table v-middle" style="table-layout:fixed;" >
-												 	<tr>
-											    		<td>
-												    		<div class="form-check form-check-inline">
-																	<input class="form-check-input" type="checkbox" id="pageNumToShow " name="pageNumToShow " value="option1">
-															</div>
-											    		</td>
-											    		<td>#</td>
-											    		<td>delNY</td>
-											    		<td>seq</td>
-											    		<td>name</td>
-											    		<td>count</td>
-											    		<td>regDate</td>
-											    		<td>modDate</td>
-										    		</tr>
-										    	<tr th:if="${!#lists.isEmpty(list)}" th:each="list:${list}"> 
-										    		<td>															
-										    				<div class="form-check form-check-inline">
-																<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-															</div>
-													</td>
-										    		<td></td>
-										     		<td th:if="${list.delNY eq 0}">N</td>
-										     		<td th:unless="${list.delNY eq 0}">Y</td>
-										    		<td th:text="${list.seq}"></td>
-										       		 <td><a th:href="@{/CodeGroupView(seq=${list.seq}, name=${list.name}, delNY=${list.delNY})}"  th:text="${list.name}"></a></td>
-			       									<td th:text="${list.cdSeqCount}"></td>
-			       									<td th:text="${#dates.format(list.modDatetime,  'yyyy-MM-dd HH:mm:ss')}"></td>
-										     		<td th:text="${#dates.format(list.regDatetime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-										    	</tr>
-											</table>
+	
+							<div class="col">
+	                                    <input type="text" id="shDateStart" name="shDateStart"
+	                                        th:value="${#strings.substring(vo.shDateStart, 0, 10)}" placeholder="시작일"
+	                                        class="form-control form-control datetimepicker"   autocomplete="off">
+	
+						</div>              
+						<div class="col">
+							<input type="text" id="shDateEnd" name="shDateEnd"
+							th:value="${#strings.substring(vo.shDateEnd, 0, 10)}" placeholder="종료일" class="form-control form-control-sm" autocomplete="off">
+						</div>  
+						
+					</div>
+					<div class="row row-cols-2 row-cols-sm-6 g-2 mt-1 px-2">
+						<div class="col">
+							<select id="shOption" name="shOption" class="form-select form-select-sm">
+								<option value="" th:selected="${vo.shOption == null}">search Option</option>
+								<option value="1" th:selected="${vo.shOption == 1}">codeGroupSeq</option>
+								<option value="2" th:selected="${vo.shOption == 2}">codeGroupName</option>
+							</select>
+						</div>                    
+						<div class="col">
+							<input type="text" id="shValue" name="shValue" th:value="${vo.shValue}" onkeyup="enterkey()" placeholder="검색어" class="form-control form-control-sm">
+							<div class="invalid-feedback" id="shValueFeedback"></div>
+						</div> 
+						<div class="col">
+							<button type="button" id="btnSearch" class="btn btn-outline-secondary btn-sm btn_custom"><i class="fa-solid fa-magnifying-glass fa-lg"></i></button>
+							<button type="button" id="btnReset" class="btn btn-outline-secondary btn-sm btn_custom"><i class="fa-solid fa-rotate-right fa-lg"></i></button>
+						</div>    
+					</div>
+				</div>
+				<!-- search e -->
+				</form>
+												
+												
+											<div class="row mt-1 mb-3">
+											<div class="col" style="padding-left : 50px;">
+												<div>Total Count: <span th:text="${listCount}"></span></div>
+											</div>
 										</div>
-									</div>
-								</div>
-											
-								<form name="formList" id="formList" method="post" autocomplete="off">
-									<input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/>
-									<input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}"/>
-								<!-- 페이징 기능 -->
-								<!-- paging s  -->				
-									<div class="container-fluid px-0 mt-2 mb-2">
+										 <div class="row mb-3">
+										 	<div class="col" style="padding-left : 50px;">
+										 		<a th:href="@{/AddCodeGroup}" >
+										 		<button type="button" class="btn btn-outline-primary">Add</button>
+										 		</a>
+										 	</div>
+											   <div class="col-1" style="padding-right : 50px;">
+									        <select id="pageSizeSelect" class="select-single js-states form-control" title="Select Product Category" data-live-search="true">
+									            <option value="5">5</option>
+									            <option value="10">10</option>
+									            <option value="25">25</option>
+									            <option value="50">50</option>
+									            <option value="100">100</option>
+									        </select>
+									    </div>
+	
+	
+										 </div>
+													    
+								<!-- Content wrapper scroll start -->
+								<div class="content-wrapper-scroll">
+				
+									<!-- Content wrapper start -->
+									<div class="content-wrapper" style="height : 500px;">
+																				
+										<!-- Row start -->
 										<div class="row">
-											<div class="col">
-												<ul class="pagination justify-content-center mb-0">
-													<li th:if="${vo.startPage gt vo.pageNumToShow}" class="page-item" style="cursor: pointer;"><a class="page-link" href="javascript:goList(${vo.startPage - 1})" th:attr="onclick=|goList('${vo.startPage - 1}')|"><i class="fa-solid fa-angle-left"></i></a></li>
-													<li th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}" th:classappend="${num eq vo.thisPage} ? active : ''" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"><!-- ${i.index} --></a></li>
-													<li th:if="${vo.endPage ne vo.totalPages}" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${vo.endPage + 1}')|"><i class="fa-solid fa-angle-right"></i></a></li>
-												</ul>
+											<div class="col-sm-12 col-12">
+									
+												<div class="table-responsive">
+													<table class="table v-middle" style="table-layout:fixed;" >
+													 	<tr>
+												    		<td>
+													    		<div class="form-check form-check-inline">
+																	<input class="form-check-input" type="checkbox" id="pageNumToShow " name="pageNumToShow " value="option1">
+																</div>
+												    		</td>
+												    		<td>#</td>
+												    		<td>delNY</td>
+												    		<td>seq</td>
+												    		<td>name</td>
+												    		<td>count</td>
+												    		<td>regDate</td>
+												    		<td>modDate</td>
+											    		</tr>
+											    	<tr th:if="${!#lists.isEmpty(list)}" th:each="list:${list}"> 
+											    		<td>															
+											    				<div class="form-check form-check-inline">
+																	<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+																</div>
+														</td>
+											    		<td></td>
+											     		<td th:if="${list.delNY eq 0}">N</td>
+											     		<td th:unless="${list.delNY eq 0}">Y</td>
+											    		<td th:text="${list.seq}"></td>
+											       		 <td><a th:href="@{/CodeGroupView(seq=${list.seq}, name=${list.name}, delNY=${list.delNY})}"  th:text="${list.name}"></a></td>
+				       									<td th:text="${list.cdSeqCount}"></td>
+				       									<td th:text="${#dates.format(list.modDatetime,  'yyyy-MM-dd HH:mm:ss')}"></td>
+											     		<td th:text="${#dates.format(list.regDatetime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+											    	</tr>
+												</table>
 											</div>
 										</div>
 									</div>
-									<!-- paging e  -->	
-								</form>
-								
-								
-											
-
-								<!-- Card end -->
-
+												
+									<form name="formList" id="formList" method="post" autocomplete="off">
+										<input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/>
+										<input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}"/>
+									<!-- 페이징 기능 -->
+									<!-- paging s  -->				
+										<div class="container-fluid px-0 mt-2 mb-2">
+											<div class="row">
+												<div class="col">
+													<ul class="pagination justify-content-center mb-0">
+														<li th:if="${vo.startPage gt vo.pageNumToShow}" class="page-item" style="cursor: pointer;"><a class="page-link" href="javascript:goList(${vo.startPage - 1})" th:attr="onclick=|goList('${vo.startPage - 1}')|"><i class="fa-solid fa-angle-left"></i></a></li>
+														<li th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}" th:classappend="${num eq vo.thisPage} ? active : ''" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"><!-- ${i.index} --></a></li>
+														<li th:if="${vo.endPage ne vo.totalPages}" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${vo.endPage + 1}')|"><i class="fa-solid fa-angle-right"></i></a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<!-- paging e  -->	
+									</form>
+									
+									
+												
+	
+									<!-- Card end -->
 							</div>
 						</div>
 						<!-- Row end -->
@@ -368,32 +364,65 @@
 		<script src="/adm/js/main.js"></script>
 		
 		
-		<!-- Pagination Script -->
-<script type="text/javascript">
-    window.addEventListener('load', function() {
-        // 기존 스크립트 내용 추가 및 수정
-        let form = document.querySelector("form[name=formList]");
-        let pageSizeSelect = document.getElementById("pageSizeSelect");
-        
-        // 페이지 크기 변경 시 처리
-        pageSizeSelect.addEventListener('change', function() {
-            changePageSize(this);
-        });
-    });
-    
-    // 페이지 번호 클릭 시 해당 페이지로 이동
-    function goToPage(pageNumber) {
-        goList(pageNumber);
-    }
+		<script type="text/javascript">
 
-    // 페이지 크기 변경 함수
-    function changePageSize(selectElement) {
-        var selectedPageSize = selectElement.value;
-        document.querySelector("input[name=rowNumToShow]").value = selectedPageSize;
-        form.action = goUrlXdmList;
-        form.submit();
-    }
+	window.addEventListener('load', function() {
+			$("#shDateStart, #shDateEnd").datetimepicker();
+	}); 
+	
+	let goUrlXdmList = "/Porders";								/* ### */
+	let goUrlXdmForm = "/v1/infra/code/PordersForm";								/* ### */
+	let goUrlXdmMultiUele = "/v1/infra/codegroup/codeGroupXdmMultiUele";			/* ### */
+	let goUrlXdmMultiDele = "/v1/infra/codegroup/codeGroupXdmMultiDele";			/* ### */
+	let goUrlXdmView = "/v1/infra/codegroup/codeGroupXdmView";								/* ### */
+	
+	let seq = document.querySelector("input[name=ifcgSeq]");									/* ### */
+
+	document.getElementById("btnReset").onclick = function () {
+	    location.href = goUrlXdmList;
+	}
+
+/* 	document.getElementById("btnForm").onclick = function () {
+	    goForm(0);
+	}
+ */
+
+	goForm = function (keyValue) {
+	    seq.value = keyValue;
+	    form.action = goUrlXdmForm;
+	    form.submit();
+	}
+	
+	document.getElementById("btnSearch").onclick = function () {
+	    form.action = goUrlXdmList;
+	    form.submit();
+	};
+	
+	let form = document.querySelector("form[name=formList]");
+	</script>
+	
+	<!-- 강사님 데이터 피커 -->
+<!--데이터피커 자바스크립트 구문-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $("#shDateStart, #shDateEnd").datetimepicker({
+                    format: "Y-m-d",
+                    timepicker:false,
+                });
+            });
         </script>
+		<!-- jQuery CDN 추가 -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- 페이지 로드 시 실행될 스크립트 -->
+		<script>
+		    // 페이지가 로드될 때 실행되는 함수
+		    $(document).ready(function() {
+		        // 페이지 로드가 완료되면 테이블을 표시
+		        $('.table-responsive').css('visibility', 'visible');
+		    });
+		</script>
 
 
 	<!-- Date Range JS -->
