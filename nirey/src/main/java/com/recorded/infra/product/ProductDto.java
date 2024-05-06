@@ -33,7 +33,7 @@ private Date revRegDateTime;
 private Integer totalReviewCount;
 private String colorSeq;
 private String sizeSeq;
-private String wishlistSeq;
+private Integer wishlistSeq;
 private String revName;
 private String memo;
 private Integer reviewRateAvg;
@@ -93,10 +93,10 @@ public String getRevName() {
 public void setRevName(String revName) {
 	this.revName = revName;
 }
-public String getWishlistSeq() {
+public Integer getWishlistSeq() {
 	return wishlistSeq;
 }
-public void setWishlistSeq(String wishlistSeq) {
+public void setWishlistSeq(Integer wishlistSeq) {
 	this.wishlistSeq = wishlistSeq;
 }
 public String getColorSeq() {

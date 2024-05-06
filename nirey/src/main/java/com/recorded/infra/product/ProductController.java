@@ -284,7 +284,7 @@ public class ProductController {
 	}
 	
 	//위시리스트
-	   @RequestMapping("/MyPage/Wishlist")
+	   @RequestMapping("/MyPage/Cart")
 	    public String getWishlist(HttpSession session,ProductDto dto, Model model) throws Exception{
 		   
 		   // 세션에서 로그인한 회원 정보 가져오기

@@ -119,8 +119,10 @@
 						            </div>
 						        </td>
 						        <td class="action" style="text-align:center; vertical-align : middle; padding: 0; padding-top : 50px; margin: 0; width : 20%">
-						            <a th:href="@{/MyPage/CheckOut(productSeq=${wishlist.wishlistSeq}, ProductName=${wishlist.ProductName})}" class="btn btn-dark wishlist mt-5 mt-md-0 col-6" title="Purchase" id="purchase-btn-1">Purchase</a>
-						            <!-- 위시리스트 단일 uelete 폼 -->
+						            <a th:href="@{/MyPage/CheckOut(wishlistSeq=${wishlist.wishlistSeq}, ProductName=${wishlist.ProductName})}" class="btn btn-dark wishlist mt-5 mt-md-0 col-6" title="Purchase" id="purchase-btn-1">
+										Purchase</a>
+										
+									<!-- 위시리스트 단일 uelete 폼 -->
 						            <form method="post" action="/ueleteW">
 						                <button class="btn btn-delete product-type-simple btn-shop col-6 mb-1 mt-2">
 						                    DELETE

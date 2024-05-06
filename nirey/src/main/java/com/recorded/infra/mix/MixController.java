@@ -71,7 +71,7 @@ public class MixController {
 		  //전체 상품 조회 
 		  model.addAttribute("wishlist",serviceP.wishlist());
 		  //일부 상품 조회 
-		  model.addAttribute("selectWishlist", serviceP.selectWishlist(dto));
+		  model.addAttribute("item", serviceP.selectWishlist(dto));
 		  
 		  
 		  return "usr/infra/v1/checkout";
