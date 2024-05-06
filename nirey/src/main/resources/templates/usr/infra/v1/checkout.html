@@ -192,53 +192,118 @@
 
 
     
-                            <div class="payment-methods">
-                                <h4 class="">Payment methods</h4>
-                                
-                                    <!-- 결제 UI, 이용약관 UI 영역 -->
-
-    
-                                <div class="info-box with-icon p-0">
-                                    <div class="form-group form-group-custom-control">
-                                        <div class="radio col-xs-12">
-                                            <label>
-                                                <input type="radio" name="radios" class="track-order-change" id="pictureTar" value="">
-                                                Etc.
-                                            </label>
-                                        </div>
-                            
-                                        <div class="col-xs-12 panel-collapse collapse in" id="pictureTarifa">
-
-    
-                                            <div class="row">
-                                                <div class="col-12" style="width : 500px;">
-                                                    <div>
-                                                         <div id="payment-method"></div>
-															    <div id="agreement"></div>
-															    
- 															    <button id="payment-button" class="btn btn-dark mb-5" style="float : right;">Order</button>
-                                                        
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                           
-                                        </div>
-
-                                        <div class="radio col-xs-12">
-                                            <label>
-                                                <input type="radio" name="radios" class="track-order-change" id="tarifaHor1">
-                                                Kakao Pay
-                                            </label>
-                                        </div>
-                                        <!-- End .custom-checkbox -->
-                                           
-                                    </div>
-                                    <!-- End .form-group -->
-                                    <!-- End .form-group -->
-                                </div>
-                        </div>
-                        <!-- End .cart-summary -->
+							<div class="payment-methods">
+							                                <h4 class="">Payment methods</h4>
+							                                
+							                                    <!-- 결제 UI, 이용약관 UI 영역 -->
+							
+							    
+							                                <div class="info-box with-icon p-0">
+							                                    <div class="form-group form-group-custom-control">
+							                                        <div class="radio col-xs-12">
+							                                            <label>
+							                                                <input type="radio" name="radios" class="track-order-change" id="pictureTar" value="">
+							                                                Credit Card
+							                                            </label>
+							                                        </div>
+							                            
+							                                        <div class="col-xs-12 panel-collapse collapse in" id="pictureTarifa">
+							
+							    
+							                                            <div class="row">
+							                                                <div class="col-12" style="width : 500px;">
+							                                                    <div>
+							<!--                                                          <div id="payment-method"></div> -->
+							<!-- 															    <div id="agreement"></div> -->
+							<!-- 															    결제하기 버튼 -->
+							<!-- <!-- 															    <button id="payment-button">결제하기</button> -->
+							                                                        <label for="card-comp">
+							                                                            Card Company
+							                                                            <span class="required">*</span>
+							                                                        </label>
+							                                                        <select name="cardcomp" class="form-control" style="height : 42px;">
+							                                                            <option value="" selected="selected">Choose...</option>
+							                                                            <option value="2">국민카드</option>
+							                                                            <option value="3">현대카드</option>
+							                                                            <option value="4">BC카드</option>
+							                                                            <option value="5">삼성카드</option>
+							                                                            <option value="6">하나카드</option>
+							                                                            <option value="7">신한카드</option>
+							                                                            <option value="8">롯데카드</option>
+							                                                        </select>
+							                                                    </div>
+							                                                </div>
+							                                            </div>
+							                                            <div class="row">
+							                                                <div class="col-6">
+							                                                    <div>
+							                                                        <label for="card-no">
+							                                                            Card No.
+							                                                            <span class="required">*</span>
+							                                                        </label>
+							                                                        <input type="email" class="form-input form-wide" id="register-email" required />
+							                                                    </div>
+							                                                </div>
+							
+							                                                <div class="col-6">
+							                                                    <div>
+							                                                        <label for="card-no">
+							                                                            Card Holder Name
+							                                                            <span class="required">*</span>
+							                                                        </label>
+							                                                        <input type="email" class="form-input form-wide" id="register-email" required />
+							                                                    </div>
+							                                                </div>
+							                                            </div>
+							                                            
+							                                            <div class="row">
+							                                                <div class="col-6">
+							                                                    <div>
+							                                                        <label for="card-no">
+							                                                            MM/YY
+							                                                            <span class="required">*</span>
+							                                                        </label>
+							                                                        <input type="email" class="form-input form-wide" id="register-email" required />
+							                                                    </div>
+							                                                </div>
+							
+							                                                <div class="col-6">
+							                                                    <div>
+							                                                        <label for="card-no">
+							                                                            CVV / CVC
+							                                                            <span class="required">*</span>
+							                                                        </label>
+							                                                        <input type="password" class="form-input form-wide" id="register-email" required />
+							                                                    </div>
+							                                                </div>
+							                                            </div>
+							
+							                                        </div>
+							
+							                                        <div class="radio col-xs-12">
+							                                            <label>
+							                                                <input type="radio" name="radios" class="track-order-change" id="tarifaHor1">
+							                                                Kakao Pay
+							                                            </label>
+							                                        </div>
+							                                        <!-- End .custom-checkbox -->
+							                                           
+							                                    </div>
+							                                    <!-- End .form-group -->
+							                                    <!-- End .form-group -->
+							                                </div>
+							                            <div class="row">
+							                                
+							                                <div class="col-12">
+															    <div class="ordergo">
+															        <a href="/recorded/OrderComplete" class="btn btn-dark btn-place-order mt-3 ml-5"  id="payment-button" style="float : right">
+															            Order
+															        </a>
+															    </div>
+															</div>
+							
+							
+							                            </div>
                     </div>
                     <!-- End .col-lg-4 -->
                 </div>
