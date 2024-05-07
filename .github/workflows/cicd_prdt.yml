@@ -11,7 +11,7 @@ on: [workflow_dispatch]
 env:
   PROJECT_NAME: nirey
   AWS_REGION: ap-northeast-2
-  S3_BUCKET: nirey-cicd
+  S3_BUCKET: che1s-cicd
   CODE_DEPLOY_APPLICATION_NAME: che1s-meomy
   CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: che1s-meomy-prdt
 
