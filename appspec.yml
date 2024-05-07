@@ -3,7 +3,7 @@ os: linux
 
 files:
   - source:  /
-    destination: /home/ec2-user/service/recorded-prdt
+    destination: /home/ec2-user/service/meomy-prdt
     overwrite: yes
 
 permissions:
