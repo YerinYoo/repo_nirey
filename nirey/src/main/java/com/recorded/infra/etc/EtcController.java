@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpSession;
 public class EtcController { 
 
 	//포트폴리오 페이지 연결 컨트롤러
-    @RequestMapping(value = "/Nirey")
+    @RequestMapping(value = "/portfolio-YerinYoo")
     public String pfIndex() throws Exception {
         return "etc/pfIndex"; 
     }
