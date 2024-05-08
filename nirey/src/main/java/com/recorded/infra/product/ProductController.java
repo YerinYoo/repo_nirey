@@ -33,7 +33,7 @@ public class ProductController {
 
 		service.insert(dto);
 
-		return "redirect:/Porders";
+		return "redirect:/ProductList";
 	}
 
 	@ResponseBody
@@ -90,7 +90,7 @@ public class ProductController {
 
 		service.update(dto);
 
-		return "redirect:/Porders";
+		return "redirect:/ProductList";
 	}
 
 	@RequestMapping(value = "/ProductUelete")
@@ -98,7 +98,7 @@ public class ProductController {
 
 		service.uelete(dto);
 
-		return "redirect:/Porders";
+		return "redirect:/ProductList";
 	}
 	
 	@RequestMapping(value="/ueleteW")
@@ -114,7 +114,7 @@ public class ProductController {
 
 		service.delete(dto);
 
-		return "redirect:/Porders";
+		return "redirect:/ProductList";
 	}
 
 	@RequestMapping(value = "/ProductList")
@@ -142,6 +142,13 @@ public class ProductController {
 		return "adm/infra/v1/PordersView";
 	}
 
+	@RequestMapping(value="/ProductEdit")
+	public String ProductEdit(ProductDto dto, Model model) throws Exception {
+		
+		model.addAttribute("item", service.selectOne(dto));
+		
+		return "adm/infra/v1/PordersEdit";
+	}
 
 	@RequestMapping(value = "/AddProduct")
 	public String PordersAdd() throws Exception {

@@ -115,7 +115,7 @@ public class MemberController extends BaseController {
  @PostMapping("/MemberUpdate")
  public String MemberUpdate(@ModelAttribute MemberDto dto) throws Exception {
      service.update(dto); // 서비스 계층으로 수정된 값 전달
-     return "redirect:/MordersView"; // 수정된 정보가 표시된 상세 페이지로 이동
+     return "redirect:/MemberView"; // 수정된 정보가 표시된 상세 페이지로 이동
  }
 
  @ResponseBody
@@ -143,14 +143,14 @@ public class MemberController extends BaseController {
     @RequestMapping(value = "/MemberUelete")
     public String MemberUelete(MemberDto dto) throws Exception {
         service.uelete(dto);
-        return "redirect:/Morders";
+        return "redirect:/MemberList";
     }
 
     // 회원 삭제 처리
     @RequestMapping(value = "/MemberDelete")
     public String MemberDelete(MemberDto dto) throws Exception {
         service.delete(dto);
-        return "redirect:/Morders";
+        return "redirect:/MemberList";
     }
 
     // 회원 목록 조회

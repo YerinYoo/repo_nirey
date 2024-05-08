@@ -182,8 +182,11 @@ where a.productSeq = #{productSeq}
 			,#{prodStockCD}
 			,#{category1CD}
 			,#{category2CD}
-			,#{color}
-			,#{size}
+			,#{DetailDescription}
+			,now()
+			,now()
+			,#{fabric}
+			,#{detailSize}
 			)
 	  </insert>
 	  

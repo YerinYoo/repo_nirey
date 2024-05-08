@@ -91,17 +91,28 @@
 				<div class="header" style="padding-left : 1%; padding-bottom : 3%">
 					<h4>View Product</h4>
 				</div>
-					<form method="post" action="ProductInsert">
 					<!-- Content wrapper start -->
 					<div class="content-wrapper" >
-					<form name="prodValidation"  method="post" action="ProductInsert">
 						<!-- Row start -->
 						<div class="row">
+							
+							<div class="col-xl-4 col-sm-6 col-12" >
+								<div class="card">
+									<div class="card-body">
+										<div>
+											<label for="productSeq" class="form-label">Product Seq<span class="text-danger fs-0">*</span></label>
+												<input type="text" class="form-control" id="productSeq"  th:value="${item?.productSeq}" required="" disabled>
+												<div class="invalid-feedback" id="productSeqFeedback"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
 							<div class="col-xl-4 col-sm-6 col-12">
 								<div class="card">
 									<div class="card-body">
 										<label for="delNY" class="form-label">DelNY<span class="text-danger fs-0">*</span></label>
-										<select class="form-select" id="delNY" required="">
+										<select class="form-select" id="delNY" required="" disabled>
 											<option  th:selected="${item.delNY eq null}"disabled="" value="">Choose...</option>
 											<option th:selected="${item.delNY == 0}"value="0">N</option>
 											<option th:selected="${item.delNY == 1}" value="1">Y</option>
@@ -127,20 +138,21 @@
 								<div class="card">
 									<div class="card-body">
 										<label for="ProductName" class="form-label">ProductName <span class="text-danger fs-0">*</span></label>
-											<input type="text" id="ProductName" name="ProductName" th:value="${item?.ProductName}" maxlength="20" class="form-control" required=""/>
+											<input type="text" id="ProductName" name="ProductName" th:value="${item?.ProductName}" maxlength="20" class="form-control" required="" disabled/>
 											<div class="invalid-feedback" id="ProductNameFeedback"></div>
 									</div>
 								</div>
 							</div>
 
 						</div>
+						
 						<!-- CD 입력 input 부분, DelNY 부분은 select로 대체 가능한지 여쭤보기 / select 값 code seq 번호로 변환하는 방법 서치 -->
 						<div class="row" th:fragment="productCD">
 							<div class="col-xl-4 col-sm-6 col-12">
 								<div class="card">
 									<div class="card-body">
 										<label for="productCD" class="form-label">Product Status(CD)<span class="text-danger fs-0">*</span></label>
-											<select class="form-select" id="productCD" required="">
+											<select class="form-select" id="productCD" required="" disabled>
 												<option disabled="" value="" th:selected="${item.prodStockCD eq null}">Choose...</option>
 												<option value="7" th:selected="${item.prodStockCD == 7}" >New</option>
 												<option value="8" th:selected="${item.prodStockCD == 8}" >Best</option>
@@ -156,7 +168,7 @@
 								<div class="card">
 									<div class="card-body">
 										<label for="prodCategory1" class="form-label">Category1(CD)</label>
-											<select class="form-select" id="prodCategory1">
+											<select class="form-select" id="prodCategory1" disabled>
 												<option th:selected="${item.category1CD == null}"  disabled="" value="">Choose...</option>
 												<option value="11" th:selected="${item.category1CD == 11}"  >Outer</option>
 												<option value="12" th:selected="${item.category1CD ==12}"  >Top</option>
@@ -170,32 +182,31 @@
 							</div>
 							
 							<div class="col-xl-4 col-sm-6 col-12">
-							<div class="card">
-									<div class="card-body">
-										<label for="prodCategory2" class="form-label">Category2(CD)</label>
-											<select class="form-select" id="prodCategory2" >
-												<option th:selected="${item.category2CD == null}"  disabled="" value="">Choose...</option>
-												<option value="15" th:selected="${item.category2CD == 15}">Bag(15)</option>
-												<option value="16" th:selected="${item.category2CD == 16}">Shoes</option>
-												<option value="17" th:selected="${item.category2CD == 17}">Acc</option>
-												<option value="18" th:selected="${item.category2CD == 18}">etc.</option>
-											</select>
-											<div class="invalid-feedback" id="prodCategory2Feedback">
+								<div class="card">
+										<div class="card-body">
+											<label for="prodCategory2" class="form-label">Category2(CD)</label>
+												<select class="form-select" id="prodCategory2" disabled>
+													<option th:selected="${item.category2CD == null}"  disabled="" value="">Choose...</option>
+													<option value="15" th:selected="${item.category2CD == 15}">Bag(15)</option>
+													<option value="16" th:selected="${item.category2CD == 16}">Shoes</option>
+													<option value="17" th:selected="${item.category2CD == 17}">Acc</option>
+													<option value="18" th:selected="${item.category2CD == 18}">etc.</option>
+												</select>
+												<div class="invalid-feedback" id="prodCategory2Feedback">
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 
 
-
 						<div class="row">
-						<th:block th:fragment="productprice">
 							<div class="col-xl-4 col-sm-6 col-12" >
 								<div class="card">
 									<div class="card-body">
 										<div>
 											<label for="prodOrgPrice" class="form-label">Product Org Price<span class="text-danger fs-0">*</span></label>
-												<input type="text" class="form-control" id="prodOrgPrice"  th:value="${item?.OrgPrice}" required="">
+												<input type="text" class="form-control" id="prodOrgPrice"  th:value="${item?.OrgPrice}" required="" disabled>
 												<div class="invalid-feedback" id="prodOrgPriceFeedback"></div>
 										</div>
 									</div>
@@ -207,27 +218,51 @@
 									<div class="card-body">
 										<div>
 											<label for="prodDiscPrice" class="form-label">Product Discounted Price</label>
-												<input type="text" class="form-control" id="prodDiscPrice" th:value="${item?.DiscountedPrice}">
+												<input type="text" class="form-control" id="prodDiscPrice" th:value="${item?.DiscountedPrice}" disabled>
 												<div class="invalid-feedback" id="prodDiscPriceFeeback"></div>
 										</div>
 									</div>
 								</div>
 							</div>
-							</th:block>
 
 							<div class="col-xl-4 col-sm-6 col-12">
 								<div class="card">
 									<div class="card-body">
 										<div>
 											<label for="prodDetails" class="form-label">Product Description</label>
-												<input type="text" class="form-control" id="prodDetails" th:value="${item?.detailDescription}"required="">
+												<input type="text" class="form-control" id="prodDetails" th:value="${item?.detailDescription}"required="" disabled>
 												<div class="invalid-feedback" id="prodDetailsFeedback">Please enter a description of the product</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-
+						
+						<div class="row">
+							<div class="col-xl-4 col-sm-6 col-12">
+								<div class="card">
+									<div class="card-body">
+										<div>
+											<label for="prodDetails" class="form-label">Fabric</label>
+												<input type="text" class="form-control" id="fabric" name="fabric" th:value="${item?.fabric}"required="" disabled>
+												<div class="invalid-feedback" id="fabricFeedback">Please enter a description of the product</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="col-xl-4 col-sm-6 col-12">
+								<div class="card">
+									<div class="card-body">
+										<div>
+											<label for="detailSize" class="form-label">Detail Size</label>
+												<input type="text" class="form-control" id="detailSize" name="detailSize" th:value="${item?.detailSize}"required="" disabled>
+												<div class="invalid-feedback" id="detailSizeFeedback">Please enter a description of the product</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 
 
 										    <!-- Form actions footer start -->
@@ -237,7 +272,10 @@
 				            <button class="btn btn-light">Cancel</button>
 				        </a>
 				
-				        <button class="btn btn-success" type="submit" th:href="@{/ProductList}" id="btnUpdate" action="ProductUpdate">Edit</button>
+						<a th:href="@{/ProductEdit(productSeq=${item.productSeq}, ProductName=${item.ProductName}, delNY=${item.delNY})}">
+							<button class="btn btn-success">Edit</button>
+						</a>
+						
 				    <!-- Form actions footer end -->
 
                     <form method="post" action="ProductUelete"> 
@@ -256,7 +294,6 @@
 						<button type="submit" class="btn btn-danger" th:href="@{/ProductList}" th:text="Delete"></button>
 											
 					</form>
-									</form> 
                 </div>
 					
 					

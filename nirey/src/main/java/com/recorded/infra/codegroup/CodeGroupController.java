@@ -42,12 +42,20 @@ public class CodeGroupController {
 		vo.setShDateStart(vo.getShDateStart() == null ? UtilDateTime.calculateDayReplace00TimeString(UtilDateTime.nowLocalDateTime(), Constants.DATE_INTERVAL) : UtilDateTime.add00TimeString(vo.getShDateStart()));
 		vo.setShDateEnd(vo.getShDateEnd() == null ? UtilDateTime.nowString() : UtilDateTime.addNowTimeString(vo.getShDateEnd()));
 	}
-
-	@RequestMapping(value = "/codeGroupView")
-	public String codeGroupView(CodeGroupDto dto, Model model) throws Exception {
-		//selectOne에 해당하는 DTO 내용을 모델에 추가하고, item이라는 이름으로 해당 내용 호출 
-		model.addAttribute("item", service.selectOne(dto)); //selectOne : 전체 값이 아닌 데이터베이스 상의 값과 조회하려는 값이 일치 할 때 해당하는 데이터만 호출하는 매퍼 참조.
-		return "codeGroupView";
+//
+//	@RequestMapping(value = "/codeGroupView")
+//	public String codeGroupView(CodeGroupDto dto, Model model) throws Exception {
+//		//selectOne에 해당하는 DTO 내용을 모델에 추가하고, item이라는 이름으로 해당 내용 호출 
+//		model.addAttribute("item", service.selectOne(dto)); //selectOne : 전체 값이 아닌 데이터베이스 상의 값과 조회하려는 값이 일치 할 때 해당하는 데이터만 호출하는 매퍼 참조.
+//		return "codeGroupView";
+//	}
+	
+	@RequestMapping(value="/CodeGroupEdit")
+	public String codeGroupEdit(CodeGroupDto dto, Model model) throws Exception {
+		
+		model.addAttribute("item", service.selectOne(dto));
+		
+		return "adm/infra/v1/OrdersEdit";
 	}
 
 	@RequestMapping(value="/codeGroupInsert")
@@ -66,7 +74,7 @@ public class CodeGroupController {
 		//서비스 파일에 update라는 이름으로 정의된 함수 호출 (Dto 내용 싣고옴)
 		service.update(dto);
 		//함수 내용 실행한 후 컨트롤러 주소로 URL 요청
-		return "redirect:/orders";
+		return "redirect:/CodeGroupList";
 	}
 
 	@RequestMapping(value = "/codeGroupUpdtDel")
@@ -74,14 +82,14 @@ public class CodeGroupController {
 		//서비스 파일에 updtDel이라는 이름으로 정의된 함수 호출
 		service.updtDel(dto);
 		//함수 내용 실행한 후 컨트롤러 주소로 URL 요청
-		return "redirect:/orders";
+		return "redirect:/CodeGroupList";
 	}
 
 	@RequestMapping(value = "/codeGroupDelete")
 	public String codeGroupDelete(CodeGroupDto dto) throws Exception {
 		//서비스 파일에  delete라는 이름으로 정의된 함수 호출
 		service.delete(dto);
-		return "redirect:/orders";
+		return "redirect:/CodeGroupList";
 	}
 
 	@RequestMapping(value = "/CodeGroupView")
