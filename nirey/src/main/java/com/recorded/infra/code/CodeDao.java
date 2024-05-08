@@ -10,6 +10,7 @@ public interface CodeDao {
 	public int update(CodeDto dto);
 	public int uelete(CodeDto dto);
 	public int delete(CodeDto dto);
+	
 	public List<CodeDto> selectList(CodeVo vo);
 	
     public List<CodeDto> selectListWithoutPaging();

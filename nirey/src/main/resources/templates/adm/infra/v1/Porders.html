@@ -277,26 +277,26 @@
 									</div>
 								</div>
 
-<!--								<nav aria-label="Page Navigation" class="mt-3">-->
-<!--									<ul class="pagination justify-content-center">-->
-<!--										<li th:if="${vo.startPage > vo.pageNumToShow}" class="page-item">-->
-<!--											<a class="page-link" href="#" th:onclick="'javascript:goList(' + (${vo.startPage - 1}) + ')'" aria-label="Previous">-->
-<!--												<span aria-hidden="true"><i class="bi bi-arrow-left"></i></span>-->
-<!--											</a>-->
-<!--										</li>-->
+								<nav aria-label="Page Navigation" class="mt-3">
+									<ul class="pagination justify-content-center">
+										<li th:if="${vo.startPage > vo.pageNumToShow}" class="page-item">
+											<a class="page-link" href="#" th:onclick="'javascript:goList(' + (${vo.startPage - 1}) + ')'" aria-label="Previous">
+												<span aria-hidden="true"><i class="bi bi-arrow-left"></i></span>
+											</a>
+										</li>
 										
-<!--										<li th:each="num : ${#numbers.sequence(vo.startPage, vo.endPage)}"-->
-<!--											th:classappend="${num eq vo.thisPage} ? 'active' : ''" class="page-item">-->
-<!--											<a class="page-link" th:onclick="'javascript:goList(' + ${num} + ')'" th:text="${num}" href="#">nums</a>-->
-<!--										</li>-->
+										<li th:each="num : ${#numbers.sequence(vo.startPage, vo.endPage)}"
+											th:classappend="${num eq vo.thisPage} ? 'active' : ''" class="page-item">
+											<a class="page-link" th:onclick="'javascript:goList(' + ${num} + ')'" th:text="${num}" href="#">nums</a>
+										</li>
 										
-<!--										<li th:if="${vo.endPage != vo.totalPages}" class="page-item">-->
-<!--											<a class="page-link" th:onclick="'javascript:goList(' + (${vo.endPage + 1}) + ')'" aria-label="Next">-->
-<!--												<span aria-hidden="true"><i class="bi bi-arrow-right"></i></span>-->
-<!--											</a>-->
-<!--										</li>-->
-<!--									</ul>-->
-<!--								</nav>-->
+										<li th:if="${vo.endPage != vo.totalPages}" class="page-item">
+											<a class="page-link" th:onclick="'javascript:goList(' + (${vo.endPage + 1}) + ')'" aria-label="Next">
+												<span aria-hidden="true"><i class="bi bi-arrow-right"></i></span>
+											</a>
+										</li>
+									</ul>
+								</nav>
 
 												<div class="row">
 

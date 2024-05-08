@@ -4,7 +4,25 @@
 <mapper namespace="com.recorded.infra.code.CodeDao">
 
     <resultMap id="resultMapObj" type="com.recorded.infra.code.CodeDto"></resultMap>
-
+	
+	<select id="selectList" resultMap="resultMapObj">
+		select
+			a.seq
+			, a.name
+			, a.delNY
+			, a.regDateTime
+			, a.modDateTime
+			, b.seq as CodeGroupSeq
+			, b.name as CodeGroupName
+		from
+			code a
+		left join
+			codegroup b
+		on
+			b.seq=a.CodeGroupSeq
+		where
+			1=1		
+	</select>
     <!-- Select Paged Code List -->
     <select id="selectPagedCodeList" resultMap="resultMapObj">
         <!-- Common SQL -->

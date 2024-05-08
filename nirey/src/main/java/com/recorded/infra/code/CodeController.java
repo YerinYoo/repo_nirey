@@ -1,5 +1,7 @@
 package com.recorded.infra.code;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -101,7 +103,9 @@ public class CodeController {
 		model.addAttribute("listCount", rowcount);
 		
 		if (vo.getTotalRows() > 0) {
-			model.addAttribute("list", service.selectPagedCodeList(vo));
+			model.addAttribute("lists", service.selectPagedCodeList(vo));
+			List<CodeDto> list = service.selectList(vo);
+			model.addAttribute("list", list);
 		}
 
 		return "adm/infra/v1/Corders"; 
