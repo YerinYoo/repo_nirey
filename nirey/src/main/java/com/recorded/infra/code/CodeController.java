@@ -128,6 +128,14 @@ public class CodeController {
 		
 	}
 	
+	@RequestMapping(value="/EditCode")
+	public String CordersEdit(CodeDto dto, Model model) throws Exception {
+		
+		model.addAttribute("item", service.selectOne(dto));
+		
+		return "adm/infra/v1/CordersEdit";
+	}
+	
 	public void setSearch(CodeVo vo) throws Exception {
 	
 		/* 초기값 세팅이 있는 경우 사용 */

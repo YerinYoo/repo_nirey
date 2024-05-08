@@ -22,6 +22,7 @@
 			b.seq=a.CodeGroupSeq
 		where
 			1=1		
+		order by a.seq asc
 	</select>
     <!-- Select Paged Code List -->
     <select id="selectPagedCodeList" resultMap="resultMapObj">
@@ -100,14 +101,20 @@
         WHERE 1=1
         AND seq = #{seq}
     </update>
+    
+    <update id="uelete">
+    update code
+    set delNY=1
+    where 1=1
+    and seq=#{seq}
+    </update>
 
     <!-- Delete -->
-    <update id="delete">
-        UPDATE code
-        SET delNY=1
-        WHERE 1=1
+    <delete id="delete">
+        delete from code
+        where 1=1
         AND seq = #{seq}
-    </update>
+    </delete>
 
     <!-- Get Total Code Count -->
     <select id="getTotalCodeCount" resultType="int">

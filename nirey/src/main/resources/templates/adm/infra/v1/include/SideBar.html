@@ -8,7 +8,7 @@
 				<!-- Sidebar brand starts -->
 				<div class="sidebar-brand">
 					<a th:href="@{/index}" class="logo">
-						<img src="/usr/images/logo-tape.png"  alt="Admin Dashboards"/>
+						<img src="/usr/images/logo-tape.png" alt="Admin Dashboards"/>
 					</a>
 				</div>
 				<!-- Sidebar brand starts -->
@@ -19,7 +19,7 @@
 						<ul>
 							<!--  코드 그룹 관리 -->
 							<li class="sidebar-dropdown">
-								<a href="#">
+								<a th:href="@{/CodeGroupList}">
 									<i class="bi bi-sd-card"></i>
 									<span class="menu-text">CodeGroup</span>
 								</a>
@@ -35,7 +35,7 @@
 								</div>
 							</li>
 							<li class="sidebar-dropdown">
-								<a href="#">
+								<a th:href="@{/CodeList}">
 									<i class="bi bi-sim"></i>
 									<span class="menu-text">Code</span>
 								</a>
@@ -51,7 +51,7 @@
 								</div>
 							</li>
 							<li class="sidebar-dropdown">
-								<a href="#">
+								<a th:href="@{/MemberList}">
 									<i class="bi bi-person-badge"></i>
 									<span class="menu-text">Members</span>
 								</a>
@@ -67,7 +67,7 @@
 								</div>
 							</li>
 							<li class="sidebar-dropdown">
-								<a href="#">
+								<a th:href="@{/ProductList}">
 									<i class="bi bi-upc"></i>
 									<span class="menu-text">Products</span>
 								</a>

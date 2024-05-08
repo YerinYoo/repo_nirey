@@ -276,24 +276,24 @@
 									</div>
 								</div>
 											
-								<form name="formList" id="formList" method="post" autocomplete="off">
-									<input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/>
-									<input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}"/>
-								<!-- 페이징 기능 -->
-								<!-- paging s  -->				
-									<div class="container-fluid px-0 mt-2 mb-2">
-										<div class="row">
-											<div class="col">
-												<ul class="pagination justify-content-center mb-0">
-													<li th:if="${vo.startPage gt vo.pageNumToShow}" class="page-item" style="cursor: pointer;"><a class="page-link" href="javascript:goList(${vo.startPage - 1})" th:attr="onclick=|goList('${vo.startPage - 1}')|"><i class="fa-solid fa-angle-left"></i></a></li>
-													<li th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}" th:classappend="${num eq vo.thisPage} ? active : ''" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"><!-- ${i.index} --></a></li>
-													<li th:if="${vo.endPage ne vo.totalPages}" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${vo.endPage + 1}')|"><i class="fa-solid fa-angle-right"></i></a></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-									<!-- paging e  -->	
-								</form>
+<!--								<form name="formList" id="formList" method="post" autocomplete="off">-->
+<!--									<input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/>-->
+<!--									<input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}"/>-->
+<!--								 페이징 기능 -->
+<!--								 paging s  				-->
+<!--									<div class="container-fluid px-0 mt-2 mb-2">-->
+<!--										<div class="row">-->
+<!--											<div class="col">-->
+<!--												<ul class="pagination justify-content-center mb-0">-->
+<!--													<li th:if="${vo.startPage gt vo.pageNumToShow}" class="page-item" style="cursor: pointer;"><a class="page-link" href="javascript:goList(${vo.startPage - 1})" th:attr="onclick=|goList('${vo.startPage - 1}')|"><i class="fa-solid fa-angle-left"></i></a></li>-->
+<!--													<li th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}" th:classappend="${num eq vo.thisPage} ? active : ''" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"> ${i.index} </a></li>-->
+<!--													<li th:if="${vo.endPage ne vo.totalPages}" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${vo.endPage + 1}')|"><i class="fa-solid fa-angle-right"></i></a></li>-->
+<!--												</ul>-->
+<!--											</div>-->
+<!--										</div>-->
+<!--									</div>-->
+<!--									 paging e  	-->
+<!--								</form>-->
 
 
 												<div class="row">
