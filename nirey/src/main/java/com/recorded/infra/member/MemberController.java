@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.recorded.common.base.BaseController;
 import com.recorded.common.constants.Constants;
+import com.recorded.infra.mail.MailService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -22,6 +23,8 @@ public class MemberController extends BaseController {
 
     @Autowired
     MemberService service;
+    @Autowired
+    MailService mailService;
     
     //Admin Controller S
     
@@ -108,6 +111,7 @@ public class MemberController extends BaseController {
         // 나머지 로직은 그대로 유지
         System.out.println(dto.toString());
         service.insert(dto);
+        
         return "redirect:/loginAdm";
     }
 
@@ -316,6 +320,19 @@ public class MemberController extends BaseController {
         // 나머지 로직은 그대로 유지
         System.out.println(dto.toString());
         service.insert(dto);
+        
+        mailService.sendMailSimple();
+		
+		Thread thread = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				mailService.sendMailSimple();
+			}
+		});
+		
+		thread.start();
+        
+		
         return "redirect:/recorded/Welcome";
     }
 
