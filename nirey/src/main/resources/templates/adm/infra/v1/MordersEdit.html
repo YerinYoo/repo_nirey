@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Meta -->
+    <meta name="description" content="Best Bootstrap Admin Dashboards">
+    <meta name="author" content="Bootstrap Gallery" />
+    <link rel="canonical" href="https://www.bootstrap.gallery/">
+    <meta property="og:url" content="https://www.bootstrap.gallery">
+    <meta property="og:title" content="Admin Templates - Dashboard Templates | Bootstrap Gallery">
+    <meta property="og:description" content="Marketplace for Bootstrap Admin Dashboards">
+    <meta property="og:type" content="Website">
+    <meta property="og:site_name" content="Bootstrap Gallery">
+    <link rel="shortcut icon" href="/adm/images/favicon.svg">
+
+    <!-- Title -->
+    <title>Bootstrap Admin Dashboards</title>
+
+    <!-- *************
+        ************ Common Css Files *************
+    ************ -->
+
+    <!-- Animated css -->
+    <link rel="stylesheet" href="/adm/css/animate.css">
+
+    <!-- Bootstrap font icons css -->
+    <link rel="stylesheet" href="/adm/fonts/bootstrap/bootstrap-icons.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="/adm/css/main.min.css">
+
+
+    <!-- *************
+        ************ Vendor Css Files *************
+    ************ -->
+
+    <!-- Scrollbar CSS -->
+    <link rel="stylesheet" href="/adm/vendor/overlay-scroll/OverlayScrollbars.min.css">
+
+    <!--  강사님 데이트 피커 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+
+
+</head>
+
+<body>
+
+   	<!-- Page wrapper start -->
+		<div class="page-wrapper">
+
+			<!-- SideBar th:block 구문 -->
+		<div th:replace="~{adm/infra/v1/include/SideBar :: SideBar}"></div>
+			<!-- *************
+				************ Main container start *************
+			************* -->
+			<div class="main-container mr-3">
+
+				<!-- Page header starts -->
+				<div class="page-header">
+
+					<div class="toggle-sidebar" id="toggle-sidebar"><i class="bi bi-list"></i></div>
+
+					<!-- Breadcrumb start -->
+					<ol class="breadcrumb d-md-flex d-none">
+						<li class="breadcrumb-item">
+							<i class="bi bi-house"></i>
+							<a href="index.html">Home</a>
+						</li>
+						<li class="breadcrumb-item">Members</li>
+						<li class="breadcrumb-item breadcrumb-active" aria-current="page">Add Member</li>
+					</ol>
+					<!-- Breadcrumb end -->
+
+					<!-- Header th:block 구문 -->
+					<div th:replace="~{adm/infra/v1/include/Header :: Header}"></div>
+
+				<!-- Content wrapper scroll start -->
+            <!-- Content wrapper scroll start -->
+            <div class="content-wrapper-scroll">
+
+                <div class="header" style="padding-left: 1%; padding-bottom: 3%">
+                    <h4>Add Member</h4>
+                </div>
+
+                <!-- Content wrapper start -->
+                <div class="content-wrapper">
+                    <form name="formInsert" id="formInsert" method="post" action="memberInsert">
+    <!-- Row start -->
+    <div class="row">
+        <div class="col-xl-4 col-sm-6 col-12">
+            <div class="card">
+                <div class="card-body">
+                    <label for="quitNY" class="form-label">QuitNY<span class="text-danger fs-0">*</span></label>
+                    <select class="form-select" id="quitNY" name="quitNY">
+                        <option selected="" disabled="" value="">Choose...</option>
+                        <option value="0">N</option>
+                        <option value="1">Y</option>
+                    </select>
+                    <div class="invalid-feedback" id="quitNYFeedback"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-sm-6 col-12">
+            <div class="card">
+                <div class="card-body">
+                    <label for="dormantNY" class="form-label">DormantNY<span class="text-danger fs-0">*</span></label>
+                    <select class="form-select" id="dormantNY" name="dormantNY">
+                        <option selected="" disabled="" value="">Choose...</option>
+                        <option value="0">N</option>
+                        <option value="1">Y</option>
+                    </select>
+                    <div class="invalid-feedback" id="dormantNYFeedback"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-sm-6 col-12">
+            <div class="card">
+                <div class="card-body">
+                    <label for="memberName" class="form-label">Name <span class="text-danger fs-0">*</span></label>
+                    <input type="text" id="name" name="name" maxlength="20" class="form-control" />
+                    <div class="invalid-feedback" id="nameFeedback"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-xl-4 col-sm-6 col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <label for="memberID" class="form-label">ID<span class="text-danger fs-0">*</span></label>
+                        <input type="text" class="form-control" id="ID" name="ID">
+                        <div class="invalid-feedback" id="IDFeedback"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-sm-6 col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <label for="pwd" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="pwd" name="pwd">
+                        <div class="invalid-feedback" id="pwdFeedback"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-sm-6 col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <label for="confirmPwd" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirmPwd" name="confirmPwd">
+                        <div class="invalid-feedback" id="confirmPwdFeedback"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-4 col-sm-6 col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <label for="email" class="form-label">Email</label>
+                        <input type="text" class="form-control" id="email" name="email">
+                        <div class="invalid-feedback" id="emailFeedback"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-sm-6 col-12">
+            <div class="card">
+                <div class="card-body">
+                    <label for="genderCD" class="form-label">Gender<span class="text-danger fs-0">*</span></label>
+                    <select class="form-select" id="genderCD" name="genderCD">
+                        <option selected="" disabled="" value="">Choose...</option>
+                        <option value="1">Male</option>
+                        <option value="2">Female</option>
+                        <option value="3">Etc.</option>
+                    </select>
+                    <div class="invalid-feedback" id="genderCDFeedback"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-4 col-sm-6 col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <label for="MobileNum" class="form-label">Mobile</label>
+                        <input type="text" class="form-control" id="MobileNum" name="MobileNum">
+                        <div class="invalid-feedback" id="MobileNumFeedback"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-sm-6 col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <label for="birthday" class="form-label">Birthday</label>
+                        <input type="text" id="birthday" name="birthday" class="form-control form-control-sm"
+                            autocomplete="off">
+                        <div class="invalid-feedback" id="birthdayFeedback"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form actions footer start -->
+    <div class="form-actions-footer">
+        <a th:href="@{/Morders}">
+            <button class="btn btn-light">Cancel</button>
+        </a>
+
+        <button class="btn btn-success" type="submit" th:href="@{/Morders}" id="btnInsert">Submit</button>
+    </div>
+    <!-- Form actions footer end -->
+</form>
+                    
+                </div>
+                <!-- Content wrapper end -->
+
+                <!-- App Footer start -->
+                <div class="app-footer">
+                    <span>© Arise admin 2023</span>
+                </div>
+                <!-- App footer end -->
+
+            </div>
+            <!-- Content wrapper scroll end -->
+
+        </div>
+        <!-- *************
+            ************ Main container end *************
+        ************* -->
+
+    </div>
+    <!-- Page wrapper end -->
+
+    <!-- *************
+        ************ Required JavaScript Files *************
+    ************* -->
+    <!-- Required jQuery first, then Bootstrap Bundle JS -->
+    <script src="/adm/js/jquery.min.js"></script>
+    <script src="/adm/js/bootstrap.bundle.min.js"></script>
+    <script src="/adm/js/modernizr.js"></script>
+    <script src="/adm/js/moment.js"></script>
+    <!--  Validation JS -->
+    <script src="/adm/js/validationXdm.js"></script>
+
+    <!-- *************
+        ************ Vendor Js Files *************
+    ************* -->
+
+    <!-- Overlay Scroll JS -->
+    <script src="/adm/vendor/overlay-scroll/jquery.overlayScrollbars.min.js"></script>
+    <script src="/adm/vendor/overlay-scroll/custom-scrollbar.js"></script>
+
+    <!-- Main Js Required -->
+    <script src="/adm/js/main.js"></script>
+
+    <script type="text/javascript">
+    //비밀번호 입력 값과 비밀번호 확인 입력 값 일치 여부 판단
+	function pwdConfirm() {
+	/* 비밀번호, 비밀번호 확인 입력창에 입력된 값을 비교해서 같다면 비밀번호 일치, 그렇지 않으면 불일치 라는 텍스트 출력.*/
+	/* document : 현재 문서를 의미함. 작성되고 있는 문서를 뜻함. */
+	/* getElementByID('아이디') : 아이디에 적힌 값을 가진 id의 value를 get을 해서 password 변수 넣기 */
+		var pwd = document.getElementById('pwd');					//비밀번호 
+		var confirmPwd = document.getElementById('confirmPwd');	//비밀번호 확인 값
+		var confrimMsg = document.getElementById('confirmMsg');				//확인 메세지
+		var correctColor = "#00ff00";	//맞았을 때 출력되는 색깔.
+		var wrongColor ="#ff0000";	//틀렸을 때 출력되는 색깔
+		
+		if(pwd.value.equals(confirmPwd.value)){ //password 변수의 값과 passwordConfirm 변수의 값과 동일하다.
+			confirmMsg.style.color = correctColor;/* span 태그의 ID(confirmMsg) 사용  */
+			confirmMsg.innerHTML ="비밀번호 일치";/* innerHTML : HTML 내부에 추가적인 내용을 넣을 때 사용하는 것. */
+		}else{
+			confirmMsg.style.color = wrongColor;
+			confirmMsg.innerHTML ="비밀번호 불일치";
+		}
+	}
+    
+        $(function () {
+            // 등록버튼 클릭 이벤트
+            $("#btnInsert").click(function () {
+                if (validationInst() == false) {
+                    return false;
+                } else {
+                    $("#formInsert").attr("action", goUrlXdmInstForm);
+                    $("#formInsert").submit();
+                }
+            });
+        });
+    </script>
+
+    <!-- 강사님 데이터 피커 -->
+    <!--데이터피커 자바스크립트 구문-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js">
+    </script>
+      <script type="text/javascript">
+        $(function () {
+            // 데이터 피커 초기화
+            $("#birthday").datetimepicker({
+                format: "Y-m-d",
+                timepicker: false,
+            });
+
+            // 등록 버튼 클릭 이벤트
+            $("#btnInsert").click(function () {
+                if (validationInst() == false) {
+                    return false;
+                } else {
+                    $("#formInsert").attr("action", goUrlXdmInstForm);
+                    $("#formInsert").submit();
+                }
+            });
+        });
+
+        // 전체 유효성 검사 함수
+        function validationInst() {
+            // 각 요소의 유효성 검사를 수행하고, 하나라도 실패하면 false를 반환합니다.
+            if (!checkSelectNull('quitNY', 2, "회원의 탈퇴 여부를 선택해 주세요.")) return false;
+            if (!checkSelectNull('dormantNY', 2, "휴면 계정 여부를 선택해 주세요.")) return false;
+            if (!checkOnlyKoreanEnglishNumber('name', 2, 0, "이름은 한글, 영어로만 입력 가능합니다.")) return false;
+            if (!checkOnlyEnglishNumber('ID', 2, 1, "ID는 영대소문자, 숫자만 입력 가능합니다.")) return false;
+            if (!checkOnlyEnglishNumber('pwd', 2, 0, "제품 이름은 영문대소문자, 숫자만 입력 가능합니다.")) return false;
+            if (!checkOnlyEnglishNumber('email', 2, 1, "이메일은 영대소문자, 숫자만 입력 가능합니다.")) return false;
+            if (!checkSelectNull('genderCD', 2, "성별을 선택해 주세요.")) return false;
+            if (!checkOnlyNumber('MobileNum', 2, 0, 1, 0, 255, "순서는 숫자(0~255)만 입력 가능합니다.")) return false;
+            return true; // 모든 유효성 검사를 통과하면 true 반환
+        }
+    </script>
+
+</body>
+
+</html>
