@@ -39,4 +39,5 @@ out/
 
 ###by Yerin###
 application-external.properties
+application.properties
 logs/
