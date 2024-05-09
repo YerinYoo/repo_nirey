@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Porto - Bootstrap eCommerce Template</title>
+    <title>meOmy</title>
 
     <meta name="keywords" content="HTML5 Template" />
     <meta name="description" content="Porto - Bootstrap eCommerce Template">
@@ -26,6 +26,10 @@
             s.parentNode.insertBefore( wf, s );
         } )( document );
     </script>
+	
+	<!-- 네이버 로그인 -->
+	<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+	
 
     <!-- Plugins CSS File -->
     <link rel="stylesheet" href="/usr/css/bootstrap.min.css">
@@ -49,45 +53,59 @@
 				<div class="row mt-10 justify-content-center">
 					<div class="col-3">
 
-								<div class="heading mb-1 mt-10">
-									<h2 class="title">Login</h2>
-								</div>
+						<div class="heading mb-1 mt-10">
+							<h2 class="title">Login</h2>
+						</div>
 
-								<form >
-									<label class="form-label">ID</label>
-				                    <input type="text" id="ID" name="ID" class="form-control" placeholder="Enter your ID" value="dd">
-				                    <div class="invalid-feedback" id="IDFeedback"></div>
+							<label class="form-label">ID</label>
+		                    <input type="text" id="ID" name="ID" class="form-control" placeholder="Enter your ID" value="dd">
+		                    <div class="invalid-feedback" id="IDFeedback"></div>
 
-									 <label class="form-label">password</label>
-				                    <input type="password" id="pwd" name="pwd" class="form-control" placeholder="Enter your Password" value="dd">
-									<div class="invalid-feedback" id="pwdFeedback"></div>
+							 <label class="form-label">password</label>
+		                    <input type="password" id="pwd" name="pwd" class="form-control" placeholder="Enter your Password" value="dd">
+							<div class="invalid-feedback" id="pwdFeedback"></div>
 
 
-										<div class="custom-control custom-checkbox mb-0">
-											<input type="checkbox" class="custom-control-input" id="lost-password" />
-											<label class="custom-control-label mb-0" for="lost-password">Remember My Account</label>
-										</div>
-										
-										<button type="button" class="btn btn-dark btn-md w-100 mt-3"  id="buttonLogIn">
-										LOGIN
-									</button>
+							<div class="custom-control custom-checkbox mb-0">
+								<input type="checkbox" class="custom-control-input" id="lost-password" />
+								<label class="custom-control-label mb-0" for="lost-password">Remember My Account</label>
+							</div>
+							
+							<div class="col-12 mt-1" style="text-align: end;">
+								<a th:href="@{/recorded/JoinIn}"
+								class="register font2">Don't u have Account?</a>
+							</div>
 
-											<div class="col-12 mt-3 font2" style="text-align: end;">
-												<a href="forgot-password.html"
-												class="forget-password font2">forgot-password?</a>
-											</div>
+							<button type="button" class="btn btn-dark btn-md w-100 mt-2 mb-0"  id="buttonLogIn">
+							LOGIN
+							</button>
+						
+						<div class="row mt-2">
+							<div class="col-4">
+								<button class="btn btn-outline-danger" style="width : 100%">Google</button>
+							</div>
+							
+							<div class="col-4">
+								<a id="naverIdLogin_loginButton" href="javascript:void(0)">
+									<button class="btn btn-outline-warning" style="width : 100%">Kakao</button>
+								</a>
+							</div>
 
-											<div class="col-12 mb-3" style="text-align: end;">
-												<a th:href="@{/recorded/JoinIn}"
-												class="register font2">Don't u have Account?</a>
-											</div>
-								</form>
+							<div class="col-4">
+								<button class="btn btn-outline-success" style="width : 100%">Naver</button>
+							</div>
+							
+						</div>
 
-					</div>
+									
+								
+
 				</div>
 			</div>
-			
-			    <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+		</div>
+		
+	    <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">	
+					
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -184,6 +202,57 @@ $("#buttonLogIn").click(function(e) {
     });
 });
 
+</script>
+
+<!-- 네이버 로그인 -->
+<script>
+
+var naverLogin = new naver.LoginWithNaverId(
+		{
+			clientId: "zkcfAGKuyAs4V6QAeeX0", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
+			callbackUrl: "http://localhost:8080/recorded/Login", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
+			isPopup: false,
+			callbackHandle: true
+		}
+	);	
+
+naverLogin.init();
+
+window.addEventListener('load', function () {
+	naverLogin.getLoginStatus(function (status) {
+		if (status) {
+			var email = naverLogin.user.getEmail(); // 필수로 설정할것을 받아와 아래처럼 조건문을 줍니다.
+    		
+			console.log(naverLogin.user); 
+    		
+            if( email == undefined || email == null) {
+				alert("이메일은 필수정보입니다. 정보제공을 동의해주세요.");
+				naverLogin.reprompt();
+				return;
+			}
+		} else {
+			console.log("callback 처리에 실패하였습니다.");
+		}
+	});
+});
+
+
+var testPopUp;
+function openPopUp() {
+    testPopUp= window.open("https://nid.naver.com/nidlogin.logout", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,width=1,height=1");
+}
+function closePopUp(){
+    testPopUp.close();
+}
+
+function naverLogout() {
+	openPopUp();
+	setTimeout(function() {
+		closePopUp();
+		}, 1000);
+	
+	
+}
 </script>
 
 

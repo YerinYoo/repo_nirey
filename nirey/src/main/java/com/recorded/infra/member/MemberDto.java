@@ -28,12 +28,33 @@ public class MemberDto {
 	private String phoneNum;
 	private String ShippingMsg;
 
-	
+//네이버 로그인 api 사용 시 추가 필요 객체
+	private String id;
+	private String nickname;
+	private String profileImage;
 	
 	
 	
 
 
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	public String getProfileImage() {
+		return profileImage;
+	}
+	public void setProfileImage(String profileImage) {
+		this.profileImage = profileImage;
+	}
 	public String getAddrDetail() {
 		return addrDetail;
 	}

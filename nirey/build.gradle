@@ -32,10 +32,15 @@ dependencies {
 	
 	//validation 사용 위해 의존성 추가
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation
-implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.5.2'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.5.2'	
+	
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '3.2.3'
+	
+	//Spring Boot Starter Mail
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '3.2.5'
 
-// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
-implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '3.2.3'
 
 }
 
