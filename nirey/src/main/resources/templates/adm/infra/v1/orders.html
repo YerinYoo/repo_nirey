@@ -91,8 +91,8 @@
 							<i class="bi bi-house"></i>
 							<a href="index.html">Home</a>
 						</li>
-						<li class="breadcrumb-item">Products</li>
-						<li class="breadcrumb-item breadcrumb-active" aria-current="page">Product List</li>
+						<li class="breadcrumb-item">CodeGroup</li>
+						<li class="breadcrumb-item breadcrumb-active" aria-current="page">CodeGroup List</li>
 					</ol>
 					<!-- Breadcrumb end -->
 
@@ -229,26 +229,18 @@
 												<div class="table-responsive">
 													<table class="table v-middle" style="table-layout:fixed;" >
 													 	<tr>
-												    		<td>
-													    		<div class="form-check form-check-inline">
-																	<input class="form-check-input" type="checkbox" id="pageNumToShow " name="pageNumToShow " value="option1">
-																</div>
-												    		</td>
-												    		<td>#</td>
-												    		<td>delNY</td>
-												    		<td>seq</td>
-												    		<td>name</td>
-												    		<td>count</td>
-												    		<td>regDate</td>
-												    		<td>modDate</td>
+															<th scope="col"><input class="form-check-input" type="checkbox" id="checkAll"  /></th>
+												    		<th>delNY</th>
+												    		<th>seq</th>
+												    		<th>name</th>
+												    		<th>count</th>
+												    		<th>regDate</th>
+												    		<th>modDate</th>
 											    		</tr>
 											    	<tr th:if="${!#lists.isEmpty(list)}" th:each="list:${list}"> 
-											    		<td>															
-											    				<div class="form-check form-check-inline">
-																	<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-																</div>
+														<td>
+															<input class="form-check-input chk" type="checkbox" name="chk" th:value="${list.seq}" />
 														</td>
-											    		<td></td>
 											     		<td th:if="${list.delNY eq 0}">N</td>
 											     		<td th:unless="${list.delNY eq 0}">Y</td>
 											    		<td th:text="${list.seq}"></td>
@@ -282,6 +274,27 @@
 									</form>
 									
 									
+									<div class="row">
+									
+										<div class="col-1" style="float : left;">
+                                                <span class="me-2">
+                                                    <a class="btn btn-primary btn-m" href="#" th:href="@{/AddCodeGroup}">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </a>
+                                                </span>
+                                               </div>
+                                               
+                                               <div class="col-1" style="float : right; padding-left : 1270px;">
+                                               
+                                                <span>
+                                                    <button class="btn btn-danger btn-icon btn-m mb-1" data-bs-toggle="modal" data-bs-target="#exampleModal" id="btnModalUelete">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </span>
+                                                </div>
+                                        </div>
+									</div>
+									
 												
 	
 									<!-- Card end -->
@@ -302,30 +315,7 @@
 				<!-- Content wrapper scroll end -->
 				
 				
-				<!-- Add Modals Here -->
-				<div class="modals-placeholder">
 				
-								<!-- Modal 1 -->
-					<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-						aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLabel">삭제</h5>
-									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-								</div>
-								<div class="modal-body">
-									삭제하시겠습니까?
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-dark" data-bs-dismiss="modal">닫기</button>
-									<button type="submit" class="btn btn-warning"th:href="@{/orders}" th:text="Uelete"></button>
-									<button type="submit" class="btn btn-danger" th:href="@{/orders}" th:text="Delete"></button>
-
-								</div>
-							</div>
-						</div>
-					</div>
 				</div>
 
 			</div>
@@ -372,7 +362,7 @@
 	
 	let goUrlXdmList = "/Porders";								/* ### */
 	let goUrlXdmForm = "/v1/infra/code/PordersForm";								/* ### */
-	let goUrlXdmMultiUele = "/v1/infra/codegroup/codeGroupXdmMultiUele";			/* ### */
+	//let goUrlXdmMultiUele = "/v1/infra/codegroup/codeGroupXdmMultiUele";			/* ### */
 	let goUrlXdmMultiDele = "/v1/infra/codegroup/codeGroupXdmMultiDele";			/* ### */
 	let goUrlXdmView = "/v1/infra/codegroup/codeGroupXdmView";								/* ### */
 	
@@ -422,6 +412,37 @@
 		        // 페이지 로드가 완료되면 테이블을 표시
 		        $('.table-responsive').css('visibility', 'visible');
 		    });
+		</script>
+		
+		<!-- 다중 셀렉 / uelete -->
+		<script>
+		//체크박스 삭제 구문
+			let goUrlXdmMultiUele = "/codeGroupUpdtDel";		
+			let checkboxSeqArray = [];
+			
+			
+			$("#btnModalUelete").on("click", function(){
+				$("input[name=chk]:checked").each(function(){ 
+					// check된것을 찾고 체크된 값만 넘김
+					checkboxSeqArray.push($(this).val());  // check 해당된 값을 담는다.
+				});				
+				
+				// checkboxSeqArray 값을 form 데이터로 추가
+			    let hiddenInput = document.createElement("input");
+			    hiddenInput.setAttribute("type", "hidden");
+			    hiddenInput.setAttribute("name", "checkboxSeqArray");
+			    hiddenInput.setAttribute("value", checkboxSeqArray.join(","));
+			    form.appendChild(hiddenInput);
+				
+				$("#modalConfirm").modal("hide");
+				
+				// 폼의 action 속성 변경
+		        form.action = goUrlXdmMultiUele;
+		        
+		        // 폼 제출
+		        form.submit();
+				
+			});
 		</script>
 
 

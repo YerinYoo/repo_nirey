@@ -79,8 +79,12 @@ public class CodeGroupController {
 
 	@RequestMapping(value = "/codeGroupUpdtDel")
 	public String codeGroupUpdtDel(CodeGroupDto dto) throws Exception {
-		//서비스 파일에 updtDel이라는 이름으로 정의된 함수 호출
-		service.updtDel(dto);
+		String[] checkboxSeqArray = dto.getCheckboxSeqArray();
+		for(String checkboxSeq : checkboxSeqArray) {
+			dto.setSeq(checkboxSeq);
+			//서비스 파일에 updtDel이라는 이름으로 정의된 함수 호출
+			service.updtDel(dto);
+		}
 		//함수 내용 실행한 후 컨트롤러 주소로 URL 요청
 		return "redirect:/CodeGroupList";
 	}

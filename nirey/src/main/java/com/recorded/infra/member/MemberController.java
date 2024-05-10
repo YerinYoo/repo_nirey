@@ -146,7 +146,12 @@ public class MemberController extends BaseController {
     // 회원 탈퇴 처리
     @RequestMapping(value = "/MemberUelete")
     public String MemberUelete(MemberDto dto) throws Exception {
-        service.uelete(dto);
+    	String[] checkboxSeqArray = dto.getCheckboxSeqArray();
+		for(String checkboxSeq : checkboxSeqArray) {
+			dto.setMemberSeq(checkboxSeq);
+			service.uelete(dto);
+		}
+		
         return "redirect:/MemberList";
     }
 

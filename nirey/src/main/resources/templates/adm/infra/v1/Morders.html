@@ -210,34 +210,26 @@
 										<div class="table-responsive">
 										<table class="table v-middle" style="table-layout:fixed;" >
 									    	<tr>
-									    		<td>
-									    			<div class="form-check form-check-inline">
-														<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-													</div>
-									    		</td>
-									    		<td>#</td>
-									    		<td>memberSeq</td>
-									    		<td>member Name</td>
-									    		<td>quitNY</td>
-									    		<td>dormantNY</td>
-									    		<td>ID</td>
-									    		<td>email</td>
-									    		<td>gender</td>
-									    		<td>birthday</td>
-									    		<td>MobileNum</td>
-									    		<td>joinDate</td>
-									    		<td>modDateTime</td>
+												<th scope="col"><input class="form-check-input" type="checkbox" id="checkAll"  /></th>
+									    		<th>memberSeq</th>
+									    		<th>member Name</th>
+									    		<th>quitNY</th>
+									    		<th>dormantNY</th>
+									    		<th>ID</th>
+									    		<th>email</th>
+									    		<th>gender</th>
+									    		<th>birthday</th>
+									    		<th>MobileNum</th>
+									    		<th>joinDate</th>
+									    		<th>modDateTime</th>
 									    		
 									    	</tr>
 									    	
 										
 									    	<tr th:if="${!#lists.isEmpty(list)}" th:each="list:${list}"> 
-									    	    <td>
-									    	    	<div class="form-check form-check-inline">
-														<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-													</div>
-									    	    </td>
-									    		<td></td>
+												<td>
+													<input class="form-check-input chk" type="checkbox" name="chk" th:value="${list.memberSeq}" />
+												</td>
 									    		<td th:text="${list.MemberSeq}"></td>
 									    		<td>
 									    			<a th:href="@{/MemberView(memberSeq=${list.memberSeq}, name=${list.name}, quitNY=${list.quitNY})}"  th:text="${list.name}"></a>
@@ -310,9 +302,10 @@
                                                            
                                                             <span>
                                                             
-                                                                <a class="btn btn-danger btn-icon btn-m mb-1" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                                <button
+															 	class="btn btn-danger btn-icon btn-m mb-1" id="btnModalUelete" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                                     <i class="bi bi-trash"></i>
-                                                                </a>
+                                                                </button>
                                                             </span>
                                                             </div>
                                                     </div>
@@ -408,7 +401,7 @@
 	
 	let goUrlXdmList = "/MemberList";								/* ### */
 	let goUrlXdmForm = "/v1/infra/code/MordersForm";								/* ### */
-	let goUrlXdmMultiUele = "/v1/infra/codegroup/codeGroupXdmMultiUele";			/* ### */
+	//let goUrlXdmMultiUele = "/v1/infra/codegroup/codeGroupXdmMultiUele";			/* ### */
 	let goUrlXdmMultiDele = "/v1/infra/codegroup/codeGroupXdmMultiDele";			/* ### */
 	let goUrlXdmView = "/v1/infra/codegroup/codeGroupXdmView";								/* ### */
 	
@@ -487,6 +480,36 @@
 		    });
 		</script>
 
+		<!-- 다중 셀렉 uelete 구문 -->
+		<script>
+			//체크박스 삭제 구문
+			let goUrlXdmMultiUele = "/MemberUelete";		
+			let checkboxSeqArray = [];
+			
+			
+			$("#btnModalUelete").on("click", function(){
+				$("input[name=chk]:checked").each(function(){ 
+					// check된것을 찾고 체크된 값만 넘김
+					checkboxSeqArray.push($(this).val());  // check 해당된 값을 담는다.
+				});				
+				
+				// checkboxSeqArray 값을 form 데이터로 추가
+			    let hiddenInput = document.createElement("input");
+			    hiddenInput.setAttribute("type", "hidden");
+			    hiddenInput.setAttribute("name", "checkboxSeqArray");
+			    hiddenInput.setAttribute("value", checkboxSeqArray.join(","));
+			    form.appendChild(hiddenInput);
+				
+				$("#modalConfirm").modal("hide");
+				
+				// 폼의 action 속성 변경
+		        form.action = goUrlXdmMultiUele;
+		        
+		        // 폼 제출
+		        form.submit();
+				
+			});
+		</script>
 
 	<!-- Date Range JS -->
 	<!-- 

@@ -10,8 +10,18 @@ public class CodeGroupDto {
     private Date regDatetime;
     private Date modDatetime;
     private Integer cdSeqCount;
+    
+    //다중 선택된 시퀀스 값을 넘기는 배열 
+    private String[] checkboxSeqArray  = null;
+    
 		
 	//getter, setter
+	public String[] getCheckboxSeqArray() {
+		return checkboxSeqArray;
+	}
+	public void setCheckboxSeqArray(String[] checkboxSeqArray) {
+		this.checkboxSeqArray = checkboxSeqArray;
+	}
 	public String getSeq() {
 		return seq;
 	}

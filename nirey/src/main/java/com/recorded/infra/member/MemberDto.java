@@ -33,10 +33,17 @@ public class MemberDto {
 	private String nickname;
 	private String profileImage;
 	
+//다중 셀렉 uelete
+	private String[] checkboxSeqArray  = null;
 	
 	
 
-
+	public String[] getCheckboxSeqArray() {
+		return checkboxSeqArray;
+	}
+	public void setCheckboxSeqArray(String[] checkboxSeqArray) {
+		this.checkboxSeqArray = checkboxSeqArray;
+	}
 	public String getId() {
 		return id;
 	}

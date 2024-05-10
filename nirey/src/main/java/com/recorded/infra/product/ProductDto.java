@@ -8,7 +8,7 @@ import java.util.List;
 public class ProductDto {
 
 
-private Integer productSeq;
+private String productSeq;
 private Integer delNY;
 private String ProductName;
 private Integer OrgPrice;
@@ -43,8 +43,17 @@ private String wishlistSize;
 private Integer Product_productSeq;
 private String Member_memberSeq;
 
+//다중 셀렉 배열
+private String[] checkboxSeqArray  = null;
 
 
+
+public String[] getCheckboxSeqArray() {
+	return checkboxSeqArray;
+}
+public void setCheckboxSeqArray(String[] checkboxSeqArray) {
+	this.checkboxSeqArray = checkboxSeqArray;
+}
 public String getMember_memberSeq() {
 	return Member_memberSeq;
 }
@@ -111,10 +120,10 @@ public String getSizeSeq() {
 public void setSizeSeq(String sizeSeq) {
 	this.sizeSeq = sizeSeq;
 }
-public Integer getProductSeq() {
+public String getProductSeq() {
 	return productSeq;
 }
-public void setProductSeq(Integer productSeq) {
+public void setProductSeq(String productSeq) {
 	this.productSeq = productSeq;
 }
 public Integer getDelNY() {

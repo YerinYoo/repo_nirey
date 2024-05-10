@@ -14,8 +14,17 @@ public class CodeDto {
 	private String name;
 	private Date regDatetime;
 	private Date modDatetime;
-
+	
+	//다중 셀렉한 값 배열로 저장 
+	private String[] checkboxSeqArray  = null;
+	
 	 //데이터 관련 getter, setter
+	public String[] getCheckboxSeqArray() {
+		return checkboxSeqArray;
+	}
+	public void setCheckboxSeqArray(String[] checkboxSeqArray) {
+		this.checkboxSeqArray = checkboxSeqArray;
+	}
 	public String getCodeGroupSeq() {
 		return CodeGroupSeq;
 	}
