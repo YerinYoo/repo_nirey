@@ -28,19 +28,19 @@
                     <div class="col-lg-4">
                         <a href="#" class="nolink">Clothes</a>
                         <ul class="submenu">
-                            <li><a th:href="@{/recorded/Shop}">Outer</a></li>
-                            <li><a th:href="@{/recorded/Shop}">Top</a></li>
-                            <li><a th:href="@{/recorded/Shop}">Bottom</a></li>
-                            <li><a th:href="@{/recorded/Shop}">Dress</a></li>
+                            <li><a th:href="@{/recorded/Shop(category1CD=11)}">Outer</a></li>
+                            <li><a th:href="@{/recorded/Shop(category1CD=12)}">Top</a></li>
+                            <li><a th:href="@{/recorded/Shop(category1CD=13)}">Bottom</a></li>
+                            <li><a th:href="@{/recorded/Shop(category1CD=14)}">Dress</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-4">
                         <a href="#" class="nolink">Etc.</a>
                         <ul class="submenu">
-                            <li><a th:href="@{/recorded/Shop}">Bag</a></li>
-                            <li><a th:href="@{/recorded/Shop}">Shoes</a></li>
-                            <li><a th:href="@{/recorded/Shop}">Acc</a></li>
-                            <li><a th:href="@{/recorded/Shop}">etc.</a></li>
+                            <li><a th:href="@{/recorded/Shop(category2CD=15)}">Bag</a></li>
+                            <li><a th:href="@{/recorded/Shop(category2CD=16)}">Shoes</a></li>
+                            <li><a th:href="@{/recorded/Shop(category2CD=17)}">Acc</a></li>
+                            <li><a th:href="@{/recorded/Shop(category2CD=18)}">etc.</a></li>
                         </ul>
                     </div>
                 </div>
@@ -49,15 +49,15 @@
 
         <!--new, best, restock : shop 페이지 참조하여 구현하기-->
         <li class="new">
-            <a th:href="@{/recorded/Shop}">New</a>
+            <a th:href="@{/recorded/Shop/New}">New</a>
         </li>
 
         <li class="best">
-            <a th:href="@{/recorded/Shop}">Best</a>
+            <a th:href="@{/recorded/Shop/Best}">Best</a>
         </li>
 
         <li class="restock">
-            <a th:href="@{/recorded/Shop}">ReStock!</a>
+            <a th:href="@{/recorded/Shop/Restock}">ReStock!</a>
         </li>
 
 		<!-- 로그인 값이 있을 경우에는 mypage와 관련된 헤더, 로그인 값이 없을 경우에는 로그인으로 반환. -->

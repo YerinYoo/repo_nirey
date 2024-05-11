@@ -164,15 +164,16 @@ where a.productSeq = #{productSeq}
     
 	  <insert id="insert">
 			insert into product (
-				a.delNY
-				, a.ProductName
-				, a.OrgPrice
-				, a.DiscountedPrice
-				, a.prodStockCD
-				, a.category1CD
-				, a.category2CD
-				, b.color
-                , c.size
+				delNY
+				, ProductName
+				, OrgPrice
+				, DiscountedPrice
+				, prodStockCD
+				, category1CD
+				, category2CD
+				, detailDescription
+				, regDateTime
+				, modDateTime
 
 			) values (
 			#{delNY}
@@ -185,8 +186,6 @@ where a.productSeq = #{productSeq}
 			,#{DetailDescription}
 			,now()
 			,now()
-			,#{fabric}
-			,#{detailSize}
 			)
 	  </insert>
 	  
@@ -570,4 +569,69 @@ where 1=1
 </update>
 
 <!-- ProductMapper.xml -->
+
+
+<!-- 필터링 (prodStockCD) -->
+<!-- new -->
+<select id="filteringByNew">
+	    SELECT 
+        a.productSeq,
+        a.delNY,
+        a.ProductName,
+        a.OrgPrice,
+        a.DiscountedPrice,
+        a.prodStockCD,
+        a.category1CD,
+        a.category2CD,
+        a.regDateTime,
+        a.modDateTime,
+         (select count(*) from review where Product_seq = a.productSeq) as totalReviewCount,
+		 (SELECT ROUND(AVG(reviewRate) * 2) / 2 FROM review WHERE Product_seq = a.productSeq) AS reviewRateAvg
+    FROM 
+        product a
+        
+        where a.prodStockCD=7
+</select>
+
+<!-- besk -->
+<select id="filteringByBest">
+	    SELECT 
+        a.productSeq,
+        a.delNY,
+        a.ProductName,
+        a.OrgPrice,
+        a.DiscountedPrice,
+        a.prodStockCD,
+        a.category1CD,
+        a.category2CD,
+        a.regDateTime,
+        a.modDateTime,
+         (select count(*) from review where Product_seq = a.productSeq) as totalReviewCount,
+		 (SELECT ROUND(AVG(reviewRate) * 2) / 2 FROM review WHERE Product_seq = a.productSeq) AS reviewRateAvg
+    FROM 
+        product a
+        
+        where a.prodStockCD=8
+</select>
+
+<!-- restock -->
+<select id="filteringByRestock">
+	    SELECT 
+        a.productSeq,
+        a.delNY,
+        a.ProductName,
+        a.OrgPrice,
+        a.DiscountedPrice,
+        a.prodStockCD,
+        a.category1CD,
+        a.category2CD,
+        a.regDateTime,
+        a.modDateTime,
+         (select count(*) from review where Product_seq = a.productSeq) as totalReviewCount,
+		 (SELECT ROUND(AVG(reviewRate) * 2) / 2 FROM review WHERE Product_seq = a.productSeq) AS reviewRateAvg
+    FROM 
+        product a
+        
+        where a.prodStockCD=9
+</select>
 </mapper>

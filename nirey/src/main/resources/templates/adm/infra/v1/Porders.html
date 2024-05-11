@@ -212,10 +212,10 @@
 										<div class="table-responsive">
 										<table class="table v-middle" style="table-layout:fixed;">
 									    	<tr style="font-weight: bold; font-style: italic;">
-												<th scope="col"><input class="form-check-input" type="checkbox" id="checkAll"  /></th>
+												<th scope="col"><input class="form-check-input" type="checkbox" id="checkAll" /></th>
 									    		<th style="width : 100px;">productSeq</th>
 									    		<th style="width : 80px;">delNY</th>
-									    		<th>ProductName</th>
+									    		<th style="width : 200px;">ProductName</th>
 									    		<th style="width :100px">OrgPrice</th>
 									    		<th>DiscountedPrice</th>
 									    		<th>prodStockCD</th>
@@ -237,8 +237,8 @@
 									    			<a th:href="@{/ProductView(productSeq=${list.productSeq}, ProductName=${list.ProductName}, delNY=${list.delNY})}"  th:text="${list.ProductName}"></a>
 									    		</td>
 									     		
-									    		<td th:text="${list.OrgPrice} " ></td>
-									    		<td th:text="${list.DiscountedPrice}"></td>
+									    		<td th:text="${list.OrgPrice}" class="old-price" ></td>
+									    		<td th:text="${list.DiscountedPrice}" class="product-price"></td>
 									    		
 									    		<td th:if="${list.prodStockCD!= null}" th:text="${@codeService.selectOneCachedCode(list.prodStockCD)}" class="prodStockCD align-middle"></td>
 												<td th:unless="${list.prodStockCD != null}" class="prodStockCD align-middle"></td>
@@ -261,8 +261,8 @@
 <!-- 									    <td th:if="${list.genderCD eq 1}">남성</td>
 									    		<td th:unless="${list.genderCD eq 2}">여성</td>  -->
 
-									       		<td th:text="${#dates.format(list.regDateTime,  'yyyy-MM-dd HH:mm:ss')}"></td>
-									     		<td th:text="${#dates.format(list.modDateTime,  'yyyy-MM-dd HH:mm:ss')}"></td>
+									       		<td th:text="${#dates.format(list.regDateTime,  'yyyy-MM-dd')}"></td>
+									     		<td th:text="${#dates.format(list.modDateTime,  'yyyy-MM-dd')}"></td>
 									    	</tr>
 									    </table>
 										</div>
@@ -483,6 +483,40 @@
 				
 			});
 		</script>
+		
+		<!-- 가격 포맷팅 -->
+		<script>
+		    // 가격 관련 스크립트
+		    function formatPriceElements() {
+		        // HTML 요소를 가져와서 가격 포맷팅 적용
+		        var oldPriceElements = document.querySelectorAll('.old-price');
+		        var productPriceElements = document.querySelectorAll('.product-price');
+		
+		        oldPriceElements.forEach(function(element) {
+		            var price = parseFloat(element.textContent);
+		            element.textContent = formatPrice(price);
+		        });
+		
+		        productPriceElements.forEach(function(element) {
+		            var price = parseFloat(element.textContent);
+		            element.textContent = formatPrice(price);
+		        });
+		    }
+		
+		    // 가격 포맷팅 함수
+		    function formatPrice(price) {
+		        // 세 자리마다 컴마 추가
+		        var formattedPrice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		        // '원'을 추가하여 반환
+		        return "₩" + formattedPrice;
+		    }
+		
+		    // 페이지 로드 시 가격 포맷팅 적용
+		    document.addEventListener('DOMContentLoaded', function() {
+		        formatPriceElements();
+		    });
+		</script>
+
 
 
 	<!-- Date Range JS -->

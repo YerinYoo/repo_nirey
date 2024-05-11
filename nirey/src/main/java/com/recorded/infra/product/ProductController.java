@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.recorded.common.constants.Constants;
 import com.recorded.common.util.UtilDateTime;
@@ -31,9 +32,21 @@ public class ProductController {
 
 		System.out.println(dto.toString());
 
-		service.insert(dto);
+		System.out.println("-------------");
+		System.out.println("dto.getUploadFiles().length: " + dto.getUploadFiles().length);
+		System.out.println("-------------");
+		System.out.println();
+		MultipartFile[] uploadFiles = dto.getUploadFiles();
+		
+		 for (MultipartFile file : uploadFiles) {
+			 
+	         System.out.println("업로드된 파일 이름: " + file.getOriginalFilename());
+	     }
+		 
+		//service.insert(dto);
 
 		return "redirect:/ProductList";
+		
 	}
 
 	@ResponseBody
@@ -217,7 +230,7 @@ public class ProductController {
 	public String recordedShop(@ModelAttribute("vo") ProductVo vo, ProductDto dto,
 	                           Model model) throws Exception {
 
-	    // 검색 기능 관련 설정
+		 // 검색 기능 관련 설정
 	    setSearch(vo, vo.getShValue(), null); // 사용자 아이디를 null로 설정
 
 	    
@@ -234,6 +247,73 @@ public class ProductController {
 	    // recordedShop 페이지로 이동
 	    return "usr/infra/v1/shop";
 	}
+	
+	@RequestMapping(value = "/recorded/Shop/New")
+	public String filterngByNew(@ModelAttribute("vo") ProductVo vo, ProductDto dto,
+	                           Model model) throws Exception {
+
+	    // 검색 기능 관련 설정
+	    setSearch(vo, vo.getShValue(), null); // 사용자 아이디를 null로 설정
+
+	    
+	    // 페이징 기능 관련 설정
+	    vo.setParamsPaging(service.getTotalProductCount(vo)); // 총 상품 수 설정
+	    // 페이징 처리된 상품 리스트 조회
+	    List<ProductDto> productListFiltered = service.selectPagedProductList(vo);
+	    
+	    model.addAttribute("prodListFilt", productListFiltered);
+
+	    // 신상품 리스트를 가져와서 모델에 추가
+	    model.addAttribute("prodList", service.filteringByNew());
+
+	    // recordedShop 페이지로 이동
+	    return "usr/infra/v1/stockCDNew";
+	}
+	
+	@RequestMapping(value = "/recorded/Shop/Best")
+	public String filterngByBest(@ModelAttribute("vo") ProductVo vo, ProductDto dto,
+	                           Model model) throws Exception {
+
+	    // 검색 기능 관련 설정
+	    setSearch(vo, vo.getShValue(), null); // 사용자 아이디를 null로 설정
+
+	    
+	    // 페이징 기능 관련 설정
+	    vo.setParamsPaging(service.getTotalProductCount(vo)); // 총 상품 수 설정
+	    // 페이징 처리된 상품 리스트 조회
+	    List<ProductDto> productListFiltered = service.selectPagedProductList(vo);
+	    
+	    model.addAttribute("prodListFilt", productListFiltered);
+
+	    // 신상품 리스트를 가져와서 모델에 추가
+	    model.addAttribute("prodList", service.filteringByBest());
+
+	    // recordedShop 페이지로 이동
+	    return "usr/infra/v1/stockCDBest";
+	}
+	
+	@RequestMapping(value = "/recorded/Shop/Restock")
+	public String filterngByRestock(@ModelAttribute("vo") ProductVo vo, ProductDto dto,
+	                           Model model) throws Exception {
+
+	    // 검색 기능 관련 설정
+	    setSearch(vo, vo.getShValue(), null); // 사용자 아이디를 null로 설정
+
+	    
+	    // 페이징 기능 관련 설정
+	    vo.setParamsPaging(service.getTotalProductCount(vo)); // 총 상품 수 설정
+	    // 페이징 처리된 상품 리스트 조회
+	    List<ProductDto> productListFiltered = service.selectPagedProductList(vo);
+	    
+	    model.addAttribute("prodListFilt", productListFiltered);
+
+	    // 신상품 리스트를 가져와서 모델에 추가
+	    model.addAttribute("prodList", service.filteringByRestock());
+
+	    // recordedShop 페이지로 이동
+	    return "usr/infra/v1/stockCDRestock";
+	}
+	
 	
 	  @RequestMapping(value = "/recorded/Shop/Product") 
 	  public String ProductView(ProductDto dto, Model model) throws Exception {
@@ -292,6 +372,34 @@ public class ProductController {
 
 		// 페이지로 이동
 		return "usr/infra/v1/shop";
+	}
+	
+	//카테고리, stockCD에 따른 제품 호출
+	@RequestMapping("/filterProducts")
+	public String filterProducts(@RequestParam(required = false, name = "category1CD") Integer category1CD,
+	                             @RequestParam(required = false, name = "category2CD") Integer category2CD,
+	                             @RequestParam(required = false, name = "prodStockCD") Integer prodStockCD,
+	                             @RequestParam(name = "page", defaultValue = "1") Integer page,
+	                             Model model) {
+	    // 요청 파라미터를 DTO에 설정
+	    ProductDto dto = new ProductDto();
+	    dto.setCategory1CD(category1CD);
+	    dto.setCategory2CD(category2CD);
+	    dto.setProdStockCD(prodStockCD);
+
+	    // 필터링된 결과를 모델에 추가
+	    List<ProductDto> filteredProducts = service.getProductListByCategoryAndStock(dto);
+	    model.addAttribute("filteredProducts", filteredProducts);
+	    
+	    // 필요한 데이터가 포함된 ProductVo 객체를 생성하여 모델에 추가
+	    ProductVo vo = new ProductVo();
+		/*
+		 * vo.setStartPage(page); // 시작 페이지 설정 vo.setPageNumToShow(20); // 페이지에 표시할 항목 수
+		 * 설정 등
+		 */	    model.addAttribute("vo", vo);
+	    
+	    return "usr/infra/v1/shop"; 
+
 	}
 	
 	//위시리스트

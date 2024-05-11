@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 
 public class ProductDto {
 
@@ -46,8 +48,73 @@ private String Member_memberSeq;
 //다중 셀렉 배열
 private String[] checkboxSeqArray  = null;
 
+//이미지 테이블 관련 칼럼 - delNY, regDateTime, modDateTime는 이미 존재하여 따로 정의하지 X
+private String imgSeq;
+private String type;
+private Integer defaultNY;
+private String imgPath;
+private String originalName;
+private String ext;
+private Integer fileSize;
+private MultipartFile uploadFile; //단일 사진 업로드 시에 사용 
+private MultipartFile[] uploadFiles; //여러 장 업로드 시에 배열 사용 
 
 
+
+public Integer getFileSize() {
+	return fileSize;
+}
+public void setFileSize(Integer fileSize) {
+	this.fileSize = fileSize;
+}
+public MultipartFile getUploadFile() {
+	return uploadFile;
+}
+public void setUploadFile(MultipartFile uploadFile) {
+	this.uploadFile = uploadFile;
+}
+public MultipartFile[] getUploadFiles() {
+	return uploadFiles;
+}
+public void setUploadFiles(MultipartFile[] uploadFiles) {
+	this.uploadFiles = uploadFiles;
+}
+public String getImgSeq() {
+	return imgSeq;
+}
+public void setImgSeq(String imgSeq) {
+	this.imgSeq = imgSeq;
+}
+public String getType() {
+	return type;
+}
+public void setType(String type) {
+	this.type = type;
+}
+public Integer getDefaultNY() {
+	return defaultNY;
+}
+public void setDefaultNY(Integer defaultNY) {
+	this.defaultNY = defaultNY;
+}
+public String getImgPath() {
+	return imgPath;
+}
+public void setImgPath(String imgPath) {
+	this.imgPath = imgPath;
+}
+public String getOriginalName() {
+	return originalName;
+}
+public void setOriginalName(String originalName) {
+	this.originalName = originalName;
+}
+public String getExt() {
+	return ext;
+}
+public void setExt(String ext) {
+	this.ext = ext;
+}
 public String[] getCheckboxSeqArray() {
 	return checkboxSeqArray;
 }

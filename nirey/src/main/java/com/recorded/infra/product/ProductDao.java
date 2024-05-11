@@ -12,8 +12,12 @@ public interface ProductDao {
 	
 	public List<ProductDto> prodList(); 
 
-    public List<ProductDto> getProductListByCategoryAndStock(ProductDto dto);
-    
+	public List<ProductDto>filteringByNew();
+	
+	public List<ProductDto>filteringByBest();
+	
+	public List<ProductDto>filteringByRestock();
+	
 	public List<ProductDto> prodColor(ProductDto dto);
 	
 	public List<ProductDto> prodSize(ProductDto dto);

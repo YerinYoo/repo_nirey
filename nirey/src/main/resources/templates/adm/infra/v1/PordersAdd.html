@@ -55,7 +55,7 @@
 
 					<!-- Content wrapper start -->
 					<div class="content-wrapper" >
-					<form name="prodValidation"  method="post" action="ProductInsert">
+					<form name="prodValidation"  method="post" action="ProductInsert" enctype="multipart/form-data" autocomplete="off">
 						<!-- Row start -->
 						<div class="row">
 							<div class="col-xl-4 col-sm-6 col-12">
@@ -90,6 +90,18 @@
 										<label for="ProductName" class="form-label">ProductName <span class="text-danger fs-0">*</span></label>
 											<input type="text" id="ProductName" name="ProductName" th:value="${item?.ProductName}" maxlength="20" class="form-control" required=""/>
 											<div class="invalid-feedback" id="ProductNameFeedback"></div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="col-xl-4 col-sm-6 col-12">
+								<div class="card">
+									<div class="card-body">
+										<div>
+											<label for="uploadFiles" class="form-label">Image File</label>
+												<input type="file" class="form-control" id="uploadFiles" name="uploadFiles" multiple required="">
+												<div class="invalid-feedback" id="prodImgFeedback">Please enter a description of the product</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -212,8 +224,7 @@
 							</div>
 						</div>
 					</div>
-
-
+					
 						<!-- Form actions footer start -->
 						<div class="form-actions-footer">
 							<a  th:href="@{/ProductList}" >
