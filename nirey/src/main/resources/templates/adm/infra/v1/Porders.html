@@ -219,8 +219,7 @@
 									    		<th style="width :100px">OrgPrice</th>
 									    		<th>DiscountedPrice</th>
 									    		<th>prodStockCD</th>
-									    		<th>category1CD</th>
-									    		<th style="width : 110px;">category2CD</th>
+									    		<th>categoryCD</th>
 									    		<th>regDateTime</th>
 									    		<th>modDateTime</th>
 									    		
@@ -244,11 +243,8 @@
 												<td th:unless="${list.prodStockCD != null}" class="prodStockCD align-middle"></td>
 												
 												
-												<td th:if="${list.category1CD!= null}" th:text="${@codeService.selectOneCachedCode(list.category1CD)}" class="category1CD align-middle"></td>
-												<td th:unless="${list.category1CD != null}" class="category1CD align-middle"></td>
-																								
-												<td th:if="${list.category2CD!= null}" th:text="${@codeService.selectOneCachedCode(list.category2CD)}" class="category2CD align-middle"></td>
-												<td th:unless="${list.category2CD != null}" class="category2CD align-middle"></td>
+												<td th:if="${list.categoryCD!= null}" th:text="${@codeService.selectOneCachedCode(list.categoryCD)}" class="categoryCD align-middle"></td>
+												<td th:unless="${list.categoryCD != null}" class="categoryCD align-middle"></td>
 
 									    	<!-- 	<td>
 									    		<th:block th:switch="${list.genderCD}">

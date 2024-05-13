@@ -128,39 +128,24 @@
 							<div class="col-xl-4 col-sm-6 col-12">
 								<div class="card">
 									<div class="card-body">
-										<label for="category1CD" class="form-label">Category1(CD)</label>
-										<select class="form-select" id="prodCategory1">
-											<option th:selected="${item.category1CD == null}"  disabled="" value="">Choose...</option>
-											<option value="11" th:selected="${item.category1CD == 11}"  >Outer</option>
-											<option value="12" th:selected="${item.category1CD ==12}"  >Top</option>
-											<option value="13" th:selected="${item.category1CD == 13}"  >Bottom</option>
-											<option value="14" th:selected="${item.category1CD == 14}"  >Dress</option>
+										<label for="categoryCD" class="form-label">Category(CD)</label>
+										<select class="form-select" id="categoryCD" name="categoryCD">
+											<option th:selected="${item.categoryCD == null}"  disabled="" value="">Choose...</option>
+											<option value="11" th:selected="${item.categoryCD == 11}"  >Outer</option>
+											<option value="12" th:selected="${item.categoryCD ==12}"  >Top</option>
+											<option value="13" th:selected="${item.categoryCD == 13}"  >Bottom</option>
+											<option value="14" th:selected="${item.categoryCD == 14}"  >Dress</option>
+											<option value="15" th:selected="${item.categoryCD == 15}">Bag(15)</option>
+											<option value="16" th:selected="${item.categoryCD == 16}">Shoes</option>
+											<option value="17" th:selected="${item.categoryCD == 17}">Acc</option>
+											<option value="18" th:selected="${item.categoryCD == 18}">etc.</option>
 										</select>
-											<div class="invalid-feedback" id="category1CDFeedback">
+											<div class="invalid-feedback" id="categoryCDFeedback">
 										</div>
 									</div>
 								</div>
 							</div>
-							
-							<div class="col-xl-4 col-sm-6 col-12">
-							<div class="card">
-									<div class="card-body">
-										<label for="category2CD" class="form-label">Category2(CD)</label>
-										<select class="form-select" id="prodCategory2">
-											<option th:selected="${item.category2CD == null}"  disabled="" value="">Choose...</option>
-											<option value="15" th:selected="${item.category2CD == 15}">Bag(15)</option>
-											<option value="16" th:selected="${item.category2CD == 16}">Shoes</option>
-											<option value="17" th:selected="${item.category2CD == 17}">Acc</option>
-											<option value="18" th:selected="${item.category2CD == 18}">etc.</option>
-										</select>
-											<div class="invalid-feedback" id="cagegory2CDFeedback">
-										</div>
-									</div>
-								</div>
-							</div>
-
-
-
+			
 						<div class="row">
 						<th:block th:fragment="productprice">
 							<div class="col-xl-4 col-sm-6 col-12" style="width : 490px;">
@@ -360,8 +345,7 @@
 		if(!checkSelectNull('prodColor', 2, "Please enter the product colors one by one (you can leave the remaining fields blank)")) return false;
 		if(!checkSelectNull('prodDelNY', 2, "Please choose whether to delete the product")) return false;
 		if(!checkSelectNull('productCD', 2, "Please enter the product status using the code number")) return false;
-		if(!checkSelectNull('prodCategory1', 2, "If the product category is clothing, Please enter the Category1 using the code number")) return false;
-		if(!checkSelectNull('prodCategory2', 2, "If the product category is not clothing, Please enter the Category2 using the code number")) return false;
+		if(!checkSelectNull('category2CD', 2, "If the product category is clothing, Please enter the Category1 using the code number")) return false;
 		if(!checkOnlyNumber('prodOrgPrice', 2, 0, 1, 0, 1000000, "Please enter the cost of the product")) return false;
 		if(!checkOnlyNumber('prodDiscPrice', 2, 0, 1, 0, 1000000, "Please enter how much the product is discounted")) return false;
 		if(!checkOnlyKoreanEnglishNumber('ProductName', 2, 0, "Please enter product name")) return false;

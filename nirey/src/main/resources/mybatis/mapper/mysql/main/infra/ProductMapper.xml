@@ -13,8 +13,7 @@
         a.OrgPrice,
         a.DiscountedPrice,
         a.prodStockCD,
-        a.category1CD,
-        a.category2CD,
+        a.categoryCD,
         a.regDateTime,
         a.modDateTime,
          (select count(*) from review where Product_seq = a.productSeq) as totalReviewCount,
@@ -43,8 +42,7 @@
 	        a.OrgPrice,
 	        a.DiscountedPrice,
 	        a.prodStockCD,
-	        a.category1CD,
-	        a.category2CD,
+	        a.categoryCD,
 	        a.regDateTime,
 	        a.modDateTime,
 	        a.DetailDescription,
@@ -68,8 +66,7 @@
 	        a.OrgPrice,
 	        a.DiscountedPrice,
 	        a.prodStockCD,
-	        a.category1CD,
-	        a.category2CD,
+	        a.categoryCD,
 	        a.regDateTime,
 	        a.modDateTime,
 	        a.DetailDescription,
@@ -169,8 +166,7 @@ where a.productSeq = #{productSeq}
 				, OrgPrice
 				, DiscountedPrice
 				, prodStockCD
-				, category1CD
-				, category2CD
+				, categoryCD
 				, detailDescription
 				, regDateTime
 				, modDateTime
@@ -181,8 +177,7 @@ where a.productSeq = #{productSeq}
 			,#{OrgPrice}
 			,#{DiscountedPrice}
 			,#{prodStockCD}
-			,#{category1CD}
-			,#{category2CD}
+			,#{categoryCD}
 			,#{DetailDescription}
 			,now()
 			,now()
@@ -384,8 +379,7 @@ where a.productSeq = #{productSeq}
 		        , a.OrgPrice
 		        , a.DiscountedPrice
 		        , a.prodStockCD
-		        , a.category1CD
-		        , a.category2CD
+		        , a.categoryCD
 		        , a.regDateTime
 		        , a.modDateTime
 		    from 
@@ -431,8 +425,7 @@ where a.productSeq = #{productSeq}
         a.ProductName,
         a.OrgPrice,
         a.DiscountedPrice,
-        a.category1CD,
-        a.category2CD,
+        a.categoryCD,
         a.prodStockCD,
         (select round(avg(reviewRate)) from review where Product_seq = a.productSeq) as reviewRateAvg,
         (select count(*) from review where Product_seq = a.productSeq) as totalReviewCount
@@ -445,8 +438,7 @@ where a.productSeq = #{productSeq}
     <if test="prodStockCD != null">AND a.prodStockCD = #{prodStockCD}</if>
     <if test="category != null and !category.isEmpty()">
         <choose>
-            <when test="category.equals('Clothes')">AND a.category1CD = #{category}</when>
-            <otherwise>AND a.category2CD = #{category}</otherwise>
+            <when test="category.equals('Clothes')">AND a.categoryCD = #{category}</when>
         </choose>
     </if>
     AND a.productSeq IS NOT NULL 
@@ -462,8 +454,7 @@ where a.productSeq = #{productSeq}
         , a.OrgPrice
         , a.DiscountedPrice
         , a.prodStockCD
-        , a.category1CD
-        , a.category2CD
+        , a.categoryCD
         , a.regDateTime
         , a.modDateTime
         , b.color
@@ -581,8 +572,7 @@ where 1=1
         a.OrgPrice,
         a.DiscountedPrice,
         a.prodStockCD,
-        a.category1CD,
-        a.category2CD,
+        a.categoryCD,
         a.regDateTime,
         a.modDateTime,
          (select count(*) from review where Product_seq = a.productSeq) as totalReviewCount,
@@ -602,8 +592,7 @@ where 1=1
         a.OrgPrice,
         a.DiscountedPrice,
         a.prodStockCD,
-        a.category1CD,
-        a.category2CD,
+        a.categoryCD,
         a.regDateTime,
         a.modDateTime,
          (select count(*) from review where Product_seq = a.productSeq) as totalReviewCount,
@@ -623,8 +612,7 @@ where 1=1
         a.OrgPrice,
         a.DiscountedPrice,
         a.prodStockCD,
-        a.category1CD,
-        a.category2CD,
+        a.categoryCD,
         a.regDateTime,
         a.modDateTime,
          (select count(*) from review where Product_seq = a.productSeq) as totalReviewCount,

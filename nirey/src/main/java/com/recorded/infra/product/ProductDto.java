@@ -16,8 +16,7 @@ private String ProductName;
 private Integer OrgPrice;
 private Integer DiscountedPrice;
 private Integer prodStockCD;
-private Integer category1CD;
-private Integer category2CD;
+private Integer categoryCD;
 private Date regDateTime;
 private Date modDateTime;
 private String color;
@@ -224,18 +223,13 @@ public Integer getProdStockCD() {
 public void setProdStockCD(Integer prodStockCD) {
 	this.prodStockCD = prodStockCD;
 }
-public Integer getCategory1CD() {
-	return category1CD;
+public Integer getCategoryCD() {
+	return categoryCD;
 }
-public void setCategory1CD(Integer category1cd) {
-	category1CD = category1cd;
+public void setCategoryCD(Integer categorycd) {
+	categoryCD = categorycd;
 }
-public Integer getCategory2CD() {
-	return category2CD;
-}
-public void setCategory2CD(Integer category2cd) {
-	category2CD = category2cd;
-}
+
 public Date getRegDateTime() {
 	return regDateTime;
 }
@@ -329,7 +323,7 @@ public void setTotalReviewCount(Integer totalReviewCount) {
 @Override
 public String toString() {
 	return "ProductDto [productSeq=" + productSeq + ", delNY=" + delNY + ", ProductName=" + ProductName + ", OrgPrice="
-			+ OrgPrice + ", DiscountedPrice=" + DiscountedPrice 	+ ", prodStockCD=" + prodStockCD + ", category1CD=" + category1CD + ", category2CD=" + category2CD
+			+ OrgPrice + ", DiscountedPrice=" + DiscountedPrice 	+ ", prodStockCD=" + prodStockCD + ", categoryCD=" + categoryCD 
 			+ ", regDateTime=" + regDateTime + ", modDateTime=" + modDateTime + ", color=" + color + ", size=" + size
 			+ ", DetailDescription=" + DetailDescription + ", detailSize=" + detailSize + ", fabric=" + fabric
 			+ ", reviewRate=" + reviewRate + ", ReviewContent=" + ReviewContent + ", Member_seq=" + Member_seq

@@ -167,38 +167,24 @@
 							<div class="col-xl-4 col-sm-6 col-12">
 								<div class="card">
 									<div class="card-body">
-										<label for="prodCategory1" class="form-label">Category1(CD)</label>
-											<select class="form-select" id="prodCategory1" disabled>
-												<option th:selected="${item.category1CD == null}"  disabled="" value="">Choose...</option>
-												<option value="11" th:selected="${item.category1CD == 11}"  >Outer</option>
-												<option value="12" th:selected="${item.category1CD ==12}"  >Top</option>
-												<option value="13" th:selected="${item.category1CD == 13}"  >Bottom</option>
-												<option value="14" th:selected="${item.category1CD == 14}"  >Dress</option>
+										<label for="prodCategory" class="form-label">Category(CD)</label>
+											<select class="form-select" id="prodCategory" disabled>
+												<option th:selected="${item.categoryCD == null}"  disabled="" value="">Choose...</option>
+												<option value="11" th:selected="${item.categoryCD == 11}"  >Outer</option>
+												<option value="12" th:selected="${item.categoryCD ==12}"  >Top</option>
+												<option value="13" th:selected="${item.categoryCD == 13}"  >Bottom</option>
+												<option value="14" th:selected="${item.categoryCD == 14}"  >Dress</option>
+												<option value="15" th:selected="${item.categoryCD == 15}">Bag(15)</option>
+												<option value="16" th:selected="${item.categoryCD == 16}">Shoes</option>
+												<option value="17" th:selected="${item.categoryCD == 17}">Acc</option>
+												<option value="18" th:selected="${item.categoryCD == 18}">etc.</option>
 											</select>
 											<div class="invalid-feedback" id="prodCategory1Feedback">
 										</div>
 									</div>
 								</div>
 							</div>
-							
-							<div class="col-xl-4 col-sm-6 col-12">
-								<div class="card">
-										<div class="card-body">
-											<label for="prodCategory2" class="form-label">Category2(CD)</label>
-												<select class="form-select" id="prodCategory2" disabled>
-													<option th:selected="${item.category2CD == null}"  disabled="" value="">Choose...</option>
-													<option value="15" th:selected="${item.category2CD == 15}">Bag(15)</option>
-													<option value="16" th:selected="${item.category2CD == 16}">Shoes</option>
-													<option value="17" th:selected="${item.category2CD == 17}">Acc</option>
-													<option value="18" th:selected="${item.category2CD == 18}">etc.</option>
-												</select>
-												<div class="invalid-feedback" id="prodCategory2Feedback">
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-
+			
 
 						<div class="row">
 							<div class="col-xl-4 col-sm-6 col-12" >

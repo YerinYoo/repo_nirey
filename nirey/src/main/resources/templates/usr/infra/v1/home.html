@@ -95,10 +95,8 @@
                                 <div class="category-wrap">
                                    	<div class="category-list">
 							            <!-- <a th:text="${product.category1CD}"></a> -->
-										<a th:if="${product.category1CD != null}" th:text="${@codeService.selectOneCachedCode(product.category1CD)}"></a>
-										<a th:unless="${product.category1CD != null}" th:text="${product.category1CD}" ></a>
-										<a th:if="${product.category2CD != null}" th:text="${@codeService.selectOneCachedCode(product.category2CD)}"></a>
-										<a th:unless="${product.category2CD != null}" th:text="${product.category2CD}" ></a>
+										<a th:if="${product.categoryCD != null}" th:text="${@codeService.selectOneCachedCode(product.categoryCD)}"></a>
+										<a th:unless="${product.categoryCD != null}" th:text="${product.categoryCD}" ></a>
 							         </div>
                                 </div>
                                 <h3 class="product-title">

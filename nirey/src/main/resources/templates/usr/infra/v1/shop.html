@@ -168,10 +168,8 @@
 						            <div class="product-details">
 						                <div class="category-wrap">
 						                    <div class="category-list">
-						                        <a th:if="${product.category1CD != null}" th:text="${@codeService.selectOneCachedCode(product.category1CD)}"></a>
-						                        <a th:unless="${product.category1CD != null}" th:text="${product.category1CD}"></a>
-						                        <a th:if="${product.category2CD != null}" th:text="${@codeService.selectOneCachedCode(product.category2CD)}"></a>
-						                        <a th:unless="${product.category2CD != null}" th:text="${product.category2CD}"></a>
+						                        <a th:if="${product.categoryCD != null}" th:text="${@codeService.selectOneCachedCode(product.categoryCD)}"></a>
+						                        <a th:unless="${product.categoryCD != null}" th:text="${product.categoryCD}"></a>
 						                    </div>
 						                </div>
 						                <h3 class="product-title">
@@ -213,10 +211,8 @@
 						            <div class="product-details">
 						                <div class="category-wrap">
 		                					<div class="category-list">
-												<a th:if="${product.category1CD != null}" th:text="${@codeService.selectOneCachedCode(product.category1CD)}"></a>
-												<a th:unless="${product.category1CD != null}" th:text="${product.category1CD}" ></a>
-												<a th:if="${product.category2CD != null}" th:text="${@codeService.selectOneCachedCode(product.category2CD)}"></a>
-												<a th:unless="${product.category2CD != null}" th:text="${product.category2CD}" ></a>
+												<a th:if="${product.categoryCD != null}" th:text="${@codeService.selectOneCachedCode(product.categoryCD)}"></a>
+												<a th:unless="${product.categoryCD != null}" th:text="${product.categoryCD}" ></a>
 							                </div>
 
 						                </div>
@@ -295,19 +291,19 @@
 								    <div class="clothes">
 								        <ul>
 								        <a>Clothes</a>
-								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop?category1CD=11}">Outer</a></li>
-								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop?category1CD=12}">Top</a></li>
-								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop?category1CD=13}">Bottom</a></li>
-								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop?category1CD=14}">Dress</a></li>
+								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop?categoryCD=11}">Outer</a></li>
+								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop?categoryCD=12}">Top</a></li>
+								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop?categoryCD=13}">Bottom</a></li>
+								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop?categoryCD=14}">Dress</a></li>
 								        </ul>
 								    </div>
 								    <div class="non-clothes">
 								        <ul>
 								        <a>Non-Clothes</a>
-								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop?category2CD=15}">Bag</a></li>
-								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop?category2CD=16}">Shoes</a></li>
-								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop?category2CD=17}">Acc.</a></li>
-								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop?category2CD=18}">Etc.</a></li>
+								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop?categoryCD=15}">Bag</a></li>
+								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop?categoryCD=16}">Shoes</a></li>
+								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop?categoryCD=17}">Acc.</a></li>
+								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop?categoryCD=18}">Etc.</a></li>
 								       	</ul>
 								    </div>
 								</div><!-- End .widget-body -->

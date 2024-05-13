@@ -118,12 +118,12 @@ public class ProductController {
 		return "redirect:/ProductList";
 	}
 	
-	@RequestMapping(value="/ueleteW")
+	@RequestMapping(value="/deleteWishlist")
 	public String ueleteW(ProductDto dto) throws Exception {
 		
 		service.ueleteW(dto);
 		
-		return "redirect:/MyPage/Wishlist";
+		return "redirect:/MyPage/Cart";
 	}
 
 	@RequestMapping(value = "/ProductDelete")
@@ -372,34 +372,6 @@ public class ProductController {
 
 		// 페이지로 이동
 		return "usr/infra/v1/shop";
-	}
-	
-	//카테고리, stockCD에 따른 제품 호출
-	@RequestMapping("/filterProducts")
-	public String filterProducts(@RequestParam(required = false, name = "category1CD") Integer category1CD,
-	                             @RequestParam(required = false, name = "category2CD") Integer category2CD,
-	                             @RequestParam(required = false, name = "prodStockCD") Integer prodStockCD,
-	                             @RequestParam(name = "page", defaultValue = "1") Integer page,
-	                             Model model) {
-	    // 요청 파라미터를 DTO에 설정
-	    ProductDto dto = new ProductDto();
-	    dto.setCategory1CD(category1CD);
-	    dto.setCategory2CD(category2CD);
-	    dto.setProdStockCD(prodStockCD);
-
-	    // 필터링된 결과를 모델에 추가
-	    List<ProductDto> filteredProducts = service.getProductListByCategoryAndStock(dto);
-	    model.addAttribute("filteredProducts", filteredProducts);
-	    
-	    // 필요한 데이터가 포함된 ProductVo 객체를 생성하여 모델에 추가
-	    ProductVo vo = new ProductVo();
-		/*
-		 * vo.setStartPage(page); // 시작 페이지 설정 vo.setPageNumToShow(20); // 페이지에 표시할 항목 수
-		 * 설정 등
-		 */	    model.addAttribute("vo", vo);
-	    
-	    return "usr/infra/v1/shop"; 
-
 	}
 	
 	//위시리스트
