@@ -85,7 +85,7 @@ public class ProductService {
 				dto.setSort(index);
 				dto.setProductSeqF(dtoP.getProductSeq());
 				
-			    daoF.insertFile(dto);
+			    daoF.insertFile(dto, dtoP);
 			}
 		}
 		return 0;
