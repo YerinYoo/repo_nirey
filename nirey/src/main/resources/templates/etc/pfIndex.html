@@ -52,6 +52,76 @@
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
 
+	<!-- 모달 스타일 -->
+	<style>
+		/* The Modal (background) */
+		.modal {
+		  display: none; /* Hidden by default */
+		  position: fixed; /* Stay in place */
+		  z-index: 1; /* Sit on top */
+		  left: 0;
+		  top: 0;
+		  width: 100%; /* Full width */
+		  height: 100%; /* Full height */
+		  overflow: auto; /* Enable scroll if needed */
+		  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+		}
+		
+		/* Modal Content */
+		.modal-content {
+		  background-color: #fefefe;
+		  width: 30%; /* 전체 가로 사이즈 중 30% 사용 */
+		  margin: 15% auto; /* 상단으로부터 15% 떨어진 위치에 가운데 정렬 */
+		  padding: 20px;
+		  border: 1px solid #888;
+		  text-align: center; /* 가로 가운데 정렬 */
+		  display: flex;
+		  flex-direction: column;
+		  justify-content: center;
+		}
+		
+		/* The Close Button */
+		.close {
+		  color: pink; /* 핑크 색상 */
+		  float: right;
+		  font-size: 28px;
+		  font-weight: bold;
+		}
+		
+		.close:hover,
+		.close:focus {
+		  color: black;
+		  text-decoration: none;
+		  cursor: pointer;
+		}
+		
+		/* Modal Header */
+		.modal-header {
+		  display: flex;
+		  justify-content: center;
+		  align-items: center;
+		}
+		
+		/* Modal Body */
+		.modal-body {
+		  flex: 1; /* 바디가 남은 공간을 차지하도록 함 */
+		  display: flex;
+		  justify-content: center;
+		  align-items: center;
+		}
+		
+		#closeBtn {
+		  background-color: #4CAF50; /* Green */
+		  color: white;
+		  padding: 10px 20px;
+		  border: none;
+		  cursor: pointer;
+		}
+		
+		#closeBtn:hover {
+		  background-color: #45a049;
+		}
+	</style>
 	</head>
 	<body>
 
@@ -74,7 +144,7 @@
 					<div class="col-md-5 animate-box">
 						<div class="indexImg">
 							<div class="item">
-								<img class="img-responsive about-img" src="/etc/images/myprof.jpg">
+								<img class="img-responsive about-img" src="/etc/images/YerinYoo.jpg">
 <!-- 								<img class="img-responsive about-img" src="/etc/images/YerinYoo.jpg"> -->
 							</div>
 						</div>
@@ -93,7 +163,7 @@
 								<div class="rotate">
 									<h2 class="heading">About</h2>
 								</div>
-								<p><a href="#">개발자가 되고 싶은 이유</a>는 개발에 흥미 어쩌구..</p>
+								<p><a href="#">사용자의 고객 경험</a>을 우선시하는 개발자가 되겠습니다.</p>
 								<div class="row">
 									<div class="col-md-4">
 										<p><a href="#" class="btn btn-primary btn-outline disabled">Contact Me!</a></p>
@@ -166,68 +236,11 @@
 							</a>
 						</div>
 					</div>
-					<h2>Team Project</h2>
-					<div class="row">
-						<div class="col-md-12 col-md-offset-0 text-center animate-box intro-heading" style="margin-bottom: 0;">
-							<h2>Soccer Community(1/2)</h2>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="rotate">
-								<h2 class="heading">Soccer Community</h2>
-								<h6>: 진행 중 // 아직 href 값 안 살림</h6>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-5 col-md-offset-4">
-							<div class="desc">
-								<p>2024.05 ~ 2024.06
-									<br>축구 동호회 선수 및 스탭들이 이용할 수 있는 커뮤니티를 구현하였습니다.
-									<br>
-									<br>축구 동호회의 경우, 축구 경기장을 예약하는 데에 어려움을 겪는다고 하여
-									<br>경기장 예약 기능도 함께 구현하였습니다.
-									<br>
-									<br>팀 별 선수 리스트(전체, 결장 선수 등)를 조회할 수 있으며, 
-									<br>경기마다 출전한 선수들의 스쿼드를 확인할 수 있습니다.
-									<br>
-									<br>또한 스탭의 경우에는 포메이션을 등록하는 등,
-									<br>커뮤니티를 통해 각 경기의 전술을 선수와 공유할 수 있습니다.
-
-								</p>
-							</div>
-						</div>
-					</div>
-	
-					<div class="row mt-3">
-						<div class="col-md-6" >
-							<div class="work-entry animate-box">
-								<a class="work-img" style="background-image: url(/etc/images/ecommerce.png);">
-									<div class="display-t">
-										<div class="work-name">
-											<h2>User</h2>
-										</div>
-									</div>
-								</a>
-							</div>
-						</div>
-	
-						<div class="col-md-6">
-							<div class="work-entry animate-box">
-								<a class="work-img" style="background-image: url(/etc/images/admin.png);">
-									<div class="display-t">
-										<div class="work-name">
-											<h2>Admin</h2>
-										</div>
-									</div>
-								</a>
-							</div>
-						</div>
+					<h2 style="text-align : center">Team Project</h2>
 
 						<div class="row">
 							<div class="col-md-12 col-md-offset-0 text-center animate-box intro-heading" style="margin-bottom: 0;">
-								<h2>DPRO(2/2)</h2>
+								<h2>물류 관리 시스템 : DPRO(1/2)</h2>
 							</div>
 						</div>
 						<div class="row">
@@ -238,7 +251,7 @@
 							</div>
 						</div>
 						
-						<div class="row justify-content-center">
+						<div class="row justify-content-center" style="margin-bottom : 0">
 							<div class="col-md-5 col-md-offset-4">
 								<div class="desc">
 									<p>24.04 ~ 24.04
@@ -264,11 +277,72 @@
 									</a>
 								</div>
 							</div>
+						
+						<div class="row">
+							<div class="col-md-12 col-md-offset-0 text-center animate-box intro-heading" style="margin-bottom: 0;">
+								<h2>Soccer Community(2/2)</h2>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="rotate">
+									<h2 class="heading">Soccer Community</h2>
+								</div>
+							</div>
+						</div>
+								
+						<div class="row justify-content-center" style="margin-bottom : 0">
+							<div class="col-md-5 col-md-offset-4">
+								<div class="desc">
+									<p>2024.05 ~ 2024.06 
+										<br>//아직 개발 진행 중인 프로젝트입니다!
+										<br>
+										<br>축구 동호회 선수 및 스탭들이 이용할 수 있는 커뮤니티를 구현하였습니다.
+										<br>
+										<br>축구 동호회의 경우, 축구 경기장을 예약하는 데에 어려움을 겪는다고 하여
+										<br>경기장 예약 기능도 함께 구현하였습니다.
+										<br>
+										<br>팀 별 선수 리스트(전체, 결장 선수 등)를 조회할 수 있으며, 
+										<br>경기마다 출전한 선수들의 스쿼드를 확인할 수 있습니다.
+										<br>
+										<br>또한 스탭의 경우에는 포메이션을 등록하는 등,
+										<br>커뮤니티를 통해 각 경기의 전술을 선수와 공유할 수 있습니다.
+					
+									</p>
+							</div>
+						</div>
+				
+						<div class="row">
+							<div class="col-md-6" style="justify-content: center;">
+								<div class="work-entry animate-box">
+									<a class="work-img" style="background-image: url(/etc/images/soccer-index.png);" href="#" id="openModal1" target = "_blank">
+										<div class="display-t">
+											<div class="work-name">
+												<h2>User</h2>
+											</div>
+										</div>
+									</a>
+								</div>
+							</div>
+		
+							<div class="col-md-6">
+								<div class="work-entry animate-box">
+									<a class="work-img" style="background-image: url(/etc/images/admin.png);" href="#" id="openModal2" target = "_blank">
+										<div class="display-t">
+											<div class="work-name">
+												<h2>Admin</h2>
+											</div>
+										</div>
+									</a>
+								</div>
+							</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
+		
+		
+	
 		<div id="colorlib-services">
 			<div class="container">
 				<div class="row">
@@ -386,7 +460,23 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			</div>
 		</div>
 	</footer>
-
+	
+	<!-- Modal Structure -->
+	<div id="myModal" class="modal">
+	  <div class="modal-content">
+	    <div class="modal-header">
+	      <span class="close">&times;</span>
+	      <h2>Notice</h2>
+	    </div>
+	    <div class="modal-body">
+	      <p>아직 개발 중인 프로젝트입니다-!</p>
+	    </div>
+	    <div class="modal-footer">
+	      <button id="closeBtn">닫기</button>
+	    </div>
+	  </div>
+	</div>
+	
 	<!-- jQuery -->
 	<script src="/etc/js/jquery.min.js"></script>
 	<!-- jQuery Easing -->
@@ -403,6 +493,61 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 	<!-- Main JS (Do not remove) -->
 	<script src="/etc/js/main.js"></script>
+	
+	<!-- 모달 스크립트 -->
+	<script>
+		// Get the modal
+		var modal = document.getElementById("myModal");
+		
+		// Get the buttons that open the modal
+		var btn1 = document.getElementById("openModal1");
+		var btn2 = document.getElementById("openModal2");
+		
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("close")[0];
+		
+		// Get the close button
+		var closeBtn = document.getElementById("closeBtn");
+		
+		// Function to open modal
+		function openModal() {
+		  modal.style.display = "block";
+		}
+		
+		// Function to close modal
+		function closeModal() {
+		  modal.style.display = "none";
+		}
+		
+		// Event listener for btn1
+		btn1.addEventListener('click', function(event) {
+		  event.preventDefault();
+		  openModal();
+		});
+		
+		// Event listener for btn2
+		btn2.addEventListener('click', function(event) {
+		  event.preventDefault();
+		  openModal();
+		});
+		
+		// Event listener for span (close button)
+		span.addEventListener('click', function() {
+		  closeModal();
+		});
+		
+		// Event listener for close button
+		closeBtn.addEventListener('click', function() {
+		  closeModal();
+		});
+		
+		// Event listener to close modal when clicking outside of it
+		window.addEventListener('click', function(event) {
+		  if (event.target == modal) {
+		    closeModal();
+		  }
+		});
+	</script>
 
 	</body>
 </html>
