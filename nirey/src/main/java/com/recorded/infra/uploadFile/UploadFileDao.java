@@ -11,7 +11,7 @@ public interface UploadFileDao {
 
 	public List<UploadFileDto> selectUploadedFileList();
 	
-	public int insertFile(UploadFileDto dto);
+	public int insertFile(UploadFileDto dto, ProductDto dtoP);
 	
 	public int updateFile(UploadFileDto dto);
 	

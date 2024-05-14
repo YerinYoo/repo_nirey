@@ -11,7 +11,6 @@
 			, imgType
 			, defaultNY
 			, sort
-			, pathName
 			, path
 			, originalName
 			, uuidName
@@ -32,7 +31,6 @@
 		insert into prodImg (
 			 defaultNY
 			, sort
-			, pathName
 			, path
 			, originalName
 			, uuidName
@@ -45,7 +43,6 @@
 		) values (
 			 #{defaultNY}
 			, #{sort}
-			, #{pathName}
 			, #{path}
 			, #{originalName}
 			, #{uuidName}
@@ -64,7 +61,6 @@
 			imgType=#{imgType}
 			, defaultNY=#{defaultNY}
 			, sort=#{sort}
-			, pathName=#{pathName}
 			, path=#{path}
 			, originalName=#{originalName}
 			, uuidName=#{uuidName}
