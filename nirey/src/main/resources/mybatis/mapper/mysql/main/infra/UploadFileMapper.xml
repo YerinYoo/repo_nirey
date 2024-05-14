@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.recorded.infra.uploadFile.UploadFileDao">
+
+	<resultMap id="resultMapObj" type="com.recorded.infra.uploadFile.UploadFileDto"></resultMap>
+	
+	<select id="selectUploadedFileList">
+		select 
+			imgSeq
+			, imgType
+			, defaultNY
+			, sort
+			, pathName
+			, path
+			, originalName
+			, uuidName
+			, ext
+			, size
+			, delNY
+			, productSeqF
+			, regDateTime
+			, modDateTime
+			
+		from	
+			prodImg
+		where
+			1=1
+	</select>
+	
+	<insert id="insertFile">
+		insert into prodImg (
+			 defaultNY
+			, sort
+			, pathName
+			, path
+			, originalName
+			, uuidName
+			, ext
+			, size
+			, delNY
+			, productSeqF
+			, regDateTime
+			, modDateTime
+		) values (
+			 #{defaultNY}
+			, #{sort}
+			, #{pathName}
+			, #{path}
+			, #{originalName}
+			, #{uuidName}
+			, #{ext}
+			, #{size}
+			, #{delNY}
+			, #{productSeqF}
+			, now()
+			, now()
+		)
+	</insert>
+	
+	<update id="updateFile">
+		update prodImg
+		set
+			imgType=#{imgType}
+			, defaultNY=#{defaultNY}
+			, sort=#{sort}
+			, pathName=#{pathName}
+			, path=#{path}
+			, originalName=#{originalName}
+			, uuidName=#{uuidName}
+			, ext=#{ext}
+			, size=#{size}
+			, delNY=#{delNY}
+			, productSeqF=#{productSeqF}
+			, regDateTime=now()
+		where
+			imgSeq=#{imgSeq}			
+	</update>
+	
+	<update id="ueleteFile">
+		update prodImg
+		set
+			delNY=1
+		where
+			1=1
+		and
+			imgSeq=#{imgSeq}
+	</update>
+	
+	<delete id="deleteFile">
+		delete from	
+			prodImg
+		where
+			imgSeq=#{imgSeq}
+		
+	</delete>
+
+</mapper>

@@ -33,6 +33,7 @@ public final class Constants {
 	
 	public static final long PASSWOPRD_CHANGE_INTERVAL = 90;
 	
+	//파일 업로드 관련 constants 내용 
 	public static final String UPLOADED_PATH_PREFIX_LOCAL = "D:/factory/sts4_4210/repo_nirey_uploaded";
 	public static final String UPLOADED_PATH_PREFIX_FOR_VIEW_LOCAL = "/uploaded";
 	
@@ -42,6 +43,7 @@ public final class Constants {
 	public static final String UPLOADED_PATH_PREFIX_S3 = "D:/factory/sts4_4210/repo_nirey_uploaded";
 	public static final String UPLOADED_PATH_PREFIX_FOR_VIEW_S3 = "/uploaded";
 	
+	//쿠키 관련 constants 내용 
 	public static final Integer COOKIE_MAXAGE_XDM = 60 * 60 * 24 * 30;	//초 * 분 * 시간 * 일 : 30day
 	public static final String COOKIE_DOMAIN_XDM = "";
 	public static final String COOKIE_PATH_XDM = "/";

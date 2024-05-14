@@ -182,6 +182,9 @@ where a.productSeq = #{productSeq}
 			,now()
 			,now()
 			)
+			<selectKey resultType="String" keyProperty="productSeq" order="AFTER">
+				select LAST_INSERT_ID()
+			</selectKey>
 	  </insert>
 	  
 <insert id="insertRev">

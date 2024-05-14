@@ -16,6 +16,7 @@ import com.recorded.common.constants.Constants;
 import com.recorded.common.util.UtilDateTime;
 import com.recorded.infra.member.MemberDto;
 import com.recorded.infra.member.MemberService;
+import com.recorded.infra.uploadFile.UploadFileDto;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -27,23 +28,12 @@ public class ProductController {
 	@Autowired
 	MemberService serviceM;
 
+	//admin
+	//제품 insert 메서드 
 	@RequestMapping(value = "/ProductInsert")
-	public String ProductInsert(ProductDto dto) throws Exception {
+	public String ProductInsert(ProductDto dto, UploadFileDto dtoF) throws Exception {
 
-		System.out.println(dto.toString());
-
-		System.out.println("-------------");
-		System.out.println("dto.getUploadFiles().length: " + dto.getUploadFiles().length);
-		System.out.println("-------------");
-		System.out.println();
-		MultipartFile[] uploadFiles = dto.getUploadFiles();
-		
-		 for (MultipartFile file : uploadFiles) {
-			 
-	         System.out.println("업로드된 파일 이름: " + file.getOriginalFilename());
-	     }
-		 
-		//service.insert(dto);
+		service.insert(dto, dtoF);
 
 		return "redirect:/ProductList";
 		
