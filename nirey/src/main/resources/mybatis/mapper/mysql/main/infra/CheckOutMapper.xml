@@ -6,7 +6,23 @@
     <resultMap id="resultMapObj" type="com.recorded.infra.checkout.CheckOutDto"></resultMap>
 
 <!-- orders select -->
-
+<select id="orderList">
+	select
+		orderSeq
+		, orderStatus
+		, RefundNY
+		, TotalOrgPrice
+		, TotalPrice
+		, OrderDate
+		, CardNo
+		, CVV
+		, CardDate
+		, CardOwner
+		, orderTracking
+		, paymentCD
+		, cardCompCD
+		, MemberSeq
+</select>
 <!-- ordered Product select -->
 
 <!-- orders insert -->
@@ -15,59 +31,6 @@
   
 
 
-<insert id="insertOrders">
-	insert into orders (
-		orderStatus
-		,totalOrgPrice
-		,totalPrice
-		,OrderDate
-		,CardNo
-		,CVV
-		,CardDate
-		,CardOwner
-		,orderTrackingNo
-		,paymentCD
-		,cardCompCD
-		,ProductSeq
-		,MemberSeq
-		) values (
-		#{orderStatus}
-		,#{totalOrgPrice}
-		,#{totalPrice}
-		,#{OrderDate}
-		,COALESCE(#{CardNo}, '')
-	    ,COALESCE(#{CVV}, '')
-	    ,COALESCE(#{CardDate}, '2024-04-30')
-	    ,COALESCE(#{CardOwner}, '')
-		,#{orderTrackingNo}
-		,#{paymentCD}
-		,#{cardCompCD}
-		,#{ProductSeq}
-		,#{MemberSeq}
-		)
-</insert>
 
-<insert id="insertOrderedProd">
-	insert into productOrdered (
-		productSeq
-		,productName
-		,ea
-		,OrgPrice
-		,DiscountedPrice
-		,size
-		,color
-		,orderSeq
-		,memberSeq
-		) values (
-		#{productSeq}
-		,#{ProductName}
-		,#{ea}
-		,#{OrgPrice}
-		,#{DiscountedPrice}
-		,#{size}
-		,#{color}
-		,#{orderSeq}
-		,#{memberSeq}
-</insert>
 
 </mapper>
