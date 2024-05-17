@@ -156,15 +156,15 @@ public class ProductService {
 		return dao.insertWishlist(dto);
 	}
 	
-	//주문 페이지를 통해 주문 리스트에 주문 내역 올리기 
-	public int insertOrders(ProductDto dto) {
-		return dao.insertOrders(dto);
-	}
-	
-	//주문 내역 중 제품 올리기 
-	public int insertOrderedProd (ProductDto dto) {
-		return dao.insertOrderedProd(dto);
-	}
+//	//주문 페이지를 통해 주문 리스트에 주문 내역 올리기 
+//	public int insertOrders(ProductDto dto) {
+//		return dao.insertOrders(dto);
+//	}
+//	
+//	//주문 내역 중 제품 올리기 
+//	public int insertOrderedProd (ProductDto dto) {
+//		return dao.insertOrderedProd(dto);
+//	}
 	
 
 	//위시리스트에서 제품 삭제하기 

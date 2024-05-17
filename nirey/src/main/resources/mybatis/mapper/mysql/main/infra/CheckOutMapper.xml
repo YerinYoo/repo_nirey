@@ -5,29 +5,30 @@
 
     <resultMap id="resultMapObj" type="com.recorded.infra.checkout.CheckOutDto"></resultMap>
 
-<!-- orders select -->
-<select id="orderList">
-	select
-		orderSeq
-		, orderStatus
-		, RefundNY
-		, TotalOrgPrice
-		, TotalPrice
-		, OrderDate
-		, CardNo
-		, CVV
-		, CardDate
-		, CardOwner
-		, orderTracking
-		, paymentCD
-		, cardCompCD
-		, MemberSeq
-</select>
-<!-- ordered Product select -->
-
-<!-- orders insert -->
-
-<!-- 주문한 상품 정보 insert -->
+	<!-- orders select -->
+	<select id="orderList">
+		select
+			orderSeq
+			, orderStatus
+			, RefundNY
+			, OrderDate
+			, CardNo
+			, CVV
+			, CardDate
+			, CardOwner
+			, paymentCD
+			, cardCompCD
+			, MemberSeq
+            , productOrderedSeqF
+		from orders
+	</select>
+	<!-- ordered Product select -->
+	<select id="orderedProduct">
+		
+	</select>
+	<!-- orders insert -->
+	
+	<!-- 주문한 상품 정보 insert -->
   
 
 
