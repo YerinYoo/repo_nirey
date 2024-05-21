@@ -51,7 +51,7 @@ private String[] checkboxSeqArray  = null;
 private String imgSeq;
 private String type;
 private Integer defaultNY;
-private String imgPath;
+private String path;
 private String originalName;
 private String ext;
 private Integer fileSize;
@@ -96,11 +96,11 @@ public Integer getDefaultNY() {
 public void setDefaultNY(Integer defaultNY) {
 	this.defaultNY = defaultNY;
 }
-public String getImgPath() {
-	return imgPath;
+public String getPath() {
+	return path;
 }
-public void setImgPath(String imgPath) {
-	this.imgPath = imgPath;
+public void setPath(String path) {
+	this.path = path;
 }
 public String getOriginalName() {
 	return originalName;

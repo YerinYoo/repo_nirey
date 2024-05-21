@@ -29,6 +29,7 @@
         <if test="shValue != null and !shValue.isEmpty()">
             AND a.ProductName LIKE CONCAT('%', #{shValue}, '%')
         </if>
+        AND b.defaultNY = 1
     </where>
     <choose>
         <when test="pageNumToShow != null and pageSize != null">
@@ -79,12 +80,13 @@
 	        a.detailSize,
 	        (select count(*) from review where Product_seq = a.productSeq) as totalReviewCount,
 			(SELECT ROUND(AVG(reviewRate) * 2) / 2 FROM review WHERE Product_seq = a.productSeq) AS reviewRateAvg
+	
 
-
-	       
     		from product  a
+
     		
-    			where a.productSeq = #{productSeq}
+			where a.productSeq = #{productSeq}
+			
     			
     </select>
     
@@ -104,11 +106,15 @@
 	    c.productSeq,
 	    c.ProductName,
 	    c.OrgPrice,
-	    c.DiscountedPrice
+	    c.DiscountedPrice,
+	    d.path,
+	    d.defaultNY
 	from wishlist a
 	inner join member b on a.Member_memberSeq=b.memberSeq
 	inner join product c on a.Product_productSeq=c.productSeq
+	inner join prodImg d on a.Product_productSeq=d.productSeqF
     where a.wishlistSeq = #{wishlistSeq}
+    and d.defaultNY = 1
     </select>
  
     	
@@ -381,10 +387,17 @@ where a.productSeq = #{productSeq}
         a.categoryCD,
         a.prodStockCD,
         (select round(avg(reviewRate)) from review where Product_seq = a.productSeq) as reviewRateAvg,
-        (select count(*) from review where Product_seq = a.productSeq) as totalReviewCount
+        (select count(*) from review where Product_seq = a.productSeq) as totalReviewCount,
+        b.path,
+        b.defaultNY
     FROM 
         product a
+    inner join
+    	prodImg b
+    on
+    	a.productSeq=b.productSeqF
     WHERE 1=1
+    AND b.defaultNY = 1
     
     <!-- 검색에서 쓰일 쿼리 -->
     <if test="shValue != null and !shValue.equals('')">AND a.ProductName LIKE CONCAT('%',#{shValue},'%')</if>
@@ -454,7 +467,9 @@ select
 from wishlist a
 inner join member b on a.Member_memberSeq=b.memberSeq
 inner join product c on a.Product_productSeq=c.productSeq
+inner join prodImg d on a.Product_productSeq=d.productSeqF
 where 1=1
+and d.defaultNY=1
 
 </select>
 
@@ -532,6 +547,10 @@ where 1=1
 		 (SELECT ROUND(AVG(reviewRate) * 2) / 2 FROM review WHERE Product_seq = a.productSeq) AS reviewRateAvg
     FROM 
         product a
+    inner join
+    	prodImg b
+    on
+    	a.productSeq=b.productSeqF
         
         where a.prodStockCD=7
 </select>
@@ -552,6 +571,10 @@ where 1=1
 		 (SELECT ROUND(AVG(reviewRate) * 2) / 2 FROM review WHERE Product_seq = a.productSeq) AS reviewRateAvg
     FROM 
         product a
+    inner join
+    	prodImg b
+    on
+    	a.productSeq=b.productSeqF
         
         where a.prodStockCD=8
 </select>
@@ -572,6 +595,12 @@ where 1=1
 		 (SELECT ROUND(AVG(reviewRate) * 2) / 2 FROM review WHERE Product_seq = a.productSeq) AS reviewRateAvg
     FROM 
         product a
+        
+   inner join
+    	prodImg b
+    on
+    	a.productSeq=b.productSeqF
+        
         
         where a.prodStockCD=9
 </select>
