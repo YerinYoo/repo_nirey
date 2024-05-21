@@ -17,9 +17,14 @@
         a.regDateTime,
         a.modDateTime,
          (select count(*) from review where Product_seq = a.productSeq) as totalReviewCount,
-		 (SELECT ROUND(AVG(reviewRate) * 2) / 2 FROM review WHERE Product_seq = a.productSeq) AS reviewRateAvg
+		 (SELECT ROUND(AVG(reviewRate) * 2) / 2 FROM review WHERE Product_seq = a.productSeq) AS reviewRateAvg,
+		b.path,
+		b.defaultNY
     FROM 
         product a
+    inner join
+    	prodImg b
+    on a.productSeq=b.productSeqF
     <where>
         <if test="shValue != null and !shValue.isEmpty()">
             AND a.ProductName LIKE CONCAT('%', #{shValue}, '%')

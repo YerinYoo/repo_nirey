@@ -156,7 +156,8 @@
 								<div class="product-default inner-quickview inner-icon">
 						            <figure>
 						                <a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq}, ProudctName=${product.ProductName})}" >
-						                    <img src="/usr/images/demoes/demo3/products/product-15.jpg" width="273" height="273" alt="productr"/>
+<!--						                    <img src="/usr/images/demoes/demo3/products/product-15.jpg" width="273" height="273" alt="productr"/>-->
+											<img th:if="${product.defaultNY == 1}" th:src="${product.path}" width="273" height="273" alt="product"/>
 						                </a>
 						                <div class="label-group">
 		                                     <div th:if="${product.prodStockCD == 7}" class="product-label label-hot">NEW</div>
@@ -217,7 +218,7 @@
 
 						                </div>
 						                <h3 class="product-title">
-						                    <a href="demo3-product.html" th:text="${product.ProductName}"></a>
+						                    <a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq}, ProductName=${product.ProductName)}" th:text="${product.ProductName}"></a>
 						                </h3>
 										<div class="ratings-container">
 										    <div class="product-ratings">
