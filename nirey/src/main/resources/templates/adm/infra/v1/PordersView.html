@@ -253,7 +253,6 @@
 
 										    <!-- Form actions footer start -->
 				    <div class="form-actions-footer">
-				    <!-- float left가 되지 않음 왜일까 -->
 				        <a th:href="@{/ProductList}" style="float : left;">
 				            <button class="btn btn-light">Cancel</button>
 				        </a>
@@ -264,7 +263,7 @@
 						
 				    <!-- Form actions footer end -->
 
-                    <form method="post" action="ProductUelete"> 
+                    <form method="post" action="/ProductUelete"> 
 						<input type="hidden" name="productSeq" th:value="${item.productSeq}">
 						<input type="hidden" name="ProductName" th:value="${item.ProductName}">
 						<input type="hidden" name="delNY" th:value="${item.delNY}">
@@ -273,7 +272,7 @@
 											
 					</form>
 					
-					<form method="post" action="ProductDelete"> 
+					<form method="post" action="/ProductDelete"> 
 						<input type="hidden" name="productSeq" th:value="${item.productSeq}">
 						<input type="hidden" name="ProductName" th:value="${item.ProductName}">
 											
