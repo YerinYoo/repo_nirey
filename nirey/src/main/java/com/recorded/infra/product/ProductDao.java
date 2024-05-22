@@ -26,6 +26,8 @@ public interface ProductDao {
 	
 	public List<ProductDto> colorOption(ProductDto dto);
 	
+	public List<ProductDto> prodImgList(ProductDto dto);
+	
 	public List<ProductDto> prodReview(ProductDto dto);
 	
 	public ProductDto selectOne(ProductDto dto);

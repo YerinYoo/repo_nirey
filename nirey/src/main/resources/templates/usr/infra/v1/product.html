@@ -62,17 +62,8 @@
 								    <div th:if="${product != null and (product.prodStockCD == 9)}" class="product-label " style="background-color: rgb(96, 133, 165);">RESTOCK</div>
 								</div> -->
                                 <div class="product-single-carousel owl-carousel owl-theme show-nav-hover">
-                                    <div class="product-item">
-                                        <img class="product-single-image" src="/usr/images/products/zoom/pham1.jpg" data-zoom-image="/usr/images/products/zoom/pham1.jpg" width="468" height="468" alt="product" />
-                                    </div>
-                                    <div class="product-item">
-										<img class="product-single-image" src="/usr/images/products/zoom/pham2.jpg" data-zoom-image="/usr/images/products/zoom/pham2.jpg" width="468" height="468" alt="product" />
-                                    </div>
-                                    <div class="product-item">
-										<img class="product-single-image" src="/usr/images/products/zoom/pham3.jpg" data-zoom-image="/usr/images/products/zoom/pham3.jpg" width="468" height="468" alt="product" />
-                                    </div>
-                                    <div class="product-item">
-										<img class="product-single-image" src="/usr/images/products/zoom/pham4.jpg" data-zoom-image="/usr/images/products/zoom/pham4.jpg" width="468" height="468" alt="product" />
+                                    <div class="product-item" th:each="img : ${prodImg}">
+                                        <img class="product-single-image" th:src="${img.path}" th:attr="data-zoom-image=${img.path}" width="468" height="468" alt="product" />
                                     </div>
                                   
                                 </div>
@@ -83,17 +74,8 @@
                             </div>
 
                             <div class="prod-thumbnail owl-dots">
-                                <div class="owl-dot">
-                                    <img src="/usr/images/products/zoom/pham1.jpg" width="110" height="110" alt="product-thumbnail" />
-                                </div>
-                                <div class="owl-dot">
-									<img src="/usr/images/products/zoom/pham2.jpg" width="110" height="110" alt="product-thumbnail" />
-                                </div>
-                                <div class="owl-dot">
-									<img src="/usr/images/products/zoom/pham3.jpg" width="110" height="110" alt="product-thumbnail" />
-                                </div>
-                                <div class="owl-dot">
-									<img src="/usr/images/products/zoom/pham4.jpg" width="110" height="110" alt="product-thumbnail" />
+                                <div class="owl-dot" th:each="img : ${prodImg}">
+                                    <img th:src="${img.path}" width="110" height="110" alt="product-thumbnail" />
                                 </div>
                             </div>
                         </div>

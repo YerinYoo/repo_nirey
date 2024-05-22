@@ -90,7 +90,6 @@
     			
     </select>
     
-    
     <select id="selectWishlist" resultMap="resultMapObj">
 	select
 	    a.wishlistSeq,
@@ -169,7 +168,23 @@ where a.productSeq = #{productSeq}
    AND
     		a.productSeq=#{productSeq} 
 </select>
-    
+
+<!-- 제품 상세 페이지에서 호출할 이미지 테이블 -->
+<select id="prodImgList" resultMap="resultMapObj">
+SELECT 
+    a.productSeq,
+    b.imgSeq,
+    b.path,
+    b.defaultNY
+FROM 
+    product a
+INNER JOIN
+    prodImg b ON a.productSeq = b.productSeqF
+WHERE 1=1
+ AND 
+    a.productSeq = #{productSeq}
+
+</select>
 	  <insert id="insert">
 			insert into product (
 				delNY

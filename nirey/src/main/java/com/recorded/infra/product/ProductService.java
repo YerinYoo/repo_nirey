@@ -133,6 +133,8 @@ public class ProductService {
 	
 	public List<ProductDto>prodSize(ProductDto dto) {return dao.prodSize(dto);}
 	
+	public List<ProductDto> prodImgList(ProductDto dto) {return dao.prodImgList(dto);}
+	
 	//위시리스트 페이지에서 호출할 제품 옵션 
 	public List<ProductDto> colorOption(ProductDto dto) {return dao.colorOption(dto);}
 	

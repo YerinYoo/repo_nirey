@@ -301,6 +301,7 @@ public class ProductController {
 		  model.addAttribute("wishlist", service.wishlist());
 		  model.addAttribute("prodColor", service.prodColor(dto));
 		  model.addAttribute("prodSize", service.prodSize(dto));
+		  model.addAttribute("prodImg", service.prodImgList(dto));
 		  model.addAttribute("prodReview", service.prodReview(dto));
 
 	  return "usr/infra/v1/product"; 
