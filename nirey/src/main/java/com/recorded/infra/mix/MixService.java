@@ -16,6 +16,10 @@ public class MixService {
 		return dao.orderList();
 	}
 	
+	public List<MixDto> productOrdered() {
+		return dao.productOrdered();
+	}
+	
 	public List<MixDto> memberInfo(){
 		return dao.memberInfo();
 	}

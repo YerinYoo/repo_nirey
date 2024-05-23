@@ -51,6 +51,8 @@ public class MixController {
         }
 
     	model.addAttribute("orderList", service.orderList());
+    	model.addAttribute("product", service.productOrdered());
+    	
     	return "usr/infra/v1/order-details";
     }
     

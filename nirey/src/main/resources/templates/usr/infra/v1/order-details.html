@@ -121,23 +121,19 @@
 													<tr>
 														<th></th> <!--주문 제품 이미지-->
 														<th style="text-align:center; vertical-align : middle;">Order Product</th>
-														<th style="text-align:center; vertical-align : middle;">Tracking Number</th>
-														<th style="text-align:center; vertical-align : middle;">Status</th>
 														<th style="text-align:center; vertical-align : middle;">Color</th>
 														<th style="text-align:center; vertical-align : middle;">Size</th>
 														<th style="text-align:center; vertical-align : middle;">Price</th>
 
 													</tr>
-													<tr>
-														<td class="product-img" style="text-align:center; vertical-align : middle;">
-															<img src="/usr/images/demoes/demo3/products/product-3.jpg" style="height : 80px;">
+													<tr th:each="product : ${product}" >
+														<td class="product-img" style="text-align:center; vertical-align : middle;"th:if="${product.path == 1}">
+															<img th:src="${product.path}" style="height : 80px;">
 														</td>
-														<td class="order-product-name" style="text-align:center; vertical-align : middle;" th:text="${order.ProductName}"></td>
-														<td class="tracking-number" style="text-align:center; vertical-align : middle;" th:text="${order.orderTrackingNo}"></td>
-														<td class="tracking-status" style="text-align:center; vertical-align : middle;" th:text="${@codeService.selectOneCachedCode(order.orderStatus)}"></td>
-														<td class="order-color" style="text-align:center; vertical-align : middle" th:text="${order.colorOption}"></td>
-														<td class="order-size" style="text-align:center; vertical-align : middle" th:text="${order.sizeOption}"></td>
-														<td class="order-product-price" style="text-align:center; vertical-align : middle" th:text="${order.DiscountedPrice}"></td>
+														<td class="order-product-name" style="text-align:center; vertical-align : middle;" th:text="${product.ProductName}"></td>
+														<td class="order-color" style="text-align:center; vertical-align : middle" th:text="${product.color}"></td>
+														<td class="order-size" style="text-align:center; vertical-align : middle" th:text="${product.size}"></td>
+														<td class="order-product-price" style="text-align:center; vertical-align : middle" th:text="${product.DiscountedPrice}"></td>
 														<td class="write-review" style="text-align:center; vertical-align : middle;">
 															<button class="btn btn-write-review product-type-simple btn-shop">
 																Write Review
@@ -170,7 +166,7 @@
 													</tr>
 													<tr>
 														<td class="total-payprice">Total Price</td>
-														<td class="total-payprice" style="text-align : right;" th:text="${order.TotalPrice}"></td>
+														<td class="total-payprice" style="text-align : right;" th:text="${order.totalPrice}"></td>
 													</tr>
 												</table>
 													<div id="accordion5">
@@ -184,7 +180,8 @@
 																<table class="table table-totalprice">
 																	<tr>
 																		<td class="order-total-price">Product Price</td>
-																		<td class="order-total-price" style="text-align : right;" th:text="${order.TotalOrgPrice}"></td>
+																		<!-- orgPrice의 총합 -->
+																		<td class="order-total-price" style="text-align : right;" th:text="${order.totalPrice}"></td>
 																	</tr>
 																	<tr>
 																		<td class="order-payment-details">Shipping Price</td>
@@ -205,11 +202,11 @@
 																	<table class="table table-discoumnted">
 																		<tr>
 																			<td class="order-discountedprod">Product Discounted Price</td>
-																			<td class="order-discountedprod"style="text-align : right;" th:text="${order.TotalDiscPrice}"></td>
+																			<td class="order-discountedprod"style="text-align : right;" th:text="${order.discountedPrice}"></td>
 																		</tr>
 																		<tr>
 																			<td class="order-totalpayprice">Paid Price</td>
-																			<td class="order-totalpayprice"style="text-align : right;" th:text="${order.TotalPrice}"></td>
+																			<td class="order-totalpayprice"style="text-align : right;" th:text="${order.totalPrice}"></td>
 																		</tr>
 																	</table>
 																</div>

@@ -123,7 +123,7 @@
 											<tr style="height : 50px" th:each="order:${orderList}">
 												<td class="order-id"style="text-align:center; vertical-align : middle;" th:text="${order.orderSeq}"></td>
 												<td class="order-date" style="text-align:center; vertical-align : middle;" th:text="${#dates.format(order.OrderDate, 'yyyy-MM-dd')}"></td>
-                                                <td class="order-price"style="text-align:center; vertical-align : middle;" th:text="${order.TotalPrice}"></td>
+                                                <td class="order-price"style="text-align:center; vertical-align : middle;" th:text="${order.totalPrice}"></td>
                                                 <td class="payment"style="text-align:center; vertical-align : middle;" 
                                                 th:text="${@codeService.selectOneCachedCode(order.paymentCD)}"></td>
 												<td class="order-status"style="text-align:center; vertical-align : middle;"

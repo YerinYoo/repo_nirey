@@ -6,51 +6,94 @@
 	<resultMap id="resultMapObj" type="com.recorded.infra.mix.MixDto"></resultMap>
 	
 	<!-- 주문 정보 관련 매퍼 - member, product, order 조인 -->
-	<select id="orderList" resultMap="resultMapObj">
-	    select
-	        a.orderSeq <!-- a = 주문 관련 테이블 -->
-	        , a.orderStatus
-	        , a.RefundNY
-	        , a.TotalOrgPrice
-	        , a.TotalPrice
-	        , a.OrderDate
-	        , a.CardNo
-	        , a.CVV
-	        , a.CardDate
-	        , a.CardOwner
-	        , a.orderTrackingNo
-	        , a.paymentCD
-	        , a.cardCompCD
-	        , a.colorOption
-	        , a.sizeOption
-	        ,b.ID <!--  b = 회원 관련 테이블 -->
-	        ,b.name
-	        ,c.ProductName <!--  c = 상품 관련 테이블 -->
-	        ,c.DiscountedPrice
-	        ,d.addrTypeCD <!--  f = 배송 주소지 테이블 -->
-	        ,d.addr
-	        ,d.addrDetail
-	        ,d.zipcode
-	        ,d.recipient
-	        ,d.phoneNum
-	        ,d.shippingMsg
-	    from 
-	        orders a
-	    inner join 
-	        member b
-	    on
-	        a.MemberSeq=b.memberSeq
-	    inner join 
-	        product c
-	    on 
-	        a.ProductSeq=c.productSeq
-		 inner join
-		    address d
-		 on 
-		 	b.memberSeq=d.Member_seq
-	    where 1=1
+<select id="orderList" resultMap="resultMapObj">
+    SELECT
+       <!-- a.orders -->
+        a.orderSeq,
+        a.orderStatus,
+        a.RefundNY,
+        a.OrderDate,
+        a.CardNo,
+        a.CVV,
+        a.CardOwner,
+        a.paymentCD,
+        a.cardCompCD,
+        a.MemberSeq,
+        a.CardDate,
+        <!-- b.member -->
+        b.memberSeq,
+        b.name,
+        b.email,
+        b.MobileNum,
+        <!-- po.productOrdered (subquery) -->
+        po.totalPrice,
+        <!-- Additional subqueries -->
+        (SELECT SUM(OrgPrice) FROM productOrdered WHERE ordersSeqF = a.orderSeq) AS totalOrgPrice,
+        (SELECT SUM(OrgPrice - DiscountedPrice) FROM productOrdered WHERE ordersSeqF = a.orderSeq) AS totalDiscountedPrice,
+        <!-- c.address -->
+        c.recipient,
+        c.zipcode,
+        c.addr,
+        c.addrDetail,
+        c.phoneNum,
+        c.shippingMsg,
+        c.Member_seq
+        
+    FROM 
+        orders a
+    INNER JOIN 
+        member b ON a.MemberSeq = b.memberSeq
+    LEFT JOIN
+        (SELECT 
+             ordersSeqF,
+             SUM(DiscountedPrice) AS totalPrice
+         FROM 
+             productOrdered
+         GROUP BY 
+             ordersSeqF) po ON a.orderSeq = po.ordersSeqF
+    LEFT JOIN
+        address c
+    ON
+        a.MemberSeq = c.Member_seq
+    WHERE 
+        1=1
+        AND a.orderSeq IS NOT NULL
+</select>
 
-	    and a.orderSeq is not null 
+	
+	<select id="productOrdered" resultMap="resultMapObj">
+		select
+			a.orderSeq,
+			b.productSeqF,
+			b.ea,
+			b.OrgPrice,
+			b.DiscountedPrice,
+			b.size,
+			b.color,
+			b.ordersSeqF,
+			b.productOrderedSeq,
+			c.productSeq,
+			c.ProductName,
+			d.path
+			
+			from
+				orders a
+			inner join
+				productOrdered b
+				on
+					a.orderSeq = b.ordersSeqF
+			inner join
+				product c
+				on
+					b.productSeqF = c.productSeq
+			inner join
+				prodImg d
+				on
+					b.productSeqF = d.productSeqF
+		where
+			1=1
+			and
+				a.orderSeq = #{orderSeq}
 	</select>
 	
 		<select id="memberAddr" resultMap="resultMapObj">
@@ -80,39 +123,8 @@
 	
 	<select id="checkOut" resultMap="resultMapObj">
 	select
-		a.memberSeq
-		, a.ID
-		, a.name
-		, b.addrDetail
-		, b.addr
-		, b.zipcode
-		, b.recipient
-		, b.phoneNum
-		, b.shippingMsg
-	    , c.CardNo
-	    , c.CVV
-	    , c.CardDate
-	    , c.CardOwner
-	    , c.orderTrackingNo
-	    , c.paymentCD
-	    , c.cardCompCD
-	    , c.colorOption
-	    , c.sizeOption
-	from member a
-	inner join 
-		address b
-	on
-		a.memberSeq=b.Member_seq
-	inner join
-		orders c
-	on a.memberSeq=c.MemberSeq
-	inner join
-		prodImg d
-	on 
-	
-where 1=1
-	    and a.memberSeq is not null 
 	
 	</select>
+	
 	
 </mapper>
