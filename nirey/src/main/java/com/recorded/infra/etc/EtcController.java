@@ -1,5 +1,12 @@
 package com.recorded.infra.etc;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +44,5 @@ public class EtcController {
    public String welcome() throws Exception {
 	   return "usr/infra/v1/welcome";
    }
-   
 
-    
 }

@@ -92,8 +92,8 @@
 						    <tr class="product-row" th:each="wishlist : ${wishlist}" th:if="${wishlist.delNY == 0}">
 						        <td style="text-align:center; vertical-align : middle; width : 20%">
 						            <figure class="product-image-container">
-						                <a th:href="@{/recorded/Shop/Product(productSeq=${wishlist.productSeq}, ProductName=${wishlist.ProductName})}" class="product-image">
-						                    <img src="/usr/images/products/pham.jpg" alt="product" style="height : 200px; width : auto;">
+						                <a th:href="@{/recorded/Shop/Product(productSeq=${wishlist.productSeq}, ProductName=${wishlist.ProductName}, path=${path})}" class="product-image" th:if="${wishlist.defaultNY == 1}">
+						                    <img th:src="${wishlist.path}" alt="product" style="height : 200px; width : auto;">
 						                </a>
 						            </figure>
 						        </td>

@@ -4,6 +4,33 @@
 
 
 <th:block th:fragment="Footer">
+
+<style>
+    .weather-container {
+        display: inline-block;
+        padding: 20px;
+        border: 1px solid pink;
+        border-radius: 5px;
+        background-color: white;
+        margin-top: 20px;
+    }
+    .main-search-input-wrap {
+        margin-top: 20px;
+    }
+    .main-search-input {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .main-search-input-item input {
+        padding: 10px;
+        width: 200px;
+        margin-right: 10px;
+    }
+    .main-search-button {
+        padding: 10px 20px;
+    }
+</style>
         <footer class="footer">
             <div class="container">
                 <div class="footer-middle">
@@ -44,6 +71,25 @@
                             </div>
                         </div>
                         
+						<div class="col-lg-6 col-xl-4">
+						    <div class="widget">
+						        <h4 class="widget-title" style="margin-bottom : 0;">How's the Weather?</h4>
+								    <div class="weather-container" style="margin-bottom : 0; padding-bottom : 0;">
+										<div>
+										    <input type="text" id="city-input" placeholder="Enter city name" style="border : none; background-color: snow;">
+										    <button id="search-button" style="border : none; background-color : pink; color : white;">Search</button>
+										</div>
+										<div class="weather-container" id="weather-container" style="display: none;">
+										    <p>City: <span id="city-name">Loading...</span></p>
+										    <p>Temperature: <span id="temperature">Loading...</span></p>
+										    <p>Weather: <span id="weather">Loading...</span></p>
+										</div>	
+										<p style="font-size : 10px; margin-top : 5px;">ⓒOpenWeather</p>							        
+								    </div>
+								
+								    <script src="app.js"></script>
+						    </div>
+						</div>
                     </div>
                 </div>
 
@@ -67,6 +113,46 @@
                     </div>
 
         </footer>
+		
+		<!-- 기상청 api 관련 스크립트 -->
+		<script>
+			document.addEventListener("DOMContentLoaded", function() {
+			    const apiKey = '382dd4fb66f6f4f0cc2f688bf0816f47';
+			
+			    document.getElementById('search-button').addEventListener('click', function() {
+			        const city = document.getElementById('city-input').value;
+			        if (city) {
+			            getWeather(city);
+			        } else {
+			            alert('Please enter a city name');
+			        }
+			    });
+			
+			    function getWeather(city) {
+			        const apiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+			
+			        fetch(apiUrl)
+			            .then(response => response.json())
+			            .then(data => {
+			                console.log(data);
+			                if (data.cod === 200) {
+			                    document.getElementById('city-name').textContent = data.name;
+			                    document.getElementById('temperature').textContent = `${data.main.temp} °C`;
+			                    document.getElementById('weather').textContent = data.weather[0].description;
+			                    document.getElementById('weather-container').style.display = 'block';
+			                } else {
+			                    alert('City not found');
+			                }
+			            })
+			            .catch(error => {
+			                console.error('Error fetching the weather data:', error);
+			                alert('Error fetching the weather data');
+			            });
+			    }
+			});
+
+			    
+		</script>
 </th:block>
 
 

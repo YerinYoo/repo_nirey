@@ -106,6 +106,9 @@
 	inner join
 		orders c
 	on a.memberSeq=c.MemberSeq
+	inner join
+		prodImg d
+	on 
 	
 where 1=1
 	    and a.memberSeq is not null 

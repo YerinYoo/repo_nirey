@@ -72,16 +72,15 @@
 
             <!--인기 상품 블럭-->
             <section class="container pb-3 mb-1">
-                <h2 class="section-title ls-n-15 text-center pb-2 m-b-4">Popular Products</h2>
+                <h2 class="section-title ls-n-15 text-center pb-2 m-b-4">New Products</h2>
 
                 <div class="row py-4">
                     <div class="col-6 col-sm-4 col-md-3 col-xl-2 appear-animate" data-animation-name="fadeIn"
-                        data-animation-delay="300" data-animation-duration="1000" th:each="product : ${prodList}" th:if="${product.prodStockCD == 8}">
+                        data-animation-delay="300" data-animation-duration="1000" th:each="product : ${prodList}" th:if="${product.prodStockCD == 7}">
                         <div class="product-default inner-quickview inner-icon">
                             <figure>
-                                 <a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq}, ProudctName=${product.ProductName}, prodStockCD=${product.prodStockCD})}" >
-                                    <img src="/usr/images/demoes/demo3/products/product-1.jpg" width="273"
-                                        height="273" alt="productr" />
+                                 <a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq}, ProudctName=${product.ProductName}, prodStockCD=${product.prodStockCD})}" th:if="${product.defaultNY==1}" >
+									<img th:src="${product.path}" alt="product"/>
                                 </a>
                                 <div class="label-group">
                                      <div th:if="${product.prodStockCD == 7}" class="product-label label-hot">NEW</div>

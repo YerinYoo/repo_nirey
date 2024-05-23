@@ -155,15 +155,14 @@
 						        
 								<div class="product-default inner-quickview inner-icon">
 						            <figure>
-						                <a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq}, ProudctName=${product.ProductName})}" >
-						                    <img src="/usr/images/demoes/demo3/products/product-15.jpg" width="273" height="273" alt="productr"/>
-						                </a>
+										<a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq}, ProductName=${product.ProductName})}" th:if="${product.defaultNY == 1}">
+										    <img th:src="${product.path}" alt="product"/>
+										</a>
 						                <div class="label-group">
 		                                     <div th:if="${product.prodStockCD == 7}" class="product-label label-hot">NEW</div>
 		                                    <div th:if="${product.prodStockCD == 8}" class="product-label label-sale">BEST</div>
 		                                    <div th:if="${product.prodStockCD == 9}" class="product-label label-restock" style="background-color: rgb(96, 133, 165);">RESTOCK</div>
 		                                </div>
-						                <a class="btn-quickview" title="goProd" th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq}, ProductName=${product.ProductName})}">View Details</a>
 						            </figure>
 						            <div class="product-details">
 						                <div class="category-wrap">
@@ -173,7 +172,7 @@
 						                    </div>
 						                </div>
 						                <h3 class="product-title">
-						                    <a  th:text="${product.ProductName}"></a>
+						                    <a th:text="${product.ProductName}"></a>
 						                </h3>
 										<div class="ratings-container">
 										    <div class="product-ratings">
@@ -200,13 +199,12 @@
 						    <div class="col-6 col-sm-4 col-md-3 col-xl-5col" th:each="product : ${searchResults}">
 						        <div class="product-default inner-quickview inner-icon">
 						            <figure>
-						                 <a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq}, ProudctName=${product.ProductName}, prodStockCD=${product.prodStockCD})}" >
-						                    <img src="/usr/images/demoes/demo3/products/product-15.jpg" width="273" height="273" alt="productr"/>
-						                </a>
+										<a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq}, ProductName=${product.ProductName})}" th:if="${product.defaultNY==1}">
+										    <img th:src="${product.path}"/>
+										</a>
 						                <div class="btn-icon-group">
 						                    <a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq}, ProudctName=${product.ProductName})}" class="btn-icon btn-add-cart product-type-simple"><i class="icon-shopping-cart"></i></a>
 						                </div>
-						                <a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq}, ProudctName=${product.ProductName})}"  class="btn-quickview" title="Quick View">Quick View</a>
 						            </figure>
 						            <div class="product-details">
 						                <div class="category-wrap">
@@ -217,7 +215,7 @@
 
 						                </div>
 						                <h3 class="product-title">
-						                    <a href="demo3-product.html" th:text="${product.ProductName}"></a>
+						                    <a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq}, ProductName=${product.ProductName})}" th:text="${product.ProductName}"></a>
 						                </h3>
 										<div class="ratings-container">
 										    <div class="product-ratings">
