@@ -60,6 +60,60 @@
         AND a.orderSeq IS NOT NULL
 </select>
 
+<select id="selectOrder" resultMap="resultMapObj">
+    SELECT
+       <!-- a.orders -->
+        a.orderSeq,
+        a.orderStatus,
+        a.RefundNY,
+        a.OrderDate,
+        a.CardNo,
+        a.CVV,
+        a.CardOwner,
+        a.paymentCD,
+        a.cardCompCD,
+        a.MemberSeq,
+        a.CardDate,
+        <!-- b.member -->
+        b.memberSeq,
+        b.name,
+        b.email,
+        b.MobileNum,
+        <!-- po.productOrdered (subquery) -->
+        po.totalPrice,
+        <!-- Additional subqueries -->
+        (SELECT SUM(OrgPrice) FROM productOrdered WHERE ordersSeqF = a.orderSeq) AS totalOrgPrice,
+        (SELECT SUM(OrgPrice - DiscountedPrice) FROM productOrdered WHERE ordersSeqF = a.orderSeq) AS totalDiscountedPrice,
+        <!-- c.address -->
+        c.recipient,
+        c.zipcode,
+        c.addr,
+        c.addrDetail,
+        c.phoneNum,
+        c.shippingMsg,
+        c.Member_seq
+        
+    FROM 
+        orders a
+    INNER JOIN 
+        member b ON a.MemberSeq = b.memberSeq
+    LEFT JOIN
+        (SELECT 
+             ordersSeqF,
+             SUM(DiscountedPrice) AS totalPrice
+         FROM 
+             productOrdered
+         GROUP BY 
+             ordersSeqF) po ON a.orderSeq = po.ordersSeqF
+    LEFT JOIN
+        address c
+    ON
+        a.MemberSeq = c.Member_seq
+    WHERE 
+        1=1
+        AND a.orderSeq = ${orderSeq}
+</select>
+
 	
 	<select id="productOrdered" resultMap="resultMapObj">
 		select

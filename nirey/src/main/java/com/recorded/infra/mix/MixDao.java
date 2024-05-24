@@ -6,6 +6,8 @@ public interface MixDao {
 
 	public List<MixDto> orderList(); 
 	
+	public MixDto selectOrder(MixDto dto);
+	
 	public List<MixDto> productOrdered();
 	
 	public List<MixDto> memberInfo();

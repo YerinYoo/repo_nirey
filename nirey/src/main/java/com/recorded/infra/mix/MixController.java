@@ -40,7 +40,7 @@ public class MixController {
     
     //orders > Orders Detail 컨트롤러
     @RequestMapping(value="/MyPage/OrderDetails")
-    public String MyOrdersDetail(HttpSession session, Model model) throws Exception {
+    public String MyOrdersDetail(HttpSession session, Model model, MixDto dto) throws Exception {
     	
     	  // 세션에서 로그인한 회원 정보 가져오기
         MemberDto authenticatedMember = (MemberDto) session.getAttribute("authenticatedMember");
@@ -50,7 +50,7 @@ public class MixController {
             return "redirect:/recorded/Login";
         }
 
-    	model.addAttribute("orderList", service.orderList());
+    	model.addAttribute("order", service.selectOrder(dto));
     	model.addAttribute("product", service.productOrdered());
     	
     	return "usr/infra/v1/order-details";

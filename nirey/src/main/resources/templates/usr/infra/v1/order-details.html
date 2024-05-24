@@ -80,7 +80,7 @@
 								<div class="order-table-container">
 								<div class="row">
 
-								<div class="container" th:each="order:${orderList}">
+								<div class="container" th:each="order:${order}">
 									<div class="mt-3" id="accordion1">
 										<div class="card card-accordion">
 											<a class="card-header collapsed" href="#" data-toggle="collapse" data-target="#collapse1"
@@ -202,7 +202,7 @@
 																	<table class="table table-discoumnted">
 																		<tr>
 																			<td class="order-discountedprod">Product Discounted Price</td>
-																			<td class="order-discountedprod"style="text-align : right;" th:text="${order.discountedPrice}"></td>
+																			<td class="order-discountedprod"style="text-align : right;" th:text="${order.totalDiscountedPrice}"></td>
 																		</tr>
 																		<tr>
 																			<td class="order-totalpayprice">Paid Price</td>
@@ -254,7 +254,7 @@
 											</div>
 										</div>
 
-										<a href="order.html" class="btn btn-dark mt-2 mb-3" style="float : right;">Go Order List</a>
+										<a th:href="@{/MyPage/Orders}" class="btn btn-dark mt-2 mb-3" style="float : right;">Go Order List</a>
 	
 
 

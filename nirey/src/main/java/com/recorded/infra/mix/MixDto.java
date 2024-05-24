@@ -16,6 +16,8 @@ public class MixDto {
 	private Integer paymentCD;
 	private Integer cardCompCD;
 	private Integer totalPrice;
+	private Integer totalOrgPrice;
+	private Integer totalDiscountedPrice;
 	
 	//member column
 	private String ID;
@@ -37,6 +39,7 @@ public class MixDto {
 	//address column
 	private String addr;
 	private String addrDetail;
+	private String shippingMsg;
 	private String zipcode;
 	private String recipient;
 	private String phoneNum;
@@ -126,6 +129,30 @@ public class MixDto {
 
 	public void setCardCompCD(Integer cardCompCD) {
 		this.cardCompCD = cardCompCD;
+	}
+
+	public Integer getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(Integer totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public Integer getTotalOrgPrice() {
+		return totalOrgPrice;
+	}
+
+	public void setTotalOrgPrice(Integer totalOrgPrice) {
+		this.totalOrgPrice = totalOrgPrice;
+	}
+
+	public Integer getTotalDiscountedPrice() {
+		return totalDiscountedPrice;
+	}
+
+	public void setTotalDiscountedPrice(Integer totalDiscountedPrice) {
+		this.totalDiscountedPrice = totalDiscountedPrice;
 	}
 
 	public String getID() {
@@ -288,12 +315,12 @@ public class MixDto {
 		this.path = path;
 	}
 
-	public Integer getTotalPrice() {
-		return totalPrice;
+	public String getShippingMsg() {
+		return shippingMsg;
 	}
 
-	public void setTotalPrice(Integer totalPrice) {
-		this.totalPrice = totalPrice;
+	public void setShippingMsg(String shippingMsg) {
+		this.shippingMsg = shippingMsg;
 	}
 
 	//toString()
@@ -301,13 +328,15 @@ public class MixDto {
 	public String toString() {
 		return "MixDto [orderSeq=" + orderSeq + ", orderStatus=" + orderStatus + ", RefundNY=" + RefundNY
 				+ ", OrderDate=" + OrderDate + ", CardNo=" + CardNo + ", CVV=" + CVV + ", CardDate=" + CardDate
-				+ ", CardOwner=" + CardOwner + ", paymentCD=" + paymentCD + ", cardCompCD=" + cardCompCD + ", ID=" + ID
-				+ ", name=" + name + ", ProductName=" + ProductName + ", productSeq=" + productSeq + ", productSeqF="
-				+ productSeqF + ", ea=" + ea + ", OrgPrice=" + OrgPrice + ", DiscountedPrice=" + DiscountedPrice
-				+ ", color=" + color + ", size=" + size + ", ordersSeqF=" + ordersSeqF + ", addr=" + addr
-				+ ", addrDetail=" + addrDetail + ", zipcode=" + zipcode + ", recipient=" + recipient + ", phoneNum="
-				+ phoneNum + ", colorOption=" + colorOption + ", sizeOption=" + sizeOption + ", defaultNY=" + defaultNY
-				+ ", path=" + path + "]";
+				+ ", CardOwner=" + CardOwner + ", paymentCD=" + paymentCD + ", cardCompCD=" + cardCompCD
+				+ ", totalPrice=" + totalPrice + ", totalOrgPrice=" + totalOrgPrice + ", totalDiscountedPrice="
+				+ totalDiscountedPrice + ", ID=" + ID + ", name=" + name + ", ProductName=" + ProductName
+				+ ", productSeq=" + productSeq + ", productSeqF=" + productSeqF + ", ea=" + ea + ", OrgPrice="
+				+ OrgPrice + ", DiscountedPrice=" + DiscountedPrice + ", color=" + color + ", size=" + size
+				+ ", ordersSeqF=" + ordersSeqF + ", addr=" + addr + ", addrDetail=" + addrDetail + ", zipcode="
+				+ zipcode + ", recipient=" + recipient + ", phoneNum=" + phoneNum + ", colorOption=" + colorOption
+				+ ", sizeOption=" + sizeOption + ", defaultNY=" + defaultNY + ", path=" + path + "]";
 	}
+	
 	
 }
