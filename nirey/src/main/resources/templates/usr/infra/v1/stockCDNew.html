@@ -129,24 +129,6 @@
 
                         </nav>
 
-                        <!-- 검색 결과가 없거나, 검색을 이용하지 않고 페이지에 접속 했을 때HTML 코드 -->
-						<!-- 검색 결과가 없을 경우 띄워줄 모달 코드 -->
-						<div class="modal" id="showModal" tabindex="-1" aria-labelledby="showModalLabel" aria-hidden="true" th:if="${showModal}" style="width:28%; position : fix; left : 35%;">
-						    <div class="modal-dialog">
-						        <div class="modal-content">
-						            <div class="modal-header">
-						                <h5 class="modal-title" id="alertModalLabel">Notification</h5>
-						            </div>
-						            <div class="modal-body mt-2 mb-2">
-						                Try again with a different keyword <br> There are currently no products that match the value entered
-						            </div>
-						            <div class="modal-footer">
-						                <button type="button" class="btn btn-secondary" id="modalCloseButton" data-bs-dismiss="modal">Close</button>
-						            </div>
-						        </div>
-						    </div>
-						</div>
-						
 						<!-- 페이지 단에 띄워줄 전체 상품 표출 코드 -->
 						<div class="row" id="product-list">
 <!--					<div class="col-6 col-sm-4 col-md-3 col-xl-5col" id="product-${product.productSeq}" data-total-review-count="${product.totalReviewCount}" data-review-rate-avg="${product.reviewRateAvg}" data-reg-date-time="${product.regDateTime}" data-org-price="${product.orgPrice}">-->
@@ -199,7 +181,7 @@
 						    <div class="col-6 col-sm-4 col-md-3 col-xl-5col" th:each="product : ${searchResults}">
 						        <div class="product-default inner-quickview inner-icon">
 						            <figure>
-										<a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq}, ProductName=${product.ProductName})}" th:if="${product.defaultNY==1}">
+										<a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq}, ProductName=${product.ProductName})}" th:if="${product.defaultNY == 1}">
 										    <img th:src="${product.path}"/>
 										</a>
 						                <div class="btn-icon-group">

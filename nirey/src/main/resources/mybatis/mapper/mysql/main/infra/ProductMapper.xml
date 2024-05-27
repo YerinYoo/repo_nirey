@@ -478,7 +478,10 @@ select
     c.productSeq,
     c.ProductName,
     c.OrgPrice,
-    c.DiscountedPrice
+    c.DiscountedPrice,
+    d.path,
+    d.defaultNY
+    
 from wishlist a
 inner join member b on a.Member_memberSeq=b.memberSeq
 inner join product c on a.Product_productSeq=c.productSeq
@@ -548,75 +551,72 @@ and d.defaultNY=1
 <!-- 필터링 (prodStockCD) -->
 <!-- new -->
 <select id="filteringByNew">
-	    SELECT 
+	
+	    SELECT
         a.productSeq,
-        a.delNY,
         a.ProductName,
         a.OrgPrice,
         a.DiscountedPrice,
-        a.prodStockCD,
         a.categoryCD,
-        a.regDateTime,
-        a.modDateTime,
-         (select count(*) from review where Product_seq = a.productSeq) as totalReviewCount,
-		 (SELECT ROUND(AVG(reviewRate) * 2) / 2 FROM review WHERE Product_seq = a.productSeq) AS reviewRateAvg
+        a.prodStockCD,
+        (select round(avg(reviewRate)) from review where Product_seq = a.productSeq) as reviewRateAvg,
+        (select count(*) from review where Product_seq = a.productSeq) as totalReviewCount,
+        b.path,
+        b.defaultNY
     FROM 
         product a
     inner join
     	prodImg b
     on
     	a.productSeq=b.productSeqF
-        
-        where a.prodStockCD=7
+    WHERE a.prodStockCD=7
+    AND b.defaultNY = 1
+
 </select>
 
 <!-- besk -->
 <select id="filteringByBest">
-	    SELECT 
+	    SELECT
         a.productSeq,
-        a.delNY,
         a.ProductName,
         a.OrgPrice,
         a.DiscountedPrice,
-        a.prodStockCD,
         a.categoryCD,
-        a.regDateTime,
-        a.modDateTime,
-         (select count(*) from review where Product_seq = a.productSeq) as totalReviewCount,
-		 (SELECT ROUND(AVG(reviewRate) * 2) / 2 FROM review WHERE Product_seq = a.productSeq) AS reviewRateAvg
+        a.prodStockCD,
+        (select round(avg(reviewRate)) from review where Product_seq = a.productSeq) as reviewRateAvg,
+        (select count(*) from review where Product_seq = a.productSeq) as totalReviewCount,
+        b.path,
+        b.defaultNY
     FROM 
         product a
     inner join
     	prodImg b
     on
     	a.productSeq=b.productSeqF
-        
-        where a.prodStockCD=8
+    WHERE a.prodStockCD=8
+    AND b.defaultNY = 1
 </select>
 
 <!-- restock -->
 <select id="filteringByRestock">
-	    SELECT 
+	    SELECT
         a.productSeq,
-        a.delNY,
         a.ProductName,
         a.OrgPrice,
         a.DiscountedPrice,
-        a.prodStockCD,
         a.categoryCD,
-        a.regDateTime,
-        a.modDateTime,
-         (select count(*) from review where Product_seq = a.productSeq) as totalReviewCount,
-		 (SELECT ROUND(AVG(reviewRate) * 2) / 2 FROM review WHERE Product_seq = a.productSeq) AS reviewRateAvg
+        a.prodStockCD,
+        (select round(avg(reviewRate)) from review where Product_seq = a.productSeq) as reviewRateAvg,
+        (select count(*) from review where Product_seq = a.productSeq) as totalReviewCount,
+        b.path,
+        b.defaultNY
     FROM 
         product a
-        
-   inner join
+    inner join
     	prodImg b
     on
     	a.productSeq=b.productSeqF
-        
-        
-        where a.prodStockCD=9
+    WHERE a.prodStockCD=9
+    AND b.defaultNY = 1
 </select>
 </mapper>
