@@ -80,9 +80,9 @@ public class MixController {
 	  }
 	 
 	   @RequestMapping(value="/recorded/OrderComplete")
-	   public String orderComplate(Model model)throws Exception {
+	   public String orderComplate(Model model, MixDto dto)throws Exception {
 		   
-		   model.addAttribute("checkOut", service.checkOut());
+		   model.addAttribute("checkOut", service.checkOut(dto));
 		   
 		   return "usr/infra/v1/order-complete";
 	   }

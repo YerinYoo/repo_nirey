@@ -18,6 +18,8 @@ public class MixDto {
 	private Integer totalPrice;
 	private Integer totalOrgPrice;
 	private Integer totalDiscountedPrice;
+	private String MemberSeq;
+	private String productOrderedSeqF;
 	
 	//member column
 	private String ID;
@@ -46,7 +48,7 @@ public class MixDto {
 	private String colorOption;
 	private String sizeOption;
 	private String defaultNY;
-
+	
 	//prodImg column
 	private String path;
 	
@@ -321,6 +323,22 @@ public class MixDto {
 
 	public void setShippingMsg(String shippingMsg) {
 		this.shippingMsg = shippingMsg;
+	}
+
+	public String getMemberSeq() {
+		return MemberSeq;
+	}
+
+	public void setMemberSeq(String memberSeq) {
+		MemberSeq = memberSeq;
+	}
+
+	public String getProductOrderedSeqF() {
+		return productOrderedSeqF;
+	}
+
+	public void setProductOrderedSeqF(String productOrderedSeqF) {
+		this.productOrderedSeqF = productOrderedSeqF;
 	}
 
 	//toString()

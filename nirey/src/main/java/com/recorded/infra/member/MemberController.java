@@ -139,7 +139,7 @@ public class MemberController extends BaseController {
      // 리다이렉트 전에 세션에 저장된 회원 정보를 다시 모델에 추가
      session.setAttribute("authenticatedMember", authenticatedMember);
 
-     return "redirect:/MyPage/AccountSettings"; //리턴 경로 에러? 왜 그러는건지 확인하기 
+     return "redirect:/MyPage/AccountSettings"; //리턴 경로 에러? 왜인지 확인하기 
  }
 
 

@@ -4,7 +4,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.recorded.infra.product.ProductDto;
 
 @Service
 public class MixService {
@@ -28,10 +27,8 @@ public class MixService {
 		return dao.memberInfo();
 	}
 	
-	public List<MixDto> checkOut(){
-		
-		return dao.checkOut();
+	public Integer checkOut(MixDto dto) {
+		return dao.checkOut(dto);
 	}
-
 	
 }

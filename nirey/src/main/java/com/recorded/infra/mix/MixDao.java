@@ -2,6 +2,7 @@ package com.recorded.infra.mix;
 
 import java.util.List;
 
+
 public interface MixDao {
 
 	public List<MixDto> orderList(); 
@@ -14,6 +15,6 @@ public interface MixDao {
 	
 	public List<MixDto> memberAddr();
 	
-	public List<MixDto> checkOut();
+	public Integer checkOut(MixDto dto);
 	
 }

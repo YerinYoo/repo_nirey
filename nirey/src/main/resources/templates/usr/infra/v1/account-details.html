@@ -118,7 +118,7 @@
 										<div class="mt-1">
 											<label for="register-mobile">
 												Mobile</label>
-											<input type="tel" pattern="[0-9]*" class="form-input form-wide" id="mobile" name="mobile" th:value="${session.sessMobileNumUsr}"/>
+											<input type="tel" name="MobileNum" pattern="[0-9]*" class="form-input form-wide" id="mobile" th:value="${session.sessMobileNumUsr}"/>
 										</div>
 							  </div>
 							</div>
@@ -168,7 +168,7 @@
 										<div class="mt-1">
 											<label for="register-shippingMsg">
 												Shipping MSG</label>
-											<input type="text" class="form-input form-wide" id="shippingMsg" th:value="${session.sessShippingMsgUsr}"/>
+											<input type="text" name="shippingMsg" class="form-input form-wide" id="shippingMsg" th:value="${session.sessShippingMsgUsr}"/>
 										</div>
 							    	
 							</div>

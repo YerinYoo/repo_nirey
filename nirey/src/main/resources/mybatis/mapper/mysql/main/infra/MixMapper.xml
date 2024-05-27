@@ -175,10 +175,33 @@
 	    and a.memberSeq is not null 
 	</select>
 	
-	<select id="checkOut" resultMap="resultMapObj">
-	select
-	
-	</select>
+	<insert id="checkOut">
+	insert into orders (
+	orderStatus,
+	RefundNY,
+	OrderDate,
+	CardNo,
+	CVV,
+	CardOwner,
+	CardDate,
+	paymentCD,
+	cardCompCD,
+	MemberSeq,
+	productOrderedSeqF
+	) values (
+	35,
+	0,
+	now(),
+	#{CardNo},
+	#{CVV},
+	#{CardOwner},
+	#{CardDate},
+	#{paymentCD},
+	#{cardCompCD},
+	#{MemberSeq},
+	1 <!-- 이후 주문 제품 들어가는 건 수정할 예정 -->
+	)
+	</insert>
 	
 	
 </mapper>
