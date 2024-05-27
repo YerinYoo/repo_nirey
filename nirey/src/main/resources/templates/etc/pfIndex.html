@@ -3,7 +3,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Portfolio</title>
+	<title>I'm Yerin Yoo</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
@@ -20,16 +20,11 @@
 	<meta name="twitter:url" content="" />
 	<meta name="twitter:card" content="" />
 
-	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-	<link rel="shortcut icon" href="favicon.ico">
-
-	<link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700" rel="stylesheet">
+	<link rel="icon" href="/etc/images/favicon/favicon.ico">
 	
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="/etc/css/animate.css">
-	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="/etc/css/icomoon.css">
+
 	<!-- Bootstrap  -->
 	<link rel="stylesheet" href="/etc/css/bootstrap.css">
 	<!-- Owl Carousel -->
@@ -125,6 +120,37 @@
 			text-decoration: none;
 		}
 	</style>
+	
+	<!-- 이름에 형광펜 st 애니메이션 관련 스타일 -->
+	<style>
+	    .highlight {
+	        position: relative;
+	        display: inline-block;
+	    }
+	
+	    .highlight::before {
+	        content: '';
+	        position: absolute;
+	        left: 0;
+	        bottom: 0;
+	        width: 100%;
+	        height: 0.5em;
+			background: linear-gradient(to right, pink 0%, pink 85%, #ff80df 100%); /* 핑크색으로 설정 */
+	        z-index: -1;
+	        animation: highlight 2s ease-in-out forwards; /* 애니메이션 시간을 2초로 설정 */
+			border-radius: 0.25em; /* 끝 부분을 둥글게 처리 */
+	    }
+	
+	    @keyframes highlight {
+	        from {
+	            width: 0;
+	        }
+	        to {
+	            width: 40%;
+	        }
+	    }
+	</style>
+	
 	</head>
 	<body>
 		
@@ -166,7 +192,7 @@
 					<div class="col-md-5 animate-box">
 						<div class="indexImg">
 							<div class="item">
-								<img class="img-responsive about-img" src="/etc/images/dailyProf.jpeg">
+								<img class="img-responsive about-img" src="/etc/images/ImLyn.jpg">
 <!-- 								<img class="img-responsive about-img" src="/etc/images/YerinYoo.jpg"> -->
 							</div>
 						</div>
@@ -175,7 +201,7 @@
 						<div class="about-desc">
 							<div class="owl-carousel3">
 								<div class="item">
-									<h2><span style="background-color: bl;">Yerin Yoo</span></h2>
+									<h2><span style="background-color: bl;" class="highlight">Yerin Yoo</span></h2>
 								</div>
 								<div class="item">
 									<h2><span>I'm</span><span>A Full-Stack Developer</span></h2>
