@@ -82,7 +82,7 @@
 		
 		/* The Close Button */
 		.close {
-		  color: pink; /* 핑크 색상 */
+		  color: #cd5c5b; /* 핑크 색상 */
 		  float: right;
 		  font-size: 28px;
 		  font-weight: bold;
@@ -98,20 +98,20 @@
 		/* Modal Header */
 		.modal-header {
 		  display: flex;
-		  justify-content: center;
-		  align-items: center;
+		  justify-content: left;
+		  align-items: left;
 		}
 		
 		/* Modal Body */
 		.modal-body {
 		  flex: 1; /* 바디가 남은 공간을 차지하도록 함 */
 		  display: flex;
-		  justify-content: center;
-		  align-items: center;
+		  justify-content: left;
+		  align-items: left;
 		}
 		
 		#closeBtn {
-		  background-color: #4CAF50; /* Green */
+		  background-color: #cd5c5b; 
 		  color: white;
 		  padding: 10px 20px;
 		  border: none;
@@ -119,7 +119,7 @@
 		}
 		
 		#closeBtn:hover {
-		  background-color: #45a049;
+		  background-color: #cd5c5b;
 		}
 		a {
 			text-decoration: none;
@@ -127,6 +127,25 @@
 	</style>
 	</head>
 	<body>
+		
+	<!-- 모달 내용 -->
+	
+	<!-- Modal Structure -->
+	<div id="myModal" class="modal">
+	  <div class="modal-content">
+	    <div class="modal-header">
+	      <span class="close">&times;</span>
+	      <h2>Notice</h2>
+	    </div>
+	    <div class="modal-body">
+	      <p>아직 개발 중인 프로젝트입니다-!</p>
+	    </div>
+	    <div class="modal-footer">
+	      <button id="closeBtn">Close</button>
+	    </div>
+	  </div>
+	</div>
+	
 
 	<div id="colorlib-page">
 		<!-- <header>
@@ -461,23 +480,7 @@
 			</div>
 		</div>
 	</footer>
-	
-	<!-- Modal Structure -->
-	<div id="myModal" class="modal">
-	  <div class="modal-content">
-	    <div class="modal-header">
-	      <span class="close">&times;</span>
-	      <h2>Notice</h2>
-	    </div>
-	    <div class="modal-body">
-	      <p>아직 개발 중인 프로젝트입니다-!</p>
-	    </div>
-	    <div class="modal-footer">
-	      <button id="closeBtn">닫기</button>
-	    </div>
-	  </div>
-	</div>
-	
+
 	<!-- jQuery -->
 	<script src="/etc/js/jquery.min.js"></script>
 	<!-- jQuery Easing -->

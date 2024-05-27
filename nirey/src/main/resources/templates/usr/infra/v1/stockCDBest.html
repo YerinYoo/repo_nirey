@@ -152,7 +152,6 @@
 <!--					<div class="col-6 col-sm-4 col-md-3 col-xl-5col" id="product-${product.productSeq}" data-total-review-count="${product.totalReviewCount}" data-review-rate-avg="${product.reviewRateAvg}" data-reg-date-time="${product.regDateTime}" data-org-price="${product.orgPrice}">-->
 
 						    <div class="col-6 col-sm-4 col-md-3 col-xl-5col sortBy" th:each="product : ${prodList}" th:id="'product-' + ${product.productSeq}" th:data-reg-date-time="${product.regDateTime}">
-						        
 								<div class="product-default inner-quickview inner-icon">
 						            <figure>
 										<a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq}, ProductName=${product.ProductName})}" th:if="${product.defaultNY == 1}">
