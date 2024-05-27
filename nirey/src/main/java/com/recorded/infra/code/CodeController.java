@@ -41,9 +41,16 @@ public class CodeController {
 		return "redirect:/CodeList";
 	}
 	
-	
 	@RequestMapping(value="/codeUelete")
 	public String codeUelete(CodeDto dto) throws Exception {
+		
+		service.uelete(dto);
+		
+		return "redirect:/CodeList";
+	}
+	
+	@RequestMapping(value="/codeMultiUelete")
+	public String codeMultiUelete(CodeDto dto) throws Exception {
 		String[] checkboxSeqArray = dto.getCheckboxSeqArray();
 		for(String checkboxSeq : checkboxSeqArray) {
 			dto.setSeq(checkboxSeq);

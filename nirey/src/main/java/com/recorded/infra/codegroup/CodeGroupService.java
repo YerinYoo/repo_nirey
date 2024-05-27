@@ -7,10 +7,10 @@ import java.util.List;
 
 @Service
 public class CodeGroupService {
-
-    private final CodeGroupDao dao;
-
     @Autowired
+    CodeGroupDao dao;
+
+
     public CodeGroupService(CodeGroupDao dao) {
         this.dao = dao;
     }

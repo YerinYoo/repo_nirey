@@ -77,8 +77,14 @@ public class CodeGroupController {
 		return "redirect:/CodeGroupList";
 	}
 
-	@RequestMapping(value = "/codeGroupUpdtDel")
+	@RequestMapping (value="/codeGroupUpdtDel")
 	public String codeGroupUpdtDel(CodeGroupDto dto) throws Exception {
+		service.updtDel(dto);
+		return "redirect:/CodeGroupList";
+	}
+	
+	@RequestMapping(value = "/codeGroupMultiUpdtDel")
+	public String codeGroupMultiUpdtDel(CodeGroupDto dto) throws Exception {
 		String[] checkboxSeqArray = dto.getCheckboxSeqArray();
 		for(String checkboxSeq : checkboxSeqArray) {
 			dto.setSeq(checkboxSeq);

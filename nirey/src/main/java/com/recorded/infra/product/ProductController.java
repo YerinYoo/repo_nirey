@@ -85,8 +85,14 @@ public class ProductController {
 		return "redirect:/ProductList";
 	}
 
-	@RequestMapping(value = "/ProductUelete")
+	@RequestMapping(value="/ProductUelete")
 	public String ProductUelete(ProductDto dto) throws Exception {
+		service.uelete(dto);
+		return "redirect:/ProductList";
+	}
+	
+	@RequestMapping(value = "/ProductMultiUelete")
+	public String ProductMultiUelete(ProductDto dto) throws Exception {
 		String[] checkboxSeqArray = dto.getCheckboxSeqArray();
 		for(String checkboxSeq : checkboxSeqArray) {
 			dto.setProductSeq(checkboxSeq);
