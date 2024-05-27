@@ -24,7 +24,8 @@
 	
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="/etc/css/animate.css">
-
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="/etc/css/icomoon.css">
 	<!-- Bootstrap  -->
 	<link rel="stylesheet" href="/etc/css/bootstrap.css">
 	<!-- Owl Carousel -->
@@ -151,6 +152,39 @@
 	    }
 	</style>
 	
+	<!-- Skill Bar -->
+	<style>
+		.skill-bar {
+		    height: 20px;
+		    width: 0;
+		    margin-top: 10px;
+		    background-color: #dd9b9b;
+		    transition: width 3.7s ease-in-out;
+			border-radius: 10px;
+		}
+		
+		.skills {
+		    text-align: right;
+		    padding-top: 10px;
+		    padding-bottom: 10px;
+		    color: white;
+		}
+	</style>
+
+	<!-- Skill Bar JavaScript -->
+	<script>
+			window.addEventListener('scroll', () => {
+			    const skillBars = document.querySelectorAll('.skill-bar');
+			    const scrollPosition = window.scrollY + window.innerHeight;
+			
+			    skillBars.forEach(skillBar => {
+			        const skillBarPosition = skillBar.offsetTop;
+			        if (scrollPosition >= skillBarPosition && skillBar.dataset.percent) {
+			            skillBar.style.width = skillBar.dataset.percent + '%';
+			        }
+			    });
+			});
+		</script>
 	</head>
 	<body>
 		
@@ -240,6 +274,100 @@
 			</div>
 		</div>
 
+		
+			<div id="colorlib-services" style="padding : 0">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="services-flex">
+									<div class="row">
+										<div class="col-md-12" style="padding : 0; justify-content: center;">
+											<span>My Skills</span>
+											<h2>Here Are Some of My Skills</h2>
+										</div>
+									</div>
+								</div>
+									<!-- Skill Bar -->
+									<div class="row">
+									        <div class="col-md-12">
+									            <div class="rotate">
+									                <h2 class="heading">My Skills</h2>
+									            </div>
+									        </div>
+											<p>* OS - Mac, Windows, Linux</p>
+									        <div class="col-md-6">
+									            <div class="services animate-box">
+									                <h3>1 - Back End Development</h3>
+									                <ul>
+									                    <li>Java
+															<div class="skill-bar" data-percent="70"></div>
+														</li>
+									                    <li>Python
+															<div class="skill-bar" data-percent="30"></div>
+														</li>
+									                </ul>
+									            </div>
+									            <div class="services animate-box">
+									                <h3>3 - Database</h3>
+									                <ul>
+									                    <li>Oracle (localhost)
+															<div class="skill-bar" data-percent="50"></div>
+														</li>
+									                    <li>MySQL (localhost, AWS RDS)
+															<div class="skill-bar" data-percent="85"></div>
+														</li>
+									                    <li>Database Modeling (ERD)
+															<div class="skill-bar" data-percent="70"></div>
+														</li>
+									                </ul>
+									            </div>
+									        </div>
+									        <div class="col-md-6">
+									            <div class="services animate-box">
+									                <h3>2 - Front End Development</h3>
+									                <ul>
+									                    <li>HTML5
+															<div class="skill-bar" data-percent="86"></div>
+														</li>
+									                    <li>CSS3
+															<div class="skill-bar" data-percent="70"></div>
+														</li>
+									                    <li>Bootstrap
+															<div class="skill-bar" data-percent="80"></div>
+														</li>
+									                    <li>JavaScript &amp; Jquery
+															<div class="skill-bar" data-percent="75"></div>
+														</li>
+									                    <li>Thymeleaf
+															<div class="skill-bar" data-percent="90"></div>
+														</li>
+									                </ul>
+									            </div>
+									            <div class="services animate-box">
+									                <h3>4 - Etc.</h3>
+									                <ul>
+									                    <li>AWS(RDS, EC2, S3, CodeDeploy)
+															<div class="skill-bar" data-percent="70"></div>
+														</li>
+									                    <li>Git / SourceTree
+															<div class="skill-bar" data-percent="53"></div>
+														</li>
+									                    <li>Github Actions를 이용한 자동화 배포
+															<div class="skill-bar" data-percent="60"></div>
+														</li>
+									                </ul>
+									            </div>
+									        </div>
+									    </div>
+									
+									    <script src="script.js"></script>
+									</div>
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
 
 		<div id="colorlib-work">
 			<div class="container">
@@ -390,83 +518,6 @@
 									</a>
 								</div>
 							</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		
-	
-		<div id="colorlib-services">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="services-flex">
-							<div class="one-third">
-								<div class="row">
-									<div class="col-md-12 col-md-offset-0 animate-box intro-heading" style="padding : 0;">
-										<span>My Skills</span>
-										<h2>Here Are Some of My Skills</h2>
-										<p>* OS - Mac, Windows, Linux</p>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-12">
-										<div class="rotate">
-											<h2 class="heading">My Skills</h2>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="services animate-box">
-											<h3>1 - Back End Development</h3>
-											<ul>
-												<li>Java</li>
-												<li>Python</li>
-											</ul>
-										</div>
-										<div class="services animate-box">
-											<h3>3 - Database</h3>
-											<ul>
-												<li>Oracle (localhost)</li>
-												<li>MySQL (localhost, AWS RDS)</li>
-												<li>Database Modeling (ERD)</li>
-											</ul>
-										</div>
-										<div class="services animate-box">
-											<h3>5 - Licenses</h3>
-											<ul>
-												<li>OPIc - AL</li>
-												<li>운전면허 2종 보통</li>
-											</ul>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="services animate-box">
-											<h3>2 - Front End Development</h3>
-											<ul>
-												<li>HTML</li>
-												<li>CSS</li>
-												<li>Bootstrap</li>
-												<li>JavaScript &amp; Jquery</li>
-												<li>Thymeleaf</li>
-											</ul>
-										</div>
-										<div class="services animate-box">
-											<h3>4 - Etc.</h3>
-											<ul>
-												<li>AWS(RDS, EC2, S3, CodeDeploy)</li>
-												<li>Git / SourceTree</li>
-												<li>Github Actions를 이용한 자동화 배포</li>
-												<li>IDE - Eclipse, Spring Tool Suite 4, Visual Studio Code</li>
-												<li>Adobe Photoshop</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="one-forth services-img" style="background-image: url(/etc/images/services-img-1.jpg);">
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
