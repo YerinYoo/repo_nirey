@@ -97,9 +97,9 @@
                 <div class="card-body">
                     <label for="quitNY" class="form-label">QuitNY<span class="text-danger fs-0">*</span></label>
                     <select class="form-select" id="quitNY" name="quitNY">
-                        <option selected="" disabled="" value="">Choose...</option>
-                        <option value="0">N</option>
-                        <option value="1">Y</option>
+                        <option disabled="" value="">Choose...</option>
+                        <option value="0" th:selected="${item.quitNY == 0}">N</option>
+                        <option value="1" th:selected="${item.quitNY == 1}">Y</option>
                     </select>
                     <div class="invalid-feedback" id="quitNYFeedback"></div>
                 </div>
@@ -111,9 +111,9 @@
                 <div class="card-body">
                     <label for="dormantNY" class="form-label">DormantNY<span class="text-danger fs-0">*</span></label>
                     <select class="form-select" id="dormantNY" name="dormantNY">
-                        <option selected="" disabled="" value="">Choose...</option>
-                        <option value="0">N</option>
-                        <option value="1">Y</option>
+                        <option disabled="" value="" >Choose...</option>
+                        <option value="0" th:selected="${item.dormantNY == 0}">N</option>
+                        <option value="1" th:selected="${item.dormantNY == 1}">Y</option>
                     </select>
                     <div class="invalid-feedback" id="dormantNYFeedback"></div>
                 </div>
@@ -124,7 +124,7 @@
             <div class="card">
                 <div class="card-body">
                     <label for="memberName" class="form-label">Name <span class="text-danger fs-0">*</span></label>
-                    <input type="text" id="name" name="name" maxlength="20" class="form-control" />
+                    <input type="text" id="name" name="name" maxlength="20" class="form-control" th:value="${item.name}"/>
                     <div class="invalid-feedback" id="nameFeedback"></div>
                 </div>
             </div>
@@ -138,7 +138,7 @@
                 <div class="card-body">
                     <div>
                         <label for="memberID" class="form-label">ID<span class="text-danger fs-0">*</span></label>
-                        <input type="text" class="form-control" id="ID" name="ID">
+                        <input type="text" class="form-control" id="ID" name="ID" th:value="${item.ID}">
                         <div class="invalid-feedback" id="IDFeedback"></div>
                     </div>
                 </div>
@@ -150,7 +150,7 @@
                 <div class="card-body">
                     <div>
                         <label for="pwd" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="pwd" name="pwd">
+                        <input type="password" class="form-control" id="pwd" name="pwd" th:value="${item.pwd}">
                         <div class="invalid-feedback" id="pwdFeedback"></div>
                     </div>
                 </div>
@@ -162,7 +162,7 @@
                 <div class="card-body">
                     <div>
                         <label for="confirmPwd" class="form-label">Confirm Password</label>
-                        <input type="password" class="form-control" id="confirmPwd" name="confirmPwd">
+                        <input type="password" class="form-control" id="confirmPwd" name="confirmPwd" th:value="${item.pwd}">
                         <div class="invalid-feedback" id="confirmPwdFeedback"></div>
                     </div>
                 </div>
@@ -176,7 +176,7 @@
                 <div class="card-body">
                     <div>
                         <label for="email" class="form-label">Email</label>
-                        <input type="text" class="form-control" id="email" name="email">
+                        <input type="text" class="form-control" id="email" name="email" th:value="${item.email}">
                         <div class="invalid-feedback" id="emailFeedback"></div>
                     </div>
                 </div>
@@ -188,10 +188,10 @@
                 <div class="card-body">
                     <label for="genderCD" class="form-label">Gender<span class="text-danger fs-0">*</span></label>
                     <select class="form-select" id="genderCD" name="genderCD">
-                        <option selected="" disabled="" value="">Choose...</option>
-                        <option value="1">Male</option>
-                        <option value="2">Female</option>
-                        <option value="3">Etc.</option>
+                        <option disabled="" value="">Choose...</option>
+                        <option th:selected="${item.genderCD == 1}" value="1">Male</option>
+                        <option th:selected="${item.genderCD == 2}" value="2">Female</option>
+                        <option th:selected="${item.genderCD == 3}" value="3">Etc.</option>
                     </select>
                     <div class="invalid-feedback" id="genderCDFeedback"></div>
                 </div>
@@ -205,7 +205,7 @@
                 <div class="card-body">
                     <div>
                         <label for="MobileNum" class="form-label">Mobile</label>
-                        <input type="text" class="form-control" id="MobileNum" name="MobileNum">
+                        <input type="text" class="form-control" id="MobileNum" name="MobileNum" th:value="${item.MobileNum">
                         <div class="invalid-feedback" id="MobileNumFeedback"></div>
                     </div>
                 </div>
@@ -218,7 +218,7 @@
                     <div>
                         <label for="birthday" class="form-label">Birthday</label>
                         <input type="text" id="birthday" name="birthday" class="form-control form-control-sm"
-                            autocomplete="off">
+                            autocomplete="off" th:value="${item.birthday}">
                         <div class="invalid-feedback" id="birthdayFeedback"></div>
                     </div>
                 </div>
@@ -232,7 +232,7 @@
             <button class="btn btn-light">Cancel</button>
         </a>
 
-        <button class="btn btn-success" type="submit" th:href="@{/Morders}" id="btnInsert">Submit</button>
+        <button class="btn btn-success" type="submit" th:href="@{/MemberList}" id="btnUpdt">Submit</button>
     </div>
     <!-- Form actions footer end -->
 </form>
@@ -302,12 +302,12 @@
     
         $(function () {
             // 등록버튼 클릭 이벤트
-            $("#btnInsert").click(function () {
+            $("#btnUpdt").click(function () {
                 if (validationInst() == false) {
                     return false;
                 } else {
-                    $("#formInsert").attr("action", goUrlXdmInstForm);
-                    $("#formInsert").submit();
+                    $("#FormUpdate").attr("action");
+                    $("#FormUpdate").submit();
                 }
             });
         });

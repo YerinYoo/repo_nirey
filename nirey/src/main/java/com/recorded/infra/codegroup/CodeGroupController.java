@@ -42,6 +42,30 @@ public class CodeGroupController {
 		vo.setShDateStart(vo.getShDateStart() == null ? UtilDateTime.calculateDayReplace00TimeString(UtilDateTime.nowLocalDateTime(), Constants.DATE_INTERVAL) : UtilDateTime.add00TimeString(vo.getShDateStart()));
 		vo.setShDateEnd(vo.getShDateEnd() == null ? UtilDateTime.nowString() : UtilDateTime.addNowTimeString(vo.getShDateEnd()));
 	}
+	
+	//AJAX로 페이징
+	@RequestMapping(value = "/CodeGroupAJAXList")
+	public String codeGroupXdmAjaxList(@ModelAttribute("vo") CodeGroupVo vo, Model model) throws Exception{
+		
+		setSearch(vo);
+		
+		return "adm/infra/v1/CodeGroupList";
+	}
+	
+	
+	@RequestMapping(value = "/CodeGroupAJAXLita")
+	public String codeGroupXdmAjaxLita(@ModelAttribute("vo") CodeGroupVo vo, Model model) throws Exception{
+		
+		setSearch(vo);
+		vo.setParamsPaging(service.getTotalCodeGroupCount(vo));
+		
+		if (vo.getTotalRows() > 0) {
+			model.addAttribute("list", service.selectList(vo));
+		}
+		
+		return "adm/infra/v1/CodegroupLita";
+	}
+	
 //
 //	@RequestMapping(value = "/codeGroupView")
 //	public String codeGroupView(CodeGroupDto dto, Model model) throws Exception {

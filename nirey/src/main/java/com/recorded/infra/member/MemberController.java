@@ -198,6 +198,13 @@ public class MemberController extends BaseController {
         // 검색 조건 설정
     }
     
+    @RequestMapping(value="/EditMember")
+    public String EditMember(MemberDto dto) throws Exception {
+    	
+    	service.update(dto);
+    	
+    	return "adm/infra/v1/MordersEdit";
+    }
     
     //adm page index
     @RequestMapping(value = "/index")

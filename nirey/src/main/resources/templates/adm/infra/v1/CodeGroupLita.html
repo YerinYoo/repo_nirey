@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Content wrapper scroll start -->
+	<div class="content-wrapper-scroll">
+	
+		<!-- Content wrapper start -->
+		<div class="content-wrapper" style="height : 500px;">
+													
+			<!-- Row start -->
+			<div class="row">
+				<div class="col-sm-12 col-12">
+		
+					<div class="table-responsive">
+						<table class="table v-middle" style="table-layout:fixed;" >
+						 	<tr>
+								<th scope="col"><input class="form-check-input" type="checkbox" id="checkAll"  /></th>
+					    		<th>delNY</th>
+					    		<th>seq</th>
+					    		<th>name</th>
+					    		<th>count</th>
+					    		<th>regDate</th>
+					    		<th>modDate</th>
+				    		</tr>
+				    	<tr th:if="${!#lists.isEmpty(list)}" th:each="list:${list}"> 
+							<td>
+								<input class="form-check-input chk" type="checkbox" name="chk" th:value="${list.seq}" />
+							</td>
+				     		<td th:if="${list.delNY eq 0}">N</td>
+				     		<td th:unless="${list.delNY eq 0}">Y</td>
+				    		<td th:text="${list.seq}"></td>
+				       		 <td><a th:href="@{/CodeGroupView(seq=${list.seq}, name=${list.name}, delNY=${list.delNY})}"  th:text="${list.name}"></a></td>
+							<td th:text="${list.cdSeqCount}"></td>
+							<td th:text="${#dates.format(list.modDatetime,  'yyyy-MM-dd HH:mm:ss')}"></td>
+				     		<td th:text="${#dates.format(list.regDatetime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+				    	</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+					
+		<form name="formList" id="formList" method="post" autocomplete="off">
+			<input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/>
+			<input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}"/>
+		<!-- 페이징 기능 -->
+		<!-- paging s  -->				
+			<div class="container-fluid px-0 mt-2 mb-2">
+				<div class="row">
+					<div class="col">
+						<ul class="pagination justify-content-center mb-0">
+							<li th:if="${vo.startPage gt vo.pageNumToShow}" class="page-item" style="cursor: pointer;"><a class="page-link" href="javascript:goList(${vo.startPage - 1})" th:attr="onclick=|goList('${vo.startPage - 1}')|"><i class="fa-solid fa-angle-left"></i></a></li>
+							<li th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}" th:classappend="${num eq vo.thisPage} ? active : ''" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"><!-- ${i.index} --></a></li>
+							<li th:if="${vo.endPage ne vo.totalPages}" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${vo.endPage + 1}')|"><i class="fa-solid fa-angle-right"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- paging e  -->	
+		</form>
+									
+</html>

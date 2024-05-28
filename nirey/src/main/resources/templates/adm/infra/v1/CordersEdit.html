@@ -94,6 +94,7 @@
                                                 <label for="name" class="form-label">Code Name</label>
                                                 <input type="text" id="name" class="form-control" name="name"
                                                     th:value="${item.name}">
+													<input type="hidden" name="seq" th:value="${item.seq}">
                                                 <div class="invalid-feedback" id="nameFeedback"></div>
                                             </div>
                                         </div>

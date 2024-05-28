@@ -64,8 +64,8 @@
     <update id="update">
         update codegroup
         set
-            memo=#{memo}
-            ,name = #{name}
+            name = #{name}
+            ,delNY=#{delNY}
         WHERE 1=1
             and seq = #{seq}
     </update>
