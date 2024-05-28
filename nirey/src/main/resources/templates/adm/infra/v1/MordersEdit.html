@@ -205,7 +205,7 @@
                 <div class="card-body">
                     <div>
                         <label for="MobileNum" class="form-label">Mobile</label>
-                        <input type="text" class="form-control" id="MobileNum" name="MobileNum" th:value="${item.MobileNum">
+                        <input type="text" class="form-control" id="MobileNum" name="MobileNum" th:value="${item.MobileNum}">
                         <div class="invalid-feedback" id="MobileNumFeedback"></div>
                     </div>
                 </div>
@@ -217,7 +217,7 @@
                 <div class="card-body">
                     <div>
                         <label for="birthday" class="form-label">Birthday</label>
-                        <input type="text" id="birthday" name="birthday" class="form-control form-control-sm"
+                        <input type="date" id="birthday" name="birthday" class="form-control form-control-sm"
                             autocomplete="off" th:value="${item.birthday}">
                         <div class="invalid-feedback" id="birthdayFeedback"></div>
                     </div>
@@ -228,7 +228,7 @@
 
     <!-- Form actions footer start -->
     <div class="form-actions-footer">
-        <a th:href="@{/Morders}">
+        <a th:href="@{/MemberList}">
             <button class="btn btn-light">Cancel</button>
         </a>
 

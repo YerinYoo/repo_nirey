@@ -119,7 +119,7 @@ public class MemberController extends BaseController {
  @PostMapping("/MemberUpdate")
  public String MemberUpdate(@ModelAttribute MemberDto dto) throws Exception {
      service.update(dto); // 서비스 계층으로 수정된 값 전달
-     return "redirect:/MemberView"; // 수정된 정보가 표시된 상세 페이지로 이동
+     return "redirect:/MemberList"; // 수정된 정보가 표시된 상세 페이지로 이동
  }
 
  @ResponseBody
@@ -199,9 +199,9 @@ public class MemberController extends BaseController {
     }
     
     @RequestMapping(value="/EditMember")
-    public String EditMember(MemberDto dto) throws Exception {
+    public String EditMember(MemberDto dto, Model model) throws Exception {
     	
-    	service.update(dto);
+    	model.addAttribute("item", service.selectOne(dto));
     	
     	return "adm/infra/v1/MordersEdit";
     }

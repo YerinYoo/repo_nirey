@@ -116,11 +116,18 @@
 
     <update id="update">
    	update member a
-   	
-   	inner join address b
-   	on b.Member_seq = a.memberSeq
+
    	set
-   		name = #{name}
+   		name = #{name},
+   		quitNY = #{quitNY},
+   		dormantNY = #{dormantNY},
+   		ID = #{ID},
+   		pwd = #{pwd},
+   		genderCD = #{genderCD},
+   		email = #{email},
+   		birthday = #{birthday},
+   		MobileNum = #{MobileNum},
+   		modDateTime = now()
    	WHERE 1=1
    		and memberSeq = #{memberSeq}
   	
