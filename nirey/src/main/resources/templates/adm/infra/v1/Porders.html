@@ -278,29 +278,20 @@
 <!--									</ul>-->
 <!--								</nav>-->
 
-												<div class="row">
+							<div class="form-actions-footer">
+								<a class="btn btn-primary btn-m mb-1" th:href="@{/AddProduct}" style="float : left">
+								    <i class="bi bi-pencil"></i>
+								</a>
+						
+								<button class="btn btn-danger btn-icon btn-m mb-1" id="btnModalUelete" data-bs-toggle="modal" data-bs-target="#exampleModal">
+								    <i class="bi bi-trash"></i>
+								</button>
+								
+								<button class="btn btn-success btn-icon btn-m mb-1" id="btnExcelFile">
+									<i class="bi bi-file-earmark-excel"></i>
+								</button>	
 
-													<div class="col-1" style="float : left;">
-                                                            <span class="me-2">
-                                                                <a class="btn btn-primary btn-m" href="#" th:href="@{/AddProduct}">
-                                                                    <i class="bi bi-pencil"></i>
-                                                                </a>
-                                                            </span>
-                                                           </div>
-                                                           
-                                                           <div class="col-1" style="float : right; padding-left : 1270px;">
-                                                           
-                                                            <span>
-                                                            
-                                                                <button class="btn btn-danger btn-icon btn-m mb-1" id="btnModalUelete" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                                    <i class="bi bi-trash"></i>
-                                                                </button>
-                                                            </span>
-                                                            </div>
-                                                    </div>
-												</div>
-											
-
+			               </div>
 								<!-- Card end -->
 
 							</div>
@@ -505,6 +496,14 @@
 		    });
 		</script>
 
+		<script>
+		    $(document).ready(function() {
+		        $('#btnExcelFile').on('click', function() {
+		            // 생성된 엑셀 파일을 다운로드
+		            window.location.href = 'excelDownload';
+		        });
+		    });
+		</script>
 
 
 	<!-- Date Range JS -->

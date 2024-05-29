@@ -18,7 +18,19 @@ import com.recorded.infra.member.MemberDto;
 import com.recorded.infra.member.MemberService;
 import com.recorded.infra.uploadFile.UploadFileDto;
 
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+//excel file download 관련 import
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 
 @Controller
 public class ProductController {
@@ -136,6 +148,102 @@ public class ProductController {
 	}
 	
 
+	//Product List Excel File 변환 및 다운로드 
+	@RequestMapping("excelDownload")
+    public void excelDownload(ProductVo vo, HttpServletResponse httpServletResponse) throws Exception {
+		
+		setSearch(vo, null, null);
+		vo.setParamsPaging(service.getTotalProductCount(vo));
+
+		if (vo.getTotalRows() > 0) {
+			List<ProductDto> list = service.selectList(vo);
+			
+//			Workbook workbook = new HSSFWorkbook();	// for xls
+	        Workbook workbook = new XSSFWorkbook();
+	        Sheet sheet = workbook.createSheet("Product List");
+	        CellStyle cellStyle = workbook.createCellStyle();        
+	        Row row = null;
+	        Cell cell = null;
+	        int rowNum = 0;
+			
+//	        each column width setting
+	        sheet.setColumnWidth(0, 2100);
+	        sheet.setColumnWidth(1, 3100);
+
+//	        Header
+	        String[] tableHeader = {"PRODUCT SEQ", "PRODUCT NAME", "STOCK CD", "ORG PRICE", "DISCOUNTED PRICE", "DEL_NY", "REG_DATE", "MOD_DATE"};
+
+	        row = sheet.createRow(rowNum++);
+			for(int i=0; i<tableHeader.length; i++) {
+				cell = row.createCell(i);
+	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	        	cell.setCellStyle(cellStyle);
+				cell.setCellValue(tableHeader[i]);
+			}
+
+//	        Body
+	        for (int i=0; i<list.size(); i++) {
+	            row = sheet.createRow(rowNum++);
+	            
+//	            String type: null 전달 되어도 ok
+//	            int, date type: null 시 오류 발생 하므로 null check
+//	            String type 이지만 정수형 데이터가 전체인 seq 의 경우 캐스팅
+	            
+	            cell = row.createCell(0);
+	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	        	cell.setCellStyle(cellStyle);
+	            cell.setCellValue(Integer.parseInt(list.get(i).getProductSeq()));
+	            
+	            cell = row.createCell(1);
+	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	        	cell.setCellStyle(cellStyle);
+	        	cell.setCellValue(list.get(i).getProductName());
+	        	
+	            cell = row.createCell(2);
+	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	        	cell.setCellStyle(cellStyle);
+	        	cell.setCellValue(list.get(i).getProdStockCD());
+
+	            cell = row.createCell(3);
+	            cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            cell.setCellStyle(cellStyle);
+	            cell.setCellValue(list.get(i).getOrgPrice());
+	            
+	            cell = row.createCell(4);
+	            cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            cell.setCellStyle(cellStyle);
+	            cell.setCellValue(list.get(i).getDiscountedPrice());
+     
+	            cell = row.createCell(5);
+	            cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            cell.setCellStyle(cellStyle);
+	            if(list.get(i).getDelNY() != null) cell.setCellValue(list.get(i).getDelNY() == 0 ? "N" : "Y");
+	            
+	            cell = row.createCell(6);
+	            cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            cell.setCellStyle(cellStyle);
+	            if(list.get(i).getCategoryCD() != null) cell.setCellValue(list.get(i).getCategoryCD());
+	            
+	            cell = row.createCell(7);
+	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	        	cell.setCellStyle(cellStyle);
+	        	if(list.get(i).getRegDateTime() != null) cell.setCellValue(UtilDateTime.dateTimeToString(list.get(i).getRegDateTime()));
+	        	
+	        	cell = row.createCell(8);
+	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	        	cell.setCellStyle(cellStyle);
+	        	if(list.get(i).getModDateTime() != null) cell.setCellValue(UtilDateTime.dateTimeToString(list.get(i).getModDateTime()));
+	        }
+
+	        httpServletResponse.setContentType("ms-vnd/excel");
+//	        httpServletResponse.setHeader("Content-Disposition", "attachment;filename=example.xls");	// for xls
+	        httpServletResponse.setHeader("Content-Disposition", "attachment;filename=example.xlsx");
+
+	        workbook.write(httpServletResponse.getOutputStream());
+	        workbook.close();
+		}
+    }
+	
 	@RequestMapping(value = "/ProductView")
 	public String PordersView(ProductDto dto, Model model) throws Exception {
 
@@ -382,6 +490,6 @@ public class ProductController {
 	        // 위시리스트 페이지로 이동하는 뷰 이름 반환
 	        return "usr/infra/v1/wishlist";
 	    }
-	  
+	   
 }
 // 사용자 페이지 관련 e
