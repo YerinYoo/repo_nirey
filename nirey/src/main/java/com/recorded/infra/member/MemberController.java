@@ -339,12 +339,12 @@ public class MemberController extends BaseController {
         System.out.println(dto.toString());
         service.insert(dto);
         
-        mailService.sendMailSimple();
+        mailService.sendMailSimple(dto);
 		
 		Thread thread = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				mailService.sendMailSimple();
+				mailService.sendMailSimple(dto);
 			}
 		});
 		
