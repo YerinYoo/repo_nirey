@@ -18,7 +18,7 @@ public class MailService {
     	
     	simpleMailMessage.setTo(dto.getEmail());
     	simpleMailMessage.setSubject("Welcome to recorded!");
-    	simpleMailMessage.setText("Nice to meet you " + dto.getName() + "!\n\n I hope you have a great time at recorded🩷");    
+    	simpleMailMessage.setText("Nice to meet you " + dto.getName() + "!\n\nI hope you have a great time at recorded🩷");    
 
     	javaMailSender.send(simpleMailMessage);
 
