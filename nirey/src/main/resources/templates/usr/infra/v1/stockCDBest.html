@@ -77,11 +77,11 @@
                 <div class="row mt-5">
                     <div class="col-lg-9 main-content">
                         <div class="category-banner pt-0 pb-2">
-                            <img class="slide-bg" src="/usr/images/demoes/demo3/slider/slide-party.jpg" style="height : 200px" alt="banner"
+                            <img class="slide-bg" src="/usr/images/demoes/demo3/slider/NewJeans_BubbleGum.jpg" style="height : 200px" alt="banner"
                                 width="1500" height="320">
                             <div class="category-slide-content pt-1">
                                 <h2 class="m-b-3" style="color : ivory; font-size : 20px;">Feel the Vintage Mood while being Unique</h2>
-                                <h3 class="text-uppercase ml-0" style="color : #FF7A85">Up to 10% OFF on ALL PRODUCTS</h3>
+                                <h3 class="text-uppercase ml-0" style="color : darkblue">Up to 10% OFF on ALL PRODUCTS</h3>
                             </div><!-- End .category-slide-content -->
                         </div><!-- End .category-slide -->
                         
@@ -152,6 +152,7 @@
 <!--					<div class="col-6 col-sm-4 col-md-3 col-xl-5col" id="product-${product.productSeq}" data-total-review-count="${product.totalReviewCount}" data-review-rate-avg="${product.reviewRateAvg}" data-reg-date-time="${product.regDateTime}" data-org-price="${product.orgPrice}">-->
 
 						    <div class="col-6 col-sm-4 col-md-3 col-xl-5col sortBy" th:each="product : ${prodList}" th:id="'product-' + ${product.productSeq}" th:data-reg-date-time="${product.regDateTime}">
+						        
 								<div class="product-default inner-quickview inner-icon">
 						            <figure>
 										<a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq}, ProductName=${product.ProductName})}" th:if="${product.defaultNY == 1}">

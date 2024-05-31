@@ -77,11 +77,11 @@
                 <div class="row mt-5">
                     <div class="col-lg-9 main-content">
                         <div class="category-banner pt-0 pb-2">
-                            <img class="slide-bg" src="/usr/images/demoes/demo3/slider/slide-party.jpg" style="height : 200px" alt="banner"
+                            <img class="slide-bg" src="/usr/images/demoes/demo3/slider/NewJeans_BubbleGum.jpg" style="height : 200px" alt="banner"
                                 width="1500" height="320">
                             <div class="category-slide-content pt-1">
                                 <h2 class="m-b-3" style="color : ivory; font-size : 20px;">Feel the Vintage Mood while being Unique</h2>
-                                <h3 class="text-uppercase ml-0" style="color : #FF7A85">Up to 10% OFF on ALL PRODUCTS</h3>
+                                <h3 class="text-uppercase ml-0" style="color : darkblue">Up to 10% OFF on ALL PRODUCTS</h3>
                             </div><!-- End .category-slide-content -->
                         </div><!-- End .category-slide -->
                         
@@ -129,6 +129,24 @@
 
                         </nav>
 
+                        <!-- 검색 결과가 없거나, 검색을 이용하지 않고 페이지에 접속 했을 때HTML 코드 -->
+						<!-- 검색 결과가 없을 경우 띄워줄 모달 코드 -->
+						<div class="modal" id="showModal" tabindex="-1" aria-labelledby="showModalLabel" aria-hidden="true" th:if="${showModal}" style="width:28%; position : fix; left : 35%;">
+						    <div class="modal-dialog">
+						        <div class="modal-content">
+						            <div class="modal-header">
+						                <h5 class="modal-title" id="alertModalLabel">Notification</h5>
+						            </div>
+						            <div class="modal-body mt-2 mb-2">
+						                Try again with a different keyword <br> There are currently no products that match the value entered
+						            </div>
+						            <div class="modal-footer">
+						                <button type="button" class="btn btn-secondary" id="modalCloseButton" data-bs-dismiss="modal">Close</button>
+						            </div>
+						        </div>
+						    </div>
+						</div>
+						
 						<!-- 페이지 단에 띄워줄 전체 상품 표출 코드 -->
 						<div class="row" id="product-list">
 <!--					<div class="col-6 col-sm-4 col-md-3 col-xl-5col" id="product-${product.productSeq}" data-total-review-count="${product.totalReviewCount}" data-review-rate-avg="${product.reviewRateAvg}" data-reg-date-time="${product.regDateTime}" data-org-price="${product.orgPrice}">-->
