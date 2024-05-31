@@ -486,7 +486,6 @@ $(document).ready(function() {
         // 클릭된 항목에 선택 클래스 추가
         $(this).addClass('selected');
         var selectedColor = $(this).data('color'); // 선택된 색상 값 가져오기
-        alert('선택된 색상: ' + selectedColor);
     });
 
     // 사이즈 선택
@@ -496,11 +495,9 @@ $(document).ready(function() {
         // 클릭된 항목에 선택 클래스 추가
         $(this).addClass('selected');
         var selectedSize = $(this).data('size'); // 선택된 사이즈 값 가져오기
-        alert('선택된 사이즈: ' + selectedSize);
     });
 
     $('#addToWishlist').click(function(event) {
-        alert('일단 눌리긴 함');
         event.preventDefault(); // 기본 동작 방지
         
         // 선택한 색상, 사이즈, 수량 정보 가져오기
@@ -531,12 +528,10 @@ $(document).ready(function() {
             data: data,
             success: function(response) {
                 // 위시리스트에 성공적으로 추가되면 알림창 또는 다른 동작 수행
-                alert('위시리스트 추가 성공');
 				window.location.reload();
             },
             error: function(xhr, status, error) {
                 // 오류 발생 시 처리
-                alert('위시리스트 추가 실패');
             }
         });
     });
