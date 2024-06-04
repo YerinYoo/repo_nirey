@@ -40,52 +40,57 @@ public class ProductController {
 	@Autowired
 	MemberService serviceM;
 
-	//admin
+	//admin UI
+
+	@RequestMapping(value = "/ProductList")
+	public String Morders(@ModelAttribute("vo") ProductVo vo, Model model) throws Exception {
+		
+		setSearch(vo, null, null);
+		int rowcount = service.getTotalProductCount(vo);
+		model.addAttribute("listCount", rowcount);
+		
+		System.out.println(rowcount);
+		
+		model.addAttribute("list", service.selectList(vo));
+		
+//		 model.addAttribute("vo", vo);
+		
+		return "adm/infra/v1/Porders";
+	}
+	
+	@RequestMapping(value = "/ProductView")
+	public String PordersView(ProductDto dto, Model model) throws Exception {
+
+		model.addAttribute("item", service.selectOne(dto));
+
+		return "adm/infra/v1/PordersView";
+	}
+
+	@RequestMapping(value="/ProductEdit")
+	public String ProductEdit(ProductDto dto, Model model) throws Exception {
+		
+		model.addAttribute("item", service.selectOne(dto));
+		
+		return "adm/infra/v1/PordersEdit";
+	}
+
+	@RequestMapping(value = "/AddProduct")
+	public String PordersAdd() throws Exception {
+
+		return "adm/infra/v1/PordersAdd";
+
+	}
+	
+	//admin UX
 	//제품 insert 메서드 
 	@RequestMapping(value = "/ProductInsert")
 	public String ProductInsert(ProductDto dto, UploadFileDto dtoF) throws Exception {
 
 		service.insert(dto, dtoF);
-
+		
 		return "redirect:/ProductList";
 		
 	}
-
-	@ResponseBody
-	@RequestMapping(value = "/ReviewInsert")
-	public String ReviewInsert(ProductDto dto) throws Exception {
-		
-		ProductDto productDto = new ProductDto();
-		productDto.setDelNY(0);
-
-		System.out.println(dto.toString());
-
-		service.insertRev(dto);
-
-		System.out.println("나 컨트롤러 불려왔다? 리뷰 데이터 넣는다?");
-		return "redirect:/recorded/Shop/Product";
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="/insertWishlist")
-	public String insertWishlist(ProductDto dto, HttpSession httpSession) throws Exception {
-	    // 세션에서 사용자의 시퀀스 값을 가져옴
-	    String memberSeq = (String) httpSession.getAttribute("sessSeqUsr");
-
-	    // 위시리스트에 추가할 때 사용자의 시퀀스 값 설정
-	    dto.setMember_memberSeq(memberSeq);
-
-	    // 나머지 필요한 로직 수행
-	    dto.setDelNY(0); // 삭제 여부 설정
-	    service.insertWishlist(dto); // 서비스 호출
-	    
-	    System.out.println("dto.getProduct_productSeq()" +dto.getProduct_productSeq());
-	    System.out.println("위시리스트에 상품 추가됨: " + dto.toString());
-
-	    return "redirect:/recorded/Shop/Product"; // 상품 페이지로 리다이렉트
-	}
-	
-
 
 	@RequestMapping(value = "/ProductUpdate")
 	public String ProductUpdate(ProductDto dto) throws Exception {
@@ -114,14 +119,6 @@ public class ProductController {
 
 		return "redirect:/ProductList";
 	}
-	
-	@RequestMapping(value="/deleteWishlist")
-	public String ueleteW(ProductDto dto) throws Exception {
-		
-		service.ueleteW(dto);
-		
-		return "redirect:/MyPage/Cart";
-	}
 
 	@RequestMapping(value = "/ProductDelete")
 	public String ProductDelete(ProductDto dto) throws Exception {
@@ -130,23 +127,6 @@ public class ProductController {
 
 		return "redirect:/ProductList";
 	}
-
-	@RequestMapping(value = "/ProductList")
-	public String Morders(@ModelAttribute("vo") ProductVo vo, Model model) throws Exception {
-		
-		setSearch(vo, null, null);
-		int rowcount = service.getTotalProductCount(vo);
-		model.addAttribute("listCount", rowcount);
-		
-		System.out.println(rowcount);
-		
-		model.addAttribute("list", service.selectList(vo));
-		
-//		 model.addAttribute("vo", vo);
-		
-		return "adm/infra/v1/Porders";
-	}
-	
 
 	//Product List Excel File 변환 및 다운로드 
 	@RequestMapping("excelDownload")
@@ -244,28 +224,7 @@ public class ProductController {
 		}
     }
 	
-	@RequestMapping(value = "/ProductView")
-	public String PordersView(ProductDto dto, Model model) throws Exception {
 
-		model.addAttribute("item", service.selectOne(dto));
-
-		return "adm/infra/v1/PordersView";
-	}
-
-	@RequestMapping(value="/ProductEdit")
-	public String ProductEdit(ProductDto dto, Model model) throws Exception {
-		
-		model.addAttribute("item", service.selectOne(dto));
-		
-		return "adm/infra/v1/PordersEdit";
-	}
-
-	@RequestMapping(value = "/AddProduct")
-	public String PordersAdd() throws Exception {
-
-		return "adm/infra/v1/PordersAdd";
-
-	}
 
 	public void setSearch(ProductVo vo, String string, String userSeq) throws Exception {
 
@@ -491,5 +450,49 @@ public class ProductController {
 	        return "usr/infra/v1/wishlist";
 	    }
 	   
+	//사용자 UI/UX 관련 메서드
+		@ResponseBody
+		@RequestMapping(value = "/ReviewInsert")
+		public String ReviewInsert(ProductDto dto) throws Exception {
+			
+			ProductDto productDto = new ProductDto();
+			productDto.setDelNY(0);
+
+			System.out.println(dto.toString());
+
+			service.insertRev(dto);
+
+			System.out.println("나 컨트롤러 불려왔다? 리뷰 데이터 넣는다?");
+			return "redirect:/recorded/Shop/Product";
+		}
+		
+		@ResponseBody
+		@RequestMapping(value="/insertWishlist")
+		public String insertWishlist(ProductDto dto, HttpSession httpSession) throws Exception {
+		    // 세션에서 사용자의 시퀀스 값을 가져옴
+		    String memberSeq = (String) httpSession.getAttribute("sessSeqUsr");
+
+		    // 위시리스트에 추가할 때 사용자의 시퀀스 값 설정
+		    dto.setMember_memberSeq(memberSeq);
+
+		    // 나머지 필요한 로직 수행
+		    dto.setDelNY(0); // 삭제 여부 설정
+		    service.insertWishlist(dto); // 서비스 호출
+		    
+		    System.out.println("dto.getProduct_productSeq()" +dto.getProduct_productSeq());
+		    System.out.println("위시리스트에 상품 추가됨: " + dto.toString());
+
+		    return "redirect:/recorded/Shop/Product"; // 상품 페이지로 리다이렉트
+		}
+		
+		
+		@RequestMapping(value="/deleteWishlist")
+		public String ueleteW(ProductDto dto) throws Exception {
+			
+			service.ueleteW(dto);
+			
+			return "redirect:/MyPage/Cart";
+		}
+
 }
 // 사용자 페이지 관련 e

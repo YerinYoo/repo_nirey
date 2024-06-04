@@ -278,27 +278,26 @@ WHERE 1=1
   	where productSeq=#{productSeq}
   	</delete>
 	  
-	  <!-- 페이징 -->
-	    <!-- Total count -->
-		 <select id="getTotalProductCount" resultType="int">
-	    SELECT COUNT(*) FROM product a 
-	    
-	    <if test="shDelNy != null and shDelNy != ''">
-	        WHERE a.delNY = #{shDelNy}
-	    </if>
-	    
-	    <choose>
-	    
-	        <when test="shOption == 1">
-	            AND a.productSeq = #{shValue}
-	        </when>
-	        
-	        <when test="shOption == 2">
-	            AND a.ProductName LIKE CONCAT('%',#{shValue},'%')
-	        </when>
-	        
-	    </choose>
-	</select>
+		<select id="getTotalProductCount" resultType="int">
+		    SELECT COUNT(*) FROM product a
+		    
+		    <where>
+		        <if test="shDelNy != null and shDelNy != ''">
+		            a.delNY = #{shDelNy}
+		        </if>
+		        
+		        <choose>
+		            <when test="shOption == 1">
+		                AND a.productSeq = #{shValue}
+		            </when>
+		            
+		            <when test="shOption == 2">
+		                AND a.ProductName LIKE CONCAT('%',#{shValue},'%')
+		            </when>
+		        </choose>
+		    </where>
+		</select>
+
 	
 	<!-- 페이징을 위해 DB 단에서 뿌리는 데이터 셀렉 -->
 <!-- 	<select id="selectPagedProductList" resultMap="resultMapObj"> -->

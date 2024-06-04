@@ -58,14 +58,15 @@ public class ProductService {
 				String pathModule = className;
 				String nowString = UtilDateTime.nowString();
 //				String pathForView = Constants.UPLOADED_PATH_PREFIX_FOR_VIEW_LOCAL + "/" + pathModule + "/" + type + "/" + pathDate + "/";
-				Integer defaultNY;
+				Integer defaultNY = 0; //defaultNY 값을 찾지 못하는 에러로 인해 잠시 0으로 지정. 이후 수정 예정
 				
-				if(index == 0) {
-					defaultNY=0;
-				}
-				else {
-					defaultNY=1;
-				}
+//				if(index == 0) {
+//					defaultNY=0;
+//				}
+//				else {
+//					defaultNY=1;
+//				}
+				System.out.println("defaultNY : " + dto.getDefaultNY());
 				
 		        ObjectMetadata metadata = new ObjectMetadata();
 		        metadata.setContentLength(multipartFiles.getSize());
