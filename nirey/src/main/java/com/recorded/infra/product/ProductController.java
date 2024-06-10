@@ -366,6 +366,15 @@ public class ProductController {
 	    return "usr/infra/v1/stockCDRestock";
 	}
 	
+	//categoryCD에 의한 필터링 메서드
+	@RequestMapping(value="/filteringByCategory")
+	public String filteringByCategory(ProductDto dto, Model model) throws Exception {
+		
+		model.addAttribute("filtering", service.filteringByCategoryCD());
+		
+		return "usr/infra/v1/shop";
+	}
+	
 	
 	  @RequestMapping(value = "/recorded/Shop/Product") 
 	  public String ProductView(ProductDto dto, Model model) throws Exception {

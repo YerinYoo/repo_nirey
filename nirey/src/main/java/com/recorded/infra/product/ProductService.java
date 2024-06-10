@@ -129,6 +129,9 @@ public class ProductService {
 	
 	public List<ProductDto> filteringByRestock() { return dao.filteringByRestock();}
 	
+	//categoryCD에 따른 필터링 
+	public List<ProductDto> filteringByCategoryCD() { return dao.filteringByCategoryCD();}
+	
 	//제품 옵션에 대한 리스트 호출 
 	public List<ProductDto>prodColor(ProductDto dto) {return dao.prodColor(dto);}
 	

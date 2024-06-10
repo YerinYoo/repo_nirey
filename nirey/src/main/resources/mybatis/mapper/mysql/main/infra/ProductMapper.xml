@@ -546,10 +546,9 @@ and d.defaultNY=1
 
 <!-- ProductMapper.xml -->
 
-
 <!-- 필터링 (prodStockCD) -->
 <!-- new -->
-<select id="filteringByNew">
+<select id="filteringByNew" resultMap="resultMapObj">
 	
 	    SELECT
         a.productSeq,
@@ -574,7 +573,7 @@ and d.defaultNY=1
 </select>
 
 <!-- besk -->
-<select id="filteringByBest">
+<select id="filteringByBest" resultMap="resultMapObj">
 	    SELECT
         a.productSeq,
         a.ProductName,
@@ -597,7 +596,7 @@ and d.defaultNY=1
 </select>
 
 <!-- restock -->
-<select id="filteringByRestock">
+<select id="filteringByRestock" resultMap="resultMapObj">
 	    SELECT
         a.productSeq,
         a.ProductName,
@@ -617,5 +616,30 @@ and d.defaultNY=1
     	a.productSeq=b.productSeqF
     WHERE a.prodStockCD=9
     AND b.defaultNY = 1
+</select>
+
+<!-- categoryCD로 필터링 -->
+<select id="filteringByCategoryCD" resultMap="resultMapObj">
+	select
+		a.productSeq,
+		a.ProductName,
+		a.OrgPrice,
+		a.DiscountedPrice,
+		a.categoryCD,
+		a.prodStockCD,
+		(select round(avg(reviewRate)) from review where Product_seq = a.productSeq) as reviewRateAvg,
+		(select count(*) from review where Product_seq = a.productSeq) as totalReviewCount,
+		b.path,
+		b.defaultNY
+	from
+		product a
+	inner join
+		prodImg b
+	on
+		a.productSeq = b.productSeqF
+	where 
+		a.categoryCD = #{categoryCD}
+	and
+		b.defaultNY = 1
 </select>
 </mapper>
