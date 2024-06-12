@@ -224,6 +224,34 @@
 		}
 	}
         </script>
+		
+		<script>
+		//카테고리에 의한 필터링 구문 
+		$(document).ready(function() {
+		    // 필터링된 결과를 받아오는 함수
+		    function getFilteredResults(categoryCD) {
+		        $.ajax({
+		            url: '/filteringByCategory', // 필터링을 수행하는 컨트롤러 엔드포인트 URL
+		            type: 'GET',
+		            data: { categoryCD: categoryCD }, // 필터링에 사용될 카테고리 코드
+		            dataType: 'html', // 반환 형식
+		            success: function(data) {
+		                $('#product-list-filtering').html(data); // 필터링된 결과를 표시할 요소에 받아온 HTML을 적용
+		            },
+		            error: function(xhr, status, error) {
+		                console.error('AJAX error:', error); // 오류가 발생한 경우 콘솔에 오류 메시지 출력
+		            }
+		        });
+		    }
+		
+		    // 카테고리를 클릭했을 때 필터링된 결과를 가져오는 이벤트 핸들러
+		    $('.submenu a').click(function(event) {
+		        event.preventDefault(); // 기본 이벤트 중단
+		        var categoryCD = $(this).attr('href').split('=')[1]; // 클릭된 링크의 href 속성에서 카테고리 코드 추출
+		        getFilteredResults(categoryCD); // 필터링된 결과를 가져오는 함수 호출
+		    });
+		});
+		</script>
         
 </th:block>
 

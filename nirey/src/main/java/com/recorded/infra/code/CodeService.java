@@ -37,6 +37,7 @@ public class CodeService {
         return dao.selectList(vo);
     }
 
+    //공통 코드 캐시에 올려 사용하기 위한 서비스 쿼리 
     @PostConstruct
     public void selectListCachedCodeArrayList() throws Exception {
         List<CodeDto> codeListFromDb = dao.selectListCachedCodeArrayList();

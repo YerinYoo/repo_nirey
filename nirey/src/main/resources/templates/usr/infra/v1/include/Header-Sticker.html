@@ -222,6 +222,34 @@
 			}
 		}
 	        </script>
+			
+			<script>
+				//카테고리 필터링 구문 
+				$(document).ready(function() {
+				    // 카테고리를 클릭했을 때 필터링된 결과를 가져오는 함수
+				    function filterByCategory(categoryCD) {
+				        $.ajax({
+				            url: '/filteringByCategory', // 필터링 컨트롤러 URL
+				            type: 'GET',
+				            data: { categoryCD: categoryCD },
+				            dataType: 'html',
+				            success: function(data) {
+				                $('#product-list-filtering').html(data); // 필터링된 결과를 표시할 요소에 적용
+				            },
+				            error: function(xhr, status, error) {
+				                console.error('AJAX error:', error);
+				            }
+				        });
+				    }
+				
+				    // 카테고리를 클릭했을 때 필터링된 결과를 가져오는 이벤트 핸들러
+				    $('.submenu li a').click(function(event) {
+				        event.preventDefault(); // 기본 동작 방지
+				        var categoryCD = $(this).attr('th:href').split('=')[1]; // 클릭된 카테고리의 코드 가져오기
+				        filterByCategory(categoryCD); // 선택된 카테고리로 필터링된 결과 가져오기
+				    });
+				});
+			</script>
         
 </th:block>
 

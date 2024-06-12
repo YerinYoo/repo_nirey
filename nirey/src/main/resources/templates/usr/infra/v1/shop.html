@@ -238,6 +238,53 @@
 						        </div>
 						    </div>
 						</div>
+						
+					<!-- 필터링에 걸린 값만 반환하는 코드 -->
+						<div class="row" id="product-list-filtering">
+<!--					<div class="col-6 col-sm-4 col-md-3 col-xl-5col" id="product-${product.productSeq}" data-total-review-count="${product.totalReviewCount}" data-review-rate-avg="${product.reviewRateAvg}" data-reg-date-time="${product.regDateTime}" data-org-price="${product.orgPrice}">-->
+
+						    <div class="col-6 col-sm-4 col-md-3 col-xl-5col sortBy" th:each="product : ${filtering}" th:id="'product-' + ${product.productSeq}" th:data-reg-date-time="${product.regDateTime}">
+						        
+								<div class="product-default inner-quickview inner-icon">
+						            <figure>
+										<a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq}, ProductName=${product.ProductName})}" th:if="${product.defaultNY == 1}">
+										    <img th:src="${product.path}" alt="product"/>
+										</a>
+						                <div class="label-group">
+		                                     <div th:if="${product.prodStockCD == 7}" class="product-label label-hot">NEW</div>
+		                                    <div th:if="${product.prodStockCD == 8}" class="product-label label-sale">BEST</div>
+		                                    <div th:if="${product.prodStockCD == 9}" class="product-label label-restock" style="background-color: rgb(96, 133, 165);">RESTOCK</div>
+		                                </div>
+						            </figure>
+						            <div class="product-details">
+						                <div class="category-wrap">
+						                    <div class="category-list">
+						                        <a th:if="${product.categoryCD != null}" th:text="${@codeService.selectOneCachedCode(product.categoryCD)}"></a>
+						                        <a th:unless="${product.categoryCD != null}" th:text="${product.categoryCD}"></a>
+						                    </div>
+						                </div>
+						                <h3 class="product-title">
+						                    <a th:text="${product.ProductName}"></a>
+						                </h3>
+										<div class="ratings-container">
+										    <div class="product-ratings">
+										        <span class="ratings" th:if="${product.reviewRateAvg == 5}" style="width:100%"></span>
+										        <span class="ratings" th:if="${product.reviewRateAvg == 4}" style="width:80%"></span>
+										        <span class="ratings" th:if="${product.reviewRateAvg == 3}" style="width:60%"></span>
+										        <span class="ratings" th:if="${product.reviewRateAvg == 2}" style="width:40%"></span>
+										        <span class="ratings" th:if="${product.reviewRateAvg == 1}" style="width:20%"></span>
+										        <span class="ratings" th:if="${product.reviewRateAvg == null}" style="width:0%"></span>
+										        <span class="tooltiptext tooltip-top"></span>
+										    </div>
+										</div>
+						                <div class="price-box">
+						                    <span class="old-price" th:text="${product.OrgPrice}"></span>
+						                    <span class="product-price" th:text="${product.DiscountedPrice}"></span>
+						                </div>
+						            </div>
+						        </div>
+						    </div>
+						</div>
 
 					<!-- paging s  -->		
 						<form name="formList" id="formList" method="post" autocomplete="off">		
@@ -332,7 +379,7 @@
             </div><!-- End .container -->
         </main><!-- End .main -->
 
-<div th:replace="~{usr/infra/v1/include/Footer :: Footer}"></div>
+	<div th:replace="~{usr/infra/v1/include/Footer :: Footer}"></div>
 
     <!-- Plugins JS File -->
     
@@ -344,46 +391,45 @@
     <!-- Main JS File -->
     <script src="/usr/js/main.min.js"></script>
     
-<script>
-
-//가격 관련 스크립트
-function formatPriceElements() {
-    // HTML 요소를 가져와서 가격 포맷팅 적용
-    var oldPriceElements = document.querySelectorAll('.old-price');
-    var productPriceElements = document.querySelectorAll('.product-price');
-
-    oldPriceElements.forEach(function(element) {
-        var price = parseFloat(element.textContent);
-        element.textContent = formatPrice(price);
-    });
-
-    productPriceElements.forEach(function(element) {
-        var price = parseFloat(element.textContent);
-        element.textContent = formatPrice(price);
-    });
-}
-
-// 가격 포맷팅 함수
-function formatPrice(price) {
-    // 세 자리마다 컴마 추가
-    var formattedPrice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    // '원'을 추가하여 반환
-    return "₩" + formattedPrice ;
-}
-
-// 문서 로드 후에 실행
-document.addEventListener('DOMContentLoaded', function() {
-    formatPriceElements();
-});
-
-//상품 이미지에 커서 올렸을 때 뜨는 quick View로 반환하는 버튼 비활성화
-//그냥 상품 페이지로 바로 연결됨-!
-//버튼 요소 선택
-var btn = document.querySelector('.btn-quickview');
-
-// 버튼 비활성화
-btn.disabled = true;
-</script>
+	<script>
+		//가격 관련 스크립트
+		function formatPriceElements() {
+		    // HTML 요소를 가져와서 가격 포맷팅 적용
+		    var oldPriceElements = document.querySelectorAll('.old-price');
+		    var productPriceElements = document.querySelectorAll('.product-price');
+		
+		    oldPriceElements.forEach(function(element) {
+		        var price = parseFloat(element.textContent);
+		        element.textContent = formatPrice(price);
+		    });
+		
+		    productPriceElements.forEach(function(element) {
+		        var price = parseFloat(element.textContent);
+		        element.textContent = formatPrice(price);
+		    });
+		}
+		
+		// 가격 포맷팅 함수
+		function formatPrice(price) {
+		    // 세 자리마다 컴마 추가
+		    var formattedPrice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		    // '원'을 추가하여 반환
+		    return "₩" + formattedPrice ;
+		}
+		
+		// 문서 로드 후에 실행
+		document.addEventListener('DOMContentLoaded', function() {
+		    formatPriceElements();
+		});
+		
+		//상품 이미지에 커서 올렸을 때 뜨는 quick View로 반환하는 버튼 비활성화
+		//그냥 상품 페이지로 바로 연결됨-!
+		//버튼 요소 선택
+		var btn = document.querySelector('.btn-quickview');
+		
+		// 버튼 비활성화
+		btn.disabled = true;
+	</script>
 
 
 	<script>
