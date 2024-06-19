@@ -126,18 +126,18 @@
 														<th style="text-align:center; vertical-align : middle;">Price</th>
 
 													</tr>
-													<tr th:each="product : ${product}" >
-														<td class="product-img" style="text-align:center; vertical-align : middle;"th:if="${product.path == 1}">
-															<img th:src="${product.path}" style="height : 80px;">
+													<tr>
+														<td class="product-img" style="text-align:center; vertical-align : middle;">
+															<img src="https://che1s-service.s3.ap-northeast-2.amazonaws.com/IMG_7561.jpg" style="height : 80px;">
 														</td>
-														<td class="order-product-name" style="text-align:center; vertical-align : middle;" th:text="${product.ProductName}"></td>
-														<td class="order-color" style="text-align:center; vertical-align : middle" th:text="${product.color}"></td>
-														<td class="order-size" style="text-align:center; vertical-align : middle" th:text="${product.size}"></td>
-														<td class="order-product-price" style="text-align:center; vertical-align : middle" th:text="${product.DiscountedPrice}"></td>
+														<td class="order-product-name" style="text-align:center; vertical-align : middle;">Macao Stripe Shirt</td>
+														<td class="order-color" style="text-align:center; vertical-align : middle">Navy</td>
+														<td class="order-size" style="text-align:center; vertical-align : middle">One Size</td>
+														<td class="order-product-price" style="text-align:center; vertical-align : middle">39,150</td>
 														<td class="write-review" style="text-align:center; vertical-align : middle;">
-															<button class="btn btn-write-review product-type-simple btn-shop">
+															<a class="btn btn-write-review product-type-simple btn-shop" th:href="@{/recorded/Shop/Product?productSeq=2}">
 																Write Review
-															</button></td>
+															</a></td>
 														</td>
 													</tr>
 												</table>
