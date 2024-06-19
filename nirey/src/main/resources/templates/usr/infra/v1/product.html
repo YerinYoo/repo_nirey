@@ -26,6 +26,37 @@
             s.parentNode.insertBefore( wf, s );
         } )( document );
     </script>
+	
+	<!-- 세션 없이 장바구니 버튼을 눌렀을 때 띄울 모달 관련 스크립트 내용 -->
+	<script>
+	    document.addEventListener('DOMContentLoaded', function() {
+	        function isLoggedIn() {
+	            // Implement your logic to check if the user is logged in
+	            // For example, check if a session variable is set
+	            return /* your condition to check if user is logged in */;
+	        }
+	
+	        document.getElementById('addToWishlist').addEventListener('click', function(event) {
+	            if (!isLoggedIn()) {
+	                event.preventDefault();
+	                $('#loginModal').modal('show');
+	            }
+	        });
+	
+	        document.getElementById('goToPurchaseButton').addEventListener('click', function(event) {
+	            if (!isLoggedIn()) {
+	                event.preventDefault();
+	                $('#loginModal').modal('show');
+	            }
+	        });
+	    });
+	</script>
+	
+	<!-- 장바구니에 제품이 성공적으로 담겼을 때 띄울 모달 관련 스크립트 -->
+	<script>
+ 		//해당 모달 관련 코드는 추후 수정 
+	</script>
+
 
     <!-- Plugins CSS File -->
     <link rel="stylesheet" href="/usr/css/bootstrap.min.css">
@@ -37,6 +68,47 @@
 </head>
 
 <body class="full-screen-slider">
+	
+	<!-- 로그인 세션 없이 카트 추가 및 구매 버튼을 눌렀을 때 띄울 모달 -->
+	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true" style="width : 30%; margin-left : 35%;">
+	    <div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <h5 class="modal-title" id="loginModalLabel">Login Required</h5>
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                    <span aria-hidden="true">&times;</span>
+	                </button>
+	            </div>
+	            <div class="modal-body">
+	                You need to Login to "Go To Buy" / "Add to Cart"
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+	                <a href="/recorded/Login" class="btn btn-primary">Go to Login</a>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+	<!-- 제품이 장바구니에 성공적으로 담겼을 때 띄워줄 모달 -->
+	<div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <h5 class="modal-title" id="cartModalLabel">알림</h5>
+	                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	            </div>
+	            <div class="modal-body">
+	                성공적으로 장바구니에 추가되었습니다!
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+	               	<a href="/MyPage/Cart" class="btn btn-primary">Go To Cart</a>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	
     <div class="page-wrapper">
         <div th:replace="~{usr/infra/v1/include/Header :: Header}"></div>
 
