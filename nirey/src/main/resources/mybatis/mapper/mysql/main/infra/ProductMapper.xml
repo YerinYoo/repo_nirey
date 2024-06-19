@@ -642,4 +642,197 @@ and d.defaultNY=1
 	and
 		b.defaultNY = 1
 </select>
+
+<select id="outer" resultMap="resultMapObj">
+	select
+		a.productSeq,
+		a.ProductName,
+		a.OrgPrice,
+		a.DiscountedPrice,
+		a.categoryCD,
+		a.prodStockCD,
+		(select round(avg(reviewRate)) from review where Product_seq = a.productSeq) as reviewRateAvg,
+		(select count(*) from review where Product_seq = a.productSeq) as totalReviewCount,
+		b.path,
+		b.defaultNY
+	from
+		product a
+	inner join
+		prodImg b
+	on
+		a.productSeq = b.productSeqF
+	where 
+		a.categoryCD = 11
+	and
+		b.defaultNY = 1
+</select>
+
+<select id="top" resultMap="resultMapObj">
+	select
+		a.productSeq,
+		a.ProductName,
+		a.OrgPrice,
+		a.DiscountedPrice,
+		a.categoryCD,
+		a.prodStockCD,
+		(select round(avg(reviewRate)) from review where Product_seq = a.productSeq) as reviewRateAvg,
+		(select count(*) from review where Product_seq = a.productSeq) as totalReviewCount,
+		b.path,
+		b.defaultNY
+	from
+		product a
+	inner join
+		prodImg b
+	on
+		a.productSeq = b.productSeqF
+	where 
+		a.categoryCD = 12
+	and
+		b.defaultNY = 1
+</select>
+
+<select id="bottom" resultMap="resultMapObj">
+	select
+		a.productSeq,
+		a.ProductName,
+		a.OrgPrice,
+		a.DiscountedPrice,
+		a.categoryCD,
+		a.prodStockCD,
+		(select round(avg(reviewRate)) from review where Product_seq = a.productSeq) as reviewRateAvg,
+		(select count(*) from review where Product_seq = a.productSeq) as totalReviewCount,
+		b.path,
+		b.defaultNY
+	from
+		product a
+	inner join
+		prodImg b
+	on
+		a.productSeq = b.productSeqF
+	where 
+		a.categoryCD = 13
+	and
+		b.defaultNY = 1
+</select>
+
+<select id="dress" resultMap="resultMapObj">
+	select
+		a.productSeq,
+		a.ProductName,
+		a.OrgPrice,
+		a.DiscountedPrice,
+		a.categoryCD,
+		a.prodStockCD,
+		(select round(avg(reviewRate)) from review where Product_seq = a.productSeq) as reviewRateAvg,
+		(select count(*) from review where Product_seq = a.productSeq) as totalReviewCount,
+		b.path,
+		b.defaultNY
+	from
+		product a
+	inner join
+		prodImg b
+	on
+		a.productSeq = b.productSeqF
+	where 
+		a.categoryCD = 14
+	and
+		b.defaultNY = 1
+</select>
+
+<select id="bag" resultMap="resultMapObj">
+	select
+		a.productSeq,
+		a.ProductName,
+		a.OrgPrice,
+		a.DiscountedPrice,
+		a.categoryCD,
+		a.prodStockCD,
+		(select round(avg(reviewRate)) from review where Product_seq = a.productSeq) as reviewRateAvg,
+		(select count(*) from review where Product_seq = a.productSeq) as totalReviewCount,
+		b.path,
+		b.defaultNY
+	from
+		product a
+	inner join
+		prodImg b
+	on
+		a.productSeq = b.productSeqF
+	where 
+		a.categoryCD = 15
+	and
+		b.defaultNY = 1
+</select>
+
+<select id="shoes" resultMap="resultMapObj">
+	select
+		a.productSeq,
+		a.ProductName,
+		a.OrgPrice,
+		a.DiscountedPrice,
+		a.categoryCD,
+		a.prodStockCD,
+		(select round(avg(reviewRate)) from review where Product_seq = a.productSeq) as reviewRateAvg,
+		(select count(*) from review where Product_seq = a.productSeq) as totalReviewCount,
+		b.path,
+		b.defaultNY
+	from
+		product a
+	inner join
+		prodImg b
+	on
+		a.productSeq = b.productSeqF
+	where 
+		a.categoryCD = 16
+	and
+		b.defaultNY = 1
+</select>
+
+
+<select id="acc" resultMap="resultMapObj">
+	select
+		a.productSeq,
+		a.ProductName,
+		a.OrgPrice,
+		a.DiscountedPrice,
+		a.categoryCD,
+		a.prodStockCD,
+		(select round(avg(reviewRate)) from review where Product_seq = a.productSeq) as reviewRateAvg,
+		(select count(*) from review where Product_seq = a.productSeq) as totalReviewCount,
+		b.path,
+		b.defaultNY
+	from
+		product a
+	inner join
+		prodImg b
+	on
+		a.productSeq = b.productSeqF
+	where 
+		a.categoryCD = 17
+	and
+		b.defaultNY = 1
+</select>
+
+<select id="etc" resultMap="resultMapObj">
+	select
+		a.productSeq,
+		a.ProductName,
+		a.OrgPrice,
+		a.DiscountedPrice,
+		a.categoryCD,
+		a.prodStockCD,
+		(select round(avg(reviewRate)) from review where Product_seq = a.productSeq) as reviewRateAvg,
+		(select count(*) from review where Product_seq = a.productSeq) as totalReviewCount,
+		b.path,
+		b.defaultNY
+	from
+		product a
+	inner join
+		prodImg b
+	on
+		a.productSeq = b.productSeqF
+	where 
+		a.categoryCD = 18
+	and
+		b.defaultNY = 1
+</select>
 </mapper>

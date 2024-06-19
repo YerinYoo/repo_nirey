@@ -195,6 +195,15 @@ public class ProductService {
 		return dao.selectWishlist(dto);
 	}
 	
+	//카테고리 별 필터링 내용
+	public List<ProductDto> outer() {return dao.outer();}
+	public List<ProductDto> top() {return dao.top();}
+	public List<ProductDto> bottom() {return dao.bottom();}
+	public List<ProductDto> dress() {return dao.dress();}
+	public List<ProductDto> bag() {return dao.bag();}
+	public List<ProductDto> shoes() {return dao.shoes();}
+	public List<ProductDto> acc() {return dao.acc();}
+	public List<ProductDto> etc() {return dao.etc();}
 }
 
 

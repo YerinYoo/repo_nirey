@@ -367,13 +367,183 @@ public class ProductController {
 	}
 	
 	//categoryCD에 의한 필터링 메서드
-	@RequestMapping(value="/filteringByCategory")
-	public String filteringByCategory(ProductDto dto, Model model) throws Exception {
-		
-		model.addAttribute("filtering", service.filteringByCategoryCD());
-		
-		return "usr/infra/v1/shop";
+	@RequestMapping(value = "/recorded/Shop/categoryCD11")
+	public String outer (@ModelAttribute("vo") ProductVo vo, ProductDto dto,
+	                           Model model) throws Exception {
+
+	    // 검색 기능 관련 설정
+	    setSearch(vo, vo.getShValue(), null); // 사용자 아이디를 null로 설정
+
+	    
+	    // 페이징 기능 관련 설정
+	    vo.setParamsPaging(service.getTotalProductCount(vo)); // 총 상품 수 설정
+	    // 페이징 처리된 상품 리스트 조회
+	    List<ProductDto> productListFiltered = service.selectPagedProductList(vo);
+	    
+	    model.addAttribute("prodListFilt", productListFiltered);
+
+	    // 신상품 리스트를 가져와서 모델에 추가
+	    model.addAttribute("prodList", service.outer());
+
+	    // recordedShop 페이지로 이동
+	    return "usr/infra/v1/categoryCD";
 	}
+	
+	@RequestMapping(value = "/recorded/Shop/categoryCD12")
+	public String top (@ModelAttribute("vo") ProductVo vo, ProductDto dto,
+	                           Model model) throws Exception {
+
+	    // 검색 기능 관련 설정
+	    setSearch(vo, vo.getShValue(), null); // 사용자 아이디를 null로 설정
+
+	    
+	    // 페이징 기능 관련 설정
+	    vo.setParamsPaging(service.getTotalProductCount(vo)); // 총 상품 수 설정
+	    // 페이징 처리된 상품 리스트 조회
+	    List<ProductDto> productListFiltered = service.selectPagedProductList(vo);
+	    
+	    model.addAttribute("prodListFilt", productListFiltered);
+
+	    // 신상품 리스트를 가져와서 모델에 추가
+	    model.addAttribute("prodList", service.top());
+
+	    // recordedShop 페이지로 이동
+	    return "usr/infra/v1/categoryCD";
+	}
+	
+	@RequestMapping(value = "/recorded/Shop/categoryCD13")
+	public String bottom (@ModelAttribute("vo") ProductVo vo, ProductDto dto,
+	                           Model model) throws Exception {
+
+	    // 검색 기능 관련 설정
+	    setSearch(vo, vo.getShValue(), null); // 사용자 아이디를 null로 설정
+
+	    
+	    // 페이징 기능 관련 설정
+	    vo.setParamsPaging(service.getTotalProductCount(vo)); // 총 상품 수 설정
+	    // 페이징 처리된 상품 리스트 조회
+	    List<ProductDto> productListFiltered = service.selectPagedProductList(vo);
+	    
+	    model.addAttribute("prodListFilt", productListFiltered);
+
+	    // 신상품 리스트를 가져와서 모델에 추가
+	    model.addAttribute("prodList", service.bottom());
+
+	    // recordedShop 페이지로 이동
+	    return "usr/infra/v1/categoryCD";
+	}
+	
+	@RequestMapping(value = "/recorded/Shop/categoryCD14")
+	public String dress (@ModelAttribute("vo") ProductVo vo, ProductDto dto,
+	                           Model model) throws Exception {
+
+	    // 검색 기능 관련 설정
+	    setSearch(vo, vo.getShValue(), null); // 사용자 아이디를 null로 설정
+
+	    
+	    // 페이징 기능 관련 설정
+	    vo.setParamsPaging(service.getTotalProductCount(vo)); // 총 상품 수 설정
+	    // 페이징 처리된 상품 리스트 조회
+	    List<ProductDto> productListFiltered = service.selectPagedProductList(vo);
+	    
+	    model.addAttribute("prodListFilt", productListFiltered);
+
+	    // 신상품 리스트를 가져와서 모델에 추가
+	    model.addAttribute("prodList", service.dress());
+
+	    // recordedShop 페이지로 이동
+	    return "usr/infra/v1/categoryCD";
+	}
+	
+	@RequestMapping(value = "/recorded/Shop/categoryCD15")
+	public String bag (@ModelAttribute("vo") ProductVo vo, ProductDto dto,
+	                           Model model) throws Exception {
+
+	    // 검색 기능 관련 설정
+	    setSearch(vo, vo.getShValue(), null); // 사용자 아이디를 null로 설정
+
+	    
+	    // 페이징 기능 관련 설정
+	    vo.setParamsPaging(service.getTotalProductCount(vo)); // 총 상품 수 설정
+	    // 페이징 처리된 상품 리스트 조회
+	    List<ProductDto> productListFiltered = service.selectPagedProductList(vo);
+	    
+	    model.addAttribute("prodListFilt", productListFiltered);
+
+	    // 신상품 리스트를 가져와서 모델에 추가
+	    model.addAttribute("prodList", service.bag());
+
+	    // recordedShop 페이지로 이동
+	    return "usr/infra/v1/categoryCD";
+	}
+	
+	@RequestMapping(value = "/recorded/Shop/categoryCD16")
+	public String shoes (@ModelAttribute("vo") ProductVo vo, ProductDto dto,
+	                           Model model) throws Exception {
+
+	    // 검색 기능 관련 설정
+	    setSearch(vo, vo.getShValue(), null); // 사용자 아이디를 null로 설정
+
+	    
+	    // 페이징 기능 관련 설정
+	    vo.setParamsPaging(service.getTotalProductCount(vo)); // 총 상품 수 설정
+	    // 페이징 처리된 상품 리스트 조회
+	    List<ProductDto> productListFiltered = service.selectPagedProductList(vo);
+	    
+	    model.addAttribute("prodListFilt", productListFiltered);
+
+	    // 신상품 리스트를 가져와서 모델에 추가
+	    model.addAttribute("prodList", service.shoes());
+
+	    // recordedShop 페이지로 이동
+	    return "usr/infra/v1/categoryCD";
+	}
+	
+	@RequestMapping(value = "/recorded/Shop/categoryCD17")
+	public String acc (@ModelAttribute("vo") ProductVo vo, ProductDto dto,
+	                           Model model) throws Exception {
+
+	    // 검색 기능 관련 설정
+	    setSearch(vo, vo.getShValue(), null); // 사용자 아이디를 null로 설정
+
+	    
+	    // 페이징 기능 관련 설정
+	    vo.setParamsPaging(service.getTotalProductCount(vo)); // 총 상품 수 설정
+	    // 페이징 처리된 상품 리스트 조회
+	    List<ProductDto> productListFiltered = service.selectPagedProductList(vo);
+	    
+	    model.addAttribute("prodListFilt", productListFiltered);
+
+	    // 신상품 리스트를 가져와서 모델에 추가
+	    model.addAttribute("prodList", service.acc());
+
+	    // recordedShop 페이지로 이동
+	    return "usr/infra/v1/categoryCD";
+	}
+	
+	@RequestMapping(value = "/recorded/Shop/categoryCD18")
+	public String etc (@ModelAttribute("vo") ProductVo vo, ProductDto dto,
+	                           Model model) throws Exception {
+
+	    // 검색 기능 관련 설정
+	    setSearch(vo, vo.getShValue(), null); // 사용자 아이디를 null로 설정
+
+	    
+	    // 페이징 기능 관련 설정
+	    vo.setParamsPaging(service.getTotalProductCount(vo)); // 총 상품 수 설정
+	    // 페이징 처리된 상품 리스트 조회
+	    List<ProductDto> productListFiltered = service.selectPagedProductList(vo);
+	    
+	    model.addAttribute("prodListFilt", productListFiltered);
+
+	    // 신상품 리스트를 가져와서 모델에 추가
+	    model.addAttribute("prodList", service.etc());
+
+	    // recordedShop 페이지로 이동
+	    return "usr/infra/v1/categoryCD";
+	}
+	
+	
 	
 	
 	  @RequestMapping(value = "/recorded/Shop/Product") 

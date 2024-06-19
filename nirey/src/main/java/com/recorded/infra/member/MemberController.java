@@ -31,6 +31,7 @@ public class MemberController extends BaseController {
     // 로그인 페이지로 이동
     @RequestMapping(value = "/loginAdm")
     public String loginAdm(MemberDto dto) throws Exception {
+    	
         return "adm/infra/v1/loginAdm"; 
     }
 
@@ -218,6 +219,7 @@ public class MemberController extends BaseController {
     //  회원 로그인 페이지
     @RequestMapping(value = "/recorded/Login")
     public String loginUsr(MemberDto dto) throws Exception {
+    	
         return "usr/infra/v1/loginUsr"; 
     }
 
@@ -238,20 +240,20 @@ public class MemberController extends BaseController {
             httpSession.setAttribute("sessSeqUsr", authenticatedMember.getMemberSeq());
             httpSession.setAttribute("sessIdUsr", authenticatedMember.getID());
             httpSession.setAttribute("sessPwdUsr", authenticatedMember.getPwd());
-            httpSession.setAttribute("sessNameUsr", authenticatedMember.getName());
-            httpSession.setAttribute("sessEmailUsr", authenticatedMember.getEmail());
-            httpSession.setAttribute("sessGenderUsr", authenticatedMember.getGenderCD());
-            httpSession.setAttribute("sessMobileNumUsr", authenticatedMember.getMobileNum());
-            httpSession.setAttribute("sessBirthDayUsr", authenticatedMember.getBirthday());
-            httpSession.setAttribute("sessAddrDetailUsr", authenticatedMember.getAddrDetail());
-            httpSession.setAttribute("sessAddrUsr", authenticatedMember.getAddr());
-            httpSession.setAttribute("sessZipcodeUsr", authenticatedMember.getZipcode());
-            httpSession.setAttribute("sessRecipientUsr", authenticatedMember.getRecipient());
-            httpSession.setAttribute("sessPhoneNumUsr", authenticatedMember.getPhoneNum());
-            httpSession.setAttribute("sessShippingMsgUsr", authenticatedMember.getShippingMsg());
+//            httpSession.setAttribute("sessNameUsr", authenticatedMember.getName());
+//            httpSession.setAttribute("sessEmailUsr", authenticatedMember.getEmail());
+//            httpSession.setAttribute("sessGenderUsr", authenticatedMember.getGenderCD());
+//            httpSession.setAttribute("sessMobileNumUsr", authenticatedMember.getMobileNum());
+//            httpSession.setAttribute("sessBirthDayUsr", authenticatedMember.getBirthday());
+//            httpSession.setAttribute("sessAddrDetailUsr", authenticatedMember.getAddrDetail());
+//            httpSession.setAttribute("sessAddrUsr", authenticatedMember.getAddr());
+//            httpSession.setAttribute("sessZipcodeUsr", authenticatedMember.getZipcode());
+//            httpSession.setAttribute("sessRecipientUsr", authenticatedMember.getRecipient());
+//            httpSession.setAttribute("sessPhoneNumUsr", authenticatedMember.getPhoneNum());
+//            httpSession.setAttribute("sessShippingMsgUsr", authenticatedMember.getShippingMsg());
          
 			System.out.println("---------------------");
-			System.out.println("httpSession.getAttribute(\"sessNameUsr\"): " + httpSession.getAttribute("sessNameUsr"));
+			System.out.println("httpSession.getAttribute(\"sessNameUsr\"): " + httpSession.getAttribute("sessIdUsr"));
 			System.out.println("httpSession.getAttribute(\"sessSeqUsr\"): " + httpSession.getAttribute("sessSeqUsr"));
 			System.out.println("---------------------");
 

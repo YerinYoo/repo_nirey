@@ -57,4 +57,14 @@ public interface ProductDao {
 
     //위시리스트
     public List<ProductDto> wishlist();
+    
+    //카테고리 별 필터링
+    public List<ProductDto> outer();
+    public List<ProductDto> top();
+    public List<ProductDto> bottom();
+    public List<ProductDto> dress();
+    public List<ProductDto> bag();
+    public List<ProductDto> shoes();
+    public List<ProductDto> acc();
+    public List<ProductDto> etc();
 }
