@@ -77,11 +77,11 @@
                 <div class="row mt-5">
                     <div class="col-lg-9 main-content">
                         <div class="category-banner pt-0 pb-2">
-                            <img class="slide-bg" src="/usr/images/demoes/demo3/slider/NewJeans_BubbleGum.jpg" style="height : 200px" alt="banner"
+                            <img class="slide-bg" src="/usr/images/demoes/demo3/slider/bubblegum.jpg" style="height : 200px" alt="banner"
                                 width="1500" height="320">
                             <div class="category-slide-content pt-1">
-                                <h2 class="m-b-3" style="color : ivory; font-size : 20px;">Feel the Vintage Mood while being Unique</h2>
-                                <h3 class="text-uppercase ml-0" style="color : darkblue">Up to 10% OFF on ALL PRODUCTS</h3>
+                                <h2 class="m-b-3" style="color : steelblue; font-size : 20px;">Feel the Vintage Mood while being Unique</h2>
+                                <h3 class="text-uppercase ml-0" style="color : ivory">Up to 10% OFF on ALL PRODUCTS</h3>
                             </div><!-- End .category-slide-content -->
                         </div><!-- End .category-slide -->
                         
@@ -148,21 +148,24 @@
 						</div>
 						
 						<!-- 페이지 단에 띄워줄 전체 상품 표출 코드 -->
+						
 						<div class="row" id="product-list">
-<!--					<div class="col-6 col-sm-4 col-md-3 col-xl-5col" id="product-${product.productSeq}" data-total-review-count="${product.totalReviewCount}" data-review-rate-avg="${product.reviewRateAvg}" data-reg-date-time="${product.regDateTime}" data-org-price="${product.orgPrice}">-->
-
-						    <div class="col-6 col-sm-4 col-md-3 col-xl-5col sortBy" th:each="product : ${prodList}" th:id="'product-' + ${product.productSeq}" th:data-reg-date-time="${product.regDateTime}">
-						        
-								<div class="product-default inner-quickview inner-icon">
+						    <!-- prodList가 비어 있을 경우 메시지 표시 -->
+						    <div th:if="${#lists.isEmpty(prodList)}">
+						        <h6>The relevant products have not been updated yet.</h6>
+						    </div>
+						    <!-- prodList에 값이 있을 경우 제품 목록 표시 -->
+						    <div th:if="${!#lists.isEmpty(prodList)}" th:each="product : ${prodList}" th:id="'product-' + ${product.productSeq}" class="col-6 col-sm-4 col-md-3 col-xl-5col sortBy" th:data-reg-date-time="${product.regDateTime}">
+						        <div class="product-default inner-quickview inner-icon">
 						            <figure>
-										<a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq}, ProductName=${product.ProductName})}" th:if="${product.defaultNY == 1}">
-										    <img th:src="${product.path}" alt="product"/>
-										</a>
+						                <a th:href="@{/recorded/Shop/Product(productSeq=${product.productSeq}, ProductName=${product.ProductName})}" th:if="${product.defaultNY == 1}">
+						                    <img th:src="${product.path}" alt="product"/>
+						                </a>
 						                <div class="label-group">
-		                                     <div th:if="${product.prodStockCD == 7}" class="product-label label-hot">NEW</div>
-		                                    <div th:if="${product.prodStockCD == 8}" class="product-label label-sale">BEST</div>
-		                                    <div th:if="${product.prodStockCD == 9}" class="product-label label-restock" style="background-color: rgb(96, 133, 165);">RESTOCK</div>
-		                                </div>
+						                    <div th:if="${product.prodStockCD == 7}" class="product-label label-hot">NEW</div>
+						                    <div th:if="${product.prodStockCD == 8}" class="product-label label-sale">BEST</div>
+						                    <div th:if="${product.prodStockCD == 9}" class="product-label label-restock" style="background-color: rgb(96, 133, 165);">RESTOCK</div>
+						                </div>
 						            </figure>
 						            <div class="product-details">
 						                <div class="category-wrap">
@@ -174,17 +177,17 @@
 						                <h3 class="product-title">
 						                    <a th:text="${product.ProductName}"></a>
 						                </h3>
-										<div class="ratings-container">
-										    <div class="product-ratings">
-										        <span class="ratings" th:if="${product.reviewRateAvg == 5}" style="width:100%"></span>
-										        <span class="ratings" th:if="${product.reviewRateAvg == 4}" style="width:80%"></span>
-										        <span class="ratings" th:if="${product.reviewRateAvg == 3}" style="width:60%"></span>
-										        <span class="ratings" th:if="${product.reviewRateAvg == 2}" style="width:40%"></span>
-										        <span class="ratings" th:if="${product.reviewRateAvg == 1}" style="width:20%"></span>
-										        <span class="ratings" th:if="${product.reviewRateAvg == null}" style="width:0%"></span>
-										        <span class="tooltiptext tooltip-top"></span>
-										    </div>
-										</div>
+						                <div class="ratings-container">
+						                    <div class="product-ratings">
+						                        <span class="ratings" th:if="${product.reviewRateAvg == 5}" style="width:100%"></span>
+						                        <span class="ratings" th:if="${product.reviewRateAvg == 4}" style="width:80%"></span>
+						                        <span class="ratings" th:if="${product.reviewRateAvg == 3}" style="width:60%"></span>
+						                        <span class="ratings" th:if="${product.reviewRateAvg == 2}" style="width:40%"></span>
+						                        <span class="ratings" th:if="${product.reviewRateAvg == 1}" style="width:20%"></span>
+						                        <span class="ratings" th:if="${product.reviewRateAvg == null}" style="width:0%"></span>
+						                        <span class="tooltiptext tooltip-top"></span>
+						                    </div>
+						                </div>
 						                <div class="price-box">
 						                    <span class="old-price" th:text="${product.OrgPrice}"></span>
 						                    <span class="product-price" th:text="${product.DiscountedPrice}"></span>
@@ -193,6 +196,7 @@
 						        </div>
 						    </div>
 						</div>
+
 						<!-- 검색 값에 해당하는 제품만 반환하는 코드 -->
 						
 						<div class="row" th:unless="${#lists.isEmpty(searchResults)}">
@@ -333,22 +337,22 @@
 
 							<div class="collapse show" id="widget-body-2">
 							    <div class="widget-body">
-								    <div class="clothes">
+									<div class="clothes">
 								        <ul>
 								        <a>Clothes</a>
-								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop?categoryCD=11}">Outer</a></li>
-								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop?categoryCD=12}">Top</a></li>
-								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop?categoryCD=13}">Bottom</a></li>
-								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop?categoryCD=14}">Dress</a></li>
+								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop/categoryCD11}">Outer</a></li>
+								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop/categoryCD12}">Top</a></li>
+								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop/categoryCD13}">Bottom</a></li>
+								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop/categoryCD14}">Dress</a></li>
 								        </ul>
 								    </div>
 								    <div class="non-clothes">
 								        <ul>
 								        <a>Non-Clothes</a>
-								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop?categoryCD=15}">Bag</a></li>
-								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop?categoryCD=16}">Shoes</a></li>
-								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop?categoryCD=17}">Acc.</a></li>
-								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop?categoryCD=18}">Etc.</a></li>
+								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop/categoryCD15}">Bag</a></li>
+								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop/categoryCD16}">Shoes</a></li>
+								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop/categoryCD17}">Acc.</a></li>
+								        <li style="padding-left: 10%;"><a th:href="@{/recorded/Shop/categoryCD18}">Etc.</a></li>
 								       	</ul>
 								    </div>
 								</div><!-- End .widget-body -->
