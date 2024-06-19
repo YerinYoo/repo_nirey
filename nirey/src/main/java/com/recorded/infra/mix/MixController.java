@@ -26,7 +26,7 @@ public class MixController {
     @RequestMapping(value="/MyPage/Orders")
     public String MyOrders(HttpSession session, Model model) throws Exception {
     	
-    	  // 세션에서 로그인한 회원 정보 가져오기
+    	// 세션에서 로그인한 회원 정보 가져오기
         MemberDto authenticatedMember = (MemberDto) session.getAttribute("authenticatedMember");
 
         // 세션에 로그인한 정보가 없으면 로그인 페이지로 리다이렉트

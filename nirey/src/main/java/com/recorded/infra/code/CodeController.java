@@ -7,9 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.recorded.common.constants.Constants;
 import com.recorded.common.util.UtilDateTime;
 import com.recorded.infra.codegroup.CodeGroupService;
+import com.recorded.infra.member.MemberDto;
+
+import jakarta.servlet.http.HttpSession;
 
 
 @Controller
@@ -106,7 +110,15 @@ public class CodeController {
 	 */
 	
 	@RequestMapping(value = "/CodeList")
-	public String Corders(@ModelAttribute("vo") CodeVo vo, Model model) throws Exception{
+	public String Corders(@ModelAttribute("vo") CodeVo vo, Model model, HttpSession session) throws Exception{
+		
+    	// 세션에서 로그인한 회원 정보 가져오기
+        MemberDto authenticatedMember = (MemberDto) session.getAttribute("authenticatedMember");
+
+        // 세션에 로그인한 정보가 없으면 로그인 페이지로 리다이렉트
+        if (authenticatedMember == null) {
+            return "redirect:/loginAdm";
+        }
 
 		setSearch(vo);
 		vo.setParamsPaging(service.getTotalCodeCount(vo));
@@ -124,7 +136,15 @@ public class CodeController {
   	}
 	
 	@RequestMapping(value = "/CodeView")
-	public String CordersView(CodeDto dto, Model model) throws Exception {
+	public String CordersView(CodeDto dto, Model model, HttpSession session) throws Exception {
+		
+    	// 세션에서 로그인한 회원 정보 가져오기
+        MemberDto authenticatedMember = (MemberDto) session.getAttribute("authenticatedMember");
+
+        // 세션에 로그인한 정보가 없으면 로그인 페이지로 리다이렉트
+        if (authenticatedMember == null) {
+            return "redirect:/loginAdm";
+        }
 		
 		model.addAttribute("item", service.selectOne(dto)); 
 		
@@ -132,7 +152,16 @@ public class CodeController {
 	}
 
 	@RequestMapping(value="/AddCode")
-	public String CordersAdd(CodeDto dto, Model model) throws Exception {
+	public String CordersAdd(CodeDto dto, Model model, HttpSession session) throws Exception {
+		
+    	// 세션에서 로그인한 회원 정보 가져오기
+        MemberDto authenticatedMember = (MemberDto) session.getAttribute("authenticatedMember");
+
+        // 세션에 로그인한 정보가 없으면 로그인 페이지로 리다이렉트
+        if (authenticatedMember == null) {
+            return "redirect:/loginAdm";
+        }
+        
 		//code add 페이지에서 codeGroup 셀렉트 박스로 값 받아오기
 		model.addAttribute("listCodeGroup", codeGroupService.selectListWithoutPaging());
 		
@@ -141,7 +170,15 @@ public class CodeController {
 	}
 	
 	@RequestMapping(value="/EditCode")
-	public String CordersEdit(CodeDto dto, Model model) throws Exception {
+	public String CordersEdit(CodeDto dto, Model model, HttpSession session) throws Exception {
+		
+    	// 세션에서 로그인한 회원 정보 가져오기
+        MemberDto authenticatedMember = (MemberDto) session.getAttribute("authenticatedMember");
+
+        // 세션에 로그인한 정보가 없으면 로그인 페이지로 리다이렉트
+        if (authenticatedMember == null) {
+            return "redirect:/loginAdm";
+        }
 		
 		model.addAttribute("item", service.selectOne(dto));
 		

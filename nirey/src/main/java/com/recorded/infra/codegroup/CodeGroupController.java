@@ -7,8 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.recorded.common.constants.Constants;
 import com.recorded.common.util.UtilDateTime;
+import com.recorded.infra.member.MemberDto;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class CodeGroupController {
@@ -20,8 +24,16 @@ public class CodeGroupController {
 	
     @RequestMapping(value = "/CodeGroupList")
     //코드 그룹 Vo와 모델 값을 가지고 orders라는 페이지 호출
-    public String orders(@ModelAttribute("vo") CodeGroupVo vo, Model model) throws Exception {
+    public String orders(@ModelAttribute("vo") CodeGroupVo vo, Model model, HttpSession session) throws Exception {
     	
+    	// 세션에서 로그인한 회원 정보 가져오기
+        MemberDto authenticatedMember = (MemberDto) session.getAttribute("authenticatedMember");
+
+        // 세션에 로그인한 정보가 없으면 로그인 페이지로 리다이렉트
+        if (authenticatedMember == null) {
+            return "redirect:/loginAdm";
+        }
+        
 		int rowcount = service.getTotalCodeGroupCount(vo);
 		model.addAttribute("listCount", rowcount);
 		
@@ -75,8 +87,16 @@ public class CodeGroupController {
 //	}
 	
 	@RequestMapping(value="/CodeGroupEdit")
-	public String codeGroupEdit(CodeGroupDto dto, Model model) throws Exception {
+	public String codeGroupEdit(CodeGroupDto dto, Model model, HttpSession session) throws Exception {
 		
+		// 세션에서 로그인한 회원 정보 가져오기
+        MemberDto authenticatedMember = (MemberDto) session.getAttribute("authenticatedMember");
+
+        // 세션에 로그인한 정보가 없으면 로그인 페이지로 리다이렉트
+        if (authenticatedMember == null) {
+            return "redirect:/loginAdm";
+        }
+        
 		model.addAttribute("item", service.selectOne(dto));
 		
 		return "adm/infra/v1/OrdersEdit";
@@ -128,7 +148,16 @@ public class CodeGroupController {
 
 	@RequestMapping(value = "/CodeGroupView")
 	//코드 그룹 Dto, 모델 내용 받아옴
-	public String ordersView(CodeGroupDto dto, Model model) throws Exception {
+	public String ordersView(CodeGroupDto dto, Model model, HttpSession session) throws Exception {
+		
+		// 세션에서 로그인한 회원 정보 가져오기
+        MemberDto authenticatedMember = (MemberDto) session.getAttribute("authenticatedMember");
+
+        // 세션에 로그인한 정보가 없으면 로그인 페이지로 리다이렉트
+        if (authenticatedMember == null) {
+            return "redirect:/loginAdm";
+        }
+        
 		//해당하는 Dto 내용 모델에 추가하고, item이름으로 호출할 수 있도록
 		model.addAttribute("item", service.selectOne(dto));
 		//반환하는 페이지 주소
@@ -136,14 +165,32 @@ public class CodeGroupController {
 	}
 
 	@RequestMapping(value = "/ordersForm")
-	public String ordersForm(CodeGroupDto dto, Model model) throws Exception {
+	public String ordersForm(CodeGroupDto dto, Model model, HttpSession session) throws Exception {
+		
+		// 세션에서 로그인한 회원 정보 가져오기
+        MemberDto authenticatedMember = (MemberDto) session.getAttribute("authenticatedMember");
+
+        // 세션에 로그인한 정보가 없으면 로그인 페이지로 리다이렉트
+        if (authenticatedMember == null) {
+            return "redirect:/loginAdm";
+        }
+        
 		model.addAttribute("item", service.selectOne(dto));
 		return "adm/infra/v1/ordersForm";
 	}
 	
 	//코드그룹 데이터 추가 페이지 호출
 	@RequestMapping(value = "/AddCodeGroup")
-	public String ordersAdd(CodeGroupDto dto) throws Exception {
+	public String ordersAdd(CodeGroupDto dto, HttpSession session) throws Exception {
+		
+		// 세션에서 로그인한 회원 정보 가져오기
+        MemberDto authenticatedMember = (MemberDto) session.getAttribute("authenticatedMember");
+
+        // 세션에 로그인한 정보가 없으면 로그인 페이지로 리다이렉트
+        if (authenticatedMember == null) {
+            return "redirect:/loginAdm";
+        }
+        
 		//Dto를 이용해서 데이터 추가할 것 - Dto 호출
 		return "adm/infra/v1/ordersAdd";
 	}

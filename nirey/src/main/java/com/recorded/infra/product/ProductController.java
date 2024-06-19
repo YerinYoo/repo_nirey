@@ -43,7 +43,15 @@ public class ProductController {
 	//admin UI
 
 	@RequestMapping(value = "/ProductList")
-	public String Morders(@ModelAttribute("vo") ProductVo vo, Model model) throws Exception {
+	public String Morders(@ModelAttribute("vo") ProductVo vo, Model model, HttpSession session) throws Exception {
+		
+    	// 세션에서 로그인한 회원 정보 가져오기
+        MemberDto authenticatedMember = (MemberDto) session.getAttribute("authenticatedMember");
+
+        // 세션에 로그인한 정보가 없으면 로그인 페이지로 리다이렉트
+        if (authenticatedMember == null) {
+            return "redirect:/LoginAdm";
+        }
 		
 		setSearch(vo, null, null);
 		int rowcount = service.getTotalProductCount(vo);
@@ -59,7 +67,15 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/ProductView")
-	public String PordersView(ProductDto dto, Model model) throws Exception {
+	public String PordersView(ProductDto dto, Model model, HttpSession session) throws Exception {
+		
+    	// 세션에서 로그인한 회원 정보 가져오기
+        MemberDto authenticatedMember = (MemberDto) session.getAttribute("authenticatedMember");
+
+        // 세션에 로그인한 정보가 없으면 로그인 페이지로 리다이렉트
+        if (authenticatedMember == null) {
+            return "redirect:/LoginAdm";
+        }
 
 		model.addAttribute("item", service.selectOne(dto));
 
@@ -67,7 +83,15 @@ public class ProductController {
 	}
 
 	@RequestMapping(value="/ProductEdit")
-	public String ProductEdit(ProductDto dto, Model model) throws Exception {
+	public String ProductEdit(ProductDto dto, Model model, HttpSession session) throws Exception {
+		
+    	// 세션에서 로그인한 회원 정보 가져오기
+        MemberDto authenticatedMember = (MemberDto) session.getAttribute("authenticatedMember");
+
+        // 세션에 로그인한 정보가 없으면 로그인 페이지로 리다이렉트
+        if (authenticatedMember == null) {
+            return "redirect:/LoginAdm";
+        }
 		
 		model.addAttribute("item", service.selectOne(dto));
 		
