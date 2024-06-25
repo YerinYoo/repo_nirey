@@ -8,8 +8,8 @@ public final class Constants {
 	public static final String ABBREVIATION_ADVERTISER = "Adt";
 	
 //	for paging
-	public static final Integer ROW_NUM_TO_SHOW = 50;
-	public static final Integer PAGE_NUM_TO_SHOW = 50;
+	public static final Integer ROW_NUM_TO_SHOW = 10;
+	public static final Integer PAGE_NUM_TO_SHOW = 10;
 
 // insert 또는 update 후 페이지 전환 타입: 1:form, 2:list	
 	public static final Integer INSERT_AFTER_TYPE = 1;		
