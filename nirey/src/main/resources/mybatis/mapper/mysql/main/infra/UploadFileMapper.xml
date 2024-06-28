@@ -27,7 +27,7 @@
 			1=1
 	</select>
 	
-	<insert id="insertFile">
+	<insert id="insertFile" parameterType="map">
 		insert into prodImg (
 			 defaultNY
 			, sort
