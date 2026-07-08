@@ -29,6 +29,19 @@
         list-style: none;
         padding: 0;
       }
+      .filter-actions {
+        margin-bottom: 16px;
+      }
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: #fff;
+        background: #007bff;
+        border-radius: 4px;
+        padding: 8px 12px;
+      }
       li {
         display: flex;
         justify-content: space-between;
@@ -49,7 +62,16 @@
   <body>
     <h1>To-Do 앱</h1>
 
+    <div class="filter-actions">
+      {% if completed_only %}
+        <a class="button" href="{{ url_for('index') }}">전체 목록 보기</a>
+      {% else %}
+        <a class="button" href="{{ url_for('index', filter='completed') }}">완료된 항목만 보기</a>
+      {% endif %}
+    </div>
+
     <form action="{{ url_for('add_todo') }}" method="post">
+      <input type="hidden" name="filter" value="{{ 'completed' if completed_only else '' }}">
       <input type="text" name="title" placeholder="할 일을 입력하세요" required>
       <button type="submit">추가</button>
     </form>
@@ -61,9 +83,11 @@
             <span class="{{ 'completed' if todo.completed else '' }}">{{ todo.title }}</span>
             <div class="actions">
               <form action="{{ url_for('toggle_todo', todo_id=todo.id) }}" method="post">
+                <input type="hidden" name="filter" value="{{ 'completed' if completed_only else '' }}">
                 <button type="submit">{{ '미완료' if todo.completed else '완료' }}</button>
               </form>
               <form action="{{ url_for('delete_todo', todo_id=todo.id) }}" method="post">
+                <input type="hidden" name="filter" value="{{ 'completed' if completed_only else '' }}">
                 <button type="submit">삭제</button>
               </form>
             </div>
