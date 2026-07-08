@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>To-Do 앱</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+        line-height: 1.5;
+      }
+      form {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+      input[type="text"] {
+        flex: 1;
+        padding: 8px;
+      }
+      button {
+        padding: 8px 12px;
+        cursor: pointer;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+      li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+      }
+      .completed {
+        text-decoration: line-through;
+        color: #888;
+      }
+      .actions {
+        display: flex;
+        gap: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>To-Do 앱</h1>
+
+    <form action="{{ url_for('add_todo') }}" method="post">
+      <input type="text" name="title" placeholder="할 일을 입력하세요" required>
+      <button type="submit">추가</button>
+    </form>
+
+    {% if todos %}
+      <ul>
+        {% for todo in todos %}
+          <li>
+            <span class="{{ 'completed' if todo.completed else '' }}">{{ todo.title }}</span>
+            <div class="actions">
+              <form action="{{ url_for('toggle_todo', todo_id=todo.id) }}" method="post">
+                <button type="submit">{{ '미완료' if todo.completed else '완료' }}</button>
+              </form>
+              <form action="{{ url_for('delete_todo', todo_id=todo.id) }}" method="post">
+                <button type="submit">삭제</button>
+              </form>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>할 일이 없습니다.</p>
+    {% endif %}
+  </body>
+</html>
